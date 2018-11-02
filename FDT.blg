@@ -1,0 +1,11 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: FDT.aux
+The style file: alpha.bst
+Illegal, another \bibstyle command---line 169 of file FDT.aux
+ : \bibstyle
+ :          {unsrt}
+I'm skipping whatever remains of this command
+Database file #1: FDT.bib
+Warning--I didn't find a database entry for "2ec"
+Warning--empty publisher in cons-cara
+Warning--can't use both author and editor fields in Wolsey1980
+(There was 1 error message)
