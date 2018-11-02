@@ -1,0 +1,119 @@
+
+\section{Introduction}
+
+Mixed-integer linear programming (MILP), the optimization of a linear objective function subject to linear and integrality constraints, is a classic NP-hard problem \cite{GJ79}. In fact it is NP-hard in general to determine if there is a feasible solution to an MILP problem \cite{GJ79}. However, intelligent branch-and-bound strategies allow commercial and open-source MIP solvers to give exact solutions (or near-optimal with provable bound) to many specific instances of NP-hard combinatorial optimization problems. Modeling combinatorial optimization problems with MILPs also started the very popular area of LP-based approximation algorithms. 
+
+Consider the set of point described by a set 
+\begin{equation}
+S(A,G,b)= \{(x,y)\in \mathbb{Z}^{n}\times \mathbb{R}^p\;:\; Ax+Gy\geq b\}  \label{S}
+\end{equation}
+and the  linear relaxation of set $S(A,G,b)$,
+\begin{equation}
+P(A,G,b) = \{(x,y)\in \mathbb{R}^{n+ p}\;:\; Ax+Gy\geq b\}. \label{P}
+\end{equation}
+
+To make the notation simpler we use $I=(A,G,b)$, i.e. an instance of the formulation. Then we use $S(I)$ and $P(I)$ to denote $S(A,G,b)$ and $P(A,G,b)$, respectively. Notice that $\min \;\{cx:\; (x,y) \in S(I)\}$ is in fact an MILP problem and $\min \;\{cx:\;(x,y)\in P(I) \}$ is lower bound provided from the LP relaxation. Let $z_{IP}(I,c)$ and $z_{LP}(I,c)$ be the optimal solution to these problems, respectively.
+
+
+Many researchers (see \cite{sw, vazirani}) have developed polynomial time algorithms that find solutions for special classes of MILPs whose cost are provably smaller than $C\cdot z_{LP}(I,c)$ for some $C$ which can be a constant number or dependent on some parameter of the MILP, e.g. $O(\log(n))$. However, for many combinatorial optimization problems there is a limit to such techniques. Let $g_I= \max_{c\geq 0}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}$. Parameter $g_I$ depends on set $S(I)$ and the linear constraints in (\ref{S}) and is known as the \textit{integrality gap} of the formulation for instance $I$. It is easy to see, that we cannot hope to find solutions for the MILP with objective values better than $g_I\cdot z_{LP}(I,c)$. More generally we can define the integrality gap for a class of instances $\mathcal{I}$. In this case, the integrality gap for problem $\mathcal{I}$ is
+\begin{equation}
+g_\mathcal{I} = \max_{c\geq 0 , I\in\mathcal{I}}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}
+\end{equation}
+
+
+For example, in the problem of finding a minimum weight 2-edge-connected multigraph, the gap of the the natural formulation, constraining every cut to be crossed at least twice, is at most $\frac{3}{2}$ \cite{Wolsey1980} and at least $\frac{6}{5}$ \cite{carr-ravi}. Therefore, we cannot hope to obtain an LP-based $(\frac{6}{5}-\epsilon)$-approximation algorithm for this problem using this LP relaxation. If we have $g_I=1$, $P(I)=\conv(S(I))$ and $P(I)$ is an \textit{integral} polyhedron. There are many interesting examples of such formulations such as spanning tree polytope and the perfect matching polytope \cite{schrijver}. For such problems we know how to write a vector $x\in P(I)$ as convex combination of points in $S(I)$ in polynomial time \cite{cons-cara}.
+
+\begin{fact}\label{cara}
+	If $g_I=1$, then for $(x,y)\in P(I)$, there exists $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in S(I)$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq x$. Moreover, we can find such a convex combination in polynomial time.
+\end{fact}
+
+	Now assume $1<g<\infty$. Denote by $\dom(P(I))$ be the set of points $(x',y')$ such that there exists a point $(x,y)\in P$ with $x'\geq x$.
+	
+	A analogous result to Fact \ref{cara} is the following theorem due to Carr and Vempala \cite{CV}. 
+	
+\begin{theorem}[Carr, Vempala \cite{CV}] \label{CV}
+	Let $(x,y)\in P(I)$, there exists $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in \dom(S(I))$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq Cx$ if and only if $g_I \leq C$.
+\end{theorem}
+
+In contrast to Fact \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time. This points to an interesting open question. 
+
+\begin{question}\label{question1}
+	Assume reasonable complexity assumptions (such as $\UGC$ or $\Pp\neq \NP$). Given instance $I$ with $1<g_I<\infty$ and $(x,y)\in P(I)$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in \dom(\conv(S(I)))$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq g_Ix$ in polynomial time?
+\end{question}
+
+This seems to be a very hard question. A more specific question is of more interest.
+
+\begin{question}\label{question2}
+	Assume reasonable complexity assumptions, a specific problem $\mathcal{I}$ with  $1<g_{\mathcal{I}}<\infty$, and $(x,y)\in P(I)$ for some $I\in \mathcal{I}$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in S(I)$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq g_{\mathcal{I}}x$ in polynomial time?
+\end{question}
+Although Question \ref{question2} is wide open, for some problems $\mathcal{I}$ there are polynomial time algorithms. For example, for generalized Steiner forest problem \cite{jain} gave an LP-based 2-approximation algorithm. The gap for this problem is also lower bounded by 2. Same holds for the set covering problem \cite{randomizedrounding}. In fact, for set cover the approximation algorithm achieving the same factor as the integrality gap lower bound, is a \textit{randomized rounding} algorithm. Rhagavan and Thompson \cite{randomizedrounding} showed that this technique acheives provably good approximation for many combinatorial optimization problems.  
+
+One key step, in answering Question \ref{question1} and \ref{question2} is being able to find a solution in $S(I)$. In fact, for general $I$ it is NP-hard to even decide if $S(I)$ is empty or not. There are a number of heuristics for this purpose, such as the feasibility pump heuristic \cite{fp1,fp2}. These heuristics are often very effective and fast in practice, however, they can sometimes fail in finding a feasible solution. In addition these algorithms do not provide any bounds on the quality of the solution they find.
+
+
+
+
+
+
+
+
+
+
+\subsection{Our results}
+
+In this paper we study Theorem \ref{CV} and the natural questions that follow from it (Questions \ref{question1} and \ref{question2}).
+
+
+ We give a general approximation framework for solving $\{0,1\}$-MILPs.  Consider the set of point described by a set 
+\begin{equation}
+S(I)= \{(x,y)\in \mathbb{R}^{n\times p}\;:\; Ax+Gy\geq b,\; x\in \{0,1\}\},  \label{S'}
+\end{equation}
+and a linear relaxation of set $S$
+\begin{equation}
+P(I) = \{(x,y)\in \mathbb{R}^{n\times p}\;:\; Ax+Gy\geq b,\; 0 \leq x\leq 1\}. \label{P'}
+\end{equation}
+For a point $(x,y)\in P(I)$, let $\sup(x,y)= \{i \in \{1,\ldots,n\}: x_i \neq 0\}$.  We prove the following algorithm.
+
+\begin{restatable}{theorem}{binaryFDT}
+	\label{binaryFDT}
+	Assume $1\leq g_I<\infty$. 	
+The FDT algorithm (Algorithm \ref{FDTFull}), given $(x^*,y^*)\in P(I)$, produces in polynomial time $\lambda\in [0,1]^k$ and $(z^1,w^1),\ldots,(z^k,w^k) \in S(I)$ such that $k\leq |\sup(x^*,y^*)|$, $\sum_{i=1}^{k}\lambda_i z^i\leq Cx^*$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g_I^{|\sup(x^*,y^*)|}$.
+\end{restatable}
+
+Notice, that the FDT algorithm needs to find feasible solutions to any MILP with finite gap. This can be of independent interest.
+\begin{restatable}{theorem}{DomToIP}
+	\label{DomToIP}
+		Assume $1\leq g_I \leq \infty$. The DomToIP algorithm (Algorithm \ref{domtoIP}) finds $(\hat{x},\hat{y})\in S(I)$ in polynomial time.
+\end{restatable}
+
+In attempt to extend our results into $\{0,1,2\}$-MILPs we give an FDT algorithm for the 2-edge-connected multigraph problem. In this problem we want to find the minimum weight 2-edge-connected multigraph in a graph $G=(V,E)$ with respect to weights $c\in \mathbb{R}^E_{\geq 0}$. For this problem the natural linear programming relaxation is
+ \begin{equation}\label{2ECpol}
+ \EC(G)= \{x\in \mathbb{R}_{\geq 0}^{E}\;:\; x(\delta(S))\geq 2 \text{ for $\emptyset \subset S\subset V$})\}.\end{equation}
+ We prove the following theorem.
+ 
+ \begin{restatable}{theorem}{FDTEC}
+ 	\label{FDT2EC}
+ 	Let $G=(V,E)$ and $x$ be an extreme point of  $\EC(G)$. The FDT algorithm for 2EC produces $\lambda\in [0,1]^k$ and 2-edge-connected multigraphs $F_1,\ldots,F_k$ such that $k\leq O(|V|)$, $\sum_{i=1}^{k}\lambda_i \chi^{F_i}\leq Cx^*$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g_{\EC}^{O(|V|)}$, where $g_{\EC}$ is the integrality gap of the 2-edge-connected multigraph problem with respect to formulation in (\ref{2ECpol}) 
+ \end{restatable}
+ 
+Although the bound guaranteed in both Theorems \ref{binaryFDT} and \ref{FDT2EC} are very large for large problems, we show that in practice, the algorithm works very well providing approximation ratios that are far better than the theoretical bound in the theorem statements. We examine FDT for binary MILPs for problems such as the tree augmentation problem (TAP) and we apply FDT for 2EC on some interesting and ``hard to decompose" points in the linear relaxation. 
+
+Finally we give a stronger characterization of integrality gap than that in Theorem \ref{CV} for bounded covering problems. For this purpose assume $P= \{x\in \mathbb{R}^n_{\geq 0}: Ax\geq b\textbf{1}, x \leq b\textbf{1}\}$, $S= P\cap \mathbb{Z}^n$, and $g= \max_{c\geq 0} \frac{\min_{x\in S}cx}{\min_{x\in P}cx}$. Examples of such problems include the 2-edge-connected multigraph problem, the tree augmentation problem, and many others.
+
+
+\begin{restatable}{theorem}{tightcuts}
+	\label{tightcuts}
+	 Let $x\in P$, there exists $\theta\in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i = 1$ and $\tilde{x}^i \in S$ for $i=1,\ldots,k$ such that \begin{itemize}
+		\item for $\ell\in \{1,\ldots,n\}$, if $x_\ell =0$, then $\tilde{x}^i_\ell=0$ for $i =1,\ldots,k$, i.e. $\tilde{x}^i$ is in the support of $x$,
+		\item we have $Cb = C\cdot A_j x \geq A_j (\sum_{i=1}^{k}\theta_i\tilde{x}^i)$, for $j$ such that $A_j x =b$,  
+	\end{itemize}
+	if and only if $C\geq g$.
+\end{restatable}
+
+
+
+This means in order to prove an upper bound on the integrality gap of a covering problem, we need to show there is a convex combination of integer feasible points that is ``cheap'' on all tight cuts. Notice that Theorem \ref{CV} requires the certificate convex combination to be ``cheap" on every single variable.
+
+
+\subsection{Notation and Preliminaries}
+

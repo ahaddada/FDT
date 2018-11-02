@@ -1,0 +1,82 @@
+
+\section{Introduction}
+
+
+
+
+
+In \textbf{Multicommodity flow problem in
+	trees} (\textbf{MFT}) we are given (i) a tree $T=(V,E)$, (ii) positive integer $c_e$ for each $e\in E$, i.e. \textit{capacity of edge $e$}, (iii) a collection of pairs of (distinct) vertices of $T$ denoted by $D$, called \textit{demands}, and (iv) a profit function $p:D\rightarrow \mathbb{Z}^+$. A set $L\subseteq D$ is  \textit{routable } in $(T,c)$ if the set of demands in $L$ can be routed through $T$ in the following sense.
+\begin{equation}
+|\{(u,v)\in L: \mbox{$e$ is in the unique $uv$-path in $T$}\}|\leq c_e \quad \mbox{for all $e\in E$}.\end{equation}
+
+For any $L\subseteq D$, we let $L_e=\{(u,v)\in L: \mbox{$e$ is in the unique $uv$-path in $T$}\}$, the set of demands in $L$ that pass through $e$. Hence, $D_e$ is the set of all demands  that ``load" edge $e$. In MFT the goal is to find the maximum profit set of demands $L$ that is routable in $(T,c)$. For the maximum profit routable subset of demands $L$ we have $\opt(T,D,c,p)= \sum_{d \in L}p(d)$. When $c_e=1$ for all $e\in T$, we have the \textbf{Unit-capacity MFT} (UMFT). 
+
+The natural linear programing relaxation, \textit{cut-LP}, for the problem is as follows.
+\begin{align}
+\lp_{cut}(T,D,c,p)=&\max \sum_{d\in D} p(d) x_d&\\
+&\sum_{d\in D_e}x_d \leq c_e &\quad\text{for } e\in E\\
+&0\leq x_d \leq 1 &\quad\text{for } d\in D.
+\end{align}
+
+We denote by $\cut(T,D,c)$ the feasible region of the above LP. The integrality gap of this cut-LP, which is denoted by $\alpha_{cut}$, 
+is $\max_{T,D,c,p} \frac{\lp_{cut} (T,D,c,p)}{\opt (T,D,c,p)}$. Since this is a maximization problem we clearly have $\alpha_{cut}\geq 1$. A $\beta$-approximation algorithm is a polynomial time algorithm that produces a solution $L\subseteq D$, such that $\opt(T,D,c,p)\leq \beta \sum_{d \in L} p(d)$. 
+
+Many special cases of MFT are well studied. For example if $T$ is a path, then the problem can be reduced to a minimum cost circulation problem and the cut-LP is totally unimodular. Furthermore, if $T$ is a star, then the problem can be reduced to a capacitated $b$-matching problem. Therefore, demand flow problem can be solved in polynomial time for both special cases. For general trees the best known result is the $4$-approximation of Chekuri et al. \cite{Chekuri}, which also obtain the upper bound of $4$ on $\alpha_{cut}$. Cheriyan et. al \cite{Cheriyan1999} conjectured that $\alpha_{cut}\leq \frac{3}{2}$. They also provide evidence for their conjecture by proving this upper bound in the case that the optimal solution to cut-LP is half-integral.
+
+
+There are several results for special demand sets as well. When all the profits are 1 \cite{Garg1997} gave a 2-approximation primal-dual algorithm. Moreover, they gave an exact polynomial-time algorithm for UMFT. However, their result does not prove an upper bound on $\alpha_{cut}$. In fact, the best known lower  bound on  $\alpha_{cut}$ is from an instance of UMFT and has a gap of $\frac{3}{2}$.  We will present this instance later in the paper. 
+
+Another interesting special case where we can improve the $4$-approximation algorithm is when $c_e\geq 2$ for all $e\in T$ as shown in \cite{ojas1}. In fact, in this case they provide an LP-based $3$-approximation for the problem which is via iterative rounding (hence $\alpha_{cut}\leq 3$ in this case.). 
+
+When restricting general structure for demands, we also have improved results. Suppose that $r$ is the root of tree $T$. If every demand $d=(u,v)$ in $D$ is such that one of $u$ or $v$ is an ancestor of the other (i.e. every demand is a \textit{radial} demand) then the matrix in the cut-LP is totally unimodular, and hence in this case $\alpha_{cut} =1$ \cite{IPbook}. More generally, \cite{ojas1} proved that if for some vertex $r$ of $T$ (as the root of the tree) every demand $d=(u,v)$ in $D$ has the property that $d$ is a radial demand, or the unique $uv$-path in $T$ contains $r$ (\textit{root} demand), then the problem can be solved exactly in polynomial time. Note that, their algorithm does not prove an upper bound on $\alpha_{cut}$. In fact, we use this fact later in the paper to prove one of our results.
+
+In this paper, besides studying MFT we will also study a generalization of MFT which we call the \textbf{multi-state multi-commodity flow in trees (MMFT)}. 
+ In this problem we are given: (i) A set of \textit{states} $S$, (ii) a tree network $T=(V,E)$, (iii) a positive integer $c^s_e$ for  $e\in S$ and $e\in E$, i.e. \textit{the capacity of edge $e$ on state $s$}, (iv) a positive integer $c_e$ for $e\in E$, i.e. \textit{total capacity of edge $e$}, (v) a collection of pairs of (distinct) vertices  $D$, called \textit{demands}, (vi) a profit function $p:D\rightarrow \mathbb{Z}^+$, and finally (vii) state function $q:D\rightarrow S$, which determines the state of each demand. 
+
+For a subset $L$ of $D$, and state $s\in S$ let $L^s=\{d\in L: q(d)=s\}$. A set $L\subseteq D$ is called \textit{ state-wise routable} on $(T,c,c^s:s\in S)$ if 
+
+\begin{equation}
+|L_e|\leq c_e \quad \mbox{for all $e\in E$}\end{equation}
+and 
+\begin{equation}
+|L^s_e|\leq c^s_e \quad \mbox{for all $e\in E$, $s\in S$}.\end{equation}
+
+
+If $|S|=1$, then MMFT is the same as MFT. For the maximum profit state-wise routable subset of demands $L$ we denote $$\opt(T,D,S,c,p,q)= \sum_{d\in L}p(d).$$ We also have the following linear programming relaxation for MMFT, namely \textit{state-cut-LP}. First let us present the natural linear programming relaxation of the multi-state demand flow problem. 
+
+
+
+\begin{align}
+LP_{state-cut}(T,D,S,c,p,q)=\max&\sum_{d\in D} p(d) x_d\label{obj}\\
+&\sum_{d\in D_e}x_d \leq c_e \quad\text{for } e\in E \label{overall}\\
+&\sum_{d\in D^s_e}x_d \leq c^s_e \quad\text{for } e\in E, s\in S\label{state}\\
+&0\leq x_d \leq 1 \quad\;\;\;\text{for } d\in D \label{nonneg}.
+\end{align}
+
+Let $\statecut(T,D,S,c,q)$ be the feasible region of the LP above, and $\alpha^{m}_{cut}$ the integrality gap of this the above LP for MMFT for instances with $|S|=m$. In other words $$\alpha^m_{cut} =\max_{T,D,c,p,q } \frac{\lp_{state-cut}(T,D,\{1,\ldots,m\},c,p,q)}{\opt(T,D,\{1,\ldots,m\},c,p,q)}$$ 
+
+If we restrict $T$ to be a path the state-cut-LP becomes integral since the matrix in the formulation will be totally unimodular (consecutive 1s matrix). When $T$ is a star, the problem reduces to a problem we call the \textbf{Multi-state $b$-matching} problem which we discuss later.
+
+
+\subsection{Motivation}
+Multi-commodity flow problems are intensely studied and have various and important applications \cite{}. The applications arise when the underlying graph network has specific properties such as when the graph is planar, or a simple cycle or a tree \cite{}. 
+
+Our main problem of study, MMFT, like most multi-commodity flow problems have various and important applications. Particularly, MMFT is a model for layered networks, such as the Internet. In detail, each level of the tree represents a layer of agents in the network. For example, leaves correspond to users and clients while lower level inner vertices of the tree correspond to local ISPs, and the domain of the network gets larger as we go up the tree. In this model, a demand is a request sent from a client is this network to another. This request can be accepted and routed through this layered network. Each request has a type: video streaming, online gaming, etc (the state of the demand). Also, each ISP and router in the network will have some predefined capacity for each type of request from its clients and also an overall capacity. 
+
+Apart from real word applications, MFT and MMFT have very interesting application in other combinatorial optimization problems. For example, MFT is a generalization of $b$-matchings (when the tree is a star) \cite{Chekuri}. In the same way, MMFT is a generalization of a multi-state version of $b$-matching. This generalized $b$-matching problem, which in this paper is called the multi-state $b$-matching problem, has interesting similarities to the recently studied bounded color matching and $b$-matching problem \cite{color-matching0,color-matching1, color-matching2, color-matching3}.
+\subsection{Our results}
+
+In this paper we show that the integrality gap of the cut-LP is exactly $\frac{3}{2}$ in the case of UMFT. We provide a $\frac{3}{2}$-approximation algorithms for this case of MFT based on the cut-LP upper bound. Note that the dynamic programming algorithm in \cite{Garg1997} is not LP based. Also the integrality gap for the cut-LP is known to be at least $\frac{3}{2}$. 
+
+Next, we prove that MMFT when $T$ is a star can be solved in polynomial time with a reduction to an easy instance of MFT. This result is independently interesting as this case of the problem can be couched as a ``state-wise" $b$-matching problem.
+
+We will also present a $2(|S|+1)$-approximation algorithm for MMFT where $|S|$ is the number of states in the MMFT instance. The approximation algorithm is LP-based and proves that $\alpha^m_{cut}\leq 2(m+1)$, e.g. the integrality gap is at most  $6$ when $|S|=2$. Finally, we show when $|S|=2$, the integrality gap of the same formulation is at least $2$, hence $2\leq \alpha^2_{cut} \leq 6$. 
+
+
+
+\subsection{Notation and Preliminaries}
+
+
+In this paper, we sometimes treat subsets of demands or edges as vectors, in which case are referring to the characteristics vector of those subsets. When the instance is clear from the context, instead of saying a subset of demands is routable in $(T,c)$ (or state-wise routable in $(T,c,c^s:s\in S)$), we may say a (state-wise) routable subset of demands in $T$, or a (state-wise) routable subset of demands.
+
