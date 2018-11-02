@@ -97,12 +97,23 @@ graphicx, verbatim, listings, color, fancybox}
 \DeclareMathOperator{\spp}{sup}
 \DeclareMathOperator{\EC}{2EC}
 \DeclareMathOperator{\DOMtoS}{DominantToFeasbile}
+\newcommand{\arash}[1]{\noindent{\bf {\color{blue!60!black}{\sc Arash:}  #1}}}
+
+\newcommand{\bob}[1]{\noindent{\bf {\color{magenta!80!black}{\sc Bob:}  #1}}}
+
+\newcommand{\cindy}[1]{\noindent{\bf {\color{green!60!black}{\sc Cindy:}   #1}}}
+
+
+
+\iffalse
+\renewcommand{\arash}[1]{}
+\renewcommand{\bob}[1]{}
+\renewcommand{\cindy}[1]{}
+\fi
+
+
 \newenvironment{cproof}
-{\begin{proof}
- [Proof.]
- \vspace{-1.5\parsep}%-3.2\parsep} %%%For use with US letter
-}
-{\renewcommand{\qed}{\hfill $\Diamond$} \end{proof}}
+
 
 
 \onehalfspacing
