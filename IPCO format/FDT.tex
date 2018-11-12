@@ -1,0 +1,646 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.20 of 2017/10/04
+%
+
+\documentclass[runningheads]{llncs}
+%
+\usepackage{graphicx}
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\begin{document}
+%
+\title{FDT\thanks{Supported by organization x.}}
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{Robert Carr\inst{1}\orcidID{} \and
+Arash Haddadan\inst{2}\orcidID{} \and
+Cynthia Phillips\inst{3}\orcidID{}}
+%
+\authorrunning{Carr et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{University of New Mexico, Albuquerque NM 87131, USA\\
+\email{bobcarr@unm.}\\   \and
+Carnegie Mellon University, Pittsburgh, PA 15213, USA\\
+\email{ahaddada@cmu.edu}\and
+Sandia National Laboratories, Albuquerque, NM 87185, USA\\
+\email{caphill@sandia.gov}}
+%
+\maketitle              % typeset the header of the con	tribution
+%
+\begin{abstract}
+The abstract should briefly summarize the contents of the paper in
+150--250 words.
+
+\keywords{First keyword  \and Second keyword \and Another keyword.}
+\end{abstract}
+%
+%
+%
+
+\section{Introduction}
+Mixed-integer linear programming (MILP), the optimization of a linear objective function subject to linear and integrality constraints, is a classic NP-hard problem \cite{GJ79}. In fact it is NP-hard in general to determine if there is a feasible solution to an MILP problem \cite{GJ79}. However, intelligent branch-and-bound strategies allow commercial and open-source MIP solvers to give exact solutions (or near-optimal with provable bound) to many specific instances of NP-hard combinatorial optimization problems. Modeling combinatorial optimization problems with MILPs also started the very popular area of LP-based approximation algorithms. 
+
+Consider the set of point described by a set 
+\begin{equation}
+S(A,G,b)= \{(x,y)\in \bbbz^{n}\times \bbbr^p\;:\; Ax+Gy\geq b\}  \label{S}
+\end{equation}
+and the  linear relaxation of set $S(A,G,b)$,
+\begin{equation}
+P(A,G,b) = \{(x,y)\in \bbbr^{n+ p}\;:\; Ax+Gy\geq b\}. \label{P}
+\end{equation}
+
+To make the notation simpler we use $I=(A,G,b)$, i.e. an instance of the formulation. Then we use $S(I)$ and $P(I)$ to denote $S(A,G,b)$ and $P(A,G,b)$, respectively. Notice that $\min \;\{cx:\; (x,y) \in S(I)\}$ is in fact an MILP problem and $\min \;\{cx:\;(x,y)\in P(I) \}$ is lower bound provided from the LP relaxation. Let $z_{IP}(I,c)$ and $z_{LP}(I,c)$ be the optimal solution to these problems, respectively.
+
+
+Many researchers (see \cite{sw, vazirani}) have developed polynomial time algorithms that find solutions for special classes of MILPs whose cost are provably smaller than $C\cdot z_{LP}(I,c)$ for some $C$ which can be a constant number or dependent on some parameter of the MILP, e.g. $O(\log(n))$. However, for many combinatorial optimization problems there is a limit to such techniques. Let $g_I= \max_{c\geq 0}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}$. Parameter $g_I$ depends on set $S(I)$ and the linear constraints in (\ref{S}) and is known as the \textit{integrality gap} of the formulation for instance $I$. It is easy to see, that we cannot hope to find solutions for the MILP with objective values better than $g_I\cdot z_{LP}(I,c)$. More generally we can define the integrality gap for a class of instances $\mathcal{I}$. In this case, the integrality gap for problem $\mathcal{I}$ is
+\begin{equation}
+g_\mathcal{I} = \max_{c\geq 0 , I\in\mathcal{I}}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}
+\end{equation}
+
+
+For example, in the problem of finding a minimum weight 2-edge-connected multigraph, the gap of the the natural formulation, constraining every cut to be crossed at least twice, is at most $\frac{3}{2}$ \cite{Wolsey1980} and at least $\frac{6}{5}$ \cite{carr-ravi}. Therefore, we cannot hope to obtain an LP-based $(\frac{6}{5}-\epsilon)$-approximation algorithm for this problem using this LP relaxation. If we have $g_I=1$, $P(I)=\conv(S(I))$ and $P(I)$ is an \textit{integral} polyhedron. There are many interesting examples of such formulations such as spanning tree polytope and the perfect matching polytope \cite{schrijver}. For such problems we know how to write a vector $x\in P(I)$ as convex combination of points in $S(I)$ in polynomial time \cite{cons-cara}.
+
+\begin{proposition}\label{cara}
+	If $g_I=1$, then for $(x,y)\in P(I)$, there exists $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in S(I)$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq x$. Moreover, we can find such a convex combination in polynomial time.
+\end{proposition}
+
+Now assume $1<g<\infty$. Denote by $\dom(P(I))$ be the set of points $(x',y')$ such that there exists a point $(x,y)\in P$ with $x'\geq x$.
+
+A analogous result to Proposition \ref{cara} is the following theorem due to Carr and Vempala \cite{CV}. 
+
+\begin{theorem}[Carr, Vempala \cite{CV}] \label{CV}
+	Let $(x,y)\in P(I)$, there exists $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in \dom(S(I))$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq Cx$ if and only if $g_I \leq C$.
+\end{theorem}
+
+In contrast to Fact \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time. This points to an interesting open question. 
+
+\begin{question}\label{question1}
+	Assume reasonable complexity assumptions (such as UGC or $\textrm{P}\neq \textrm{NP}$). Given instance $I$ with $1<g_I<\infty$ and $(x,y)\in P(I)$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in \dom(\conv(S(I)))$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq g_Ix$ in polynomial time?
+\end{question}
+
+This seems to be a very hard question. A more specific question is of more interest.
+
+\begin{question}\label{question2}
+	Assume reasonable complexity assumptions, a specific problem $\mathcal{I}$ with  $1<g_{\mathcal{I}}<\infty$, and $(x,y)\in P(I)$ for some $I\in \mathcal{I}$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in S(I)$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq g_{\mathcal{I}}x$ in polynomial time?
+\end{question}
+Although Question \ref{question2} is wide open, for some problems $\mathcal{I}$ there are polynomial time algorithms. For example, for generalized Steiner forest problem \cite{jain} gave an LP-based 2-approximation algorithm. The gap for this problem is also lower bounded by 2. Same holds for the set covering problem \cite{randomizedrounding}. In fact, for set cover the approximation algorithm achieving the same factor as the integrality gap lower bound, is a \textit{randomized rounding} algorithm. Rhagavan and Thompson \cite{randomizedrounding} showed that this technique acheives provably good approximation for many combinatorial optimization problems.  
+
+One key step, in answering Question \ref{question1} and \ref{question2} is being able to find a solution in $S(I)$. In fact, for general $I$ it is NP-hard to even decide if $S(I)$ is empty or not. There are a number of heuristics for this purpose, such as the feasibility pump heuristic \cite{fp1,fp2}. These heuristics are often very effective and fast in practice, however, they can sometimes fail in finding a feasible solution. In addition these algorithms do not provide any bounds on the quality of the solution they find.
+
+
+
+
+
+
+
+
+
+
+\subsection{Our results}
+
+In this paper we study Theorem \ref{CV} and the natural questions that follow from it (Questions \ref{question1} and \ref{question2}).
+
+
+We give a general approximation framework for solving $\{0,1\}$-MILPs.  Consider the set of point described by a set 
+\begin{equation}
+S(I)= \{(x,y)\in \bbbr^{n\times p}\;:\; Ax+Gy\geq b,\; x\in \{0,1\}\},  \label{S'}
+\end{equation}
+and a linear relaxation of set $S$
+\begin{equation}
+P(I) = \{(x,y)\in \bbbr^{n\times p}\;:\; Ax+Gy\geq b,\; 0 \leq x\leq 1\}. \label{P'}
+\end{equation}
+For a point $(x,y)\in P(I)$, let $\sup(x,y)= \{i \in \{1,\ldots,n\}: x_i \neq 0\}$.  We prove the following algorithm.
+
+\begin{restatable}{theorem}{binaryFDT}
+	\label{binaryFDT}
+	Assume $1\leq g_I<\infty$. 	
+	The FDT algorithm (Algorithm \ref{FDTFull}), given $(x^*,y^*)\in P(I)$, produces in polynomial time $\lambda\in [0,1]^k$ and $(z^1,w^1),\ldots,(z^k,w^k) \in S(I)$ such that $k\leq |\sup(x^*,y^*)|$, $\sum_{i=1}^{k}\lambda_i z^i\leq Cx^*$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g_I^{|\sup(x^*,y^*)|}$.
+\end{restatable}
+
+Notice, that the FDT algorithm needs to find feasible solutions to any MILP with finite gap. This can be of independent interest.
+\begin{restatable}{theorem}{DomToIP}
+	\label{DomToIP}
+	Assume $1\leq g_I \leq \infty$. The DomToIP algorithm (Algorithm \ref{domtoIP}) finds $(\hat{x},\hat{y})\in S(I)$ in polynomial time.
+\end{restatable}
+
+In attempt to extend our results into $\{0,1,2\}$-MILPs we give an FDT algorithm for the 2-edge-connected multigraph problem. In this problem we want to find the minimum weight 2-edge-connected multigraph in a graph $G=(V,E)$ with respect to weights $c\in \bbbr^E_{\geq 0}$. For this problem the natural linear programming relaxation is
+\begin{equation}\label{2ECpol}
+\EC(G)= \{x\in \bbbr_{\geq 0}^{E}\;:\; x(\delta(S))\geq 2 \text{ for $\emptyset \subset S\subset V$})\}.\end{equation}
+We prove the following theorem.
+
+\begin{restatable}{theorem}{FDTEC}
+	\label{FDT2EC}
+	Let $G=(V,E)$ and $x$ be an extreme point of  $\EC(G)$. The FDT algorithm for 2EC produces $\lambda\in [0,1]^k$ and 2-edge-connected multigraphs $F_1,\ldots,F_k$ such that $k\leq O(|V|)$, $\sum_{i=1}^{k}\lambda_i \chi^{F_i}\leq Cx^*$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g_{\EC}^{O(|V|)}$, where $g_{\EC}$ is the integrality gap of the 2-edge-connected multigraph problem with respect to formulation in (\ref{2ECpol}) 
+\end{restatable}
+
+Although the bound guaranteed in both Theorems \ref{binaryFDT} and \ref{FDT2EC} are very large for large problems, we show that in practice, the algorithm works very well providing approximation ratios that are far better than the theoretical bound in the theorem statements. We examine FDT for binary MILPs for problems such as the tree augmentation problem (TAP) and we apply FDT for 2EC on some interesting and ``hard to decompose" points in the linear relaxation. 
+
+Finally we give a stronger characterization of integrality gap than that in Theorem \ref{CV} for bounded covering problems. For this purpose assume $P= \{x\in \bbbr^n_{\geq 0}: Ax\geq b\textbf{1}, x \leq b\textbf{1}\}$, $S= P\cap \bbbz^n$, and $g= \max_{c\geq 0} \frac{\min_{x\in S}cx}{\min_{x\in P}cx}$. Examples of such problems include the 2-edge-connected multigraph problem, the tree augmentation problem, and many others.
+
+
+\begin{restatable}{theorem}{tightcuts}
+	\label{tightcuts}
+	Let $x\in P$, there exists $\theta\in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i = 1$ and $\tilde{x}^i \in S$ for $i=1,\ldots,k$ such that \begin{itemize}
+		\item for $\ell\in \{1,\ldots,n\}$, if $x_\ell =0$, then $\tilde{x}^i_\ell=0$ for $i =1,\ldots,k$, i.e. $\tilde{x}^i$ is in the support of $x$,
+		\item we have $Cb = C\cdot A_j x \geq A_j (\sum_{i=1}^{k}\theta_i\tilde{x}^i)$, for $j$ such that $A_j x =b$,  
+	\end{itemize}
+	if and only if $C\geq g$.
+\end{restatable}
+
+
+
+This means in order to prove an upper bound on the integrality gap of a covering problem, we need to show there is a convex combination of integer feasible points that is ``cheap'' on all tight cuts. Notice that Theorem \ref{CV} requires the certificate convex combination to be ``cheap" on every single variable.
+
+
+\subsection{Notation and Preliminaries}
+
+\section{FDT on binary MIPs}
+\label{binaryfdt}
+
+In this section we present the fractional decomposition tree (FDT) algorithm and prove its correctness. 
+
+Consider a formulation instance $I=(A,G,b)$, set 
+\begin{equation}
+S(I)= \{(x,y)\in \bbbr^{n\times p}\;:\; Ax+Gy\geq b,\; x\in \{0,1\}\},  \label{S'}
+\end{equation}
+and its linear relaxation
+\begin{equation}
+P(I) = \{(x,y)\in \bbbr^{n\times p}\;:\; Ax+Gy\geq b,\; 0 \leq x\leq 1\}. \label{P'}
+\end{equation}
+Also assume we are given a point $(x^*,y^*)\in P(I)$. For instance, $(x^*,y^*)$ can be the optimal solution of minimizing a cost function $cx$ over set $P$, which provides a lower bound on $\min_{(x,y)\in S(I)} cx$. In this section, we prove the following theorem.  
+
+\binaryFDT*
+
+One key ingredient in proving Theorem \ref{binaryFDT} is Theorem \ref{DomToIP} that we will also prove in this section.
+
+
+
+Although the theoretical worst-case upper bound on $C$ in the statement of Theorem \ref{binaryFDT} can be very large, we will show that in practice $C$ can be really small and hence FDT can provide good LP-based approximation algorithms in many cases. We also remark that if $g_I=1$, then the algorithm will give an exact decomposition of any feasible solution.  In the remainder of this section we explain the FDT algorithm and prove Theorem \ref{binaryFDT}. For simplicity in the notations we denote $P(I),S(I),$ and $g_I$ with $P,S,$ and $g$, respectively. Let $t=|\sup(x^*,y^*)|$. We assume without loss of generality that $\sup(x^*,y^*)= \{1,\ldots,t\}$.
+
+We begin with the following lemmas that show how the FDT algorithm branches on a variable.
+\begin{lemma}\label{LPClemma}
+	Given $(x',y')\in \dom(P)$ and $\ell\in \{1,\ldots,n\}$, we can find in polynomial time vector $(\hat{x}^0,\hat{y}^0),(\hat{x}^1,\hat{y}^1)$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that
+	\begin{itemize}
+		\item[(i)] $\gamma_0 + \gamma_1  \geq \frac{ 1}{g}$,
+		\item[(ii)] $(\hat{x}^0,\hat{y}^0)$ and $(\hat{x}^1,\hat{y}^1)$ are in  $ P$, 
+		\item[(iii)] $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$,
+		\item[(iv)] $\gamma_0 \hat{x}^0 + \gamma_1\hat{x}^1 \leq x'$.
+	\end{itemize}
+\end{lemma}
+
+
+\begin{proof}[Proof of Lemma \ref{LPClemma}] 
+	
+	Consider the following linear programing which we denote by $\LPC(\ell,x',y')$. The variables of $\LPC(\ell,x',y')$ are $\gamma_0,\gamma_1$ and $(x^0,y^0)$ and $(x^1,y^1)$. 
+	\begin{align}
+		\LPC(\ell,x',y')\quad\quad& \max\quad \;\lambda_0+\lambda_1\\
+		&\;\text{s.t.} \quad Ax^j + Gy^j\geq b\lambda_j & \mbox{ for $j=0,1$} \label{feasibility}\\
+		&\;{\color{white}{\text{s.t.}} }\quad 0 \leq x^j \leq \lambda_j &\mbox{ for $j=0,1$}\label{bound}\\
+		&\;{\color{white}{\text{s.t.}} }\quad x^0_\ell = 0,\; x^1_\ell =\lambda_1\label{branchcoordinate}\\
+		&\;{\color{white}{\text{s.t.}} }\quad x^0 + x^1 \leq x'\label{packing}\\
+		&\;{\color{white}{\text{s.t.}} }\quad \lambda_0,\lambda_1 \geq 0
+	\end{align}
+	
+	Let $(x^0,y^0),(x^1,y^1)$, and $\gamma_0,\gamma_1$ be an optimal solution solution to the LP above. Let $(\hat{x}^0,\hat{y}^0) = (\frac{x^0}{\gamma_0},\frac{y^0}{\gamma_0})$, $(\hat{x}^1,\hat{y}^1) = (\frac{x^1}{\gamma_1},\frac{y^1}{\gamma_1})$. Observe that  (ii), (iii), (iv) are satisfied with this choice. In order to show that (i) is also satisfied we prove the following claim.
+	
+	\begin{claim}\label{CVexists}
+		We have $\gamma_0 + \gamma_1\geq \frac{1}{g}$.
+	\end{claim}
+	\begin{proof}
+		We show that there is a feasible solution that achieves the objective value of $\frac{1}{g}$. By Theorem \ref{CV} there exists $\theta \in [0,1]^k$, with $\sum_{i=1}^{k}\theta_i = 1$ and $(\tilde{x}^i,\tilde{y}^i)\in S$ for $i=1,\ldots,k$ such that 
+		$\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq gx'$. 
+		
+		\begin{equation}\label{splitting}
+		x'\geq \sum_{i=1}^{k}\frac{\theta_i}{g} \tilde{x}^i
+		={\sum_{i\in [k]: \tilde{x}^i_\ell =0}\frac{\theta_i}{g} \tilde{x}^i}+{\sum_{i\in [k]: \tilde{x}^i_\ell =1}\frac{\theta_i}{g} \tilde{x}^i}
+		\end{equation}
+		For $j=0,1$, let $(x^j,y^j) = \sum_{i\in [k]:\tilde{x}^i_\ell=j} \frac{\theta_i}{g}(\tilde{x}^i,\tilde{y}^i)$. Also let $\lambda_0=\sum_{i\in [k]: \tilde{x}^i_\ell =0}\frac{\theta_i}{g}$ and $\lambda_1 = \sum_{i\in [k]: \tilde{x}^i_\ell =1}\frac{\theta_i}{g}$. Note that $\lambda_0+\lambda_1 = \frac{1}{g}$. Constraint \ref{packing} is satisfied by Inequality \ref{splitting}. Also, for $j=0,1$ we have
+		\begin{equation}
+		Ax^j+Gy^j = \sum_{i\in[k], \tilde{x}^i_\ell = j} \frac{\theta_i}{g} (A\tilde{x}^i + G\tilde{y}^i) \leq b \sum_{i\in[k], \tilde{x}^i_\ell = j} \frac{\theta_i}{g} = b\lambda_j.
+		\end{equation}
+		Hence, Constraints \ref{feasibility} holds. Constraint \ref{branchcoordinate} also holds since $x^0_\ell$ is obviously $0$ and $x^1_\ell= \sum_{i\in [k]: \tilde{x}^i_\ell = 1}\frac{\theta_i}{g}= \lambda_1$. The rest of the constraints trivially hold. 
+	\end{proof}
+	This concludes the proof.	
+\end{proof}
+
+We now show if $x'$ in the statement of of Lemma \ref{LPClemma} is partially integral, we can find solutions with more integral components.
+\begin{lemma}\label{round-up}
+	Given $(x',y')\in \dom(P)$, such that $x'_1,\ldots,x'_{\ell-1}\in \{0,1\}$ for some $\ell\geq 1$, we can find in polynomial time vector $(\hat{x}^0,\hat{y}^0),(\hat{x}^1,\hat{y}^1)$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that
+	\begin{itemize}
+		\item[(i)] $\gamma_0 + \gamma_1  \geq\frac{ 1}{g}$,
+		\item[(ii)] $(\hat{x}^0,\hat{y}^0)$ and $(\hat{x}^1,\hat{y}^1)$ are in  $\dom( P)$, 
+		\item[(iii)] $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$,
+		\item[(iv)] $ \gamma_0\hat{x}^0 +\gamma_1 \hat{x}^1 \leq
+		x'$,
+		\item[(v)] $\hat{x}^i_j\in \{0,1\}$ for $i=0,1$ and $j=1,\ldots,\ell-1$.
+	\end{itemize}
+\end{lemma} 
+\begin{proof}
+	By Lemma \ref{LPClemma} we can find $(\bar{x}^0,\bar{y}^0)$, $(\bar{x}^1,\bar{y}^1)$, $\gamma_0$ and $\gamma_1$ that satisfy (i), (ii), (iii), and (iv). We define $\hat{x}^0$ and $\hat{x}^1$ as follows. For $i=0,1$, for $j=1,\ldots,\ell-1$, let $\hat{x}^i_j= \ceil{\bar{x}^i_j}$, for $j=\ell,\ldots,n$ let $\hat{x}^i_j = \bar{x}^i_j$. We now show that $(\hat{x}^0,\bar{y}^0)$, $(\hat{x}^1,\bar{y}^1)$, $\gamma_0$, and $\gamma_1$ satisfy all the conditions. Note that conditions (i), (ii), (iii), and (v) are trivially satisfied. Thus we only need to show (iv) holds. We need to show that $\gamma_0 \hat{x}^0_j+\gamma_1\hat{x}^1_j\leq gx'_j$. If $j=\ell,\ldots,n$, then this clearly holds. Hence, assume $j\leq \ell-1$. By the property of $x'$ we have $x'_j\in \{0,1\}$. If $x'_j= 0$, then by Constraint \ref{packing} we have $\bar{x}^0_j = \bar{x}^1_j=0$. Therefore, $\hat{x}^i_j=0$ for $i=0,1$, so (iv) holds. Otherwise if $x'_j = 1$, then we have
+	\begin{equation*}\gamma_0\hat{x}^0_j+\gamma_1\hat{x}^1_j\leq \gamma_0+\gamma_1\leq 1\leq x'_j.\end{equation*}
+	Therefore (v) holds.
+\end{proof}
+The FDT algorithm grows a tree similar to the classic branch-and-bound search tree for integer programs. Each node represents a partially integral vector $(\bar{x},\bar{y})$ in $\dom(P)$ together with a multiplier $\bar{\lambda}$. The solutions contained in the nodes of the tree become progressively more integral at each level. Leaves of the FDT tree contain solutions with integer values for all the $x$ variables that dominate a point in $P$. We will later see how we can turn these into points in $S$. 
+
+Let us define the FDT algorithm more formally. The algorithm maintains nodes $L_i$ in iteration $i$ of the algorithm. The nodes in $L_i$ correspond to the nodes in level $L_i$ of the FDT tree. The points in the leaves of the FDT tree, or $L_t$, are points in $\dom(P)$ and are integral for all integer variables.
+
+
+
+\begin{lemma}\label{prune}
+	There is a polynomial time algorithm that produces sets $L_0,\ldots,L_t$ of pairs of $(x,y)\in \dom(P)$ together with multipliers $\lambda$ with the following properties for $i=0,\ldots,t$. 
+	\begin{itemize}
+		\item[a.] If $(x,y)\in L_i$, then $x_j \in \{0,1\}$ for $j=1,\ldots,i$, i.e. the first $i$ coordinates of a solution in level $i$ are integral. 
+		\item[b.] $\sum_{[(x,y),\lambda]\in L_i} \lambda\geq\frac{1}{g^i}$.
+		\item[c.] $\sum_{[(x,y),\lambda]\in L_i}\lambda x \leq x^*$.
+		\item[d.] $|L_i|\leq t$.
+	\end{itemize}
+\end{lemma}
+\begin{proof}
+	We prove this lemma using induction but one can clearly see how to turn this proof into a polynomial time algorithm. Let $L_0$ be the set that contains a single node (\textit{root of the FDT tree}) with $(x^*,y^*)$ and multiplier 1. It is easy to check all the requirements in the lemma are satisfied for this choice.
+	
+	Suppose by induction that we have constructed sets $L_0,\ldots,L_i$. Let the solutions in $L_i$ be $(x^j,y^j)$ for $j=1,\ldots,k$ and $\lambda_j$ be their multipliers, respectively. For each $j\in 1,\ldots,k$ by Lemma \ref{round-up} (setting $(x',y')= (x^j,y^j)$ and $\ell = i$) we can find $(x^{j0},y^{j0}), (x^{j1},y^{j1})$ and $\lambda^0_j$, $\lambda^1_j$ with the properties (i) to (v) in Lemma \ref{round-up}. Define $L'$ to be the set of node with solutions $(x^{j0},y^{j0}), (x^{j1},y^{j1})$ and multipliers  $\lambda_j\lambda^0_j$, $\lambda_j\lambda^1_j$, respectively, for $j=1,\ldots,k$.
+	
+	Notice that for each $j\in \{1,\ldots,k\}$ by property (v) in Lemma \ref{round-up} we have $x_\ell^{j0}, x_\ell^{j1}\in \{0,1\}$ for $\ell = 0,\ldots,i+1$. We also have
+	\begin{align*}
+		\sum_{[(x,y),\lambda]\in L'} \lambda & =  \sum_{j=1}^{k} \lambda_j\lambda^0_j+\lambda_j\lambda^1_j&\\
+		& \geq \sum_{j=1}^{k} \frac{\lambda_j}{ g} & (\text{By property (i) in Lemma \ref{round-up}})\\
+		& \geq \frac{1}{g} \sum_{[(x,y),\lambda]\in L_i}\lambda&\\
+		& \geq \frac{1}{g^{i+1}}.&(\text{By induction hypothesis})	 
+	\end{align*} 
+	Also 
+	\begin{align*}
+		\sum_{[(x,y),\lambda]\in L'}\lambda x & =  \sum_{j=1}^{k} \lambda_j\big(\lambda^0_jx^{j0}+\lambda^1_jx^{j1}\big)&\\ 
+		& \leq \sum_{j=1}^{k} \lambda_j x^j  & (\text{By property (iv) in Lemma \ref{round-up}})\\
+		& \leq \sum_{[(x,y),\lambda]\in L_i}\lambda x&\\
+		& \leq x^*.&(\text{By induction hypothesis})	 
+	\end{align*} 
+	Set $L'$ seems like a suitable candidate for $L_{i+1}$, however we can only ensure that $|L'|\leq 2k\leq 2t$, and might have $|L'|>t$. We call the following linear programming $\prun(L')$. Let $L' = \{[(x^1,y^1),\lambda_1],\ldots,[(x^k,y^k),\lambda_k]\}$. The variables of $\prun(L')$ is a scalar variable $\theta_j$ for each node $j$ in $L'$.  
+	
+	\begin{align}
+		\prun(L')\quad\quad& \max\quad \;\sum_{j=1}^{k} \theta_j\\
+		&\;\text{s.t.} \quad \;\;\sum_{j=1}^{k} \theta_j x^j_i\leq x^*_i &\mbox{ for $i=1,\ldots,t$} \label{packs}\\
+		&\;{\color{white}{\text{s.t.}} }\quad  \;\quad\quad\theta \geq 0\label{nonneg}
+	\end{align}
+	
+	Notice that $\theta = \lambda$ is in fact a feasible solution to $\prun(L')$. Let $\theta^*$ be the optimal vertex point solution to this LP. Since the problem is in $\bbbr^k$,  $\theta^*$ has to satisfy $k$ linearly independent constraints at equality. However, there are only $t$ constraints of type \ref{packs}. Therefore, there are at most $t$ coordinates of $\theta^*_j$ that are non-zero. We claim that $L_{i+1}$ which consists of $(x^j,y^j)$ for $j=1,\ldots,k$ and their corresponding multipliers $\theta^*_j$ satisfy the properties in the statement of the lemma. Notice that, we can discard the nodes in $L_{i+1}$ that have $\theta^*_j=0$, so $|L_{i+1}| \leq t$. Also, since $\theta^*$ is optimal and $\lambda$ is feasible for $\prun(L')$, we have $\sum_{j=1}^{k} \theta^*_j \geq \sum_{j=1}^{k}\lambda_j \geq \frac{1}{g^{i+1}}$. 
+\end{proof}
+
+
+The leaves of the FDT tree, or $L_t$ have the property that every solution $(x,y)$ in $L_t$ has $x\in\{0,1\}^n$ and $(x,y)\in \dom(P)$. Our goal to now replace these leaves solutions in $\dom(P)$ with solutions in $S$. To this end, we need to reduce some variables with value of 1 into variables of value 0 and obtain feasibility in the meantime. We introduce a procedure that given a  point $(x,y)\in \dom(P)$ with $x\in \{0,1\}^n$ outputs a point $z\leq x$ with $z\in \{0,1\}^n$ such that $(z,w)$ is in $S$ for some vector $w\in \bbbr^p$. 
+
+The algorithm ``fixes" the variables iteratively, from $x_1$ to $x_t$. Suppose we run the algorithm for $\ell\in \{0,\ldots,t-1\}$ iterations and we have $(x^{(\ell)},y^{(\ell)})\in \dom(P)$  such that $x^{(\ell)}_i\in \{0,1\}$ for $i=1,\ldots,\ell$. Now consider the following linear programming. The variables of this LP are the $z\in \bbbr^n$ variables and $w\in \bbbr^p$.
+\begin{align}
+	\DOMtoS(x^{(\ell)})\quad\quad& \min\quad \;z_{\ell+1}\\
+	&\;\text{s.t.} \quad \;\;Az+ Gw\geq b \\
+	&\;{\color{white}{\text{s.t.}} }\quad \;\; \; z_j = x^{(\ell)}_j \quad \; j =1,\ldots, \ell\\
+	&\;{\color{white}{\text{s.t.}} }\quad \; \;\; z_j \leq x^{(\ell)}_j \quad \; j = \ell+1,\ldots,n\\
+	&\;{\color{white}{\text{s.t.}} }\quad \; \;\; z\;\geq 0
+\end{align}
+
+If the optimal value to $\DOMtoS(x^{(\ell)})$ is 0, then let $x^{(\ell+1)}_{\ell+1} = 0$. Otherwise if the optimal value is strictly positive let $x^{(\ell+1)}_{\ell+1} = 1$. Let $x^{(\ell+1)}_j = x^{(\ell)}_j$ for $j\in \{1,\ldots,n\}\setminus \{\ell+1\}$. This procedure is summarized in Algorithm \ref{domtoIP}.
+
+\begin{algorithm}[H]\label{domtoIP}
+	\KwIn{$(x,y)\in \dom(S)$}
+	\KwOut{$(x^{(t)},y^{(t)}) \in S$, $x^{(t)}\leq x$}
+	$x^{(0)}\leftarrow x$\\
+	\For{$\ell = 0$ \textbf{to} $t-1$}{
+		$x^{(\ell+1)} \leftarrow x^{(\ell)}$\\
+		$\eta \leftarrow$ optimal value of $ \DOMtoS(x^{(\ell)})$\\
+		$y^{(\ell+1)}\leftarrow$ optimal solution for $w$ variables in $ \DOMtoS(x^{(\ell)})$\\
+		\eIf{$\eta = 0$}{
+			$x^{(\ell+1)}_{\ell+1} \leftarrow 0$\
+		}{
+			$x^{(\ell+1)}_{\ell+1} \leftarrow 1$
+		}
+	}
+	\caption{The DomToIP algorithm}
+\end{algorithm}
+
+
+
+The following lemma proves Theorem \ref{domtoIP}.
+\begin{lemma}
+	Given $(x,y)\in \dom(P)$ Algorithm \ref{domtoIP} correctly finds $(x^{(t)},y^{(t)})\in S$ in polynomial time.
+\end{lemma}
+\begin{proof}
+	First, we need to show that in any iteration $\ell\in \{0,\ldots,n-1\}$ of Algorithm \ref{domtoIP} the $\DOMtoS(x^{\ell})$ is feasible. We show something stronger. For $\ell=0,\ldots,t-1$ let
+	\begin{align*}
+		\LP^{(\ell)}&= \{(z,w)\in P\; : \; z\leq x^{(\ell)} \mbox{ and } z_j=x_j^{(\ell)} \mbox{ for } j=1,\ldots,\ell\}, \text{ and}\\
+		\IP^{(\ell)}&= \{(z,w)\in \LP^{(\ell)}\; : \; z\in \{0,1\}^n\}.
+	\end{align*}
+	Notice that if $\LP^{(\ell)}$ is an non-empty set then $\DOMtoS(x^{(\ell)})$ is feasible. We show by induction on $\ell$ that $\LP^{(\ell)}$ and $\IP^{(\ell)}$ are not empty sets for $\ell=0,\ldots,t-1$. First notice that $\LP^{(0)}$ is clearly feasible since by definition $(x^{(0)},y^{(0)})\in \dom(P)$, meaning there exists $(z,w)\in P$ such that $z\leq x^{(0)}$. By Theorem \ref{CV}, there exists $(\tilde{z}^i,\tilde{w}^i) \in S$ and $\theta_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k} \theta_i = 1$ and $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz$. Hence, $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz\leq gx^0$. So if $x^0_j$ is zero, then $ \sum_{i=1}^{k}\theta_i \tilde{z}_j^i =0$, which implies that $\tilde{z}^i_j=0$ for all $i=1,\ldots,k$ and $j= 1,\ldots,n$ where $x^{(0)}_j=0$. Hence, $z^i\leq x^{(0)}$ for $i=1,\ldots,k$. Therefore $(\tilde{z}^i,\tilde{w}^i)\in \IP^{(0)}$ for $i=1,\ldots,k$, which implies $\IP^{(0)}\neq \emptyset$.
+	
+	Now assume $\IP^{(\ell)}$ is non-empty for some $\ell \in \{0,\ldots,t-2\}$. Since $\IP^{(\ell)}\subseteq\LP^{(\ell)}$ we have $\LP^{(\ell)}\neq \emptyset$ and hence the $\DOMtoS(x^{(\ell)})$ has an optimal solution $(z^*,w^*)$. 
+	
+	We consider two cases. In the first case, we have $z^*_{\ell+1}=0$. In this case we have $x^{(\ell+1)}_{\ell+1}=0$. Since $z^*\leq x^{(\ell+1)}$, we have $(z^*,w^*)\in \LP^{(\ell+1)}$. Also, $(z^*,w^*)\in P$. By Theorem \ref{CV} there exists $(\tilde{z}^i,\tilde{w}^i)\in S$ and $\theta_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k} \theta_i = 1$ and  $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*$ . We have
+	\begin{equation}
+	\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*\leq gx^{(\ell+1)}
+	\end{equation}
+	So for $j\in \{1,\ldots,n\}$ where $x^{(\ell+1)}_j=0$, we have $z^i_j=0$ for $i=1,\ldots,k$. Hence, $\tilde{z}^i\leq x^{(\ell+1)}$ for $i=1,\ldots,k$. Hence, there exists $(z,w)\in S$ such that $z\leq x^{(\ell+1)}$. We claim that $(z,w)\in \IP^{(\ell+1)}$. If $(z,w)\notin \IP^{(\ell+1)}$ we must have $1\leq j \leq \ell$ such that $z_j < x^{(\ell+1)}_{j}$, and thus $z_j = 0$ and $x^{(\ell+1)}_j=1$. Without loss of generality assume $j$ is minimum number satisfying $z_j < x^{(\ell+1)}_{j}$. Consider iteration $j$ of Algorithm \ref{domtoIP}. Notice that $z\leq x^{(\ell+1)}\leq x^{(j)}$. We have $x^{(j)}_j=1$ which implies when we solved $\DOMtoS(x^{(j-1)})$ the optimal value was strictly larger than zero. However, $(z,w)$ is a feasible solution to $\DOMtoS(x^{(j-1)})$ and gives an objective value of 0. This is a contradiction, so $(z,w)\in \IP^{(\ell+1)}$.
+	
+	Now for the second case, assume $z^*_{\ell+1} > 0$. We have $x^{(\ell+1)}_{\ell+1}=1$. Notice that for each point $z\in \LP^{(\ell)}$ we have $z_{\ell+1} >0$, so for each $z\in \IP^{(\ell)}$ we have $z_{\ell+1}>0$, i.e. $z_{\ell+1}=1$. This means that $(z,w)\in \IP^{(\ell+1)}$, and $\IP^{(\ell+1)} \neq \emptyset$.
+	
+	Now consider $(x^{(t)},y^{(t)})$. Let $(z,y^{(t)})$ be the optimal solution to $\LP^{(t-1)}$. If $x^{(t)} = 0$, we have $x^{(t)} = z$, which implies that $(x^{(t)},y^{(t)})\in P$, and since $x^{(t)}\in \{0,1\}^n$ we have $(x^{(t)},y^{(t)})\in S$. If $x^{(t)} =1$, it must be the case that $z_t > 0$. By the argument above there is a point $(z',w')\in \IP^{(t-1)}$. We show that $x^{(t)} = z'$. Observe that for $j=1,\ldots,n-1$ we have $z'_j= x_j^{(t-1)}=x_j^{(t)}$. We just need to show that $z'_j = 1$. Assume $z'_j = 0$ for contradiction, then $(z',w')\in \LP^{(t-1)}$ has objective value of $0$ for $\DOMtoS(x^{(t-1)})$, this is a contradiction to $(z,w)$ being the optimal solution.
+\end{proof}
+
+This completes the FDT algorithm. 
+
+
+\begin{algorithm}[H]\label{FDTFull}
+	\KwIn{$P= \{(x,y)\in \bbbr^{n\times p}: Ax+Gy\geq b\}$ and $S=\{(x,y)\in P: x\in \{0,1\}^n\}$ such that $g=\max_{c\in \bbbr^n_+ }\frac{\min_{(x,y)\in }cx}{\min_{(x,y)\in P}cx}$ is finite, $(x^*,y^*)\in P$}
+	\KwOut{$(z^i,w^i)\in S$ and $\lambda_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\lambda_i = 1$, and $\sum_{i=1}^{k}\lambda_iz^i\leq g^tx^*$ }
+	$L^0\leftarrow [(x^*,y^*),1]$\\
+	\For{$i=1$ \textbf{to} $t$}{
+		$L'\leftarrow \emptyset$\\
+		\For{$[(x,y),\lambda] \in L^i$}{
+			Apply Lemma \ref{round-up} to obtain $[(\hat{x}^0,\hat{y}^0),\gamma_0]$ and $[(\hat{x}^1,\hat{y}^1),\gamma_1]$\\
+			$L' \leftarrow L' \cup \{[(\hat{x}^0,\hat{y}^0),\gamma_0]\} \cup \{[(\hat{x}^1,\hat{y}^1),\gamma_1]\}$\\			
+		}
+		Apply Lemma \ref{prune} to $L'$ to obtain $L^{i+1}$. 
+	}
+	\For{$[(x,y),\lambda] \in L^t$}{
+		Apply Algorithm \ref{domtoIP} to $(x,y)$ to obtain $(z,w)\in S$\\
+		$F \leftarrow F \cup \{[(z,w),\lambda]\}$
+	}
+	\textbf{return} $F$
+	\caption{Fractional Decomposition Tree Algorithm}
+\end{algorithm}
+\section{FDT for 2EC}\label{2EC}
+
+In Section \ref{binaryfdt} our focus was on binary MIPs. In this section, in an attempt to extend FDT to 0,1,2 problems we introduce an FDT algorithm for a 2-edge-connected multigraph problem. Given a graph $G=(V,E)$ a multi-subset of edges $F$ of $G$ is a 2-edge-connected multigraph of $G$ if for each set $\emptyset\subset U \subset V$, the number of edge in $F$ that have one endpoint in $U$ and one not in $U$ is at least 2. In the 2EC problem, we are given non-negative costs on the edge of $G$ and the goal is to find the minimum cost 2-edge-connected multigraph of $G$. Notice that, no optimal solution ever takes 3 copies of an edge in 2EC, hence we assume that we can take an edge at most 2 times. The natural linear programming relaxation is $\EC(G) = \{x\in [0,2]^E: x(\delta(U))\geq 2 \mbox{ for } \emptyset \subset U \subset V\}$. Notice that $\dom(\EC(G))\cap [0,2]^{E} = \EC(G)$, since 2EC is a covering problem. We want to prove the following theorem. 
+
+\FDTEC*
+
+We do not know the exact value for $g_{\EC}$, but we know $\frac{6}{5} \leq g_{\EC} \leq \frac{3}{2}$ \cite{carr-ravi,Wolsey1980}. Also, we need to remark that polyhedral version of Christofides' algorithm provides a $\frac{3}{2}$-approximation for 2EC, i.e. we already have an algorithm with $C\leq \frac{3}{2}$. However, we show later in Section \ref{experiment} that in practice the constant $C$ for the FDT algorithm for 2EC is much better than $\frac{3}{2}$. 
+
+The FDT algorithm for 2EC is very similar to the one for binary MIPs, but there are some differences as well. First, we need a branching lemma. Observe that  the following branching lemma is essentially a translation of Lemma \ref{LPClemma} for 0,1,2 problems expect for one additional clause. 
+
+
+\begin{restatable}{lemma}{2ECLPC}
+	\label{LPC2EC}
+	Given $x\in \EC(G)$, and $e\in E$ we can find in polynomial time vectors $x^0,x^1$ and $x^2$ and scalars $\gamma_0,\gamma_1$, and $\gamma_2$ such that
+	\begin{itemize}
+		\item[(i)] $\gamma_0 + \gamma_1 +\gamma_2 \geq \frac{ 1}{g_{\EC}}$,
+		\item[(ii)] $x^0,x^1,$ and $x^2$ are in  $ \EC(G)$, 
+		\item[(iii)] $x^0_e=0$, $x^1_e=1$, and $x^2_e=2$,
+		\item[(iv)] $\gamma_0 x^0 + \gamma_1{x}^1  + \gamma_2x^2\leq {x}$,
+		\item[(v)] for $f\in E$ with ${x}_f\geq 1$, we have $x^j_f\geq 1$ for $j=0,1,2$. 
+	\end{itemize}
+\end{restatable}
+
+\begin{proof}
+	Consider the following linear programing with variables $\lambda_j$ and $x^j$ for $j=0,1,2$. 
+	\begin{align}
+		\quad\quad& \max\quad \;\sum_{j=0,1,2}\lambda_j\\
+		&\;\text{s.t.} \quad x^j(\delta(U))\geq 2\lambda_j \;& \mbox{ for $\emptyset \subset U \subset V$, and $j=0,1,2$} \label{feasibility2ec}\\
+		&\;{\color{white}{\text{s.t.}} }\quad 0 \leq x^j \leq 2\lambda_j\; &\mbox{ for $j=0,1,2$}\label{bound2ec}\\
+		&\;{\color{white}{\text{s.t.}} }\quad x^j_e = j\; &\mbox{ for $j=0,1,2$}\label{branchcoordinate2ec}\\
+		&\;{\color{white}{\text{s.t.}} }\quad x^j_f \geq j \; &\mbox{ for $f\in E$ where $x_f \geq 1$, and $j=0,1,2$}\label{1edges2ec}\\
+		&\;{\color{white}{\text{s.t.}} }\quad x^0 + x^1+x^2 \leq x\label{packing2ec}\\
+		&\;{\color{white}{\text{s.t.}} }\quad \lambda_0,\lambda_1,\lambda_2 \geq 0
+	\end{align}
+	
+	Let $x^j$, $\gamma_j$ for $j=0,1,2$ be an optimal solution solution to the LP above. Let $\hat{x}^{j}=\frac{x^j}{\gamma_j}$ for $j=0,1,2$ where $\gamma_j>0$. If $\gamma_j=0$, let $\hat{x}^{j}=0$. Observe that  (ii), (iii), (iv), and (v) are satisfied with this choice. In order to show that (i) is also satisfied we prove the following claim.
+	
+	
+	
+	\begin{claim}\label{CVexists}
+		We have $\gamma_0 + \gamma_1+\gamma_2\geq \frac{1}{g_{\EC}}$.
+	\end{claim}
+	\begin{proof}
+		Suppose for contradiction $\sum_{j=0,1,2}\gamma_j = \frac{1}{g_{\EC}} - \epsilon$ for some $\epsilon >0$. 
+		
+		Construct graph $G'$ by removing edge $f$ with $x_f\geq 1$ and replacing it with a path $P_f$ of length $\ceil{\frac{2}{\epsilon}}$. Define $x'_h = x_h$ for each edge $h$ such that $x_h<1$. For each $h\in P_f$ let $x'_h= x_f$ for all $f$ with $x_f\geq 1$. It is easy to check that $x'\in \EC(G')$. By Theorem \ref{CV} there exists $\theta \in [0,1]^k$, with $\sum_{i=1}^{k}\theta_i = 1$ and 2-edge-connected multigraphs $F'_i$ of $G'$ for $i=1,\ldots,k$ such that 
+		$\sum_{i=1}^{k}\theta_i \chi^{F'_i}\leq g_{\EC}x'$. 
+		
+		Note that each $F'_i$ contains at least one copy of every edge in any path $P_f$, except for at most one edge in the path. We will obtain 2-edge-connected multigraphs $F_1,\ldots,F_k$ of $G$ using $F'_1,\ldots,F'_k$, respectively. To obtain $F_i$ first remove all $P_f$ paths from $F'_i$. Suppose there is an edge $h$ in $P_f$ such that $\chi^{F'_i}_h=0$, this means that for any edge $p\in P_f$ such that $p\neq h$, $\chi^{F'_i}_p=2$. In this case, let $\chi^{F_i}_f=2$, i.e. add two copies of $f$ to $F_i$. If there is an edge $h\in P_f$ with $\chi^{F'_i}_h = 1$, let $\chi^{F_i}_f=1$, i.e. add one copy of $f$ to $F_i$. If for all edge $h\in P_f$, we have $\chi^{F'_i}_h=2$, then let $\chi^{F_i}_f=2$. For $f\in E$ with $x_f<1$ we have
+		\begin{equation}
+		\sum_{i=1}^{k}\theta_i \chi^{F_i}_f=\sum_{i=1}^{k}\theta_i \chi^{F'_i}_f\leq g_{\EC}x'_f= g_{\EC}x_f.
+		\end{equation}
+		In addition for $f\in E$ with $x_f\geq 1$ we have $\chi^{F_i}_f \leq \frac{\sum_{h\in P_f}\chi^{F'_i}_h}{\ceil{\frac{2}{\epsilon}}-1}$ by construction.
+		\begin{align*}
+			\sum_{i=1}^{k}\theta_i \chi^{F_i}_f&\leq \sum_{i=1}^{k}\theta_i\frac{\sum_{h\in P_f}\chi^{F'_i}_h}{\ceil{\frac{2}{\epsilon}}-1}\\
+			&= \frac{\sum_{h\in P_f} \sum_{i=1}^{k}\theta_i\chi^{F'_i}_h}{\ceil{\frac{2}{\epsilon}}-1}\\
+			&\leq \frac{\sum_{h\in P_f} g_{\EC}x'_h}{\ceil{\frac{2}{\epsilon}}-1}\\
+			&= \frac{\sum_{h\in P_f} g_{\EC}x'_h}{\ceil{\frac{2}{\epsilon}}-1}\\
+			&= \frac{\ceil{\frac{2}{\epsilon}}}{\ceil{\frac{2}{\epsilon}}-1}g_{\EC}x_f
+		\end{align*}
+		Therefore, we have 
+		\begin{equation}
+		x' \geq \sum_{i\in [k]: \chi^{F_i}_e=1}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi^{F_i}+\sum_{i\in [k]: \chi^{F_i}_e=2}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi^{F_i}.
+		\end{equation}
+		Let $x^j = \sum_{i\in [k]: \chi^{F_i}_e=j}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi^{F_i}$ and $\theta_j =  \sum_{i\in [k]: \chi^{F_i}_e=j}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}$ for $j=0,1,2$. It is easy to check that $x^j$ , $\theta_j$ for $j=0,1,2$ is a feasible solution to the LP above. Notice that $\sum_{j=0,1,2}\theta_j = \frac{\ceil{\frac{2}{\epsilon}}-1}{g_{\EC}\ceil{\frac{2}{\epsilon}}}$. By assumption, we have $\frac{\ceil{\frac{2}{\epsilon}}-1}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\leq  \frac{1}{g_{\EC}}-\epsilon$. However, this means $2\leq 1$ which is a contradiction.
+	\end{proof}
+	This concludes the proof.
+\end{proof}
+
+
+In contrast to FDT for binary MIPs where we round up the fractional variables that are already branched on at each level, in FDT for 2EC we keep all coordinates as they are and preform a rounding procedure at the end. Formally, let $L_i$ for $i=1,\ldots,|\sup(x^*)|$ be collections of pairs of feasible points in $\EC(G)$ together with their multipliers. Let $t=|\sup(x^*)|$ and assume without loss of generality that $\sup(x^*)=\{e_1,\ldots,e_t\}$. 
+
+\begin{lemma}\label{2ecpruning}
+	The FDT algorithm for 2EC in  polynomial time produces sets $L_0,\ldots,L_t$ of pairs $x\in \EC(G)$ together with multipliers $\lambda$ with the following properties.
+	\begin{enumerate}
+		\item[a.] If $x\in L_i$, then $x_{e_j}=0$ or $x_{e_j}\geq 1$ for $j=1,\ldots,i$,
+		\item [b.] $\sum_{(x,\lambda)\in L_i }\lambda \geq \frac{1}{g_{\EC}^i}$,
+		\item[c.]  $\sum_{(x,\lambda)\in L_i }\lambda x \leq x^*$,
+		\item[d.] $|L_i|\leq t$.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	We proceed by induction on the $i$. Define $L_0=\{(x^*,1)\}$. It is easy to check all the properties are satisfied. Now, suppose by induction we have $L_{i-1}$ for some $i=1,\ldots,t$ that satisfies all the properties. For each solution $x^\ell$ in $L_{i-1}$ apply Lemma \ref{LPC2EC} on $x^\ell$ and $e_{i}$ to obtain $x^{\ell j}$ and $\lambda_{\ell j}$ for $j=0,1,2$. Let $L'$ be the collection that contains $(x^{\ell j},\lambda_\ell \cdot \lambda_{\ell j})$ for $j=0,1,2$, when applied to all $(x^\ell,\lambda_\ell)$ in $L_{i-1}$. Similar to the proof in Lemma \ref{prune} one can check that $L_i$ satisfies properties (b), (c). We now verify property (a). Consider a solution $x^\ell$ in $L_{i-1}$. For $e\in \{e_1,\ldots,e_{i-1}\}$ if $x^\ell_e =0$, then by property (iv) in Lemma \ref{LPC2EC} we have $x^{\ell j}=0$ for $j=0,1,2$. Otherwise by induction we have $x^{\ell}_{e}\geq 1$ in which case property (v) in Lemma \ref{LPC2EC} ensures that $x^{\ell j}_e\geq 1$ for $j=0,1,2$. Also, $x^{\ell j}_{e_i}= j$, so $x^{\ell j}_{e_i}=0$ or $x^{\ell j}_{e_i}\geq 1$ for $j=0,1,2$. 
+	
+	If $|L'|\geq t$ we let $L_i=L'$, otherwise apply $\prun(L')$ to obtain $L_{i}$.
+\end{proof}	
+
+Consider the solutions $x$ in $L_t$. For each variable $e$ we have $x_e=0$ or $x_e\geq 1$. 
+\begin{lemma}\label{rounddown}
+	Let $x$ be a solution in $L_t$. Then $\floor{x} \in \EC(G)$. 
+\end{lemma}
+\begin{proof}
+	Suppose not. Then there is a set of vertices $\emptyset \subset U \subset V$ such that $\sum_{e\in \delta(U)}\floor{x_e}<2$. Since $x\in \EC(G)$ we have $\sum_{e\in \delta(U)}x_e \geq 2$. Therefore, there is an edge $f\in \delta(U)$ such that $x_f$ is fractional. By property (a) in Lemma \ref{2ecpruning}, we have $1<  x_f < 2$. Therefore, there is another edge $h$ in $\delta(U)$ such that $x_h>0$, which implies that $x_h\geq 1$. But in this case $\sum_{e\in \delta(U)}\floor{x_e}\geq  \floor{x_f}+\floor{x_h}  \geq 2$. This is a contradiction.
+\end{proof}
+
+The FDT algorithm for 2EC iteratively applies Lemmas \ref{LPC2EC} and \ref{2ecpruning} to variables $x_1,\ldots,x_t$ to obtain leaf point solutions $L_t$. Then, we just need to apply Lemma \ref{rounddown} to obtain the 2-edge-connected multigraphs from every solution in $L_t$. Notice that $t\leq 2|V|-3$ \cite{}. By Lemma \ref{2ecpruning} we have
+\begin{align*}
+	\sum_{(x,\lambda)\in L_t} \frac{\lambda}{\sum_{(x,\lambda)\in L_t}\lambda} \floor{x} \leq \frac{1}{\sum_{(x,\lambda)\in L_t}\lambda} \sum_{(x,\lambda)\in L_t} \lambda {x} \leq g^t_{\EC} x^*.
+\end{align*}
+
+
+
+
+
+
+
+\section{Stronger version of Carr-Vempala for covering problems} \label{gap}
+
+Theorem \ref{CV} characterizes the integrality gap as the smallest number such that for any point $x\in \dom(P)$, $gx$ dominates a convex combination of points in $S$, i.e. there exists convex combination $\sum_{i=1}^{k}\lambda_ix^i \leq gx$.  In a covering problem, we assume that matrix $A$ in the description of $P$ is a non-negative matrix, hence if $y\geq x$ and $x\in P$ we have $y\in P$. We also assume the right hand side vector in (\ref{P}) is of the form $b\textbf{1}$, i.e. it is a uniform vector. Finally we assume we have bound constraints $x\leq b\textbf{1}$. This class of problems include a broad class of problems. Notice that for a covering problem $\dom(P)=P$.  We show that for these problems, we can make Theorem \ref{CV} stronger in the following sense. 
+
+\tightcuts*
+
+In other words, the integrality gap is the smallest number such that for any $x\in P$, there exists a convex combination $y=\sum_{i=1}^{k}\lambda_ix^i$, such that $A_jy\leq g(A_jx)$ for all $j$ such that $A_jx=b$. 
+
+Notice that the proof of this theorem, same as Theorem \ref{CV}, does not imply a polynomial time algorithm.
+
+Observe that if $C\geq g$, by Theorem \ref{CV}, there is a convex combination of points in $S$ that is dominated by $Cx$, i.e. there exists $\theta\in [0,1]^{k}$, where $\sum_{i=1}^{k}\theta_i=1$, and $x^i\in S$, such that $\sum_{i=1}^{k}\theta_ix^i\leq gx$. The same convex combination also trivially satisfies both requirements in Theorem \ref{tightcuts}. The more interesting direction is the converse. We begin with the following theorem. Suppose $v^1,\ldots,v^r$ are the extreme points of $P$. Assume for each $i=1,\ldots,r$, there exists a convex combination of points in $S$, namely $\sum_{\ell=1}^{k_i} \lambda^i_\ell w^i_\ell$ such that $A_j \sum_{\ell=1}^{k_i} \lambda^i_\ell w^i_\ell \leq CA_jv^i$ for $j$ such that $A_jv^i = b$. Let $z^i = \sum_{\ell=1}^{k_i} \lambda^i_\ell w^i_\ell$.
+\begin{lemma}\label{epsilon}
+	For any  $i\in\{1,\ldots,r\}$, there exists $\epsilon_i >0$ and ${x^i}\in P$ where ${x^i}\leq \frac{Cv^i-\epsilon_i z^i}{C(1-\epsilon_i)}$.
+\end{lemma}
+\begin{proof}
+	
+	Let $u^i(\epsilon) = \frac{Cv^i-\epsilon z^i}{C(1-\epsilon)}$. For $j\in \{1,\ldots,m\}$, let $t_j = A_jz^i-Cb$ and $s_j=A_jv^i-b$. 
+	Assume $\epsilon <1$. For $j\in \{1,\ldots,m\}$ such that $A_jz^i\leq Cb$, i.e. $t_j\leq 0$ (this includes $j$ such that $A_jv^i=b$, i.e. $s_j=0$) we have
+	\begin{equation}
+	A_j u^i(\epsilon) = \frac{CA_jv^i-\epsilon A_jz^i}{C(1-\epsilon)}\geq \frac{Cb-\epsilon Cb}{C(1-\epsilon)}=b
+	\end{equation}
+	Assume $\epsilon \leq C\cdot\min_{j: t_j >0} \frac{s_j}{t_j}$. Notice that $\max_{j: t_j >0} \frac{s_j}{t_j}>0$ since for $j$ such that $t_j>0$, we have $A_jz_i > Cb$ which implies that $A_jv^i>b$, so $s_j>0$. For $j$ such that $t_j>0$ we have
+	\begin{align*}
+		A_ju^i(\epsilon) &= \frac{CA_jv^i-\epsilon A_jz^i}{C(1-\epsilon)}& \\
+		&= \frac{C(b+s_j)-\epsilon (Cb+t_j)}{C(1-\epsilon)}&\\
+		&= b+ \frac{Cs_j-\epsilon t_j}{C(1-\epsilon)}&\\
+		&\geq b & (\epsilon  \leq C\cdot  \frac{s_j}{t_j}, \mbox{ and } \epsilon <1, \mbox{ so } \frac{Cs_j-\epsilon t_j}{C(1-\epsilon)}\geq 0 )
+	\end{align*} 
+	Therefore if $\epsilon \leq 1$ and $\epsilon \leq C\cdot\min_{j: t_j >0} \frac{s_j}{t_j}$ we have $Au^i(\epsilon)\geq \textbf{1}b$. Next, we show that we can choose $\epsilon$ so that $ u^i(\epsilon)\geq 0$.
+	
+	For $\ell\in \{1,\ldots,n\}$, if $z^i_\ell=0$, then we have $u_\ell^i(\epsilon) = \frac{Cv_\ell^i}{C(1-\epsilon)}\geq 0$, since $v^i_\ell\geq 0$ and $\epsilon <1$. Otherwise we have $z^i_\ell>0$. Assume $\epsilon \leq C\cdot \min_{ \ell:z^i_\ell>0}\frac{v^i_\ell}{z^i_\ell}$. Notice that for $\ell$ such that $z^i_\ell>0$, we have $v^i_\ell>0$ since $z^i$ lies in the support of $v^i$ by assumption. This means that $\min_{\ell:z^i_\ell>0}\frac{v^i_\ell}{z^i_\ell}>0$. Now, for $\ell$ such that $z^i_\ell>0$, we have $u^i_\ell(\epsilon) = \frac{Cv_\ell^i-\epsilon z_\ell^i}{C(1-\epsilon)}\geq 0$ by choice of $\epsilon$.
+	
+	Define $\epsilon_i =\min\{1, C\cdot \min_{j: t_j >0}\frac{s_j}{t_j},C\cdot\min_{\ell: z^i_\ell>0}\frac{v^i_\ell}{z^i_\ell}\}$. By the arguments above $Au^i(\epsilon_i)\geq \textbf{1}b$ and $u^i(\epsilon_i)\geq 0$. Define $x^i$ as follows: For each $j\in \{1,\ldots,m\}$, if $u^i_j(\epsilon_i)\leq b$, then let $x^i_j=u^i_j(\epsilon_i)$, otherwise let $x^i_j=b$. We need to show that $x^i\in P$. Note that clearly $x^i\geq 0$, hence we only need to show that $Ax^i\geq \textbf{1}b$. Suppose for contradiction there is $j\in \{1,\ldots,m\}$ such that $A_jx^i <b$. Since $u^i(\epsilon)\in P$, there must be $\ell^*\in\{1,\ldots,n\}$ such that $u^i_{\ell^*}(\epsilon)>b$, and $A_{j,\ell^*}>0$. But this means that $A_{j,\ell^*}\geq 1$ and $x^i_{\ell^*}=b$. Therefore $A_jx^i \geq  A_{j,\ell^*}x^i_{\ell^*}= A_{j,\ell^*}b\geq b$. \end{proof}
+\begin{lemma}\label{tightcutcomb}
+	There exists a convex combination of point in $S$ that is dominated by $Cv^i$ for $i=1,\ldots,r$.
+\end{lemma}
+\begin{proof}
+	
+	
+	We prove something slightly stronger. We show that for $i\in\{1,\ldots,r\}$, and for $j=1,\ldots,i$, the vector $Cv^j$ dominates  a convex combination of $z^1,\ldots,z^i$ and $Cv^{i+1},\ldots,Cv^r$. Note that this is enough to prove our statement since for $i=r$, the statement implies that $Cv^j$ dominates a convex combination of $z^1,\ldots,z^r$ for $j=1,\ldots,r$. 
+	
+	We proceed by induction on $i$. If $i=1$, we just need to show that $Cv^1$ is dominated by a convex combination of $z^1$ and $Cv^2,\ldots,Cv^r$. By Lemma \ref{epsilon}, there exists $x^1\leq  \frac{Cv^1-\epsilon_1z^1}{C(1-\epsilon_1)}$. We have $x^1\in P$, so we can write $x^1$ as convex combination of $v^1,\ldots, v^r$. We have
+	\begin{equation}
+	Cv^1 \geq  \epsilon_1z^1 + C(1-\epsilon_1)x^1 \geq \epsilon_1z^1 + C(1-\epsilon_1) \sum_{\ell=1}^{r}\lambda^1_\ell v^\ell.
+	\end{equation}
+	Hence,
+	\begin{equation}
+	Cv^1 \geq \frac{\epsilon_1}{1-(1-\epsilon_1)\lambda^1_1}\cdot z^1 + (1-\epsilon_i)\sum_{\ell=2}^{r} \frac{\lambda^1_\ell}{1-(1-\epsilon_1)\lambda_1^1}\cdot Cv^\ell.
+	\end{equation}
+	Observe that $\frac{\epsilon_1}{1-(1-\epsilon_1)\lambda^1_1}$ and $(1-\epsilon_1)\frac{\lambda^1_\ell}{1-(1-\epsilon_1)\lambda_1^1}$ for $\ell=2,\ldots,r$ form convex multipliers, so the base case holds.
+	
+	Now consider $i\in \{1,\ldots,r-1\}$. By induction, for $j=1,\ldots,i$ we have
+	\begin{equation}\label{IHs}
+	Cv^j \geq  \sum_{\ell=1}^{i} \theta^{j}_\ell z^\ell + \sum_{\ell=i+1}^{r}\theta^{j}_{\ell}Cv^\ell.
+	\end{equation}
+	Suppose we are able to show 
+	\begin{equation}\label{claim} 
+	Cv^{i+1} \geq \sum_{\ell=1}^{i+1} \mu_\ell z^\ell + \sum_{\ell=i+2}^{r}\mu_{\ell}Cv^\ell,\end{equation} 
+	where $\mu\geq 0$, and $\sum_{\ell=1}^{r}\mu_{\ell}=1$. Then for $j=1,\ldots,i$ we have
+	\begin{align*}
+		Cv^j& \geq \sum_{\ell=1}^{i} \theta^{j}_\ell z^\ell +\theta^{j}_{i+1}Cv^{i+1}+  \sum_{\ell=i+2}^{r}\theta^{j}_{\ell}Cv^\ell.& (\mbox{By } \ref{IHs})\\
+		& \geq \sum_{\ell=1}^{i} \theta^{j}_\ell z^\ell +\sum_{\ell=1}^{i+1}\theta^{j}_{i+1}\mu_\ell z^\ell+ \sum_{\ell=i+2}^{r}\theta^j_{i+1}\mu_{\ell}Cv^\ell +   \sum_{\ell=i+2}^{r}\theta^{j}_{\ell}Cv^\ell.& (\mbox{By } \ref{claim})\\
+		&= \sum_{\ell=1}^{i} (\theta^j_\ell+\mu_{\ell}\theta^j_{i+1}) z^\ell + \mu_{j+1}\theta^j_{i+1}z^{i+1} + \sum_{\ell=i+2}^{r} (\theta^j_\ell+\mu_\ell\theta^j_{i+1})Cv^\ell.&
+	\end{align*} 
+	It is easy to see that the multipliers above are convex. Thus, we only need to show the convex combination in (\ref{claim}) exists. This will be similar to what we did in the base case. By Lemma \ref{epsilon}, there exists $\epsilon_{i+1}$ and $x^{i+1}$ such that
+	\begin{align*}
+		Cv^{i+1}&\geq \epsilon_{i+1}z^{i+1}+ C(1-\epsilon_{i+1})x^{i+1}\\
+		&\geq \epsilon_{i+1}z^{i+1}+ (1-\epsilon_{i+1})\sum_{\ell=1}^{k}\lambda_{\ell}Cv^\ell
+	\end{align*}
+	Applying induction we can replace $Cv^j$ by $ \sum_{\ell=1}^{i} \theta^{j}_\ell z^\ell + \sum_{\ell=i+1}^{r}\theta^{j}_{\ell}Cv^\ell$ for $j=1,\ldots,i$. 
+	This means
+	\begin{align*}
+		(1-(1-\epsilon_{i+1})(\lambda_{i+1}+\sum_{j=1}^{i}\lambda_j\theta^j_{i+1}))Cv^{i+1}&\geq \epsilon_{i+1}z^{i+1}+(1-\epsilon_{i+1})\sum_{j=1}^{i}\lambda_j (\sum_{\ell=1}^{i}\theta^j_\ell z^\ell+ \sum_{\ell=i+2}^{r}\theta^j_\ell Cv^\ell)\\
+		&+(1-\epsilon_{i+1})(\sum_{j=1}^{i}\lambda_j \lambda^j_{i+1}+\lambda^i_{i+1})C+ (1-\epsilon_{i+1})\sum_{j=i+2}^{r}\lambda_jCv^{j} 
+	\end{align*}
+	It is easy to show that  multipliers above are convex.
+\end{proof}
+
+
+
+%
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
+% \bibliographystyle{splncs04}
+% \bibliography{mybibliography}
+%
+\begin{thebibliography}{8}
+	
+	\bibitem[CR98]{carr-ravi}
+	Robert Carr and R.~Ravi.
+	\newblock A new bound for the 2-edge connected subgraph problem.
+	\newblock In {\em Proceedings of the 6th International IPCO Conference on
+		Integer Programming and Combinatorial Optimization}, pages 112--125, London,
+	UK, UK, 1998. Springer-Verlag.
+	
+	\bibitem[CV04]{CV}
+	Robert Carr and Santosh Vempala.
+	\newblock On the held-karp relaxation for the asymmetric and symmetric
+	traveling salesman problems.
+	\newblock {\em Mathematical Programming}, 100(3):569--587, Jul 2004.
+	
+	\bibitem[FGL05]{fp1}
+	Matteo Fischetti, Fred Glover, and Andrea Lodi.
+	\newblock The feasibility pump.
+	\newblock {\em Mathematical Programming}, 104(1):91--104, Sep 2005.
+	
+	\bibitem[FS09]{fp2}
+	Matteo Fischetti and Domenico Salvagnin.
+	\newblock Feasibility pump 2.0.
+	\newblock {\em Mathematical Programming Computation}, 1(2):201--222, Oct 2009.
+	
+	\bibitem[GJ79]{GJ79}
+	M.R. Garey and D.S. Johnson.
+	\newblock {\em Computers and Intractability -- A Guide to the Theory of
+		{NP}-Completeness}.
+	\newblock Freeman, San Francisco, CA, 1979.
+	
+	\bibitem[GLS93]{cons-cara}
+	Martin Gr{\"o}tschel, L{\'a}szl{\'o} Lov{\'a}sz, and Alexander Schrijver.
+	\newblock {\em Geometric Algorithms and Combinatorial Optimization}, volume~2.
+	\newblock Second corrected edition edition, 1993.
+	
+	\bibitem[Jai98]{jain}
+	Kamal Jain.
+	\newblock A factor 2 approximation algorithm for the generalized steiner
+	network problem.
+	\newblock In {\em Proceedings of the 39th Annual Symposium on Foundations of
+		Computer Science}, FOCS '98, pages 448--, Washington, DC, USA, 1998. IEEE
+	Computer Society.
+	
+	\bibitem[RT87]{randomizedrounding}
+	Prabhakar Raghavan and Clark~D. Tompson.
+	\newblock Randomized rounding: A technique for provably good algorithms and
+	algorithmic proofs.
+	\newblock {\em Combinatorica}, 7(4):365--374, Dec 1987.
+	
+	\bibitem[Sch03]{schrijver}
+	A.~Schrijver.
+	\newblock {\em Combinatorial Optimization - Polyhedra and Efficiency}.
+	\newblock Springer, 2003.
+	
+	\bibitem[Vaz01]{vazirani}
+	Vijay~V. Vazirani.
+	\newblock {\em Approximation Algorithms}.
+	\newblock Springer-Verlag, Berlin, Heidelberg, 2001.
+	
+	\bibitem[Wol80]{Wolsey1980}
+	Laurence~A. Wolsey.
+	\newblock {\em Heuristic analysis, linear programming and branch and bound},
+	pages 121--134.
+	\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1980.
+	
+	\bibitem[WS11]{sw}
+	David~P. Williamson and David~B. Shmoys.
+	\newblock {\em The Design of Approximation Algorithms}.
+	\newblock Cambridge University Press, New York, NY, USA, 1st edition, 2011.
+
+\end{thebibliography}
+\end{document}
