@@ -1,40 +1,46 @@
-\begin{thebibliography}{FGL05}
+\begin{thebibliography}{10}
 
-\bibitem[CR98]{carr-ravi}
+\bibitem{carr-ravi}
 Robert Carr and R.~Ravi.
 \newblock A new bound for the 2-edge connected subgraph problem.
 \newblock In {\em Proceedings of the 6th International IPCO Conference on
   Integer Programming and Combinatorial Optimization}, pages 112--125, London,
   UK, UK, 1998. Springer-Verlag.
 
-\bibitem[CV04]{CV}
+\bibitem{CV}
 Robert Carr and Santosh Vempala.
 \newblock On the held-karp relaxation for the asymmetric and symmetric
   traveling salesman problems.
 \newblock {\em Mathematical Programming}, 100(3):569--587, Jul 2004.
 
-\bibitem[FGL05]{fp1}
+\bibitem{gerard}
+G{\'e}rard Cornu{\'e}jols, Jean Fonlupt, and Denis Naddef.
+\newblock The traveling salesman problem on a graph and some related integer
+  polyhedra.
+\newblock {\em Mathematical Programming}, 33(1):1--27, Sep 1985.
+
+\bibitem{fp1}
 Matteo Fischetti, Fred Glover, and Andrea Lodi.
 \newblock The feasibility pump.
 \newblock {\em Mathematical Programming}, 104(1):91--104, Sep 2005.
 
-\bibitem[FS09]{fp2}
+\bibitem{fp2}
 Matteo Fischetti and Domenico Salvagnin.
 \newblock Feasibility pump 2.0.
 \newblock {\em Mathematical Programming Computation}, 1(2):201--222, Oct 2009.
 
-\bibitem[GJ79]{GJ79}
+\bibitem{GJ79}
 M.R. Garey and D.S. Johnson.
 \newblock {\em Computers and Intractability -- A Guide to the Theory of
   {NP}-Completeness}.
 \newblock Freeman, San Francisco, CA, 1979.
 
-\bibitem[GLS93]{cons-cara}
+\bibitem{cons-cara}
 Martin Gr{\"o}tschel, L{\'a}szl{\'o} Lov{\'a}sz, and Alexander Schrijver.
 \newblock {\em Geometric Algorithms and Combinatorial Optimization}, volume~2.
 \newblock Second corrected edition edition, 1993.
 
-\bibitem[Jai98]{jain}
+\bibitem{jain}
 Kamal Jain.
 \newblock A factor 2 approximation algorithm for the generalized steiner
   network problem.
@@ -42,31 +48,31 @@ Kamal Jain.
   Computer Science}, FOCS '98, pages 448--, Washington, DC, USA, 1998. IEEE
   Computer Society.
 
-\bibitem[RT87]{randomizedrounding}
+\bibitem{randomizedrounding}
 Prabhakar Raghavan and Clark~D. Tompson.
 \newblock Randomized rounding: A technique for provably good algorithms and
   algorithmic proofs.
 \newblock {\em Combinatorica}, 7(4):365--374, Dec 1987.
 
-\bibitem[Sch03]{schrijver}
+\bibitem{schrijver}
 A.~Schrijver.
 \newblock {\em Combinatorial Optimization - Polyhedra and Efficiency}.
 \newblock Springer, 2003.
 
-\bibitem[Vaz01]{vazirani}
+\bibitem{vazirani}
 Vijay~V. Vazirani.
 \newblock {\em Approximation Algorithms}.
 \newblock Springer-Verlag, Berlin, Heidelberg, 2001.
 
-\bibitem[Wol80]{Wolsey1980}
+\bibitem{sw}
+David~P. Williamson and David~B. Shmoys.
+\newblock {\em The Design of Approximation Algorithms}.
+\newblock Cambridge University Press, New York, NY, USA, 1st edition, 2011.
+
+\bibitem{Wolsey1980}
 Laurence~A. Wolsey.
 \newblock {\em Heuristic analysis, linear programming and branch and bound},
   pages 121--134.
 \newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1980.
-
-\bibitem[WS11]{sw}
-David~P. Williamson and David~B. Shmoys.
-\newblock {\em The Design of Approximation Algorithms}.
-\newblock Cambridge University Press, New York, NY, USA, 1st edition, 2011.
 
 \end{thebibliography}

@@ -55,6 +55,7 @@
 \usepackage{thm-restate}
 
 \usepackage[pdftex]{hyperref}
+\usepackage{cite}
 \usepackage{mathtools}
 \usepackage{graphicx}
 \usepackage{caption}
@@ -78,7 +79,7 @@
 \DeclareMathOperator{\dom}{\mathcal{D}}
 \DeclareMathOperator{\conv}{conv}
 \DeclareMathOperator{\prun}{Pruning}
-\DeclareMathOperator{\spp}{sup}
+\DeclareMathOperator{\spp}{supp}
 \DeclareMathOperator{\EC}{2EC}
 \DeclareMathOperator{\DOMtoS}{DominantToFeasbile}
 \newcommand{\arash}[1]{\noindent{\bf {\color{blue!60!black}{\sc Arash:}  #1}}}

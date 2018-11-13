@@ -25,7 +25,7 @@
 Arash Haddadan\inst{2}\orcidID{} \and
 Cynthia Phillips\inst{3}\orcidID{}}
 %
-\authorrunning{Carr et al.}
+\authorrunning{R. Carr, A. Haddadan, C. Phillips}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
@@ -63,7 +63,7 @@ P(A,G,b) = \{(x,y)\in \bbbr^{n+ p}\;:\; Ax+Gy\geq b\}. \label{P}
 To make the notation simpler we use $I=(A,G,b)$, i.e. an instance of the formulation. Then we use $S(I)$ and $P(I)$ to denote $S(A,G,b)$ and $P(A,G,b)$, respectively. Notice that $\min \;\{cx:\; (x,y) \in S(I)\}$ is in fact an MILP problem and $\min \;\{cx:\;(x,y)\in P(I) \}$ is lower bound provided from the LP relaxation. Let $z_{IP}(I,c)$ and $z_{LP}(I,c)$ be the optimal solution to these problems, respectively.
 
 
-Many researchers (see \cite{sw, vazirani}) have developed polynomial time algorithms that find solutions for special classes of MILPs whose cost are provably smaller than $C\cdot z_{LP}(I,c)$ for some $C$ which can be a constant number or dependent on some parameter of the MILP, e.g. $O(\log(n))$. However, for many combinatorial optimization problems there is a limit to such techniques. Let $g_I= \max_{c\geq 0}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}$. Parameter $g_I$ depends on set $S(I)$ and the linear constraints in (\ref{S}) and is known as the \textit{integrality gap} of the formulation for instance $I$. It is easy to see, that we cannot hope to find solutions for the MILP with objective values better than $g_I\cdot z_{LP}(I,c)$. More generally we can define the integrality gap for a class of instances $\mathcal{I}$. In this case, the integrality gap for problem $\mathcal{I}$ is
+Many researchers (see \cite{vazirani,sw}) have developed polynomial time algorithms that find solutions for special classes of MILPs whose cost are provably smaller than $C\cdot z_{LP}(I,c)$ for some $C$ which can be a constant number or dependent on some parameter of the MILP, e.g. $O(\log(n))$. However, for many combinatorial optimization problems there is a limit to such techniques. Let $g_I= \max_{c\geq 0}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}$. Parameter $g_I$ depends on set $S(I)$ and the linear constraints in (\ref{S}) and is known as the \textit{integrality gap} of the formulation for instance $I$. It is easy to see, that we cannot hope to find solutions for the MILP with objective values better than $g_I\cdot z_{LP}(I,c)$. More generally we can define the integrality gap for a class of instances $\mathcal{I}$. In this case, the integrality gap for problem $\mathcal{I}$ is
 \begin{equation}
 g_\mathcal{I} = \max_{c\geq 0 , I\in\mathcal{I}}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}
 \end{equation}
@@ -83,7 +83,7 @@ A analogous result to Proposition \ref{cara} is the following theorem due to Car
 	Let $(x,y)\in P(I)$, there exists $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in \dom(S(I))$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq Cx$ if and only if $g_I \leq C$.
 \end{theorem}
 
-In contrast to Fact \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time. This points to an interesting open question. 
+In contrast to Proposition \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time. This points to an interesting open question. 
 
 \begin{question}\label{question1}
 	Assume reasonable complexity assumptions (such as UGC or $\textrm{P}\neq \textrm{NP}$). Given instance $I$ with $1<g_I<\infty$ and $(x,y)\in P(I)$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in \dom(\conv(S(I)))$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq g_Ix$ in polynomial time?
@@ -163,7 +163,9 @@ Finally we give a stronger characterization of integrality gap than that in Theo
 This means in order to prove an upper bound on the integrality gap of a covering problem, we need to show there is a convex combination of integer feasible points that is ``cheap'' on all tight cuts. Notice that Theorem \ref{CV} requires the certificate convex combination to be ``cheap" on every single variable.
 
 
-\subsection{Notation and Preliminaries}
+\subsection{Notation}
+For vectors $x,y\in \bbbr_{n}$ we say $x$ dominates $y$ if $x_i\geq y_i$ for $i= 1,\ldots,n$. For $m\times n$ matrix $A$, let $A_j$ be the $j$-th row of $A$ and $A^j$ be the $j$-th column of $A$. Let $\textbf{1}$ be the vector of all ones of a suitable dimension. For a set $S$ of vectors in $\bbbr_{n}$, $\conv(S)$ is the convex hull of all the points in $S$.
+
 
 \section{FDT on binary MIPs}
 \label{binaryfdt}
@@ -471,7 +473,7 @@ Consider the solutions $x$ in $L_t$. For each variable $e$ we have $x_e=0$ or $x
 	Suppose not. Then there is a set of vertices $\emptyset \subset U \subset V$ such that $\sum_{e\in \delta(U)}\floor{x_e}<2$. Since $x\in \EC(G)$ we have $\sum_{e\in \delta(U)}x_e \geq 2$. Therefore, there is an edge $f\in \delta(U)$ such that $x_f$ is fractional. By property (a) in Lemma \ref{2ecpruning}, we have $1<  x_f < 2$. Therefore, there is another edge $h$ in $\delta(U)$ such that $x_h>0$, which implies that $x_h\geq 1$. But in this case $\sum_{e\in \delta(U)}\floor{x_e}\geq  \floor{x_f}+\floor{x_h}  \geq 2$. This is a contradiction.
 \end{proof}
 
-The FDT algorithm for 2EC iteratively applies Lemmas \ref{LPC2EC} and \ref{2ecpruning} to variables $x_1,\ldots,x_t$ to obtain leaf point solutions $L_t$. Then, we just need to apply Lemma \ref{rounddown} to obtain the 2-edge-connected multigraphs from every solution in $L_t$. Notice that $t\leq 2|V|-3$ \cite{}. By Lemma \ref{2ecpruning} we have
+The FDT algorithm for 2EC iteratively applies Lemmas \ref{LPC2EC} and \ref{2ecpruning} to variables $x_1,\ldots,x_t$ to obtain leaf point solutions $L_t$. Then, we just need to apply Lemma \ref{rounddown} to obtain the 2-edge-connected multigraphs from every solution in $L_t$. Notice that since $x$ is an extreme point we have $t\leq 2|V|-3$ \cite{}. By Lemma \ref{2ecpruning} we have
 \begin{align*}
 	\sum_{(x,\lambda)\in L_t} \frac{\lambda}{\sum_{(x,\lambda)\in L_t}\lambda} \floor{x} \leq \frac{1}{\sum_{(x,\lambda)\in L_t}\lambda} \sum_{(x,\lambda)\in L_t} \lambda {x} \leq g^t_{\EC} x^*.
 \end{align*}
@@ -571,76 +573,82 @@ Observe that if $C\geq g$, by Theorem \ref{CV}, there is a convex combination of
 % \bibliographystyle{splncs04}
 % \bibliography{mybibliography}
 %
-\begin{thebibliography}{8}
+\begin{thebibliography}{10}
 	
-	\bibitem[CR98]{carr-ravi}
-	Robert Carr and R.~Ravi.
-	\newblock A new bound for the 2-edge connected subgraph problem.
-	\newblock In {\em Proceedings of the 6th International IPCO Conference on
-		Integer Programming and Combinatorial Optimization}, pages 112--125, London,
-	UK, UK, 1998. Springer-Verlag.
+		\bibitem{carr-ravi}
+		Robert Carr and R.~Ravi.
+		\newblock A new bound for the 2-edge connected subgraph problem.
+		\newblock In {\em Proceedings of the 6th International IPCO Conference on
+			Integer Programming and Combinatorial Optimization}, pages 112--125, London,
+		UK, UK, 1998. Springer-Verlag.
+		
+		\bibitem{CV}
+		Robert Carr and Santosh Vempala.
+		\newblock On the held-karp relaxation for the asymmetric and symmetric
+		traveling salesman problems.
+		\newblock {\em Mathematical Programming}, 100(3):569--587, Jul 2004.
+		
+		\bibitem{gerard}
+		G{\'e}rard Cornu{\'e}jols, Jean Fonlupt, and Denis Naddef.
+		\newblock The traveling salesman problem on a graph and some related integer
+		polyhedra.
+		\newblock {\em Mathematical Programming}, 33(1):1--27, Sep 1985.
+		
+		\bibitem{fp1}
+		Matteo Fischetti, Fred Glover, and Andrea Lodi.
+		\newblock The feasibility pump.
+		\newblock {\em Mathematical Programming}, 104(1):91--104, Sep 2005.
+		
+		\bibitem{fp2}
+		Matteo Fischetti and Domenico Salvagnin.
+		\newblock Feasibility pump 2.0.
+		\newblock {\em Mathematical Programming Computation}, 1(2):201--222, Oct 2009.
+		
+		\bibitem{GJ79}
+		M.R. Garey and D.S. Johnson.
+		\newblock {\em Computers and Intractability -- A Guide to the Theory of
+			{NP}-Completeness}.
+		\newblock Freeman, San Francisco, CA, 1979.
+		
+		\bibitem{cons-cara}
+		Martin Gr{\"o}tschel, L{\'a}szl{\'o} Lov{\'a}sz, and Alexander Schrijver.
+		\newblock {\em Geometric Algorithms and Combinatorial Optimization}, volume~2.
+		\newblock Second corrected edition edition, 1993.
+		
+		\bibitem{jain}
+		Kamal Jain.
+		\newblock A factor 2 approximation algorithm for the generalized steiner
+		network problem.
+		\newblock In {\em Proceedings of the 39th Annual Symposium on Foundations of
+			Computer Science}, FOCS '98, pages 448--, Washington, DC, USA, 1998. IEEE
+		Computer Society.
+		
+		\bibitem{randomizedrounding}
+		Prabhakar Raghavan and Clark~D. Tompson.
+		\newblock Randomized rounding: A technique for provably good algorithms and
+		algorithmic proofs.
+		\newblock {\em Combinatorica}, 7(4):365--374, Dec 1987.
+		
+		\bibitem{schrijver}
+		A.~Schrijver.
+		\newblock {\em Combinatorial Optimization - Polyhedra and Efficiency}.
+		\newblock Springer, 2003.
+		
+		\bibitem{vazirani}
+		Vijay~V. Vazirani.
+		\newblock {\em Approximation Algorithms}.
+		\newblock Springer-Verlag, Berlin, Heidelberg, 2001.
+		
+		\bibitem{sw}
+		David~P. Williamson and David~B. Shmoys.
+		\newblock {\em The Design of Approximation Algorithms}.
+		\newblock Cambridge University Press, New York, NY, USA, 1st edition, 2011.
+		
+		\bibitem{Wolsey1980}
+		Laurence~A. Wolsey.
+		\newblock {\em Heuristic analysis, linear programming and branch and bound},
+		pages 121--134.
+		\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1980.
 	
-	\bibitem[CV04]{CV}
-	Robert Carr and Santosh Vempala.
-	\newblock On the held-karp relaxation for the asymmetric and symmetric
-	traveling salesman problems.
-	\newblock {\em Mathematical Programming}, 100(3):569--587, Jul 2004.
-	
-	\bibitem[FGL05]{fp1}
-	Matteo Fischetti, Fred Glover, and Andrea Lodi.
-	\newblock The feasibility pump.
-	\newblock {\em Mathematical Programming}, 104(1):91--104, Sep 2005.
-	
-	\bibitem[FS09]{fp2}
-	Matteo Fischetti and Domenico Salvagnin.
-	\newblock Feasibility pump 2.0.
-	\newblock {\em Mathematical Programming Computation}, 1(2):201--222, Oct 2009.
-	
-	\bibitem[GJ79]{GJ79}
-	M.R. Garey and D.S. Johnson.
-	\newblock {\em Computers and Intractability -- A Guide to the Theory of
-		{NP}-Completeness}.
-	\newblock Freeman, San Francisco, CA, 1979.
-	
-	\bibitem[GLS93]{cons-cara}
-	Martin Gr{\"o}tschel, L{\'a}szl{\'o} Lov{\'a}sz, and Alexander Schrijver.
-	\newblock {\em Geometric Algorithms and Combinatorial Optimization}, volume~2.
-	\newblock Second corrected edition edition, 1993.
-	
-	\bibitem[Jai98]{jain}
-	Kamal Jain.
-	\newblock A factor 2 approximation algorithm for the generalized steiner
-	network problem.
-	\newblock In {\em Proceedings of the 39th Annual Symposium on Foundations of
-		Computer Science}, FOCS '98, pages 448--, Washington, DC, USA, 1998. IEEE
-	Computer Society.
-	
-	\bibitem[RT87]{randomizedrounding}
-	Prabhakar Raghavan and Clark~D. Tompson.
-	\newblock Randomized rounding: A technique for provably good algorithms and
-	algorithmic proofs.
-	\newblock {\em Combinatorica}, 7(4):365--374, Dec 1987.
-	
-	\bibitem[Sch03]{schrijver}
-	A.~Schrijver.
-	\newblock {\em Combinatorial Optimization - Polyhedra and Efficiency}.
-	\newblock Springer, 2003.
-	
-	\bibitem[Vaz01]{vazirani}
-	Vijay~V. Vazirani.
-	\newblock {\em Approximation Algorithms}.
-	\newblock Springer-Verlag, Berlin, Heidelberg, 2001.
-	
-	\bibitem[Wol80]{Wolsey1980}
-	Laurence~A. Wolsey.
-	\newblock {\em Heuristic analysis, linear programming and branch and bound},
-	pages 121--134.
-	\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1980.
-	
-	\bibitem[WS11]{sw}
-	David~P. Williamson and David~B. Shmoys.
-	\newblock {\em The Design of Approximation Algorithms}.
-	\newblock Cambridge University Press, New York, NY, USA, 1st edition, 2011.
-
 \end{thebibliography}
 \end{document}

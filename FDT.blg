@@ -1,10 +1,6 @@
-The top-level auxiliary file: FDT.aux
-The style file: alpha.bst
-Illegal, another \bibstyle command---line 176 of file FDT.aux
- : \bibstyle
- :          {unsrt}
-I'm skipping whatever remains of this command
+This is BibTeX, Version 0.99dThe top-level auxiliary file: FDT.aux
+The style file: plain.bst
 Database file #1: FDT.bib
 Warning--empty publisher in cons-cara
 Warning--can't use both author and editor fields in Wolsey1980
-(There was 1 error message)
+(There were 2 warnings)
