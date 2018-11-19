@@ -55,9 +55,8 @@ graphicx, verbatim, listings, color, fancybox}
 
 \newcommand{\Ex}{\mathop{\mathbb{E}}}
 
-\declaretheoremstyle[style=claim,qed=$\Diamond$]{claim}
-\declaretheoremstyle[style=plain,qed=$\square$]{theorem}
 
+\usepackage{amsmath}
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}[theorem]
@@ -135,7 +134,7 @@ graphicx, verbatim, listings, color, fancybox}
 \input{2ECFDT}
 \input{gap}
 \input{conclusion}
-
+\nocite{fj}\nocite{32gap}
 \bibliographystyle{plain}
 \bibliography{FDT}
 

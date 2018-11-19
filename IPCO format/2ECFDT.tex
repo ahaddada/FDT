@@ -1,0 +1,84 @@
+
+\section{FDT for 2EC}\label{2EC}
+
+In Section \ref{binaryfdt} our focus was on binary MIPs. In this section, in an attempt to extend FDT to 0,1,2 problems we introduce an FDT algorithm for a 2-edge-connected multigraph problem. Given a graph $G=(V,E)$ a multi-subset of edges $F$ of $G$ is a 2-edge-connected multigraph of $G$ if for each set $\emptyset\subset U \subset V$, the number of edge in $F$ that have one endpoint in $U$ and one not in $U$ is at least 2. In the 2EC problem, we are given non-negative costs on the edge of $G$ and the goal is to find the minimum cost 2-edge-connected multigraph of $G$. Notice that, no optimal solution ever takes 3 copies of an edge in 2EC, hence we assume that we can take an edge at most 2 times. The natural linear programming relaxation is $\EC(G) = \{x\in [0,2]^E: x(\delta(U))\geq 2 \mbox{ for } \emptyset \subset U \subset V\}$. Notice that $\dom(\EC(G))\cap [0,2]^{E} = \EC(G)$, since 2EC is a covering problem. We want to prove the following theorem. 
+
+\FDTEC*
+
+We do not know the exact value for $g_{\EC}$, but we know $\frac{6}{5} \leq g_{\EC} \leq \frac{3}{2}$ \cite{carr-ravi,Wolsey1980}. Also, we need to remark that polyhedral version of Christofides' algorithm provides a $\frac{3}{2}$-approximation for 2EC, i.e. we already have an algorithm with $C\leq \frac{3}{2}$. However, we show later in Section \ref{experiment} that in practice the constant $C$ for the FDT algorithm for 2EC is much better than $\frac{3}{2}$. 
+
+The FDT algorithm for 2EC is very similar to the one for binary MIPs, but there are some differences as well. First, we need a branching lemma. Observe that  the following branching lemma is essentially a translation of Lemma \ref{LPClemma} for 0,1,2 problems expect for one additional clause. 
+
+
+\begin{restatable}{lemma}{2ECLPC}
+	\label{LPC2EC}
+	Given $x\in \EC(G)$, and $e\in E$ we can find in polynomial time vectors $x^0,x^1$ and $x^2$ and scalars $\gamma_0,\gamma_1$, and $\gamma_2$ such that: (i) $\gamma_0 + \gamma_1 +\gamma_2 \geq \frac{ 1}{g_{\EC}}$, (ii) $x^0,x^1,$ and $x^2$ are in  $ \EC(G)$, (iii) $x^0_e=0$, $x^1_e=1$, and $x^2_e=2$, (iv) $\gamma_0 x^0 + \gamma_1{x}^1  + \gamma_2x^2\leq {x}$, (v) for $f\in E$ with ${x}_f\geq 1$, we have $x^j_f\geq 1$ for $j=0,1,2$.
+\end{restatable}
+
+\begin{proof}
+	Consider the following LP with variables $\lambda_j$ and $x^j$ for $j=0,1,2$. 
+	\begin{align}
+		\quad\quad& \max\quad \;\sum_{j=0,1,2}\lambda_j\\
+		&\;\text{s.t.} \quad x^j(\delta(U))\geq 2\lambda_j \;& \mbox{ for $\emptyset \subset U \subset V$, and $j=0,1,2$} \label{feasibility2ec}\\
+		&\;{\color{white}{\text{s.t.}} }\quad 0 \leq x^j \leq 2\lambda_j\; &\mbox{ for $j=0,1,2$}\label{bound2ec}\\
+		&\;{\color{white}{\text{s.t.}} }\quad x^j_e = j\; &\mbox{ for $j=0,1,2$}\label{branchcoordinate2ec}\\
+		&\;{\color{white}{\text{s.t.}} }\quad x^j_f \geq j \; &\mbox{ for $f\in E$ where $x_f \geq 1$, and $j=0,1,2$}\label{1edges2ec}\\
+		&\;{\color{white}{\text{s.t.}} }\quad x^0 + x^1+x^2 \leq x\label{packing2ec}\\
+		&\;{\color{white}{\text{s.t.}} }\quad \lambda_0,\lambda_1,\lambda_2 \geq 0
+	\end{align}	Let $x^j$, $\gamma_j$ for $j=0,1,2$ be an optimal solution solution to the LP above. Let $\hat{x}^{j}=\frac{x^j}{\gamma_j}$ for $j=0,1,2$ where $\gamma_j>0$. If $\gamma_j=0$, let $\hat{x}^{j}=0$. Observe that  (ii), (iii), (iv), and (v) are satisfied with this choice. We can also show that $\gamma_0+\gamma_1+\gamma_2\geq \frac{1}{g_{\EC}}$, which means that (i) is also satisfied. The proof is similar to the proof of the claim in Lemma \ref{LPClemma}, but we need to replace each $f\in E$ with $x_f\geq 0$ with a suitably long path to ensure that Constraint (\ref{1edges2ec}) is also satisfied.	We skip the details.\iffalse{
+	\begin{claim}\label{CVexists}
+		We have $\gamma_0 + \gamma_1+\gamma_2\geq \frac{1}{g_{\EC}}$.
+	\end{claim}
+	\begin{proof}
+		Suppose for contradiction $\sum_{j=0,1,2}\gamma_j = \frac{1}{g_{\EC}} - \epsilon$ for some $\epsilon >0$. 
+		
+		Construct graph $G'$ by removing edge $f$ with $x_f\geq 1$ and replacing it with a path $P_f$ of length $\ceil{\frac{2}{\epsilon}}$. Define $x'_h = x_h$ for each edge $h$ such that $x_h<1$. For each $h\in P_f$ let $x'_h= x_f$ for all $f$ with $x_f\geq 1$. It is easy to check that $x'\in \EC(G')$. By Theorem \ref{CV} there exists $\theta \in [0,1]^k$, with $\sum_{i=1}^{k}\theta_i = 1$ and 2-edge-connected multigraphs $F'_i$ of $G'$ for $i=1,\ldots,k$ such that 
+		$\sum_{i=1}^{k}\theta_i \chi^{F'_i}\leq g_{\EC}x'$. 
+		
+		Note that each $F'_i$ contains at least one copy of every edge in any path $P_f$, except for at most one edge in the path. We will obtain 2-edge-connected multigraphs $F_1,\ldots,F_k$ of $G$ using $F'_1,\ldots,F'_k$, respectively. To obtain $F_i$ first remove all $P_f$ paths from $F'_i$. Suppose there is an edge $h$ in $P_f$ such that $\chi^{F'_i}_h=0$, this means that for any edge $p\in P_f$ such that $p\neq h$, $\chi^{F'_i}_p=2$. In this case, let $\chi^{F_i}_f=2$, i.e. add two copies of $f$ to $F_i$. If there is an edge $h\in P_f$ with $\chi^{F'_i}_h = 1$, let $\chi^{F_i}_f=1$, i.e. add one copy of $f$ to $F_i$. If for all edge $h\in P_f$, we have $\chi^{F'_i}_h=2$, then let $\chi^{F_i}_f=2$. For $f\in E$ with $x_f<1$ we have
+		\begin{equation}
+		\sum_{i=1}^{k}\theta_i \chi^{F_i}_f=\sum_{i=1}^{k}\theta_i \chi^{F'_i}_f\leq g_{\EC}x'_f= g_{\EC}x_f.
+		\end{equation}
+		In addition for $f\in E$ with $x_f\geq 1$ we have $\chi^{F_i}_f \leq \frac{\sum_{h\in P_f}\chi^{F'_i}_h}{\ceil{\frac{2}{\epsilon}}-1}$ by construction.
+		\begin{align*}
+			\sum_{i=1}^{k}\theta_i \chi^{F_i}_f&\leq \sum_{i=1}^{k}\theta_i\frac{\sum_{h\in P_f}\chi^{F'_i}_h}{\ceil{\frac{2}{\epsilon}}-1}\\
+			&= \frac{\sum_{h\in P_f} \sum_{i=1}^{k}\theta_i\chi^{F'_i}_h}{\ceil{\frac{2}{\epsilon}}-1}\\
+			&\leq \frac{\sum_{h\in P_f} g_{\EC}x'_h}{\ceil{\frac{2}{\epsilon}}-1}\\
+			&= \frac{\sum_{h\in P_f} g_{\EC}x'_h}{\ceil{\frac{2}{\epsilon}}-1}\\
+			&= \frac{\ceil{\frac{2}{\epsilon}}}{\ceil{\frac{2}{\epsilon}}-1}g_{\EC}x_f
+		\end{align*}
+		Therefore, we have 
+		\begin{equation}
+		x' \geq \sum_{i\in [k]: \chi^{F_i}_e=1}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi^{F_i}+\sum_{i\in [k]: \chi^{F_i}_e=2}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi^{F_i}.
+		\end{equation}
+		Let $x^j = \sum_{i\in [k]: \chi^{F_i}_e=j}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi^{F_i}$ and $\theta_j =  \sum_{i\in [k]: \chi^{F_i}_e=j}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}$ for $j=0,1,2$. It is easy to check that $x^j$ , $\theta_j$ for $j=0,1,2$ is a feasible solution to the LP above. Notice that $\sum_{j=0,1,2}\theta_j = \frac{\ceil{\frac{2}{\epsilon}}-1}{g_{\EC}\ceil{\frac{2}{\epsilon}}}$. By assumption, we have $\frac{\ceil{\frac{2}{\epsilon}}-1}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\leq  \frac{1}{g_{\EC}}-\epsilon$. However, this means $2\leq 1$ which is a contradiction.
+	\end{proof}
+	This concludes the proof.}\fi \end{proof}
+
+
+In contrast to FDT for binary MIPs where we round up the fractional variables that are already branched on at each level, in FDT for 2EC we keep all coordinates as they are and preform a rounding procedure at the end. Formally, let $L_i$ for $i=1,\ldots,|\spp(x^*)|$ be collections of pairs of feasible points in $\EC(G)$ together with their multipliers. Let $t=|\spp(x^*)|$ and assume without loss of generality that $\spp(x^*)=\{e_1,\ldots,e_t\}$. 
+
+\begin{lemma}\label{2ecpruning}
+	The FDT algorithm for 2EC in  polynomial time produces sets $L_0,\ldots,L_t$ of pairs $x\in \EC(G)$ together with multipliers $\lambda$ with the following properties.
+		(a) If $x\in L_i$, then $x_{e_j}=0$ or $x_{e_j}\geq 1$ for $j=1,\ldots,i$, (b) $\sum_{(x,\lambda)\in L_i }\lambda \geq \frac{1}{g_{\EC}^i}$, (c) $\sum_{(x,\lambda)\in L_i }\lambda x \leq x^*$, (d) $|L_i|\leq t$.
+\end{lemma}
+The proof is similar to Lemma \ref{prune}, but we need to use property (i) in Lemma \ref{LPC2EC} to prove that (a) also holds.
+\iffalse{
+\begin{proof}
+	We proceed by induction on the $i$. Define $L_0=\{(x^*,1)\}$. It is easy to check all the properties are satisfied. Now, suppose by induction we have $L_{i-1}$ for some $i=1,\ldots,t$ that satisfies all the properties. For each solution $x^\ell$ in $L_{i-1}$ apply Lemma \ref{LPC2EC} on $x^\ell$ and $e_{i}$ to obtain $x^{\ell j}$ and $\lambda_{\ell j}$ for $j=0,1,2$. Let $L'$ be the collection that contains $(x^{\ell j},\lambda_\ell \cdot \lambda_{\ell j})$ for $j=0,1,2$, when applied to all $(x^\ell,\lambda_\ell)$ in $L_{i-1}$. Similar to the proof in Lemma \ref{prune} one can check that $L_i$ satisfies properties (b), (c). We now verify property (a). Consider a solution $x^\ell$ in $L_{i-1}$. For $e\in \{e_1,\ldots,e_{i-1}\}$ if $x^\ell_e =0$, then by property (iv) in Lemma \ref{LPC2EC} we have $x^{\ell j}=0$ for $j=0,1,2$. Otherwise by induction we have $x^{\ell}_{e}\geq 1$ in which case property (v) in Lemma \ref{LPC2EC} ensures that $x^{\ell j}_e\geq 1$ for $j=0,1,2$. Also, $x^{\ell j}_{e_i}= j$, so $x^{\ell j}_{e_i}=0$ or $x^{\ell j}_{e_i}\geq 1$ for $j=0,1,2$. 
+	
+	If $|L'|\geq t$ we let $L_i=L'$, otherwise apply $\prun(L')$ to obtain $L_{i}$.
+\end{proof}	}\fi
+
+Consider the solutions $x$ in $L_t$. For each variable $e$ we have $x_e=0$ or $x_e\geq 1$. 
+\begin{lemma}\label{rounddown}
+	Let $x$ be a solution in $L_t$. Then $\floor{x} \in \EC(G)$. 
+\end{lemma}
+\begin{proof}
+	Suppose not. Then there is a set of vertices $\emptyset \subset U \subset V$ such that $\sum_{e\in \delta(U)}\floor{x_e}<2$. Since $x\in \EC(G)$ we have $\sum_{e\in \delta(U)}x_e \geq 2$. Therefore, there is an edge $f\in \delta(U)$ such that $x_f$ is fractional. By property (a) in Lemma \ref{2ecpruning}, we have $1<  x_f < 2$. Therefore, there is another edge $h$ in $\delta(U)$ such that $x_h>0$, which implies that $x_h\geq 1$. But in this case $\sum_{e\in \delta(U)}\floor{x_e}\geq  \floor{x_f}+\floor{x_h}  \geq 2$. This is a contradiction.
+\end{proof}
+
+The FDT algorithm for 2EC iteratively applies Lemmas \ref{LPC2EC} and \ref{2ecpruning} to variables $x_1,\ldots,x_t$ to obtain leaf point solutions $L_t$. Then, we just need to apply Lemma \ref{rounddown} to obtain the 2-edge-connected multigraphs from every solution in $L_t$. Notice that since $x$ is an extreme point we have $t\leq 2|V|-1$ \cite{gerard}. By Lemma \ref{2ecpruning} we have
+\begin{align*}
+	\sum_{(x,\lambda)\in L_t} \frac{\lambda}{\sum_{(x,\lambda)\in L_t}\lambda} \floor{x} \leq \frac{1}{\sum_{(x,\lambda)\in L_t}\lambda} \sum_{(x,\lambda)\in L_t} \lambda {x} \leq g^t_{\EC} x^*.
+\end{align*}

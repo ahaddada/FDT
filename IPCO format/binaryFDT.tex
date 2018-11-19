@@ -1,0 +1,155 @@
+\section{FDT on binary MIPs}
+\label{binaryfdt}
+
+In this section we present the fractional decomposition tree (FDT) algorithm and prove its correctness. 
+
+Consider a formulation instance $I=(A,G,b)$. Define sets $S(I)$ and $P(I)$ as in (\ref{S'}) and (\ref{P'}), respectively. Also assume we are given a point $(x^*,y^*)\in P(I)$. For instance, $(x^*,y^*)$ can be the optimal solution of minimizing a cost function $cx$ over set $P$, which provides a lower bound on $\min_{(x,y)\in S(I)} cx$. In this section, we prove Theorem \ref{binaryFDT}.  One key ingredient in proving Theorem \ref{binaryFDT} is Theorem \ref{domtoIP} that we will also prove in this section.
+
+
+
+Although the theoretical worst-case upper bound on $C$ in the statement of Theorem \ref{binaryFDT} can be very large, we will show that in practice $C$ can be really small and hence FDT can provide good LP-based approximation algorithms in many cases. We also remark that if $g_I=1$, then the algorithm will give an exact decomposition of any feasible solution.  In the remainder of this section we explain the FDT algorithm and prove Theorem \ref{binaryFDT}. For simplicity in the notation we denote $P(I),S(I),$ and $g_I$ with $P,S,$ and $g$, respectively. Let $t=|\spp(x^*)|$. We assume without loss of generality that $\spp(x^*)= \{1,\ldots,t\}$.
+
+The FDT algorithm grows a tree similar to the classic branch-and-bound search tree for integer programs. Each node represents a partially integral vector $(\bar{x},\bar{y})$ in $\dom(P)$ together with a multiplier $\bar{\lambda}$. The solutions contained in the nodes of the tree become progressively more integral at each level. In each level of the tree, the algorithm maintain a conic combination of points with the properties mentioned above. Leaves of the FDT tree contain solutions with integer values for all the $x$ variables that dominate a point in $P$. We will later see how we can turn these into points in $S$. We begin with the following lemmas that show how the FDT algorithm branches on a variable.
+\begin{lemma}\label{LPClemma}
+	Given $(x',y')\in \dom(P)$ and $\ell\in \{1,\ldots,n\}$, we can find in polynomial time vectors $(\hat{x}^0,\hat{y}^0),(\hat{x}^1,\hat{y}^1)$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that: (i) $\gamma_0 + \gamma_1  \geq \frac{ 1}{g}$, (ii) $(\hat{x}^0,\hat{y}^0)$ and $(\hat{x}^1,\hat{y}^1)$ are in  $ P$
+		,(iii) $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$, (iv) $\gamma_0 \hat{x}^0 + \gamma_1\hat{x}^1 \leq x'$.
+\end{lemma}
+
+
+\begin{proof} 
+	Consider the following linear program which we denote by $\LPC(\ell,x',y')$. The variables of $\LPC(\ell,x',y')$ are $\gamma_0,\gamma_1$ and $(x^0,y^0)$ and $(x^1,y^1)$. 
+	\begin{align}
+		\LPC(\ell,x',y')\quad\quad& \max\quad \;\lambda_0+\lambda_1\\
+		&\;\text{s.t.} \quad Ax^j + Gy^j\geq b\lambda_j & \mbox{ for $j=0,1$} \label{feasibility}\\
+		&\;{\color{white}{\text{s.t.}} }\quad 0 \leq x^j \leq \lambda_j &\mbox{ for $j=0,1$}\label{bound}\\
+		&\;{\color{white}{\text{s.t.}} }\quad x^0_\ell = 0,\; x^1_\ell =\lambda_1\label{branchcoordinate}\\
+		&\;{\color{white}{\text{s.t.}} }\quad x^0 + x^1 \leq x'\label{packing}\\
+		&\;{\color{white}{\text{s.t.}} }\quad \lambda_0,\lambda_1 \geq 0
+	\end{align}
+	
+	Let $(x^0,y^0),(x^1,y^1)$, and $\gamma_0,\gamma_1$ be an optimal solution solution to the LP above. Let $(\hat{x}^0,\hat{y}^0) = (\frac{x^0}{\gamma_0},\frac{y^0}{\gamma_0})$, $(\hat{x}^1,\hat{y}^1) = (\frac{x^1}{\gamma_1},\frac{y^1}{\gamma_1})$. Observe that  (ii), (iii), (iv) are satisfied with this choice. In order to show that (i) is also satisfied we prove the following claim.
+	
+	\begin{claim}\label{CVexists}
+		We have $\gamma_0 + \gamma_1\geq \frac{1}{g}$.
+	\end{claim}
+	\begin{proof}
+		We show that there is a feasible solution that achieves the objective value of $\frac{1}{g}$. By Theorem \ref{CV} there exists $\theta \in [0,1]^k$, with $\sum_{i=1}^{k}\theta_i = 1$ and $(\tilde{x}^i,\tilde{y}^i)\in S$ for $i=1,\ldots,k$ such that 
+		$\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq gx'$. 
+		
+		\begin{equation}\label{splitting}
+		x'\geq \sum_{i=1}^{k}\frac{\theta_i}{g} \tilde{x}^i
+		={\sum_{i\in [k]: \tilde{x}^i_\ell =0}\frac{\theta_i}{g} \tilde{x}^i}+{\sum_{i\in [k]: \tilde{x}^i_\ell =1}\frac{\theta_i}{g} \tilde{x}^i}
+		\end{equation}
+		For $j=0,1$, let $(x^j,y^j) = \sum_{i\in [k]:\tilde{x}^i_\ell=j} \frac{\theta_i}{g}(\tilde{x}^i,\tilde{y}^i)$. Also let $\lambda_0=\sum_{i\in [k]: \tilde{x}^i_\ell =0}\frac{\theta_i}{g}$ and $\lambda_1 = \sum_{i\in [k]: \tilde{x}^i_\ell =1}\frac{\theta_i}{g}$. Note that $\lambda_0+\lambda_1 = \frac{1}{g}$. Constraint (\ref{packing}) is satisfied by Inequality (\ref{splitting}). Also, for $j=0,1$ we have
+		\begin{equation}
+		Ax^j+Gy^j = \sum_{i\in[k], \tilde{x}^i_\ell = j} \frac{\theta_i}{g} (A\tilde{x}^i + G\tilde{y}^i) \geq b \sum_{i\in[k], \tilde{x}^i_\ell = j} \frac{\theta_i}{g} = b\lambda_j.
+		\end{equation}
+		Hence, Constraints (\ref{feasibility}) holds. Constraint (\ref{branchcoordinate}) also holds since $x^0_\ell$ is obviously $0$ and $x^1_\ell= \sum_{i\in [k]: \tilde{x}^i_\ell = 1}\frac{\theta_i}{g}= \lambda_1$. The rest of the constraints trivially hold. 
+	\end{proof}
+	This concludes the proof.	
+\end{proof}
+
+We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integral, we can find solutions with more integral components.
+\begin{lemma}\label{round-up}
+	Given $(x',y')\in \dom(P)$, such that $x'_1,\ldots,x'_{\ell-1}\in \{0,1\}$ for some $\ell\geq 1$, we can find in polynomial time vectors $(\hat{x}^0,\hat{y}^0),(\hat{x}^1,\hat{y}^1)$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that: (i) $\frac{ 1}{g}\leq \gamma_0 + \gamma_1  \leq 1$, (ii) $(\hat{x}^0,\hat{y}^0)$ and $(\hat{x}^1,\hat{y}^1)$ are in  $\dom( P)$, (iii) $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$, (iv) $ \gamma_0\hat{x}^0 +\gamma_1 \hat{x}^1 \leq
+		x'$,(v) $\hat{x}^i_j\in \{0,1\}$ for $i=0,1$ and $j=1,\ldots,\ell-1$.
+\end{lemma} 
+\begin{proof}
+	By Lemma \ref{LPClemma} we can find $(\bar{x}^0,\bar{y}^0)$, $(\bar{x}^1,\bar{y}^1)$, $\gamma_0$ and $\gamma_1$ that satisfy (i), (ii), (iii), and (iv). We define $\hat{x}^0$ and $\hat{x}^1$ as follows. For $i=0,1$, for $j=1,\ldots,\ell-1$, let $\hat{x}^i_j= \ceil{\bar{x}^i_j}$, for $j=\ell,\ldots,t$ let $\hat{x}^i_j = \bar{x}^i_j$. We now show that $(\hat{x}^0,\bar{y}^0)$, $(\hat{x}^1,\bar{y}^1)$, $\gamma_0$, and $\gamma_1$ satisfy all the conditions. Note that conditions (i), (ii), (iii), and (v) are trivially satisfied. Thus we only need to show (iv) holds. We need to show that $\gamma_0 \hat{x}^0_j+\gamma_1\hat{x}^1_j\leq gx'_j$. If $j=\ell,\ldots,t$, then this clearly holds. Hence, assume $j\leq \ell-1$. By the property of $x'$ we have $x'_j\in \{0,1\}$. If $x'_j= 0$, then by Constraint (\ref{packing}) we have $\bar{x}^0_j = \bar{x}^1_j=0$. Therefore, $\hat{x}^i_j=0$ for $i=0,1$, so (iv) holds. Otherwise if $x'_j = 1$, then we have
+	$\gamma_0\hat{x}^0_j+\gamma_1\hat{x}^1_j\leq \gamma_0+\gamma_1\leq 1\leq x'_j.$ 
+	Therefore (v) holds.
+\end{proof}
+
+
+Let us define the FDT algorithm more formally. The algorithm maintains nodes $L_i$ in iteration $i$ of the algorithm. The nodes in $L_i$ correspond to the nodes in level $L_i$ of the FDT tree. The points in the leaves of the FDT tree, $L_t$, are points in $\dom(P)$ and are integral for all integer variables.
+
+
+
+\begin{lemma}\label{prune}
+	There is a polynomial time algorithm that produces sets $L_0,\ldots,L_t$ of pairs of $(x,y)\in \dom(P)$ together with multipliers $\lambda$ with the following properties for $i=0,\ldots,t$:
+		(a) If $(x,y)\in L_i$, then $x_j \in \{0,1\}$ for $j=1,\ldots,i$, i.e. the first $i$ coordinates of a solution in level $i$ are integral, (b) $\sum_{[(x,y),\lambda]\in L_i} \lambda\geq\frac{1}{g^i}$, (c) $\sum_{[(x,y),\lambda]\in L_i}\lambda x \leq x^*$, (d) $|L_i|\leq t$.
+\end{lemma}
+\begin{proof}
+	We prove this lemma using induction but one can clearly see how to turn this proof into a polynomial time algorithm. Let $L_0$ be the set that contains a single node (\textit{root of the FDT tree}) with $(x^*,y^*)$ and multiplier 1. It is easy to check all the requirements in the lemma are satisfied for this choice.
+	
+	Suppose by induction that we have constructed sets $L_0,\ldots,L_i$. Let the solutions in $L_i$ be $(x^j,y^j)$ for $j=1,\ldots,k$ and $\lambda_j$ be their multipliers, respectively. For each $j= 1,\ldots,k$ by Lemma \ref{round-up} (setting $(x',y')= (x^j,y^j)$ and $\ell = i+1$) we can find $(x^{j0},y^{j0}), (x^{j1},y^{j1})$ and $\lambda^0_j$, $\lambda^1_j$ with the properties (i) to (v) in Lemma \ref{round-up}. Define $L'$ to be the set of nodes with solutions $(x^{j0},y^{j0}), (x^{j1},y^{j1})$ and multipliers  $\lambda_j\lambda^0_j$, $\lambda_j\lambda^1_j$, respectively, for $j=1,\ldots,k$. It is easy to check that \iffalse{
+	Notice that for each $j= 1,\ldots,k$ by property (v) in Lemma \ref{round-up} we have $x_h^{j0}, x_h^{j1}\in \{0,1\}$ for $h = 0,\ldots,i+1$. We also have
+	\begin{align*}
+		\sum_{[(x,y),\lambda]\in L'} \lambda & =  \sum_{j=1}^{k} \lambda_j\lambda^0_j+\lambda_j\lambda^1_j&\\
+		& \geq \sum_{j=1}^{k} \frac{\lambda_j}{ g} & (\text{By property (i) in Lemma \ref{round-up}})\\
+		& \geq \frac{1}{g} \sum_{[(x,y),\lambda]\in L_i}\lambda&\\
+		& \geq \frac{1}{g^{i+1}}.&(\text{By induction hypothesis})	 
+	\end{align*} 
+	Also 
+	\begin{align*}
+		\sum_{[(x,y),\lambda]\in L'}\lambda x & =  \sum_{j=1}^{k} \lambda_j\big(\lambda^0_jx^{j0}+\lambda^1_jx^{j1}\big)&\\ 
+		& \leq \sum_{j=1}^{k} \lambda_j x^j  & (\text{By property (iv) in Lemma \ref{round-up}})\\
+		& \leq \sum_{[(x,y),\lambda]\in L_i}\lambda x&\\
+		& \leq x^*.&(\text{By induction hypothesis})	 
+	\end{align*} \fi set $L'$ is a suitable candidate for $L_{i+1}$, i.e. set $L'$ satisfies (a), (b) and (c). However we can only ensure that $|L'|\leq 2k\leq 2t$, and might have $|L'|>t$. We call the following linear program $\prun(L')$. Let $L' = \{[(x^1,y^1),\gamma_1],\ldots,[(x^{2k},y^{2k}),\gamma_{2k}]\}$. The variables of $\prun(L')$ is a scalar variable $\theta_j$ for each node $j$ in $L'$.  
+	\begin{align}
+		\prun(L')\quad\quad& \max\quad \;\sum_{j=1}^{2k} \theta_j\\
+		&\;\text{s.t.} \quad \;\;\sum_{j=1}^{2k} \theta_j x^j_i\leq x^*_i &\mbox{ for $i=1,\ldots,t$} \label{packs}\\
+		&\;{\color{white}{\text{s.t.}} }\quad  \;\quad\quad\theta \geq 0\label{nonneg}
+	\end{align}
+
+	Notice that $\theta = \gamma$ is in fact a feasible solution to $\prun(L')$. Let $\theta^*$ be the optimal vertex point solution to this LP. Since the problem is in $\bbbr^{2k}$,  $\theta^*$ has to satisfy $2k$ linearly independent constraints at equality. However, there are only $t$ constraints of type (\ref{packs}). Therefore, there are at most $t$ coordinates of $\theta^*_j$ that are non-zero. We claim that $L_{i+1}$ which consists of $(x^j,y^j)$ for $j=1,\ldots,2k$ and their corresponding multipliers $\theta^*_j$ satisfy the properties in the statement of the lemma. Notice that, we can discard the nodes in $L_{i+1}$ that have $\theta^*_j=0$, so $|L_{i+1}| \leq t$. Also, since $\theta^*$ is optimal and $\gamma$ is feasible for $\prun(L')$, we have $\sum_{j=1}^{k} \theta^*_j \geq \sum_{j=1}^{2k}\gamma_j \geq \frac{1}{g^{i+1}}$. 
+\end{proof}
+The leaves of the FDT tree,  $L_t$, have the property that every solution $(x,y)$ in $L_t$ has $x\in\{0,1\}^n$ and $(x,y)\in \dom(P)$. Our goal to now replace these leaves solutions in $\dom(P)$ with solutions in $S$. To this end, we need to reduce some variables with value of 1 into variables of value 0 and obtain feasibility in the meantime. We introduce a procedure that given a  point $(x,y)\in \dom(P)$ with $x\in \{0,1\}^n$ outputs a point $z\leq x$ with $z\in \{0,1\}^n$ such that $(z,w)$ is in $S$ for some vector $w\in \bbbr^p$. 
+
+The algorithm ``fixes" the variables iteratively, from $x_1$ to $x_t$. Suppose we run the algorithm for $\ell\in \{0,\ldots,t-1\}$ iterations and we have $(x^{(\ell)},y^{(\ell)})\in \dom(P)$  such that $x^{(\ell)}_i\in \{0,1\}$ for $i=1,\ldots,t$. Now consider the following linear program. The variables of this LP are the $z\in \bbbr^n$ variables and $w\in \bbbr^p$.
+\begin{align}
+	\DOMtoS(x^{(\ell)})\quad\quad& \min\quad \;z_{\ell+1}\\
+	&\;\text{s.t.} \quad \;\;Az+ Gw\geq b \\
+	&\;{\color{white}{\text{s.t.}} }\quad \;\; \; z_j = x^{(\ell)}_j \quad \; j =1,\ldots, \ell\\
+	&\;{\color{white}{\text{s.t.}} }\quad \; \;\; z_j \leq x^{(\ell)}_j \quad \; j = \ell+1,\ldots,n\\
+	&\;{\color{white}{\text{s.t.}} }\quad \; \;\; z\;\geq 0
+\end{align}
+
+If the optimal value to $\DOMtoS(x^{(\ell)})$ is 0, then let $x^{(\ell+1)}_{\ell+1} = 0$. Otherwise if the optimal value is strictly positive let $x^{(\ell+1)}_{\ell+1} = 1$. Let $x^{(\ell+1)}_j = x^{(\ell)}_j$ for $j\in \{1,\ldots,n\}\setminus \{\ell+1\}$. This procedure is the DomToIP algorithm.
+\iffalse{
+\begin{algorithm}[H]
+	\KwIn{$(x,y)\in \dom(S)$}
+	\KwOut{$(x^{(t)},y^{(t)}) \in S$, $x^{(t)}\leq x$}
+	$x^{(0)}\leftarrow x$\\
+	\For{$\ell = 0$ \textbf{to} $t-1$}{
+		$x^{(\ell+1)} \leftarrow x^{(\ell)}$\\
+		$\eta \leftarrow$ optimal value of $ \DOMtoS(x^{(\ell)})$\\
+		$y^{(\ell+1)}\leftarrow$ optimal solution for $w$ variables in $ \DOMtoS(x^{(\ell)})$\\
+		\eIf{$\eta = 0$}{
+			$x^{(\ell+1)}_{\ell+1} \leftarrow 0$\
+		}{
+			$x^{(\ell+1)}_{\ell+1} \leftarrow 1$
+		}
+	}
+	\label{domtoIPalg}
+	\caption{The DomToIP algorithm}
+\end{algorithm}
+}\fi
+The following lemma proves Theorem \ref{domtoIP}.
+\begin{lemma}
+	Given $(x,y)\in \dom(P)$, DomToIP algorithm correctly finds $(x^{(t)},y^{(t)})\in S$ in polynomial time.
+\end{lemma}
+The proof is in Appendix \ref{lemma4}.
+
+
+\iffalse{
+\begin{algorithm}[H]\label{FDTFull}
+	\KwIn{$P= \{(x,y)\in \bbbr^{n\times p}: Ax+Gy\geq b\}$ and $S=\{(x,y)\in P: x\in \{0,1\}^n\}$ such that $g=\max_{c\in \bbbr^n_+ }\frac{\min_{(x,y)\in }cx}{\min_{(x,y)\in P}cx}$ is finite, $(x^*,y^*)\in P$}
+	\KwOut{$(z^i,w^i)\in S$ and $\lambda_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\lambda_i = 1$, and $\sum_{i=1}^{k}\lambda_iz^i\leq g^tx^*$ }
+	$L^0\leftarrow [(x^*,y^*),1]$\\
+	\For{$i=1$ \textbf{to} $t$}{
+		$L'\leftarrow \emptyset$\\
+		\For{$[(x,y),\lambda] \in L^i$}{
+			Apply Lemma \ref{round-up} to obtain $[(\hat{x}^0,\hat{y}^0),\gamma_0]$ and $[(\hat{x}^1,\hat{y}^1),\gamma_1]$\\
+			$L' \leftarrow L' \cup \{[(\hat{x}^0,\hat{y}^0),\gamma_0]\} \cup \{[(\hat{x}^1,\hat{y}^1),\gamma_1]\}$\\			
+		}
+		Apply Lemma \ref{prune} to $L'$ to obtain $L^{i+1}$. 
+	}
+	\For{$[(x,y),\lambda] \in L^t$}{
+		Apply Algorithm \ref{domtoIP} to $(x,y)$ to obtain $(z,w)\in S$\\
+		$F \leftarrow F \cup \{[(z,w),\lambda]\}$
+	}
+	\textbf{return} $F$
+	\caption{Fractional Decomposition Tree Algorithm}
+\end{algorithm}}\fi

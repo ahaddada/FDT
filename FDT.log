@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.2)  16 NOV 2018 16:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.2)  19 NOV 2018 12:56
 entering extended mode
 **./FDT.tex
 (FDT.tex
@@ -930,22 +930,6 @@ Package cleveref Info: loaded `english' language definitions on input line 6732
 .
 )
 \c@thm=\count164
-Package thmtools Info: Key `style' (with value `claim')
-(thmtools)             is not a known style key.
-(thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=claim' on input line 58.
-Package thmtools Info: Key `qed' (with value `$\Diamond $')
-(thmtools)             is not a known style key.
-(thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=claim' on input line 58.
-Package thmtools Info: Key `style' (with value `plain')
-(thmtools)             is not a known style key.
-(thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=theorem' on input line 59.
-Package thmtools Info: Key `qed' (with value `$\square $')
-(thmtools)             is not a known style key.
-(thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=theorem' on input line 59.
 \c@theorem=\count165
 \c@corollary=\count166
 \c@lemma=\count167
@@ -955,9 +939,15 @@ Package thmtools Info: Key `qed' (with value `$\square $')
 \c@observation=\count171
 \c@proposition=\count172
 \c@define=\count173
-\c@claim=\count174
-\c@example=\count175
 
+
+Package amsthm Warning: Unknown theoremstyle `claim' on input line 72.
+
+\c@claim=\count174
+
+Package amsthm Warning: Unknown theoremstyle `claim' on input line 74.
+
+\c@example=\count175
 (FDT.aux
 
 LaTeX Warning: Label `S'' multiply defined.
@@ -980,21 +970,21 @@ LaTeX Warning: Label `CVexists@cref' multiply defined.
 )
 \openout1 = `FDT.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Info: Redefining \microtypecontext on input line 123.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Info: Redefining \microtypecontext on input line 122.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -1038,7 +1028,7 @@ G,.JBIG2,.JB2,.eps]
 )
 \c@lstlisting=\count182
 \AtBeginShipoutBox=\box78
-Package hyperref Info: Link coloring OFF on input line 123.
+Package hyperref Info: Link coloring OFF on input line 122.
 
 ("C:\Users\ahaddadu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\namere
 f.sty"
@@ -1050,9 +1040,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count183
 )
-LaTeX Info: Redefining \ref on input line 123.
-LaTeX Info: Redefining \pageref on input line 123.
-LaTeX Info: Redefining \nameref on input line 123.
+LaTeX Info: Redefining \ref on input line 122.
+LaTeX Info: Redefining \pageref on input line 122.
+LaTeX Info: Redefining \nameref on input line 122.
  (FDT.out) (FDT.out)
 \@outlinefile=\write5
 \openout5 = `FDT.out'.
@@ -1094,7 +1084,7 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 128.
+LaTeX Font Info:    Try loading font information for U+msa on input line 127.
 
 ("C:\Users\ahaddadu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.f
 d"
@@ -1103,7 +1093,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 128.
+LaTeX Font Info:    Try loading font information for U+msb on input line 127.
 
 ("C:\Users\ahaddadu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.f
 d"
@@ -1112,21 +1102,77 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\microtype\mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 128.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 127.
 
 ("C:\Users\ahaddadu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\jknappen\ursfs.
 fd"
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-) (abstract.tex) (introduction.tex [1
+) (abstract.tex)
+
+LaTeX Warning: Citation `schrijver' undefined on input line 131.
+
+(introduction.tex
+
+LaTeX Warning: Citation `goemans' undefined on input line 1.
+
+
+LaTeX Warning: Citation `GJ79' on page 1 undefined on input line 3.
+
+
+LaTeX Warning: Citation `GJ79' on page 1 undefined on input line 3.
+
+
+LaTeX Warning: Citation `sw' on page 1 undefined on input line 17.
+
+
+LaTeX Warning: Citation `vazirani' on page 1 undefined on input line 17.
+
+[1
 
 {C:/Users/ahaddadu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+
+LaTeX Warning: Citation `Wolsey1980' on page 2 undefined on input line 23.
+
+
+LaTeX Warning: Citation `carr-ravi' on page 2 undefined on input line 23.
+
+
+LaTeX Warning: Citation `schrijver' on page 2 undefined on input line 23.
+
+
+LaTeX Warning: Citation `cons-cara' on page 2 undefined on input line 23.
+
 Package hyperref Info: bookmark level for unknown fact defaults to 0 on input l
 ine 25.
+
+LaTeX Warning: Citation `CV' on page 2 undefined on input line 31.
+
+
+LaTeX Warning: Citation `CV' on page 2 undefined on input line 33.
+
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on inpu
 t line 33.
 Package hyperref Info: bookmark level for unknown question defaults to 0 on inp
 ut line 39.
- [2] [3]
+
+LaTeX Warning: Citation `jain' on page 2 undefined on input line 48.
+
+
+LaTeX Warning: Citation `randomizedrounding' on page 2 undefined on input line 
+48.
+
+
+LaTeX Warning: Citation `randomizedrounding' on page 2 undefined on input line 
+48.
+
+[2]
+
+LaTeX Warning: Citation `fp1' on page 3 undefined on input line 50.
+
+
+LaTeX Warning: Citation `fp2' on page 3 undefined on input line 50.
+
+[3]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 110.
 
 
@@ -1139,34 +1185,342 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.95> not available
 Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input 
 line 25.
 
-Overfull \hbox (26.1357pt too wide) in paragraph at lines 38--39
-[]\OT1/cmr/m/n/10.95 (-20) Consider the fol-low-ing lin-ear pro-gram-ing which 
-we de-note by $[](\OML/cmm/m/it/10.95 `; x[]; y[]\OT1/cmr/m/n/10.95 (-20) )$.
- []
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.36 \begin{proof}
+                  [Proof of Lemma \ref{LPClemma}]
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 [5]
 Package hyperref Info: bookmark level for unknown claim defaults to 0 on input 
 line 50.
- [6] [7] [8] [9] [10]) (2ECFDT.tex [11]
+
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.53 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.66 \end{proof}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.68 \end{proof}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[6]
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.83 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.87 \end{proof}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.106 \begin{proof}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[7] [8]
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134 \end{proof}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[9]
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.173 \begin{proof}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[10]
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.192   \end{proof}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+) (2ECFDT.tex [11]
+
+LaTeX Warning: Citation `carr-ravi' on page 12 undefined on input line 7.
+
+
+LaTeX Warning: Citation `Wolsey1980' on page 12 undefined on input line 7.
+
 
 LaTeX Warning: Reference `experiment' on page 12 undefined on input line 7.
 
-[12] [13] [14] [15]) (gap.tex [16] [17]
+[12]
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.24 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.43 	\begin{proof}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[13]
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.66 	\end{proof}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.68 \end{proof}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[14]
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.82 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.86 \end{proof}
+                	
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.94 \end{proof}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+LaTeX Warning: Citation `gerard' on page 15 undefined on input line 96.
+
+[15]) (gap.tex
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.15 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[16]
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 ...\ell^*}= A_{j,\ell^*}b\geq b$. \end{proof}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[17]
 Overfull \hbox (28.08208pt too wide) detected at line 75
 []
  []
 
-[18]) (conclusion.tex) (FDT.bbl [19]) (appendix.tex)
+[18]
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77 \end{proof}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+) (conclusion.tex)
+
+LaTeX Warning: Citation `fj' undefined on input line 137.
+
+
+LaTeX Warning: Citation `32gap' undefined on input line 137.
+
+(FDT.bbl) (appendix.tex)
 
 Package caption Warning: Unused \captionsetup[sub] on input line 19.
 See the caption package documentation for explanation.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 147.
-[20]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 147.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 146.
+[19]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 146.
  (FDT.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 147.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 147.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 146.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 146.
 Package rerunfilecheck Info: File `FDT.out' has not changed.
 (rerunfilecheck)             Checksum: F87AD24DE6092EBE270A91DF768C380C;508.
 
@@ -1176,16 +1530,16 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 147.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 146.
  ) 
 Here is how much of TeX's memory you used:
- 23593 strings out of 493044
- 418540 string characters out of 3126350
- 611047 words of memory out of 3000000
- 26686 multiletter control sequences out of 15000+200000
- 19027 words of font info for 118 fonts, out of 3000000 for 9000
+ 23533 strings out of 493044
+ 417861 string characters out of 3126350
+ 610912 words of memory out of 3000000
+ 26654 multiletter control sequences out of 15000+200000
+ 18493 words of font info for 112 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 49i,15n,53p,1138b,506s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 49i,15n,53p,1129b,506s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
 nts/cm/cmbx10.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiK
@@ -1211,9 +1565,9 @@ eX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/ahaddadu/AppData/Loca
 l/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/ahadd
 adu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm1
 0.pfb>
-Output written on FDT.pdf (20 pages, 363952 bytes).
+Output written on FDT.pdf (19 pages, 351342 bytes).
 PDF statistics:
- 472 PDF objects out of 1000 (max. 8388607)
- 156 named destinations out of 1000 (max. 500000)
+ 432 PDF objects out of 1000 (max. 8388607)
+ 140 named destinations out of 1000 (max. 500000)
  18509 words of extra memory for PDF output out of 20736 (max. 10000000)
 
