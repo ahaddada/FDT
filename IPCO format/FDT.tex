@@ -43,7 +43,7 @@ We present a new algorithm for finding a feasible solution for a mixed-integer l
 integrality gap is bounded. The algorithm is based on convex decomposition of scaled linear-
 programming relaxations, so in general it provides a suite of integer solutions. Because of the
 relationship between convex decomposition and integrality gaps, this algorithm can be seen as an approximation algorithm. We apply our algorithm our algorithm to a class of 
-fractional extreme points for two known problems in combinatorial optimization: the 2-edge-connected spanning subgraph problem and the tree augmentaion problem. These computational experiments show that our algorithm can be used as a tool to evaluate the integrality gap of integer programs with their linear relaxation. Finally we provide a stronger characterization of integrality gap for a class of covering problems than that of \cite{goemans}. 
+fractional extreme points for two known problems in combinatorial optimization: the 2-edge-connected spanning subgraph problem and the tree augmentation problem. These computational experiments show that our algorithm can be used as a tool to evaluate the integrality gap of integer programs with their linear relaxation. Finally we provide a stronger characterization of integrality gap for a class of covering problems than that of \cite{goemans}. 
 
 \keywords{Mixed-integer linear programming  \and  Integrality gap \and convex combinations.}
 \end{abstract}
@@ -52,7 +52,6 @@ fractional extreme points for two known problems in combinatorial optimization: 
 %
 \input{introduction.tex}
 \input{binaryFDT.tex}
-\input{2ECFDT.tex}
 \input{computational}
 \iffalse{
 \input{strongerCV}
@@ -178,25 +177,9 @@ fractional extreme points for two known problems in combinatorial optimization: 
 	\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1980.
 	
 \end{thebibliography}
-
+\newpage
 \appendix
-\section{Proof of Lemma 4}\label{lemma4}
-	First, we need to show that in any iteration $\ell=  0,\ldots,t-1$ of Algorithm \ref{domtoIPalg} the $\DOMtoS(x^{\ell})$ is feasible. We show something stronger. For $\ell=0,\ldots,t-1$ let
-	\begin{align*}
-	\LP^{(\ell)}&= \{(z,w)\in P\; : \; z\leq x^{(\ell)} \mbox{ and } z_j=x_j^{(\ell)} \mbox{ for } j=1,\ldots,\ell\}, \text{ and}\\
-	\IP^{(\ell)}&= \{(z,w)\in \LP^{(\ell)}\; : \; z\in \{0,1\}^n\}.
-	\end{align*}
-	Notice that if $\LP^{(\ell)}$ is a non-empty set then $\DOMtoS(x^{(\ell)})$ is feasible. We show by induction on $\ell$ that $\LP^{(\ell)}$ and $\IP^{(\ell)}$ are not empty sets for $\ell=0,\ldots,t-1$. First notice that $\LP^{(0)}$ is clearly feasible since by definition $(x^{(0)},y^{(0)})\in \dom(P)$, meaning there exists $(z,w)\in P$ such that $z\leq x^{(0)}$. By Theorem \ref{CV}, there exists $(\tilde{z}^i,\tilde{w}^i) \in S$ and $\theta_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k} \theta_i = 1$ and $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz$. Hence, $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz\leq gx^{(0)}$. So if $x^{(0)}_j=0$, then $ \sum_{i=1}^{k}\theta_i \tilde{z}_j^i =0$, which implies that $\tilde{z}^i_j=0$ for all $i=1,\ldots,k$ and $j= 1,\ldots,n$ where $x^{(0)}_j=0$. Hence, $z^i\leq x^{(0)}$ for $i=1,\ldots,k$. Therefore $(\tilde{z}^i,\tilde{w}^i)\in \IP^{(0)}$ for $i=1,\ldots,k$, which implies $\IP^{(0)}\neq \emptyset$.
-	
-	Now assume $\IP^{(\ell)}$ is non-empty for some $\ell \in \{0,\ldots,t-2\}$. Since $\IP^{(\ell)}\subseteq\LP^{(\ell)}$ we have $\LP^{(\ell)}\neq \emptyset$ and hence the $\DOMtoS(x^{(\ell)})$ has an optimal solution $(z^*,w^*)$. 
-	
-	We consider two cases. In the first case, we have $z^*_{\ell+1}=0$. In this case we have $x^{(\ell+1)}_{\ell+1}=0$. Since $z^*\leq x^{(\ell+1)}$, we have $(z^*,w^*)\in \LP^{(\ell+1)}$. Also, $(z^*,w^*)\in P$. By Theorem \ref{CV} there exists $(\tilde{z}^i,\tilde{w}^i)\in S$ and $\theta_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k} \theta_i = 1$ and  $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*$ . We have
-	\begin{equation}
-	\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*\leq gx^{(\ell+1)}
-	\end{equation}
-	So for $j\in \{1,\ldots,n\}$ where $x^{(\ell+1)}_j=0$, we have $z^i_j=0$ for $i=1,\ldots,k$. Hence, $\tilde{z}^i\leq x^{(\ell+1)}$ for $i=1,\ldots,k$. Hence, there exists $(z,w)\in S$ such that $z\leq x^{(\ell+1)}$. We claim that $(z,w)\in \IP^{(\ell+1)}$. If $(z,w)\notin \IP^{(\ell+1)}$ we must have $1\leq j \leq \ell$ such that $z_j < x^{(\ell+1)}_{j}$, and thus $z_j = 0$ and $x^{(\ell+1)}_j=1$. Without loss of generality assume $j$ is minimum number satisfying $z_j < x^{(\ell+1)}_{j}$. Consider iteration $j$ of Algorithm \ref{domtoIPalg}. Notice that $z\leq x^{(\ell+1)}\leq x^{(j)}$. We have $x^{(j)}_j=1$ which implies when we solved $\DOMtoS(x^{(j-1)})$ the optimal value was strictly larger than zero. However, $(z,w)$ is a feasible solution to $\DOMtoS(x^{(j-1)})$ and gives an objective value of 0. This is a contradiction, so $(z,w)\in \IP^{(\ell+1)}$.
-	
-	Now for the second case, assume $z^*_{\ell+1} > 0$. We have $x^{(\ell+1)}_{\ell+1}=1$. Notice that for each point $z\in \LP^{(\ell)}$ we have $z_{\ell+1} >0$, so for each $z\in \IP^{(\ell)}$ we have $z_{\ell+1}>0$, i.e. $z_{\ell+1}=1$. This means that $(z,w)\in \IP^{(\ell+1)}$, and $\IP^{(\ell+1)} \neq \emptyset$.
-	
-	Now consider $(x^{(t)},y^{(t)})$. Let $(z,y^{(t)})$ be the optimal solution to $\LP^{(t-1)}$. If $x^{(t)} = 0$, we have $x^{(t)} = z$, which implies that $(x^{(t)},y^{(t)})\in P$, and since $x^{(t)}\in \{0,1\}^n$ we have $(x^{(t)},y^{(t)})\in S$. If $x^{(t)} =1$, it must be the case that $z_t > 0$. By the argument above there is a point $(z',w')\in \IP^{(t-1)}$. We show that $x^{(t)} = z'$. Observe that for $j=1,\ldots,n-1$ we have $z'_j= x_j^{(t-1)}=x_j^{(t)}$. We just need to show that $z'_j = 1$. Assume $z'_j = 0$ for contradiction, then $(z',w')\in \LP^{(t-1)}$ has objective value of $0$ for $\DOMtoS(x^{(t-1)})$, this is a contradiction to $(z,w)$ being the optimal solution.
+
+\input{2ECFDT.tex}
+
 \end{document}

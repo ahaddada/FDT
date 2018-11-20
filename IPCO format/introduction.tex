@@ -59,7 +59,7 @@ P(I) = \{(x,y)\in \bbbr^{n\times p}\;:\; Ax+Gy\geq b,\; 0 \leq x\leq 1\}. \label
 For a vector $x\in \bbbr^n$ such that $(x,y)\in P(I)$ for some $y\in \bbbr^p$, let $\spp(x)= \{i \in \{1,\ldots,n\}: x_i \neq 0\}$. 
 
 
-The \textit{Fractional Decomposition Tree} algorithm (henceforth FDT) is a polynomial time algorithm that given a point $x\in P(I)$ produces a convex combination of feasible point in $S(I)$ that are dominates by a ``factor" of $x$. If this factor is $g_I$, it would settle Question \ref{question2}, however we can only guarantee a factor of $g_I^|\spp(x)|$. FDT relies on iteratively solving linear programs that are about the same size as the description of $P(I)$.
+The \textit{Fractional Decomposition Tree} algorithm (henceforth FDT) is a polynomial time algorithm that given a point $x\in P(I)$ produces a convex combination of feasible point in $S(I)$ that are dominates by a ``factor" of $x$. If this factor is $g_I$, it would settle Question \ref{question2}, however we can only guarantee a factor of $g_I^{|\spp(x)|}$. FDT relies on iteratively solving linear programs that are about the same size as the description of $P(I)$.
 
 \begin{restatable}{theorem}{binaryFDT}
 	\label{binaryFDT}
@@ -84,7 +84,7 @@ We prove the following theorem.
 
 \begin{restatable}{theorem}{FDTEC}
 	\label{FDT2EC}
-	Let $G=(V,E)$ and $x$ be an extreme point of  $\EC(G)$. The FDT algorithm for 2EC produces $\lambda\in [0,1]^k$ and 2-edge-connected multigraphs $F_1,\ldots,F_k$ such that $k\leq O(|V|)$, $\sum_{i=1}^{k}\lambda_i \chi^{F_i}\leq Cx^*$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g_{\EC}^{O(|V|)}$, where $g_{\EC}$ is the integrality gap of the 2-edge-connected multigraph problem with respect to formulation in (\ref{2ECpol}) 
+	Let $G=(V,E)$ and $x$ be an extreme point of  $\EC(G)$. The FDT algorithm for 2EC produces $\lambda\in [0,1]^k$ and 2-edge-connected multigraphs $F_1,\ldots,F_k$ such that $k\leq 2|V|-1$, $\sum_{i=1}^{k}\lambda_i \chi^{F_i}\leq Cx^*$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g({\EC})^{k}$, where $g({\EC})$ is the integrality gap of the 2-edge-connected multigraph problem with respect to formulation in (\ref{2ECpol}) 
 \end{restatable}
 
 
