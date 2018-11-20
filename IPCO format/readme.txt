@@ -1,4 +1,4 @@
-Dear LLNCS user,
+cDear LLNCS user,
 
 The files in this directory belong to the LaTeX2e package for
 Lecture Notes in Computer Science (LNCS) of Springer-Verlag.

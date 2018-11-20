@@ -72,7 +72,7 @@ Notice, that the FDT algorithm needs to find feasible solutions to any MILP with
 	Assume $1\leq g_I < \infty$. The DomToIP algorithm finds $(\hat{x},\hat{y})\in S(I)$ in polynomial time.
 \end{restatable}
 
-In attempt to extend our results into $\{0,1,2\}$-MILPs we give an FDT algorithm for the 2-edge-connected multigraph problem. In this problem we want to find the minimum weight 2-edge-connected subgraph (which can multiple copies of each edge) in a graph $G=(V,E)$ with respect to weights $c\in \bbbr^E_{\geq 0}$. For this problem the natural linear programming relaxation is
+In an attempt to extend our results into $\{0,1,2\}$-MILPs we give an FDT algorithm for the 2-edge-connected multigraph problem. In this problem we want to find the minimum weight 2-edge-connected subgraph (which can multiple copies of each edge) in a graph $G=(V,E)$ with respect to weights $c\in \bbbr^E_{\geq 0}$. For this problem the natural linear programming relaxation is
 \begin{equation}\label{2ECpol}
 \EC(G)= \{x\in \bbbr_{\geq 0}^{E}\;:\; x(\delta(S))\geq 2 \text{ for $\emptyset \subset S\subset V$})\}.\end{equation}
 We prove the following theorem.
@@ -84,6 +84,8 @@ We prove the following theorem.
 
 Although the bound guaranteed in both Theorems \ref{binaryFDT} and \ref{FDT2EC} are very large for large problems, we show that in practice, the algorithm works very well providing approximation ratios that are far better than the theoretical bound in the theorem statements. We examine FDT for binary MILPs for problems such as the tree augmentation problem (TAP) and we apply FDT for 2EC on some interesting and ``hard to decompose" points in the linear relaxation. 
 
+
+\iffalse{
 Finally we give a stronger characterization of integrality gap than that in Theorem \ref{CV} for bounded covering problems. For this purpose assume $P= \{x\in \bbbr^n_{\geq 0}: Ax\geq b\textbf{1}, x \leq b\textbf{1}\}$, $S= P\cap \bbbz^n$, and $g= \max_{c\geq 0} \frac{\min_{x\in S}cx}{\min_{x\in P}cx}$. Examples of such problems include the 2-edge-connected multigraph problem, the tree augmentation problem, and many others.
 
 
@@ -99,8 +101,6 @@ Finally we give a stronger characterization of integrality gap than that in Theo
 
 
 This means in order to prove an upper bound on the integrality gap of a covering problem, we need to show there is a convex combination of integer feasible points that is ``cheap'' on all tight cuts. Notice that Theorem \ref{CV} requires the certificate convex combination to be ``cheap" on every single variable.
-
-
 \subsection{Notations}
 For vectors $x,y\in \bbbr_{n}$ we say $x$ dominates $y$ if $x_i\geq y_i$ for $i= 1,\ldots,n$. For $m\times n$ matrix $A$, let $A_j$ be the $j$-th row of $A$ and $A^j$ be the $j$-th column of $A$. Let $\textbf{1}$ be the vector of all ones of a suitable dimension. For a set $S$ of vectors in $\bbbr_{n}$, $\conv(S)$ is the convex hull of all the points in $S$.
-
+}\fi

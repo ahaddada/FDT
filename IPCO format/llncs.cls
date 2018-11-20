@@ -70,6 +70,10 @@
 \usepackage{caption}
 \usepackage{thmtools}
 \usepackage{bbm}
+\usepackage[caption=false]{subfig}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\usepackage{booktabs}% http://ctan.org/pkg/booktabss
 \usepackage{pgf,tikz}
 \usepackage{mathrsfs}
 \newcommand\floor[1]{\lfloor#1\rfloor}

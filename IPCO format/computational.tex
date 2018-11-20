@@ -1,4 +1,30 @@
 \section{Computational experiments with FDT}\label{experiment}
-We implement FDT to two covering problem. First, the tree argumentation problem (TAP) where given a tree $T=(V,E)$, and a set of link $L$ between the vertices in $V$ and costs $c\in \bbbr^{L}_{\geq 0}$ we with to find minimum cost subset $L'$ of $L$ such that $T+L'$ is 2-edge-connected. For $\ell\in L$, let $P_\ell$ be the set of edges in the unique path between the endpoints of $\ell$ in $T$. For TAP, $S(\mbox{TAP})=\{x\in \bbbz^{L}_{\geq 0}: \sum_{\ell: e\in P_\ell}x_\ell \geq 1, \mbox{ for $e\in E$}\}$. Relaxing the integrality constraint we get $P(\mbox{TAP})$. It is been shown that $\frac{3}{2}\leq g({\mbox{TAP}})\leq 2$ \cite{fj,32gap}. We applied the binary FDT algorithm on a set of 264 fractional extreme points of $P(\mbox{TAP})$. The result are summarized in Figure \ref{plotTAP}. 
-
-Next we implemented the FDT for 2EC on a 900 fractional extreme points of $\EC(G)$. These points are obtained by considering all fundamental vertices with $12$ vertices (See \cite{CV} for the definition of fundamental vertices). The results are summarized in Figure \ref{plot2EC}. We also, implemented polyhedral version of Christofides' algorithm \cite{Wolsey1980} and compared its performance on fundamental extreme points with 10 vertices. The result are in Figure \ref{}.
+We implement FDT to two covering problem. First, the tree argumentation problem (TAP) where given a tree $T=(V,E)$, and a set of link $L$ between the vertices in $V$ and costs $c\in \bbbr^{L}_{\geq 0}$ we with to find minimum cost subset $L'$ of $L$ such that $T+L'$ is 2-edge-connected. For $\ell\in L$, let $P_\ell$ be the set of edges in the unique path between the endpoints of $\ell$ in $T$. For TAP, $S(\mbox{TAP})=\{x\in \bbbz^{L}_{\geq 0}: \sum_{\ell: e\in P_\ell}x_\ell \geq 1, \mbox{ for $e\in E$}\}$. Relaxing the integrality constraint we get $P(\mbox{TAP})$. It is been shown that $\frac{3}{2}\leq g({\mbox{TAP}})\leq 2$ \cite{fj,32gap}. We applied the binary FDT algorithm on a set of 264 fractional extreme points of $P(\mbox{TAP})$. The result are summarized in Table \ref{tableTAP}. 
+\begin{table}[h]
+	\centering
+	  \begin{tabular}{c c c c c}
+	  \toprule
+	  	& $C\in [1.1,1.2]\;$ & $\;C\in (1.2,1.3]\;$ &
+               $\;C\in (1.3,1.4]$ &\; $C\in (1.4,1.5]\;$ \\ \midrule
+	  	TAP & $36$ & $66$ & $170$ & $10$\\  \bottomrule \\
+	  \end{tabular}\caption{FDT impletemented applied to 264 randomly generated TAP instances with fractional extreme points: 138 of the 264 have $74$ variables, so the theoretical guarantee of Theorem \ref{binaryFDT} is at least $(1.5)^{74}$. For the rest, the number of variables in $250$.}
+	  \label{tableTAP}
+\end{table}
+Next we implemented the FDT for 2EC on a 963 fractional extreme points of $\EC(G)$. These points are obtained by considering all fundamental vertices with $10$ and $12$ vertices (See \cite{CV} for the definition of fundamental vertices). The results are summarized in Table \ref{table2EC}. 
+\begin{table}[h]
+	\centering
+	  \begin{tabular}{c c c c c}
+	  	\toprule
+	  	& $C\in [1.08,1.11]\;$ & $\;C\in (1.11,1.14]\;$ &
+               $\;C\in (1.14,1.17]$ &\; $C\in (1.17,1.2]\;$ \\ \midrule
+	  	2EC & $79$ & $201$ & $605$ & $78$ \\ \bottomrule\\
+	  \end{tabular}\caption{FDT for $\EC$ implemented applied to all fundamental extreme points with 10 and 12 vertices. The number of variables for a fundamental extreme point with $k$ vertices is $\frac{3k}{2}$ and the lower bound on $g_\EC$ is $\frac{6}{5}$.}
+	  \label{table2EC}
+\end{table}
+We also implemented polyhedral version of Christofides' algorithm \cite{Wolsey1980} and compared its performance on fundamental extreme points with 10 vertices. The result are in Figure \ref{fdtvschris}.
+\begin{figure*}%
+\centering
+\includegraphics[width=8cm]{"fdt vs christofides".png}}
+\caption{Christofides' algorithm vs FDT on all fundamental extreme points with 10 vertices.}
+\label{fdtvschris}
+\end{figure*}
