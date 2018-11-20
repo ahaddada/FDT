@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.2)  16 NOV 2018 16:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.2)  20 NOV 2018 13:00
 entering extended mode
 **./FDT.tex
 (FDT.tex
@@ -489,6 +489,29 @@ LaTeX Font Info:    Overwriting math alphabet `\mathbbm' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathbbmss' in version `bold'
 (Font)                  U/bbmss/m/n --> U/bbmss/bx/n on input line 35.
 )
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\subfig\subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+\c@KVtest=\count129
+\sf@farskip=\skip72
+\sf@captopadj=\dimen148
+\sf@capskip=\skip73
+\sf@nearskip=\skip74
+\c@subfigure=\count130
+\c@subfigure@save=\count131
+\c@lofdepth=\count132
+\c@subtable=\count133
+\c@subtable@save=\count134
+\c@lotdepth=\count135
+\sf@top=\skip75
+\sf@bottom=\skip76
+)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\pgfplots\pgfplots.sty
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplots.rev
+ision.tex)
+Package: pgfplots 2015/05/02 v1.12.1 Data Visualization (1.12.1)
+
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\frontendlayer\tikz.
+sty
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\basiclayer\pgf.sty
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\utilities\pgfrcs.st
 y
@@ -526,20 +549,20 @@ Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
 filtered.code.tex
 \pgfkeys@tmptoks=\toks31
 ))
-\pgf@x=\dimen148
-\pgf@y=\dimen149
-\pgf@xa=\dimen150
-\pgf@ya=\dimen151
-\pgf@xb=\dimen152
-\pgf@yb=\dimen153
-\pgf@xc=\dimen154
-\pgf@yc=\dimen155
+\pgf@x=\dimen149
+\pgf@y=\dimen150
+\pgf@xa=\dimen151
+\pgf@ya=\dimen152
+\pgf@xb=\dimen153
+\pgf@yb=\dimen154
+\pgf@xc=\dimen155
+\pgf@yc=\dimen156
 \w@pgf@writea=\write3
 \r@pgf@reada=\read1
-\c@pgf@counta=\count129
-\c@pgf@countb=\count130
-\c@pgf@countc=\count131
-\c@pgf@countd=\count132
+\c@pgf@counta=\count136
+\c@pgf@countb=\count137
+\c@pgf@countc=\count138
+\c@pgf@countd=\count139
 
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\systemlayer\pgf.c
 fg
@@ -558,8 +581,8 @@ File: pgfsys-common-pdf.def 2008/05/19  (rcs-revision 1.10)
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\systemlayer\pgfsy
 ssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
-\pgfsyssoftpath@smallbuffer@items=\count133
-\pgfsyssoftpath@bigbuffer@items=\count134
+\pgfsyssoftpath@smallbuffer@items=\count140
+\pgfsyssoftpath@bigbuffer@items=\count141
 )
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\systemlayer\pgfsy
 sprotocol.code.tex
@@ -595,8 +618,8 @@ code.tex
 code.tex)
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathparse
 r.code.tex
-\pgfmath@dimen=\dimen156
-\pgfmath@count=\count135
+\pgfmath@dimen=\dimen157
+\pgfmath@count=\count142
 \pgfmath@box=\box63
 \pgfmath@toks=\toks32
 \pgfmath@stack@operand=\toks33
@@ -620,37 +643,37 @@ ions.round.code.tex)
 ions.misc.code.tex)))
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathfloat
 .code.tex
-\c@pgfmathroundto@lastzeros=\count136
+\c@pgfmathroundto@lastzeros=\count143
 ))
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcor
 epoints.code.tex
 File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
-\pgf@picminx=\dimen157
-\pgf@picmaxx=\dimen158
-\pgf@picminy=\dimen159
-\pgf@picmaxy=\dimen160
-\pgf@pathminx=\dimen161
-\pgf@pathmaxx=\dimen162
-\pgf@pathminy=\dimen163
-\pgf@pathmaxy=\dimen164
-\pgf@xx=\dimen165
-\pgf@xy=\dimen166
-\pgf@yx=\dimen167
-\pgf@yy=\dimen168
-\pgf@zx=\dimen169
-\pgf@zy=\dimen170
+\pgf@picminx=\dimen158
+\pgf@picmaxx=\dimen159
+\pgf@picminy=\dimen160
+\pgf@picmaxy=\dimen161
+\pgf@pathminx=\dimen162
+\pgf@pathmaxx=\dimen163
+\pgf@pathminy=\dimen164
+\pgf@pathmaxy=\dimen165
+\pgf@xx=\dimen166
+\pgf@xy=\dimen167
+\pgf@yx=\dimen168
+\pgf@yy=\dimen169
+\pgf@zx=\dimen170
+\pgf@zy=\dimen171
 )
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcor
 epathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2010/08/03  (rcs-revision 1.24)
-\pgf@path@lastx=\dimen171
-\pgf@path@lasty=\dimen172
+\pgf@path@lastx=\dimen172
+\pgf@path@lasty=\dimen173
 )
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcor
 epathusage.code.tex
 File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
-\pgf@shorten@end@additional=\dimen173
-\pgf@shorten@start@additional=\dimen174
+\pgf@shorten@end@additional=\dimen174
+\pgf@shorten@start@additional=\dimen175
 )
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcor
 escopes.code.tex
@@ -658,19 +681,19 @@ File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
 \pgfpic=\box64
 \pgf@hbox=\box65
 \pgf@layerbox@main=\box66
-\pgf@picture@serial@count=\count137
+\pgf@picture@serial@count=\count144
 )
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcor
 egraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
-\pgflinewidth=\dimen175
+\pgflinewidth=\dimen176
 )
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcor
 etransformations.code.tex
 File: pgfcoretransformations.code.tex 2009/06/10  (rcs-revision 1.11)
-\pgf@pt@x=\dimen176
-\pgf@pt@y=\dimen177
-\pgf@pt@temp=\dimen178
+\pgf@pt@x=\dimen177
+\pgf@pt@y=\dimen178
+\pgf@pt@temp=\dimen179
 )
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcor
 equick.code.tex
@@ -691,8 +714,8 @@ File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcor
 eshade.code.tex
 File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
-\pgf@max=\dimen179
-\pgf@sys@shading@range@num=\count138
+\pgf@max=\dimen180
+\pgf@sys@shading@range@num=\count145
 )
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcor
 eimage.code.tex
@@ -727,15 +750,13 @@ File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\compatibility\pgfco
 mp-version-0-65.sty
 Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
-\pgf@nodesepstart=\dimen180
-\pgf@nodesepend=\dimen181
+\pgf@nodesepstart=\dimen181
+\pgf@nodesepend=\dimen182
 )
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\compatibility\pgfco
 mp-version-1-18.sty
 Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
 ))
-(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\frontendlayer\tikz.
-sty
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\utilities\pgffor.st
 y
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\utilities\pgfkeys.s
@@ -745,8 +766,8 @@ ty
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\utilities\pgffor.
 code.tex
 Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
-\pgffor@iter=\dimen182
-\pgffor@skip=\dimen183
+\pgffor@iter=\dimen183
+\pgffor@skip=\dimen184
 \pgffor@stack=\toks35
 \pgffor@toks=\toks36
 ))
@@ -757,120 +778,288 @@ Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\libraries\pgflibr
 aryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
-\pgf@plot@mark@count=\count139
-\pgfplotmarksize=\dimen184
+\pgf@plot@mark@count=\count146
+\pgfplotmarksize=\dimen185
 )
-\tikz@lastx=\dimen185
-\tikz@lasty=\dimen186
-\tikz@lastxsaved=\dimen187
-\tikz@lastysaved=\dimen188
-\tikzleveldistance=\dimen189
-\tikzsiblingdistance=\dimen190
+\tikz@lastx=\dimen186
+\tikz@lasty=\dimen187
+\tikz@lastxsaved=\dimen188
+\tikz@lastysaved=\dimen189
+\tikzleveldistance=\dimen190
+\tikzsiblingdistance=\dimen191
 \tikz@figbox=\box69
 \tikz@tempbox=\box70
-\tikztreelevel=\count140
-\tikznumberofchildren=\count141
-\tikznumberofcurrentchild=\count142
-\tikz@fig@count=\count143
+\tikztreelevel=\count147
+\tikznumberofchildren=\count148
+\tikznumberofcurrentchild=\count149
+\tikz@fig@count=\count150
 
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\modules\pgfmodule
 matrix.code.tex
 File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
-\pgfmatrixcurrentrow=\count144
-\pgfmatrixcurrentcolumn=\count145
-\pgf@matrix@numberofcolumns=\count146
+\pgfmatrixcurrentrow=\count151
+\pgfmatrixcurrentcolumn=\count152
+\pgf@matrix@numberofcolumns=\count153
 )
-\tikz@expandcount=\count147
+\tikz@expandcount=\count154
 
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tik
 z\libraries\tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
 )))
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplots.cod
+e.tex
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplotscore
+.code.tex
+\t@pgfplots@toka=\toks37
+\t@pgfplots@tokb=\toks38
+\t@pgfplots@tokc=\toks39
+\pgfplots@tmpa=\dimen192
+\c@pgfplots@coordindex=\count155
+\c@pgfplots@scanlineindex=\count156
+
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\sys\pgfplots
+sysgeneric.code.tex))
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\libs\pgfplot
+slibrary.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompat
+ib\pgfplotsoldpgfsupp_loader.code.tex
+Package pgfplots: loading complementary code for your PGF version...
+
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompat
+ib\pgfplotsoldpgfsupp_misc.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompat
+ib\pgfplotsoldpgfsupp_pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks40
+\pgfkeys@temptoks=\toks41
+
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompat
+ib\pgfplotsoldpgfsupp_pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks42
+))
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompat
+ib\pgfplotsoldpgfsupp_pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count157
+)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompat
+ib\pgfplotsoldpgfsupp_pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2012/09/11 v2.10 (rcs-revision 1.17)
+\pgf@plot@mark@count=\count158
+\pgfplotmarksize=\dimen193
+)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompat
+ib\pgfplotsoldpgfsupp_pgflibraryfpu.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompat
+ib\pgfplotsoldpgfsupp_pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2012/11/30  (rcs-revision 1.38)
+\pgfpic=\box71
+\pgf@hbox=\box72
+\pgf@layerbox@main=\box73
+\pgf@picture@serial@count=\count159
+)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompat
+ib\pgfplotsoldpgfsupp_pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2012/11/07  (rcs-revision 1.5)
+)
+Package pgfplots: loading complementary utilities for your pgf version...
+\t@pgf@toka=\toks43
+\t@pgf@tokb=\toks44
+\t@pgf@tokc=\toks45
+
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompat
+ib\pgfplotsoldpgfsupp_pgfutil-common-lists.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\oldpgfcompat
+ib\pgfplotsoldpgfsupp_trig_format.code.tex))
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\util\pgfplot
+sutil.code.tex
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\liststructur
+e\pgfplotsliststructure.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\liststructur
+e\pgfplotsliststructureext.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\liststructur
+e\pgfplotsarray.code.tex
+\c@pgfplotsarray@tmp=\count160
+)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\liststructur
+e\pgfplotsmatrix.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\numtable\pgf
+plotstableshared.code.tex
+\c@pgfplotstable@counta=\count161
+\t@pgfplotstable@a=\toks46
+)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\liststructur
+e\pgfplotsdeque.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\util\pgfplot
+sbinary.code.tex
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\util\pgfplot
+sbinary.data.code.tex))
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\util\pgfplot
+sutil.verb.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\libs\pgflibr
+arypgfplots.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count162
+
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\sys\pgflibra
+rypgfplots.surfshading.pgfsys-pdftex.def)))
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\util\pgfplot
+scolormap.code.tex
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\util\pgfplot
+scolor.code.tex))
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplotsstac
+kedplots.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplotsplot
+handlers.code.tex
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplotsmesh
+plothandler.code.tex))
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplots.sca
+ling.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplotscoor
+dprocessing.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplots.err
+orbars.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplots.mar
+kers.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplotstick
+s.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgfplots\pgfplots.pat
+hs.code.tex)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tik
+z\libraries\tikzlibrarydecorations.code.tex
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\modules\pgfmodule
+decorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen194
+\pgfdecoratedremainingdistance=\dimen195
+\pgfdecoratedinputsegmentcompleteddistance=\dimen196
+\pgfdecoratedinputsegmentremainingdistance=\dimen197
+\pgf@decorate@distancetomove=\dimen198
+\pgf@decorate@repeatstate=\count163
+\pgfdecorationsegmentamplitude=\dimen199
+\pgfdecorationsegmentlength=\dimen256
+)
+\tikz@lib@dec@box=\box74
+)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tik
+z\libraries\tikzlibrarydecorations.pathmorphing.code.tex
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\libraries\decorat
+ions\pgflibrarydecorations.pathmorphing.code.tex))
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tik
+z\libraries\tikzlibrarydecorations.pathreplacing.code.tex
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\libraries\decorat
+ions\pgflibrarydecorations.pathreplacing.code.tex))
+\pgfplots@numplots=\count164
+\pgfplots@xmin@reg=\dimen257
+\pgfplots@xmax@reg=\dimen258
+\pgfplots@ymin@reg=\dimen259
+\pgfplots@ymax@reg=\dimen260
+\pgfplots@zmin@reg=\dimen261
+\pgfplots@zmax@reg=\dimen262
+)
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tik
+z\libraries\tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\libraries\pgflibr
+aryplotmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2010/10/15 v2.10 (rcs-revision 1.12)
+)))
+(C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\latex\booktabs\booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen263
+\lightrulewidth=\dimen264
+\cmidrulewidth=\dimen265
+\belowrulesep=\dimen266
+\belowbottomsep=\dimen267
+\aboverulesep=\dimen268
+\abovetopsep=\dimen269
+\cmidrulesep=\dimen270
+\cmidrulekern=\dimen271
+\defaultaddspace=\dimen272
+\@cmidla=\count165
+\@cmidlb=\count166
+\@aboverulesep=\dimen273
+\@belowrulesep=\dimen274
+\@thisruleclass=\count167
+\@lastruleclass=\count168
+\@thisrulewidth=\dimen275
+)
 ("C:\Users\ahaddadu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\jknappen\mathrs
 fs.sty"
 Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
 \symrsfs=\mathgroup4
 )
-\c@chapter=\count148
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 399.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 400.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 401.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 402.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 403.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 404.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 405.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 406.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 407.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 408.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 409.
-\tocchpnum=\dimen191
-\tocsecnum=\dimen192
-\tocsectotal=\dimen193
-\tocsubsecnum=\dimen194
-\tocsubsectotal=\dimen195
-\tocsubsubsecnum=\dimen196
-\tocsubsubsectotal=\dimen197
-\tocparanum=\dimen198
-\tocparatotal=\dimen199
-\tocsubparanum=\dimen256
-\@tempcntc=\count149
-\fnindent=\dimen257
-\c@@inst=\count150
-\c@@auth=\count151
-\c@auco=\count152
-\instindent=\dimen258
-\authrun=\box71
-\authorrunning=\toks37
-\tocauthor=\toks38
-\titrun=\box72
-\titlerunning=\toks39
-\toctitle=\toks40
-\c@theorem=\count153
-\c@case=\count154
-\c@conjecture=\count155
-\c@corollary=\count156
-\c@definition=\count157
-\c@example=\count158
-\c@exercise=\count159
-\c@lemma=\count160
-\c@note=\count161
-\c@problem=\count162
-\c@property=\count163
-\c@proposition=\count164
-\c@question=\count165
-\c@solution=\count166
-\c@remark=\count167
-\headlineindent=\dimen259
-) (FDT.aux
-
-LaTeX Warning: Label `S'' multiply defined.
-
-
-LaTeX Warning: Label `P'' multiply defined.
-
-)
+\c@chapter=\count169
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 403.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 404.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 405.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 406.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 407.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 408.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 409.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 410.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 411.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 412.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 413.
+\tocchpnum=\dimen276
+\tocsecnum=\dimen277
+\tocsectotal=\dimen278
+\tocsubsecnum=\dimen279
+\tocsubsectotal=\dimen280
+\tocsubsubsecnum=\dimen281
+\tocsubsubsectotal=\dimen282
+\tocparanum=\dimen283
+\tocparatotal=\dimen284
+\tocsubparanum=\dimen285
+\@tempcntc=\count170
+\fnindent=\dimen286
+\c@@inst=\count171
+\c@@auth=\count172
+\c@auco=\count173
+\instindent=\dimen287
+\authrun=\box75
+\authorrunning=\toks47
+\tocauthor=\toks48
+\titrun=\box76
+\titlerunning=\toks49
+\toctitle=\toks50
+\c@theorem=\count174
+\c@case=\count175
+\c@conjecture=\count176
+\c@corollary=\count177
+\c@definition=\count178
+\c@example=\count179
+\c@exercise=\count180
+\c@lemma=\count181
+\c@note=\count182
+\c@problem=\count183
+\c@property=\count184
+\c@proposition=\count185
+\c@question=\count186
+\c@solution=\count187
+\c@remark=\count188
+\headlineindent=\dimen288
+) (FDT.aux)
 \openout1 = `FDT.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 
 
 Package thmtools Warning: amsthm loaded after thmtools .
 
-\AtBeginShipoutBox=\box73
-Package hyperref Info: Link coloring OFF on input line 16.
+\AtBeginShipoutBox=\box77
+Package hyperref Info: Link coloring OFF on input line 18.
 
 ("C:\Users\ahaddadu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\namere
 f.sty"
@@ -880,11 +1069,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 itlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count168
+\c@section@level=\count189
 )
-LaTeX Info: Redefining \ref on input line 16.
-LaTeX Info: Redefining \pageref on input line 16.
-LaTeX Info: Redefining \nameref on input line 16.
+LaTeX Info: Redefining \ref on input line 18.
+LaTeX Info: Redefining \pageref on input line 18.
+LaTeX Info: Redefining \nameref on input line 18.
  (FDT.out) (FDT.out)
 \@outlinefile=\write4
 \openout4 = `FDT.out'.
@@ -892,17 +1081,17 @@ LaTeX Info: Redefining \nameref on input line 16.
 
 (C:\Users\ahaddadu\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count169
-\scratchdimen=\dimen260
-\scratchbox=\box74
-\nofMPsegments=\count170
-\nofMParguments=\count171
-\everyMPshowfont=\toks41
-\MPscratchCnt=\count172
-\MPscratchDim=\dimen261
-\MPnumerator=\count173
-\makeMPintoPDFobject=\count174
-\everyMPtoPDFconversion=\toks42
+\scratchcounter=\count190
+\scratchdimen=\dimen289
+\scratchbox=\box78
+\nofMPsegments=\count191
+\nofMParguments=\count192
+\everyMPshowfont=\toks51
+\MPscratchCnt=\count193
+\MPscratchDim=\dimen290
+\MPnumerator=\count194
+\makeMPintoPDFobject=\count195
+\everyMPtoPDFconversion=\toks52
 )
 ("C:\Users\ahaddadu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstop
 df-base.sty"
@@ -920,6 +1109,7 @@ G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: Incompatible package detected (regarding \@caption).
 (caption)             \@caption = \long macro:#1[#2]#3->\par \addcontentsline {
 \csname ext@#1\endcsname }{#1}{\protect \numberline {\csname the#1\endcsname }{
@@ -934,7 +1124,10 @@ See the caption package documentation for explanation.
 
 Package caption Info: End \AtBeginDocument code.
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 39.
+Package pgfplots notification 'compat/show suggested version=true': document ha
+s been generated with the most recent feature set (\pgfplotsset{compat=1.12}).
+
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 41.
 
 ("C:\Users\ahaddadu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\jknappen\ursfs.
 fd"
@@ -942,32 +1135,138 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\unskip' on input line 39.
+(hyperref)                removing `\unskip' on input line 41.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 45.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 50.
 ("C:\Users\ahaddadu\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 45.
- [1
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 50.
+ (introduction.tex [1
 
-{C:/Users/ahaddadu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-[2] [3]
-Overfull \hbox (0.88873pt too wide) in paragraph at lines 133--133
+{C:/Users/ahaddadu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3]
+Overfull \hbox (0.88873pt too wide) in paragraph at lines 88--88
 \OT1/cmr/m/it/10 go-rithm for 2EC pro-duces $\OML/cmm/m/it/10  \OMS/cmsy/m/n/1
 0 2 \OT1/cmr/m/n/10 [0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1][]$ \OT1/cmr/m/it/10
  and 2-edge-connected multi-graphs $\OML/cmm/m/it/10 F[]; [] ; F[]$
  []
 
-[4]
-Overfull \hbox (17.65918pt too wide) in paragraph at lines 185--186
+[4]) (binaryFDT.tex
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.19 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (1.32603pt too wide) in paragraph at lines 20--21
 []\OT1/cmr/m/n/10 Consider the fol-low-ing lin-ear pro-gram which we de-note by
  $[](\OML/cmm/m/it/10 `; x[]; y[]\OT1/cmr/m/n/10 )$.
  []
 
-[5] [6] [7]
-Overfull \hbox (4.046pt too wide) in paragraph at lines 296--297
+[5]
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 	\begin{proof}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.48 	\end{proof}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.50 \end{proof}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.57 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.61 \end{proof}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[6]
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.72 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.97 \end{proof}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[7]
+Overfull \hbox (4.046pt too wide) in paragraph at lines 131--132
 []\OT1/cmr/m/it/10 Given $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x; y\OT1/cmr/m/n/10
  ) \OMS/cmsy/m/n/10 2 []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 P\OT1/cmr/m/n/10 )$\O
 T1/cmr/m/it/10 , Dom-ToIP al-go-rithm cor-rectly finds $\OT1/cmr/m/n/10 (\OML/c
@@ -975,54 +1274,141 @@ mm/m/it/10 x[]; y[]\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 2
  []
 
 
-Overfull \hbox (0.88873pt too wide) in paragraph at lines 325--325
-\OT1/cmr/m/it/10 go-rithm for 2EC pro-duces $\OML/cmm/m/it/10  \OMS/cmsy/m/n/1
-0 2 \OT1/cmr/m/n/10 [0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1][]$ \OT1/cmr/m/it/10
- and 2-edge-connected multi-graphs $\OML/cmm/m/it/10 F[]; [] ; F[]$
- []
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134 \begin{proof}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 
-LaTeX Warning: Reference `experiment' on page 8 undefined on input line 327.
+LaTeX Warning: Reference `domtoIPalg' on page 8 undefined on input line 135.
 
 [8]
-Overfull \hbox (15.20146pt too wide) in paragraph at lines 381--383
+
+LaTeX Warning: Reference `domtoIPalg' on page 9 undefined on input line 148.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.152 ...)$ being the optimal solution.\end{proof}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+) (computational.tex
+<"fdt vs christofides".png, id=186, 462.528pt x 346.896pt>
+File: "fdt vs christofides".png Graphic file (type png)
+<use "fdt vs christofides".png>
+Package pdftex.def Info: "fdt vs christofides".png  used on input line 4.
+(pdftex.def)             Requested size: 156.49014pt x 117.3661pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) [9]
+Underfull \vbox (badness 2057) has occurred while \output is active []
+
+ [10 <./fdt vs christofides.png>] [11] (2ECFDT.tex
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.54 	This concludes the proof.}\fi \end{proof}
+                                               
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[12]
+Overfull \hbox (15.20146pt too wide) in paragraph at lines 60--62
 []\OT1/cmr/m/it/10 The FDT al-go-rithm for 2EC in poly-no-mial time pro-duces s
 ets $\OML/cmm/m/it/10 L[]; [] ; L[]$
  []
 
-[9] [10] [11]
 
-LaTeX Warning: Reference `domtoIPalg' on page 12 undefined on input line 590.
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.75 \begin{proof}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 
-LaTeX Warning: Reference `domtoIPalg' on page 12 undefined on input line 603.
+! LaTeX Error: \begin{document} ended by \end{proof}.
 
-[12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 608.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77 \end{proof}
+                
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (8.83037pt too wide) in paragraph at lines 76--78
+[]\OT1/cmr/m/n/10 Suppose not. Then there is a set of ver-tices $\OMS/cmsy/m/n/
+10 ;  \OML/cmm/m/it/10 U \OMS/cmsy/m/n/10  \OML/cmm/m/it/10 V$ \OT1/cmr/m/n/1
+0 such that $[][]\OMS/cmsy/m/n/10 b\OML/cmm/m/it/10 x[]\OMS/cmsy/m/n/10 c \OML/
+cmm/m/it/10 <
+ []
+
+)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 187.
  [13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 608.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 187.
  (FDT.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 608.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 608.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 187.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 187.
 Package rerunfilecheck Info: File `FDT.out' has not changed.
 (rerunfilecheck)             Checksum: AC968603E78058A5F57DB3E56A088AAC;39.
 
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 608.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 187.
  ) 
 Here is how much of TeX's memory you used:
- 17872 strings out of 493044
- 315509 string characters out of 3126350
- 429662 words of memory out of 3000000
- 21241 multiletter control sequences out of 15000+200000
- 14233 words of font info for 53 fonts, out of 3000000 for 9000
+ 25794 strings out of 493044
+ 568339 string characters out of 3126350
+ 797484 words of memory out of 3000000
+ 28992 multiletter control sequences out of 15000+200000
+ 14839 words of font info for 55 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,12n,55p,1097b,478s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 70i,12n,83p,1116b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
 st, replaced by a fixed one
 
@@ -1036,25 +1422,26 @@ du/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
 s/cm/cmmi5.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
 /public/amsfonts/cm/cmmi6.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/ahaddadu/AppData/Local/P
-rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/ahaddad
-u/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C
+rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/ahaddadu/
+AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C
 :/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmr5.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmr6.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/ahaddadu/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/ahaddadu/AppDat
-a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users
-/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
-5.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmsy7.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/ahaddadu/AppData/Local/Programs/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/ahaddadu/AppData/
-Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti9.pfb><C:/Users/ah
-addadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt9.p
-fb>
-Output written on FDT.pdf (13 pages, 346980 bytes).
+cm/cmr10.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmr5.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/ahaddadu/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/ahaddadu/AppDa
+ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/
+ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmsy5.pfb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/ahaddadu/AppData/Local/Programs/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/ahaddadu/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/ah
+addadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti9.p
+fb><C:/Users/ahaddadu/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmtt9.pfb>
+Output written on FDT.pdf (13 pages, 365553 bytes).
 PDF statistics:
- 340 PDF objects out of 1000 (max. 8388607)
- 88 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 349 PDF objects out of 1000 (max. 8388607)
+ 83 named destinations out of 1000 (max. 500000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
