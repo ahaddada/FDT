@@ -46,9 +46,7 @@ This seems to be a very hard question. A more specific question is of more inter
 \end{question}
 Although Question \ref{question2} is wide open, for some problems there are polynomial time algorithms closing the gap. For example, for generalized Steiner forest problem \cite{jain} gave an LP-based 2-approximation algorithm. The gap for this problem is also lower bounded by 2. Same holds for the set covering problem \cite{randomizedrounding}. In fact, for set cover the approximation algorithm achieving the same factor as the integrality gap lower bound, is a \textit{randomized rounding} algorithm. Raghavan and Thompson \cite{randomizedrounding} showed that this technique achieves provably good approximation for many combinatorial optimization problems.  
 
-One key step, in answering Question \ref{question1} and \ref{question2} is being able to find a solution in $S(I)$. In fact, for general $I$ it is NP-hard to even decide if $S(I)$ is empty or not. There are a number of heuristics for this purpose, such as the feasibility pump heuristic \cite{fp1,fp2}. These heuristics are often very effective and fast in practice, however, they can sometimes fail in finding a feasible solution. In addition these algorithms do not provide any bounds on the quality of the solution they find.
-\subsection{Our results}
-In this paper we study Theorem \ref{CV} and the natural questions that follow from it (Questions \ref{question1} and \ref{question2}).
+If we relax Question \ref{question1} (resp. Question \ref{question2}), but multiplying $g(I)$ (resp. $g(\mathcal{I})$) by a factor $C$, they are still very interesting, since they will provide upper bounds on the integraltiy gap the instance (resp. the problem). The results in this paper serve this purpose.
 
 We give a general approximation framework for solving $\{0,1\}$-MILPs.  Consider the set of point described by a set 
 \begin{equation}
@@ -58,7 +56,10 @@ and a linear relaxation of set $S$
 \begin{equation}
 P(I) = \{(x,y)\in \bbbr^{n\times p}\;:\; Ax+Gy\geq b,\; 0 \leq x\leq 1\}. \label{P'}
 \end{equation}
-For a vector $x\in \bbbr^n$ such that $(x,y)\in P(I)$ for some $y\in \bbbr^p$, let $\spp(x)= \{i \in \{1,\ldots,n\}: x_i \neq 0\}$.  We prove the following algorithm.
+For a vector $x\in \bbbr^n$ such that $(x,y)\in P(I)$ for some $y\in \bbbr^p$, let $\spp(x)= \{i \in \{1,\ldots,n\}: x_i \neq 0\}$. 
+
+
+The \textit{Fractional Decomposition Tree} algorithm (henceforth FDT) is a polynomial time algorithm that given a point $x\in P(I)$ produces a convex combination of feasible point in $S(I)$ that are dominates by a ``factor" of $x$. If this factor is $g_I$, it would settle Question \ref{question2}, however we can only guarantee a factor of $g_I^|\spp(x)|$. FDT relies on iteratively solving linear programs that are about the same size as the description of $P(I)$.
 
 \begin{restatable}{theorem}{binaryFDT}
 	\label{binaryFDT}
@@ -72,7 +73,11 @@ Notice, that the FDT algorithm needs to find feasible solutions to any MILP with
 	Assume $1\leq g_I < \infty$. The DomToIP algorithm finds $(\hat{x},\hat{y})\in S(I)$ in polynomial time.
 \end{restatable}
 
-In an attempt to extend our results into $\{0,1,2\}$-MILPs we give an FDT algorithm for the 2-edge-connected multigraph problem. In this problem we want to find the minimum weight 2-edge-connected subgraph (which can multiple copies of each edge) in a graph $G=(V,E)$ with respect to weights $c\in \bbbr^E_{\geq 0}$. For this problem the natural linear programming relaxation is
+
+Note that for general $I$ it is NP-hard to even decide if $S(I)$ is empty or not. There are a number of heuristics for this purpose, such as the feasibility pump heuristic \cite{fp1,fp2}. These heuristics are often very effective and fast in practice, however, they can sometimes fail in finding a feasible solution. In addition these algorithms do not provide any bounds on the quality of the solution they find. 
+
+
+One can trivially extend the FDT algorithm for binary MILPs into covering $\{0,1,2\}$-MILPs by losing a factor $2^{|\spp(x)|}$. In order to eradicate this factor, we need to treat the coordinate $i$ with $x_i=1$ differently. For  the 2-edge-connected subgraph problem we show how this can be done. In this problem we want to find the minimum weight 2-edge-connected subgraph (which can multiple copies of each edge) in a graph $G=(V,E)$ with respect to weights $c\in \bbbr^E_{\geq 0}$. For this problem the natural linear programming relaxation is
 \begin{equation}\label{2ECpol}
 \EC(G)= \{x\in \bbbr_{\geq 0}^{E}\;:\; x(\delta(S))\geq 2 \text{ for $\emptyset \subset S\subset V$})\}.\end{equation}
 We prove the following theorem.
@@ -82,7 +87,10 @@ We prove the following theorem.
 	Let $G=(V,E)$ and $x$ be an extreme point of  $\EC(G)$. The FDT algorithm for 2EC produces $\lambda\in [0,1]^k$ and 2-edge-connected multigraphs $F_1,\ldots,F_k$ such that $k\leq O(|V|)$, $\sum_{i=1}^{k}\lambda_i \chi^{F_i}\leq Cx^*$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g_{\EC}^{O(|V|)}$, where $g_{\EC}$ is the integrality gap of the 2-edge-connected multigraph problem with respect to formulation in (\ref{2ECpol}) 
 \end{restatable}
 
-Although the bound guaranteed in both Theorems \ref{binaryFDT} and \ref{FDT2EC} are very large for large problems, we show that in practice, the algorithm works very well providing approximation ratios that are far better than the theoretical bound in the theorem statements. We examine FDT for binary MILPs for problems such as the tree augmentation problem (TAP) and we apply FDT for 2EC on some interesting and ``hard to decompose" points in the linear relaxation. 
+
+Although the bound guaranteed in both Theorems \ref{binaryFDT} and \ref{FDT2EC} are very large for large problems, we show that in practice, the algorithm works very well providing approximation ratios that are far better than the theoretical bound in the theorem statements. We examine FDT for binary MILPs for problems such as the tree augmentation problem (TAP) and we apply FDT for 2EC on some interesting and ``hard to decompose" points in the linear relaxation. Our computational results show that the FDT algorithm is a good tool to evaluate the integrality gap of integer programming formulations. 
+
+Evaluating the integrality gap for instances of interesting problems such as TSP or $\EC$ have been done by others as well. For instance, Benoit and Boyd \cite{TSPcompute} used a quadratic programming model to show that the integrality gap for TSP is at most $\frac{20}{17}$ for instances with at most 10 vertices. Also,  Alexander et. al \cite{abe} used the same ideas to provide an upper bound of $\frac{7}{6}$ for $\EC$ on instances with at most 10 vertices. For $\EC$ we can show that the integrality gap of $\EC$ is at most $\frac{6}{5}$ for fundamental vertices with 12 vertices. In fact, since FDT can be applied to different problem, we can use it to evaluate the integrality gap of other well-known problem. For example, for TAP, we create random fractional extreme points and round them using FDT. For the instances that we create the blow-up factor is always below $\frac{3}{2}$ providing an upper bound for such instances.
 
 
 \iffalse{
