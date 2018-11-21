@@ -82,8 +82,9 @@ We consider the following TSP-related problems.  The {\em 2-edge-connected subgr
 in a graph $G=(V,E)$ with respect to weights $c\in \bbbr^E_{\geq 0}$. In the {\em tree-augmentation problem (TAP)} we wish to add a minimum-cost set of edges to a tree to make it 2-edge-connected.  We formally define TAP in Section~\ref{experiment}.
 
 One can extend the FDT algorithm for binary MILPs into covering $\{0,1,2\}$-MILPs by losing a factor $2^{|\spp(x)|}$. In order to eradicate this factor, we need to treat the coordinate $i$ with $x_i=1$ differently. The 2EC problem has the natural linear programming relaxation is
-\begin{equation}\label{2ECpol}
-\EC(G)= \{x\in \bbbr_{\geq 0}^{E}\;:\; x(\delta(S))\geq 2 \text{ for $\emptyset \subset S\subset V$})\}.\end{equation}
+%\begin{equation}\label{2ECpol}
+$\EC(G)= \{x\in \bbbr_{\geq 0}^{E}\;:\; x(\delta(S))\geq 2 \text{ for $\emptyset \subset S\subset V$})\}.$
+%\end{equation}
 % We prove the following theorem.
 
 \begin{restatable}{theorem}{FDTEC}

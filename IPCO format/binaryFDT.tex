@@ -47,15 +47,12 @@ We prove that indeed $(x^{(t)},y^{(t)})\in S$.
 	
 	Now assume $\IP^{(\ell)}$ is non-empty for some $\ell \in \{0,\ldots,t-2\}$. Since $\IP^{(\ell)}\subseteq\LP^{(\ell)}$ we have $\LP^{(\ell)}\neq \emptyset$ and hence the $\DOMtoS(x^{(\ell)})$ has an optimal solution $(z^*,w^*)$. 
 	
-	We consider two cases. In the first case, we have $z^*_{\ell+1}=0$. In this case we have $x^{(\ell+1)}_{\ell+1}=0$. Since $z^*\leq x^{(\ell+1)}$, we have $(z^*,w^*)\in \LP^{(\ell+1)}$. Also, $(z^*,w^*)\in P$. By Theorem \ref{CV} there exists $(\tilde{z}^i,\tilde{w}^i)\in S$ and $\theta_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k} \theta_i = 1$ and  $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*$ . We have
-	\begin{equation}
-	\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*\leq gx^{(\ell+1)}
-	\end{equation}
+	We consider two cases. In the first case, we have $z^*_{\ell+1}=0$. In this case we have $x^{(\ell+1)}_{\ell+1}=0$. Since $z^*\leq x^{(\ell+1)}$, we have $(z^*,w^*)\in \LP^{(\ell+1)}$. Also, $(z^*,w^*)\in P$. By Theorem \ref{CV} there exists $(\tilde{z}^i,\tilde{w}^i)\in S$ and $\theta_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k} \theta_i = 1$ and  $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*$ . We have $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*\leq gx^{(\ell+1)}$
 	So for $j\in \{1,\ldots,n\}$ where $x^{(\ell+1)}_j=0$, we have $z^i_j=0$ for $i=1,\ldots,k$. Hence, $\tilde{z}^i\leq x^{(\ell+1)}$ for $i=1,\ldots,k$. Hence, there exists $(z,w)\in S$ such that $z\leq x^{(\ell+1)}$. We claim that $(z,w)\in \IP^{(\ell+1)}$. If $(z,w)\notin \IP^{(\ell+1)}$ we must have $1\leq j \leq \ell$ such that $z_j < x^{(\ell+1)}_{j}$, and thus $z_j = 0$ and $x^{(\ell+1)}_j=1$. Without loss of generality assume $j$ is minimum number satisfying $z_j < x^{(\ell+1)}_{j}$. Consider iteration $j$ of the Dom2IP algorithm. Notice that $z\leq x^{(\ell+1)}\leq x^{(j)}$. We have $x^{(j)}_j=1$ which implies when we solved $\DOMtoS(x^{(j-1)})$ the optimal value was strictly larger than zero. However, $(z,w)$ is a feasible solution to $\DOMtoS(x^{(j-1)})$ and gives an objective value of 0. This is a contradiction, so $(z,w)\in \IP^{(\ell+1)}$.
 	
 	Now for the second case, assume $z^*_{\ell+1} > 0$. We have $x^{(\ell+1)}_{\ell+1}=1$. Notice that for each point $z\in \LP^{(\ell)}$ we have $z_{\ell+1} >0$, so for each $z\in \IP^{(\ell)}$ we have $z_{\ell+1}>0$, i.e. $z_{\ell+1}=1$. This means that $(z,w)\in \IP^{(\ell+1)}$, and $\IP^{(\ell+1)} \neq \emptyset$.
 	
-	Now consider $(x^{(t)},y^{(t)})$. Let $(z,y^{(t)})$ be the optimal solution to $\LP^{(t-1)}$. If $x^{(t)} = 0$, we have $x^{(t)} = z$, which implies that $(x^{(t)},y^{(t)})\in P$, and since $x^{(t)}\in \{0,1\}^n$ we have $(x^{(t)},y^{(t)})\in S$. If $x^{(t)} =1$, it must be the case that $z_t > 0$. By the argument above there is a point $(z',w')\in \IP^{(t-1)}$. We show that $x^{(t)} = z'$. Observe that for $j=1,\ldots,n-1$ we have $z'_j= x_j^{(t-1)}=x_j^{(t)}$. We just need to show that $z'_j = 1$. Assume $z'_j = 0$ for contradiction, then $(z',w')\in \LP^{(t-1)}$ has objective value of $0$ for $\DOMtoS(x^{(t-1)})$, this is a contradiction to $(z,w)$ being the optimal solution. This concludes the proof of Lemma \ref{domlemma}. 
+	Now consider $(x^{(t)},y^{(t)})$. Let $(z,y^{(t)})$ be the optimal solution to $\LP^{(t-1)}$. If $x^{(t)} = 0$, we have $x^{(t)} = z$, which implies that $(x^{(t)},y^{(t)})\in P$, and since $x^{(t)}\in \{0,1\}^n$ we have $(x^{(t)},y^{(t)})\in S$. If $x^{(t)} =1$, it must be the case that $z_t > 0$. By the argument above there is a point $(z',w')\in \IP^{(t-1)}$. We show that $x^{(t)} = z'$. For $j=1,\ldots,n-1$ we have $z'_j= x_j^{(t-1)}=x_j^{(t)}$. We just need to show that $z'_j = 1$. Assume $z'_j = 0$ for contradiction, then $(z',w')\in \LP^{(t-1)}$ has objective value of $0$ for $\DOMtoS(x^{(t-1)})$, this is a contradiction to $(z,w)$ being the optimal solution. This concludes the proof of Lemma \ref{domlemma}. 
 	
 	Notice that Lemma \ref{domlemma} implies Theorem \ref{domtoIP}, since it is easy to obtain an integer point in $\dom(P)$: rounding up any fractional point in $P$ gives us a point in $\dom(P)$.
 
@@ -81,8 +78,10 @@ We prove that indeed $(x^{(t)},y^{(t)})\in S$.
 	\caption{Fractional Decomposition Tree Algorithm}
 \end{algorithm}}\fi
 
+\vspace*{-.1in}
 \section{FDT on binary MIPs}
 \label{binaryfdt}
+\vspace*{-.1in}
 
 Assume we are given a point $(x^*,y^*)\in P$. For instance, $(x^*,y^*)$ can be the optimal solution of minimizing a cost function $cx$ over set $P$, which provides a lower bound on $\min_{(x,y)\in S(I)} cx$.  In this section, we prove Theorem \ref{binaryFDT} by describing the Fractional Decomposition Tree (FDT) algorithm.
 \iffalse{We also remark that if $g_I=1$, then the algorithm will give an exact decomposition of any feasible solution. }\fi
@@ -110,7 +109,7 @@ We begin with the following lemmas that show how the FDT algorithm branches on a
 		&\;{\color{white}{\text{s.t.}} }\quad \lambda_0,\lambda_1 \geq 0
 	\end{align}
 	
-	Let $(x^0,y^0),(x^1,y^1)$, and $\gamma_0,\gamma_1$ be an optimal solution solution to the LP above. Let $(\hat{x}^0,\hat{y}^0) = (\frac{x^0}{\gamma_0},\frac{y^0}{\gamma_0})$, $(\hat{x}^1,\hat{y}^1) = (\frac{x^1}{\gamma_1},\frac{y^1}{\gamma_1})$. Observe that  (ii), (iii), (iv) are satisfied with this choice. In order to show that (i) is also satisfied we prove the following claim.
+	Let $(x^0,y^0),(x^1,y^1)$, and $\gamma_0,\gamma_1$ be an optimal solution solution to the LP above. Let $(\hat{x}^0,\hat{y}^0) = (\frac{x^0}{\gamma_0},\frac{y^0}{\gamma_0})$, $(\hat{x}^1,\hat{y}^1) = (\frac{x^1}{\gamma_1},\frac{y^1}{\gamma_1})$. This choice satisfies  (ii), (iii), (iv). To show that (i) is also satisfied we prove the following claim.
 	
 	\begin{claim}\label{CVexists}
 		We have $\gamma_0 + \gamma_1\geq \frac{1}{g}$.
@@ -176,6 +175,7 @@ We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integr
 
 	Notice that $\theta = \gamma$ is in fact a feasible solution to $\prun(L')$. Let $\theta^*$ be the optimal vertex point solution to this LP. Since the problem is in $\bbbr^{2k}$,  $\theta^*$ has to satisfy $2k$ linearly independent constraints at equality. However, there are only $t$ constraints of type (\ref{packs}). Therefore, there are at most $t$ coordinates of $\theta^*_j$ that are non-zero. We claim that $L_{i+1}$ which consists of $(x^j,y^j)$ for $j=1,\ldots,2k$ and their corresponding multipliers $\theta^*_j$ satisfy the properties in the statement of the lemma. Notice that, we can discard the nodes in $L_{i+1}$ that have $\theta^*_j=0$, so $|L_{i+1}| \leq t$. Also, since $\theta^*$ is optimal and $\gamma$ is feasible for $\prun(L')$, we have $\sum_{j=1}^{k} \theta^*_j \geq \sum_{j=1}^{2k}\gamma_j \geq \frac{1}{g^{i+1}}$. 
 \end{proof}
+\vspace*{-.2in}
 \paragraph{From leaves of FDT to feasible solutions}
 For the leaves of the FDT tree,  $L_t$, we have that every solution $(x,y)$ in $L_t$ has $x\in\{0,1\}^n$ and $(x,y)\in \dom(P)$. By applying Lemma \ref{domlemma} we can obtain a point $(x',y')\in S$ such that $x'\leq x$. This conclude the description of the FDT algorithm and proves Theorem \ref{binaryFDT}.
 
