@@ -52,11 +52,20 @@ Sandia National Laboratories, \email{caphill@sandia.gov}}
 \maketitle              % typeset the header of the con	tribution
 %
 \begin{abstract}
-We present a new algorithm for finding a feasible solution for a mixed-integer linear program. The algorithm runs in polynomial time and is guaranteed to find a feasible integer solution provided the
-integrality gap is bounded. The algorithm is based on convex decomposition of scaled linear-
-programming relaxations, so in general it provides a suite of integer solutions. Because of the
-relationship between convex decomposition and integrality gaps, this algorithm can be seen as an approximation algorithm. We apply our algorithm our algorithm to a class of 
-fractional extreme points for two known problems in combinatorial optimization: the 2-edge-connected spanning subgraph problem and the tree augmentation problem. These computational experiments show that our algorithm can be used as a tool to evaluate the integrality gap of integer programs with their linear relaxation. Finally we provide a stronger characterization of integrality gap for a class of covering problems than that of \cite{goemans}. 
+We present a new algorithm/tool for studying integrality gaps of mixed-integer linear programming formulations.
+The algorithm is based on convex decomposition of scaled linear-programming relaxations. The relationship between convex decomposition and integrality gaps provides both integrality-gap information and approximate solutions. 
+% The algorithm finds a feasible solution for a mixed-integer linear program.
+Our algorithm runs in polynomial time and is guaranteed to find a feasible integer solution provided the
+integrality gap is bounded.  Thus when the algorithm fails, it proves an unbounded integrality gap.  The algorithm also provides a lower
+bound on the instance integrality gap at each step. 
+% so in general it provides a suite of integer solutions.
+%, this algorithm can be seen as an approximation algorithm. 
+We apply our algorithm to a class of 
+fractional extreme points for two traveling-salesman-like problems: 2-edge-connected spanning subgraph (2EC) and tree augmentation.
+These experiments provide insight into the current gap bounds.  Furthermore, for 2EC, the approximate solutions are consistently better than the best previous
+approximation algorithm due to Christofides.
+%These computational experiments show that our algorithm can be used as a tool to evaluate the integrality gap of integer programs with their linear relaxation.
+% Finally we provide a stronger characterization of integrality gap for a class of covering problems than that of \cite{goemans}. 
 
 \keywords{Mixed-integer linear programming  \and  Integrality gap \and convex combinations.}
 \end{abstract}
