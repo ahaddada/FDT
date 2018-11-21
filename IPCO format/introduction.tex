@@ -28,21 +28,21 @@ For example, finding a  minimum-weight 2-edge-connected multigraph has a natural
 	If $g_I=1$, then for $(x,y)\in P(I)$, there exists $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in S(I)$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq x$. Moreover, we can find such a convex combination in polynomial time.
 \end{proposition}
 
-Carr and Vempala~\cite{CV} have a similar decomposition result for finite integrality gap $1<g(I)<\infty$. %A analogous result to Proposition \ref{cara} is the following theorem due to Carr and Vempala \cite{CV}, which
+Carr and Vempala~\cite{CV} gave a decomposition result for integrality gap $1<g(I)<\infty$. %A analogous result to Proposition \ref{cara} is the following theorem due to Carr and Vempala \cite{CV}, which
 This is a generalization of Goemans' proof for blocking polyhedra \cite{goemans}. 
 
 \begin{theorem}[Carr, Vempala \cite{CV}] \label{CV}
 	Let $(x,y)\in P(I)$, there exists $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in \dom(S(I))$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq Cx$ if and only if $g_I \leq C$.
 \end{theorem}
-In this theorem $\dom(P(I))$ is the set of points $(x',y')$ such that there exists a point $(x,y)\in P$ with $x'\geq x$, also known as the dominant of $P(I)$. For covering problems the polyhedron is essentially the same as its dominant, but this is not true in general. In contrast to Proposition \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time.
+Here $\dom(P(I))$ is the set of points $(x',y')$ such that there exists a point $(x,y)\in P$ with $x'\geq x$, also known as the dominant of $P(I)$. For covering problems the polyhedron is essentially the same as its dominant, but this is not true in general. While there is an exact algorithm for problems with gap $1$, Theorem~\ref{CV} is existenial, with no construction.
+%In contrast to Proposition \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time.
 %This points to an interesting open question. 
 % We show later, for $I$ with $g(I)<\infty$, the notation of dominant is in fact useful.
-
 \iffalse
 
-\begin{question}\label{question1}
+\begin{question*}\label{question1}
 	Assume reasonable complexity assumptions (such as UGC or $\textrm{P}\neq \textrm{NP}$). Given instance $I$ with $1<g_I<\infty$ and $(x,y)\in P(I)$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in \dom(\conv(S(I)))$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq g_Ix$ in polynomial time?
-\end{question}
+\end{question*}
 
 This seems to be a very hard question. A more specific question is of more interest.
 
@@ -53,7 +53,6 @@ Although Question \ref{question2} is wide open, for some problems there are poly
 
 If we relax Question \ref{question1} (resp. Question \ref{question2}), but multiplying $g(I)$ (resp. $g(\mathcal{I})$) by a factor $C$, they are still very interesting, since they will provide upper bounds on the integraltiy gap the instance (resp. the problem). The results in this paper serve this purpose.
 \fi
-
 To study integrality gaps, we wish to find such a solution contructively:
 \begin{question}\label{question2}
 	Assume reasonable complexity assumptions, a specific problem $\mathcal{I}$ with  $1<g_{\mathcal{I}}<\infty$, and $(x,y)\in P(I)$ for some $I\in \mathcal{I}$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in S(I)$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq $C$ g_{\mathcal{I}}x$ in polynomial time? We wish to find the smallest slack factor $C$ as possible.
