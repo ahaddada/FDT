@@ -1,39 +1,44 @@
 \section{Introduction}
-Mixed-integer linear programming (MILP), the optimization of a linear objective function subject to linear and integrality constraints, is a classic NP-hard problem \cite{GJ79}. In fact it is NP-hard in general to determine if there is a feasible solution to an MILP problem \cite{GJ79}. However, intelligent branch-and-bound strategies allow commercial and open-source MIP solvers to give exact solutions (or near-optimal with provable bound) to many specific instances of NP-hard combinatorial optimization problems. Modeling combinatorial optimization problems with MILPs also started the very popular area of LP-based approximation algorithms. 
 
-Consider the set of points described by a set 
+Mixed-integer linear programming (MILP), the optimization of a linear objective function subject to linear and integrality constraints, models many practical optimization problems including scheduling, logistics and resource allocation.  The set of feasible points for a MILP is the set
 \begin{equation}
-S(A,G,b)= \{(x,y)\in \bbbz^{n}\times \bbbr^p\;:\; Ax+Gy\geq b\}  \label{S}
+S(A,G,b)= \{(x,y)\in \bbbz^{n}\times \bbbr^p\;:\; Ax+Gy\geq b\}  \label{S}.
 \end{equation}
-and the  linear relaxation of set $S(A,G,b)$,
+If we drop the integrality constraints, we have the linear relaxation of set $S(A,G,b)$,
 \begin{equation}
 P(A,G,b) = \{(x,y)\in \bbbr^{n+ p}\;:\; Ax+Gy\geq b\}. \label{P}
 \end{equation}
 
-To make the notation simpler we use $I=(A,G,b)$, i.e. an instance of the formulation. Then we use $S(I)$ and $P(I)$ to denote $S(A,G,b)$ and $P(A,G,b)$, respectively. Notice that $\min \;\{cx:\; (x,y) \in S(I)\}$ is in fact an MILP problem and $\min \;\{cx:\;(x,y)\in P(I) \}$ is lower bound provided from the LP relaxation. Let $z_{IP}(I,c)$ and $z_{LP}(I,c)$ be the optimal solution to these problems, respectively.
+Let $I=(A,G,b)$ be the feasible set of a specific instance. Then $S(I)$ and $P(I)$ denote $S(A,G,b)$ and $P(A,G,b)$, respectively. Given a linear objective function $c$, a MILP problem is $\min \;\{cx:\; (x,y) \in S(I)\}$. It is  NP-hard even to determine if a MILP instance has a feasible solution~\cite{GJ79}. However, intelligent branch-and-bound strategies allow commercial and open-source MIP solvers to give exact solutions (or near-optimal with provable bound) to many specific instances of NP-hard combinatorial optimization problems. 
 
+Relaxing the integrality constraints gives the polynomial-time-solvable linear-programming relaxation: $\min \;\{cx:\;(x,y)\in P(I) \}$.  The optimal value of this linear program (LP), denoted $z_{LP}(I,c)$, is a lower bound on the optimal value for the MILP, denoted $z_{IP}(I,c)$. The solution can also provide some useful global structure, even though the fractional values are not directly meaningful. {\em LP-based approximation algorithms} for combinatorial problems involve modeling the problem as a MILP, solving the LP relaxation, finding a (problem-specific) integer-feasible solution from the LP solution, and proving an approximation bound by comparing the solution value to the LP lower bound.
 
-Many researchers (see \cite{vazirani,sw}) have developed polynomial time algorithms that find solutions for special classes of MILPs whose cost are provably smaller than $C\cdot z_{LP}(I,c)$ for some $C$ which can be a constant number or dependent on some parameter of the MILP, e.g. $O(\log(n))$. However, for many combinatorial optimization problems there is a limit to such techniques. Let $g_I= \max_{c\geq 0}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}$. Parameter $g_I$ depends on set $S(I)$ and the linear constraints in (\ref{S}) and is known as the \textit{integrality gap} of the formulation for instance $I$. It is easy to see, that we cannot hope to find solutions for the MILP with objective values better than $g_I\cdot z_{LP}(I,c)$. More generally we can define the integrality gap for a class of instances $\mathcal{I}$. In this case, the integrality gap for problem $\mathcal{I}$ is
+Many researchers (see \cite{vazirani,sw}) have developed polynomial-time LP-based algorithms that find solutions for special classes of MILPs whose cost are provably smaller than $C\cdot z_{LP}(I,c)$. The approximation factor $C$ can be a constant or depend a MILP parameter, e.g. $O(\log(n))$. However, for many combinatorial optimization problems there is a limit to such techniques. Define the \textit{integrality gap} of the MILP formulation for instance $I$ to be $g_I= \max_{c\geq 0}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}$. This value depends on the constraints in (\ref{S}).  We cannot hope to find solutions for the MILP with objective values better than $g_I\cdot z_{LP}(I,c)$. 
+
+More generally we can define the integrality gap for a class of instances $\mathcal{I}$:% In this case, the integrality gap for problem $\mathcal{I}$ is
 \begin{equation}
 g_\mathcal{I} = \max_{c\geq 0 , I\in\mathcal{I}}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}
 \end{equation}
+For example, finding a  minimum-weight 2-edge-connected multigraph has a natural formulation: constraining every cut to be crossed at least twice.  The gap for this formulation is at most $\frac{3}{2}$ \cite{Wolsey1980} and at least $\frac{6}{5}$ \cite{carr-ravi}. Therefore, we cannot hope to obtain an LP-based $(\frac{6}{5}-\epsilon)$-approximation algorithm for this problem using this LP relaxation.
 
+\paragraph{The value of good MILP formulations:} There can be multiple correct MILP formulations for a problem with different integrality gaps. Finding MILP formulations with small integrality gap, e.g. by adding extra contraints, enables better provable approximation algorithms.  Such formulations are also likely to work better in practice when using exact solvers because branch-and-bound algorithms for MILP use LP bounds to prove whole regions of the search space can be pruned. In this paper, we provide tools to help modelers develop MILP formulations with integrality gaps closer to the optimal.
 
-For example, in the problem of finding a minimum weight 2-edge-connected multigraph, the gap of the the natural formulation, constraining every cut to be crossed at least twice, is at most $\frac{3}{2}$ \cite{Wolsey1980} and at least $\frac{6}{5}$ \cite{carr-ravi}. Therefore, we cannot hope to obtain an LP-based $(\frac{6}{5}-\epsilon)$-approximation algorithm for this problem using this LP relaxation. If we have $g_I=1$, $P(I)=\conv(S(I))$ and $P(I)$ is an \textit{integral} polyhedron. There are many interesting examples of such formulations such as spanning tree polytope and the perfect matching polytope \cite{schrijver}. For such problems we know how to write a vector $x\in P(I)$ as convex combination of points in $S(I)$ in polynomial time \cite{cons-cara}.
-
+\paragraph{Decomposition} Our methods will take advantage of theory connecting integrality gaps to sets of feasible solutions. Instances $I$ with  $g_I=1$ has $P(I)=\conv(S(I))$ where $\conv(S(I))$ is the convex hull of the lattice of feasible points. In this case, $P(I)$ is an \textit{integral} polyhedron. The spanning-tree polytope and the perfect-matching polytope \cite{schrijver} have this property. For such problems there is an algorithm to express vector $x\in P(I)$ as a convex combination of points in $S(I)$ in polynomial time \cite{cons-cara}.
 \begin{proposition}\label{cara}
 	If $g_I=1$, then for $(x,y)\in P(I)$, there exists $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in S(I)$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq x$. Moreover, we can find such a convex combination in polynomial time.
 \end{proposition}
 
-Now assume $1<g(I)<\infty$. Denote by $\dom(P(I))$ be the set of points $(x',y')$ such that there exists a point $(x,y)\in P$ with $x'\geq x$, also known as the dominant of $P(I)$. Notice that for covering problems the dominant of a polyhedron is essentially the same as its dominant, but for problems that are not covering, the two might be different. We show later, for $I$ with $g(I)<\infty$, the notation of dominant is in fact useful.
-
-A analogous result to Proposition \ref{cara} is the following theorem due to Carr and Vempala \cite{CV}, which is a generalization of Goemans proof for blocking polyhedra \cite{goemans}. 
+Carr and Vempala~\cite{CV} have a similar decomposition result for finite integrality gap $1<g(I)<\infty$. %A analogous result to Proposition \ref{cara} is the following theorem due to Carr and Vempala \cite{CV}, which
+This is a generalization of Goemans' proof for blocking polyhedra \cite{goemans}. 
 
 \begin{theorem}[Carr, Vempala \cite{CV}] \label{CV}
 	Let $(x,y)\in P(I)$, there exists $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in \dom(S(I))$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq Cx$ if and only if $g_I \leq C$.
 \end{theorem}
+In this theorem $\dom(P(I))$ is the set of points $(x',y')$ such that there exists a point $(x,y)\in P$ with $x'\geq x$, also known as the dominant of $P(I)$. For covering problems the polyhedron is essentially the same as its dominant, but this is not true in general. In contrast to Proposition \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time.
+%This points to an interesting open question. 
+% We show later, for $I$ with $g(I)<\infty$, the notation of dominant is in fact useful.
 
-In contrast to Proposition \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time. This points to an interesting open question. 
+\iffalse
 
 \begin{question}\label{question1}
 	Assume reasonable complexity assumptions (such as UGC or $\textrm{P}\neq \textrm{NP}$). Given instance $I$ with $1<g_I<\infty$ and $(x,y)\in P(I)$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in \dom(\conv(S(I)))$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq g_Ix$ in polynomial time?
@@ -47,8 +52,15 @@ This seems to be a very hard question. A more specific question is of more inter
 Although Question \ref{question2} is wide open, for some problems there are polynomial time algorithms closing the gap. For example, for generalized Steiner forest problem \cite{jain} gave an LP-based 2-approximation algorithm. The gap for this problem is also lower bounded by 2. Same holds for the set covering problem \cite{randomizedrounding}. In fact, for set cover the approximation algorithm achieving the same factor as the integrality gap lower bound, is a \textit{randomized rounding} algorithm. Raghavan and Thompson \cite{randomizedrounding} showed that this technique achieves provably good approximation for many combinatorial optimization problems.  
 
 If we relax Question \ref{question1} (resp. Question \ref{question2}), but multiplying $g(I)$ (resp. $g(\mathcal{I})$) by a factor $C$, they are still very interesting, since they will provide upper bounds on the integraltiy gap the instance (resp. the problem). The results in this paper serve this purpose.
+\fi
+
+To study integrality gaps, we wish to find such a solution contructively:
+\begin{question}\label{question2}
+	Assume reasonable complexity assumptions, a specific problem $\mathcal{I}$ with  $1<g_{\mathcal{I}}<\infty$, and $(x,y)\in P(I)$ for some $I\in \mathcal{I}$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in S(I)$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq $C$ g_{\mathcal{I}}x$ in polynomial time? We wish to find the smallest slack factor $C$ as possible.
+\end{question}
 
 We give a general approximation framework for solving $\{0,1\}$-MILPs.  Consider the set of point described by a set 
+\cindy{I think this next definition ($S(I)$) should have integer variables.  It looks the same as P(I).  Also, are these significantly different from the $S(I)$ and $P(I)$ defined above?  We will likely have some space issues.}
 \begin{equation}
 S(I)= \{(x,y)\in \bbbr^{n\times p}\;:\; Ax+Gy\geq b,\; x\in \{0,1\}\},  \label{S'} 
 \end{equation}
@@ -59,7 +71,7 @@ P(I) = \{(x,y)\in \bbbr^{n\times p}\;:\; Ax+Gy\geq b,\; 0 \leq x\leq 1\}. \label
 For a vector $x\in \bbbr^n$ such that $(x,y)\in P(I)$ for some $y\in \bbbr^p$, let $\spp(x)= \{i \in \{1,\ldots,n\}: x_i \neq 0\}$. 
 
 
-The \textit{Fractional Decomposition Tree} algorithm (henceforth FDT) is a polynomial time algorithm that given a point $x\in P(I)$ produces a convex combination of feasible point in $S(I)$ that are dominates by a ``factor" of $x$. If this factor is $g_I$, it would settle Question \ref{question2}, however we can only guarantee a factor of $g_I^{|\spp(x)|}$. FDT relies on iteratively solving linear programs that are about the same size as the description of $P(I)$.
+The \textit{Fractional Decomposition Tree} algorithm (henceforth FDT) is a polynomial time algorithm that given a point $x\in P(I)$ produces a convex combination of feasible point in $S(I)$ that are dominated by a ``factor" $C$ of $x$. If $C = g_I$, it would be optimal. However we can only guarantee a factor of $g_I^{|\spp(x)|}$. FDT relies on iteratively solving linear programs that are about the same size as the description of $P(I)$.
 
 \begin{restatable}{theorem}{binaryFDT}
 	\label{binaryFDT}
@@ -67,17 +79,17 @@ The \textit{Fractional Decomposition Tree} algorithm (henceforth FDT) is a polyn
 	The Fractional Decomposition Tree (FDT) algorithm , given $(x^*,y^*)\in P(I)$, produces in polynomial time $\lambda\in [0,1]^k$ and $(z^1,w^1),\ldots,(z^k,w^k) \in S(I)$ such that $k\leq |\spp(x^*)|$, $\sum_{i=1}^{k}\lambda_i z^i\leq Cx^*$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g_I^{|\spp(x^*)|}$.
 \end{restatable}
 
-Notice, that the FDT algorithm needs to find feasible solutions to any MILP with finite gap. This can be of independent interest.
+FDT finds feasible solutions to any MILP with finite gap. This can be of independent interest, especially in proving that a model has unbounded gap.
 \begin{restatable}{theorem}{DomToIP}
 	\label{domtoIP}
 	Assume $1\leq g_I < \infty$. The DomToIP algorithm finds $(\hat{x},\hat{y})\in S(I)$ in polynomial time.
 \end{restatable}
 
+For general $I$ it is NP-hard to even decide if $S(I)$ is empty or not. There are a number of heuristics for this purpose, such as the feasibility pump heuristic \cite{fp1,fp2}. These heuristics are often very effective and fast in practice, however, they can sometimes fail to find a feasible solution. These heuristics do not provide any bounds on the quality of the solution they find. 
 
-Note that for general $I$ it is NP-hard to even decide if $S(I)$ is empty or not. There are a number of heuristics for this purpose, such as the feasibility pump heuristic \cite{fp1,fp2}. These heuristics are often very effective and fast in practice, however, they can sometimes fail in finding a feasible solution. In addition these algorithms do not provide any bounds on the quality of the solution they find. 
+We consider the following TSP-related problems.  The {\em 2-edge-connected subgraph problem (2EC)} want to find the minimum weight 2-edge-connected subgraph (which can multiple copies of each edge) in a graph $G=(V,E)$ with respect to weights $c\in \bbbr^E_{\geq 0}$. In the {\em tree-augmentation problem (TAP)} we wish to add a minimum-cost set of edges to a tree to make it 2-edge-connected.  We formally define TAP in Section~\ref{experiment}.
 
-
-One can trivially extend the FDT algorithm for binary MILPs into covering $\{0,1,2\}$-MILPs by losing a factor $2^{|\spp(x)|}$. In order to eradicate this factor, we need to treat the coordinate $i$ with $x_i=1$ differently. For  the 2-edge-connected subgraph problem we show how this can be done. In this problem we want to find the minimum weight 2-edge-connected subgraph (which can multiple copies of each edge) in a graph $G=(V,E)$ with respect to weights $c\in \bbbr^E_{\geq 0}$. For this problem the natural linear programming relaxation is
+One can trivially extend the FDT algorithm for binary MILPs into covering $\{0,1,2\}$-MILPs by losing a factor $2^{|\spp(x)|}$. In order to eradicate this factor, we need to treat the coordinate $i$ with $x_i=1$ differently. The 2EC problem has the natural linear programming relaxation is
 \begin{equation}\label{2ECpol}
 \EC(G)= \{x\in \bbbr_{\geq 0}^{E}\;:\; x(\delta(S))\geq 2 \text{ for $\emptyset \subset S\subset V$})\}.\end{equation}
 We prove the following theorem.
@@ -87,10 +99,27 @@ We prove the following theorem.
 	Let $G=(V,E)$ and $x$ be an extreme point of  $\EC(G)$. The FDT algorithm for 2EC produces $\lambda\in [0,1]^k$ and 2-edge-connected multigraphs $F_1,\ldots,F_k$ such that $k\leq 2|V|-1$, $\sum_{i=1}^{k}\lambda_i \chi^{F_i}\leq Cx^*$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g({\EC})^{k}$, where $g({\EC})$ is the integrality gap of the 2-edge-connected multigraph problem with respect to formulation in (\ref{2ECpol}) 
 \end{restatable}
 
+\paragraph{Experiments} Although the bound guaranteed in both Theorems \ref{binaryFDT} and \ref{FDT2EC} are very large for large problems, we show that in practice, the algorithm works very well for the TSP-like problems described above. We show how one might use FDT to investigate the integrality gap for such well-studied problems.
 
-Although the bound guaranteed in both Theorems \ref{binaryFDT} and \ref{FDT2EC} are very large for large problems, we show that in practice, the algorithm works very well providing approximation ratios that are far better than the theoretical bound in the theorem statements. We examine FDT for binary MILPs for problems such as the tree augmentation problem (TAP) and we apply FDT for 2EC on some interesting and ``hard to decompose" points in the linear relaxation. Our computational results show that the FDT algorithm is a good tool to evaluate the integrality gap of integer programming formulations. 
+Known polyhedral structure makes it easier to study integrality gaps for such problems. 
+\cindy{Is this right?  That citation is for Carr and Vempala.}
+Carr and Ravi \cite{CV} introduced the notion of fundamental extreme points. A point x in Held-Karp relaxation for TSP (or 2EC; they have the same relaxation) is a point whose support of $x$, namely $G_x$ satisfies the following: i)  $G_x$ is a cubic graph, ii) in $G_x$ there is exactly one edge with $x_e=1$ incident to each node iii) The fractional edges of $G_x$ form a Hamiltonian cycle.  We say a fundamental extreme point (FEP) is {\em order $k$} if there are $k$ nodes on this Hamiltonian cycle. An FEP of order $k$ could represent an instance with many more than $k$ vertices. Carr and co-authors~\cite{CV,carr-ravi,Boyd-Carr-2011} proved that showing that $Cx$ is a convex combination of tours (resp. 2-edge-connected subgraphs) for all fundamental extreme points is equivalent to proving that the integrality gap for TSP (resp. 2EC) is bounded above by $C$. Thus we can create the ``hardest'' LP solutions to decompose.
 
-Evaluating the integrality gap for instances of interesting problems such as TSP or $\EC$ have been done by others as well. For instance, Benoit and Boyd \cite{TSPcompute} used a quadratic programming model to show that the integrality gap for TSP is at most $\frac{20}{17}$ for instances with at most 10 vertices. Also,  Alexander et. al \cite{abe} used the same ideas to provide an upper bound of $\frac{7}{6}$ for $\EC$ on instances with at most 10 vertices. For $\EC$ we can show that the integrality gap of $\EC$ is at most $\frac{6}{5}$ for fundamental vertices with 12 vertices. In fact, since FDT can be applied to different problem, we can use it to evaluate the integrality gap of other well-known problem. For example, for TAP, we create random fractional extreme points and round them using FDT. For the instances that we create the blow-up factor is always below $\frac{3}{2}$ providing an upper bound for such instances.
+There are fairly good bounds known for the integrality gap for TSP or $\EC$. \cindy{Arash, please confirm this change is correct.}Benoit and Boyd \cite{TSPcompute} used a quadratic programming model to show that the integrality gap for TSP is at most $\frac{20}{17}$ for FEPs of order at most 10. Also,  Alexander et. al \cite{abe} used the same ideas to provide an upper bound of $\frac{7}{6}$ for $\EC$ on FEPs of order at most 10. For $\EC$ we can show that the integrality gap of $\EC$ is at most $\frac{6}{5}$ for FEPs of order at most 12.
+%In fact, since FDT can be applied to different problem, we can use it to evaluate the integrality gap of other well-known problem.
+For TAP, we create random fractional extreme points and round them using FDT. For the instances that we create the blow-up factor is always below $\frac{3}{2}$ providing an upper bound for such instances.
+
+% providing approximation ratios that are far better than the theoretical bound in the theorem statements.
+%We examine FDT for binary MILPs for problems such as the tree augmentation problem (TAP) and we apply FDT for 2EC on some interesting and ``hard to decompose" points in the linear relaxation. Our computational results show that the FDT algorithm is a good tool to evaluate the integrality gap of integer programming formulations. 
+
+
+
+\paragraph{Contributions}  The paper has the following contributions: 
+\begin{itemize}
+\item We give a simple algorithm, Dom2IP, that can prove a formulation’s integrality gap is unbounded.  Someone formulating a first MILP for a new problem can test it with Dom2IP.  If the algorithm ever fails, the MILP has an unbounded gap.
+\item We give an algorithm, Fractional Decomposition Tree (FDT), to construct the convex decomposition in the Carr-Vempala theorem, perhaps scaling by a factor larger than the integrality gap.  Each step of this algorithm provides a {\em lower bound} on the instances integrality gap. This also provides a lower bound on the approximation factor of any LP-based approximation algorithm using this formulation.
+\item For a special set of problems related to TSP, where there is a notion of a fundamental extreme point and long-running attempts to exactly determine the integrality gap of classic formulations, experimental analysis with FDT can help give some intuition about which bound(s) is/are likely to be loose.  Computing on fundamental extreme points is a way to experimentally characterize the gap upper bound.  There is no guarantee. Still, this can help direct theoretical analysis in the most promising direction.  Furthermore, for these kinds of problems, especially 2EC, FDT gives good approximate solutions, better than the best current competitor (Christofides).
+\end{itemize}
 
 
 \iffalse{
