@@ -6,7 +6,7 @@ We do not know the exact value for $g_{\EC}$, but we know $\frac{6}{5} \leq g_{\
 
 The FDT algorithm for 2EC is very similar to the one for binary MILPs, but there are some differences as well. A natural thing to do is to have three branches for each node of the FDT tree, however, the branches that are equivalent to setting a variable to $1$, might need further decomposition. That is the main difficulty when dealing with $\{0,1,2\}$-MILPs.
 
-First, we need a branching lemma. Observe that  the following branching lemma is essentially a translation of Lemma \ref{LPClemma} for 0,1,2 problems expect for one additional clause. 
+First, we need a branching lemma. Observe that  the following branching lemma is essentially a translation of Lemma \ref{LPClemma} for 0,1,2 problems except for one additional clause. 
 
 \begin{restatable}{lemma}{2ECLPC}
 	\label{LPC2EC}
@@ -23,7 +23,7 @@ First, we need a branching lemma. Observe that  the following branching lemma is
 		&\;{\color{white}{\text{s.t.}} }\quad x^j_f \geq j \; &\mbox{ for $f\in E$ where $x_f \geq 1$, and $j=0,1,2$}\label{1edges2ec}\\
 		&\;{\color{white}{\text{s.t.}} }\quad x^0 + x^1+x^2 \leq x\label{packing2ec}\\
 		&\;{\color{white}{\text{s.t.}} }\quad \lambda_0,\lambda_1,\lambda_2 \geq 0
-	\end{align}	Let $x^j$, $\gamma_j$ for $j=0,1,2$ be an optimal solution solution to the LP above. Let $\hat{x}^{j}=\frac{x^j}{\gamma_j}$ for $j=0,1,2$ where $\gamma_j>0$. If $\gamma_j=0$, let $\hat{x}^{j}=0$. Observe that  (ii), (iii), (iv), and (v) are satisfied with this choice. We can also show that $\gamma_0+\gamma_1+\gamma_2\geq \frac{1}{g_{\EC}}$, which means that (i) is also satisfied. The proof is similar to the proof of the claim in Lemma \ref{LPClemma}, but we need to replace each $f\in E$ with $x_f\geq 0$ with a suitably long path to ensure that Constraint (\ref{1edges2ec}) is also satisfied.	We skip the details.\iffalse{
+	\end{align}	Let $x^j$, $\gamma_j$ for $j=0,1,2$ be an optimal solution solution to the LP above. Let $\hat{x}^{j}=\frac{x^j}{\gamma_j}$ for $j=0,1,2$ where $\gamma_j>0$. If $\gamma_j=0$, let $\hat{x}^{j}=0$. Observe that  (ii), (iii), (iv), and (v) are satisfied with this choice. We can also show that $\gamma_0+\gamma_1+\gamma_2\geq \frac{1}{g_{\EC}}$, which means that (i) is also satisfied. The proof is similar to the proof of the claim in Lemma \ref{LPClemma}, but we need to replace each $f\in E$ with $x_f\geq 1$ with a suitably long path to ensure that Constraint (\ref{1edges2ec}) is also satisfied.	We skip the details.\iffalse{
 	\begin{claim}\label{CVexists}
 		We have $\gamma_0 + \gamma_1+\gamma_2\geq \frac{1}{g_{\EC}}$.
 	\end{claim}
@@ -54,7 +54,7 @@ First, we need a branching lemma. Observe that  the following branching lemma is
 	This concludes the proof.}\fi \end{proof}
 
 
-In contrast to FDT for binary MIPs where we round up the fractional variables that are already branched on at each level, in FDT for 2EC we keep all coordinates as they are and preform a rounding procedure at the end. Formally, let $L_i$ for $i=1,\ldots,|\spp(x^*)|$ be collections of pairs of feasible points in $\EC(G)$ together with their multipliers. Let $t=|\spp(x^*)|$ and assume without loss of generality that $\spp(x^*)=\{e_1,\ldots,e_t\}$. 
+In contrast to FDT for binary MIPs where we round up the fractional variables that are already branched on at each level, in FDT for 2EC we keep all coordinates as they are and perform a rounding procedure at the end. Formally, let $L_i$ for $i=1,\ldots,|\spp(x^*)|$ be collections of pairs of feasible points in $\EC(G)$ together with their multipliers. Let $t=|\spp(x^*)|$ and assume without loss of generality that $\spp(x^*)=\{e_1,\ldots,e_t\}$. 
 
 \begin{lemma}\label{2ecpruning}
 	The FDT algorithm for 2EC in  polynomial time produces sets $L_0,\ldots,L_t$ of pairs $x\in \EC(G)$ together with multipliers $\lambda$ with the following properties.
