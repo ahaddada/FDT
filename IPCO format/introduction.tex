@@ -9,7 +9,7 @@ If we drop the integrality constraints, we have the linear relaxation of set $S(
 P(A,G,b) = \{(x,y)\in \bbbr^{n+ p}\;:\; Ax+Gy\geq b\}. \label{P}
 \end{equation}
 
-Let $I=(A,G,b)$ be the feasible set of a specific instance. Then $S(I)$ and $P(I)$ denote $S(A,G,b)$ and $P(A,G,b)$, respectively. Given a linear objective function $c$, a MILP problem is $\min \;\{cx:\; (x,y) \in S(I)\}$. It is  NP-hard even to determine if a MILP instance has a feasible solution~\cite{GJ79}. However, intelligent branch-and-bound strategies allow commercial and open-source MIP solvers to give exact solutions (or near-optimal with provable bound) to many specific instances of NP-hard combinatorial optimization problems. 
+Let $I=(A,G,b)$ be the feasible set of a specific instance. Then $S(I)$ and $P(I)$ denote $S(A,G,b)$ and $P(A,G,b)$, respectively. Given a linear objective function $c$, a MILP problem is $\min \;\{cx:\; (x,y) \in S(I)\}$. It is  NP-hard even to determine if a MILP instance has a feasible solution~\cite{GJ79}. However, intelligent branch-and-bound strategies allow commercial and open-source MILP solvers to give exact solutions (or near-optimal with provable bound) to many specific instances of NP-hard combinatorial optimization problems. 
 
 Relaxing the integrality constraints gives the polynomial-time-solvable linear-programming relaxation: $\min \;\{cx:\;(x,y)\in P(I) \}$.  The optimal value of this linear program (LP), denoted $z_{LP}(I,c)$, is a lower bound on the optimal value for the MILP, denoted $z_{IP}(I,c)$. The solution can also provide some useful global structure, even though the fractional values are not directly meaningful. {\em LP-based approximation algorithms} for combinatorial problems involve modeling the problem as a MILP, solving the LP relaxation, finding a (problem-specific) integer-feasible solution from the LP solution, and proving an approximation bound by comparing the solution value to the LP lower bound.
 
@@ -59,16 +59,7 @@ To study integrality gaps, we wish to find such a solution contructively:
 	Assume reasonable complexity assumptions, a specific problem $\mathcal{I}$ with  $1<g_{\mathcal{I}}<\infty$, and $(x,y)\in P(I)$ for some $I\in \mathcal{I}$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in S(I)$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq $C$ g_{\mathcal{I}}x$ in polynomial time? We wish to find the smallest slack factor $C$ as possible.
 \end{question}
 
-We give a general approximation framework for solving $\{0,1\}$-MILPs.  Consider the set of point described by a set 
-\cindy{I think this next definition ($S(I)$) should have integer variables.  It looks the same as P(I).  Also, are these significantly different from the $S(I)$ and $P(I)$ defined above?  We will likely have some space issues.}
-\begin{equation}
-S(I)= \{(x,y)\in \bbbr^{n\times p}\;:\; Ax+Gy\geq b,\; x\in \{0,1\}\},  \label{S'} 
-\end{equation}
-and a linear relaxation of set $S$
-\begin{equation}
-P(I) = \{(x,y)\in \bbbr^{n\times p}\;:\; Ax+Gy\geq b,\; 0 \leq x\leq 1\}. \label{P'}
-\end{equation}
-For a vector $x\in \bbbr^n$ such that $(x,y)\in P(I)$ for some $y\in \bbbr^p$, let $\spp(x)= \{i \in \{1,\ldots,n\}: x_i \neq 0\}$. 
+We give a general approximation framework for solving $\{0,1\}$-MILPs.  Consider the set of point described by sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume in addition that $S(I),P(I)\subseteq [0,1]^n\times \bbbr^p$. For a vector $x\in \bbbr^n$ such that $(x,y)\in P(I)$ for some $y\in \bbbr^p$, let $\spp(x)= \{i \in \{1,\ldots,n\}: x_i \neq 0\}$. 
 
 
 The \textit{Fractional Decomposition Tree} algorithm (henceforth FDT) is a polynomial time algorithm that given a point $x\in P(I)$ produces a convex combination of feasible point in $S(I)$ that are dominated by a ``factor" $C$ of $x$. If $C = g_I$, it would be optimal. However we can only guarantee a factor of $g_I^{|\spp(x)|}$. FDT relies on iteratively solving linear programs that are about the same size as the description of $P(I)$.
@@ -89,7 +80,7 @@ For general $I$ it is NP-hard to even decide if $S(I)$ is empty or not. There ar
 
 We consider the following TSP-related problems.  The {\em 2-edge-connected subgraph problem (2EC)} want to find the minimum weight 2-edge-connected subgraph (which can multiple copies of each edge) in a graph $G=(V,E)$ with respect to weights $c\in \bbbr^E_{\geq 0}$. In the {\em tree-augmentation problem (TAP)} we wish to add a minimum-cost set of edges to a tree to make it 2-edge-connected.  We formally define TAP in Section~\ref{experiment}.
 
-One can trivially extend the FDT algorithm for binary MILPs into covering $\{0,1,2\}$-MILPs by losing a factor $2^{|\spp(x)|}$. In order to eradicate this factor, we need to treat the coordinate $i$ with $x_i=1$ differently. The 2EC problem has the natural linear programming relaxation is
+One can extend the FDT algorithm for binary MILPs into covering $\{0,1,2\}$-MILPs by losing a factor $2^{|\spp(x)|}$. In order to eradicate this factor, we need to treat the coordinate $i$ with $x_i=1$ differently. The 2EC problem has the natural linear programming relaxation is
 \begin{equation}\label{2ECpol}
 \EC(G)= \{x\in \bbbr_{\geq 0}^{E}\;:\; x(\delta(S))\geq 2 \text{ for $\emptyset \subset S\subset V$})\}.\end{equation}
 We prove the following theorem.
@@ -103,9 +94,9 @@ We prove the following theorem.
 
 Known polyhedral structure makes it easier to study integrality gaps for such problems. 
 \cindy{Is this right?  That citation is for Carr and Vempala.}
-Carr and Ravi \cite{CV} introduced the notion of fundamental extreme points. A point x in Held-Karp relaxation for TSP (or 2EC; they have the same relaxation) is a point whose support of $x$, namely $G_x$ satisfies the following: i)  $G_x$ is a cubic graph, ii) in $G_x$ there is exactly one edge with $x_e=1$ incident to each node iii) The fractional edges of $G_x$ form a Hamiltonian cycle.  We say a fundamental extreme point (FEP) is {\em order $k$} if there are $k$ nodes on this Hamiltonian cycle. An FEP of order $k$ could represent an instance with many more than $k$ vertices. Carr and co-authors~\cite{CV,carr-ravi,Boyd-Carr-2011} proved that showing that $Cx$ is a convex combination of tours (resp. 2-edge-connected subgraphs) for all fundamental extreme points is equivalent to proving that the integrality gap for TSP (resp. 2EC) is bounded above by $C$. Thus we can create the ``hardest'' LP solutions to decompose.
+Carr and Ravi \cite{carr-ravi} introduced the notion of fundamental extreme points. A point x in Held-Karp relaxation for TSP (or 2EC; they have the same relaxation) is a point whose support of $x$, namely $G_x$ satisfies the following: i)  $G_x$ is a cubic graph, ii) in $G_x$ there is exactly one edge with $x_e=1$ incident to each node iii) The fractional edges of $G_x$ form a Hamiltonian cycle.  We say a fundamental extreme point (FEP) is {\em order $k$} if there are $k$ nodes on this Hamiltonian cycle. An FEP of order $k$ could represent an instance with many more than $k$ vertices. Carr and co-authors~\cite{CV,carr-ravi,Boyd-Carr-2011} proved that showing that $Cx$ is a convex combination of tours (resp. 2-edge-connected subgraphs) for all fundamental extreme points is equivalent to proving that the integrality gap for TSP (resp. 2EC) is bounded above by $C$. Thus we can create the ``hardest'' LP solutions to decompose.
 
-There are fairly good bounds known for the integrality gap for TSP or $\EC$. \cindy{Arash, please confirm this change is correct.}Benoit and Boyd \cite{TSPcompute} used a quadratic programming model to show that the integrality gap for TSP is at most $\frac{20}{17}$ for FEPs of order at most 10. Also,  Alexander et. al \cite{abe} used the same ideas to provide an upper bound of $\frac{7}{6}$ for $\EC$ on FEPs of order at most 10. For $\EC$ we can show that the integrality gap of $\EC$ is at most $\frac{6}{5}$ for FEPs of order at most 12.
+There are fairly good bounds known for the integrality gap for TSP or $\EC$. \cindy{Arash, please confirm this change is correct.}Benoit and Boyd \cite{TSPcompute} used a quadratic programming model to show that the integrality gap for TSP is at most $\frac{20}{17}$ for graphs with at most 10 vertices. Also,  Alexander et. al \cite{abe} used the same ideas to provide an upper bound of $\frac{7}{6}$ for $\EC$ on graphs with at most 10 vertices. For $\EC$ we can show that the integrality gap of $\EC$ is at most $\frac{6}{5}$ for FEPs of order at most 12.
 %In fact, since FDT can be applied to different problem, we can use it to evaluate the integrality gap of other well-known problem.
 For TAP, we create random fractional extreme points and round them using FDT. For the instances that we create the blow-up factor is always below $\frac{3}{2}$ providing an upper bound for such instances.
 
@@ -116,8 +107,8 @@ For TAP, we create random fractional extreme points and round them using FDT. Fo
 
 \paragraph{Contributions}  The paper has the following contributions: 
 \begin{itemize}
-\item We give a simple algorithm, Dom2IP, that can prove a formulation’s integrality gap is unbounded.  Someone formulating a first MILP for a new problem can test it with Dom2IP.  If the algorithm ever fails, the MILP has an unbounded gap.
-\item We give an algorithm, Fractional Decomposition Tree (FDT), to construct the convex decomposition in the Carr-Vempala theorem, perhaps scaling by a factor larger than the integrality gap.  Each step of this algorithm provides a {\em lower bound} on the instances integrality gap. This also provides a lower bound on the approximation factor of any LP-based approximation algorithm using this formulation.
+\item We give a simple algorithm, Dom2IP, that can prove a formulation’s integrality gap is unbounded or if not provide a feasible integer solution.  Someone formulating a first MILP for a new problem can test it with Dom2IP.  If the algorithm ever fails in finding a feasible solution, the MILP has an unbounded gap.
+\item We give an algorithm, Fractional Decomposition Tree (FDT), to construct the convex decomposition in the Carr-Vempala theorem, perhaps scaling by a factor larger than the integrality gap.  Each step of this algorithm provides a {\em lower bound} on the instances integrality gap. This also provides a lower bound on the approximation factor of any LP-based approximation algorithm using this formulation. The overall approximation factor of the FDT algorithm is an upper bound on the integrality gap for that specific instance.
 \item For a special set of problems related to TSP, where there is a notion of a fundamental extreme point and long-running attempts to exactly determine the integrality gap of classic formulations, experimental analysis with FDT can help give some intuition about which bound(s) is/are likely to be loose.  Computing on fundamental extreme points is a way to experimentally characterize the gap upper bound.  There is no guarantee. Still, this can help direct theoretical analysis in the most promising direction.  Furthermore, for these kinds of problems, especially 2EC, FDT gives good approximate solutions, better than the best current competitor (Christofides).
 \end{itemize}
 
