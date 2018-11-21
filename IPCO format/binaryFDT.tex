@@ -3,7 +3,7 @@ Consider a formulation instance $I=(A,G,b)$. Define sets $S(I)$ and $P(I)$ as in
 
 In this section we prove Theorem \ref{domtoIP}. In fact, we prove a stronger result. 
 \begin{lemma}\label{domlemma}
-	Given $(x,y)\in \dom(P)$, there is an algorithm (the DomToIP algorithm) that finds $(x^{(t)},y^{(t)})\in S$ in polynomial time, such that $x^{t}\leq x$, where $t=|\spp(x)|$\end{lemma}
+	Given $(x,y)\in \dom(P)$, there is an algorithm (the Dom2IP algorithm) that finds $(x^{(t)},y^{(t)})\in S$ in polynomial time, such that $x^{t}\leq x$, where $t=|\spp(x)|$\end{lemma}
 
 We prove Lemma \ref{domlemma} by introducing an algorithm that ``fixes" the variables iteratively, starting from $x_1$ and ending at $x_t$. Suppose we run the algorithm for $\ell\in \{0,\ldots,t-1\}$ iterations and we have $(x^{(\ell)},y^{(\ell)})\in \dom(P)$  such that $x^{(\ell)}_i\in \{0,1\}$ for $i=1,\ldots,t$. Now consider the following linear program. The variables of this linear program are the $z\in \bbbr^n$ variables and $w\in \bbbr^p$.
 \begin{align}
@@ -16,7 +16,7 @@ We prove Lemma \ref{domlemma} by introducing an algorithm that ``fixes" the vari
 
 If the optimal value to $\DOMtoS(x^{(\ell)})$ is 0, then let $x^{(\ell+1)}_{\ell+1} = 0$. Otherwise if the optimal value is strictly positive let $x^{(\ell+1)}_{\ell+1} = 1$. Let $x^{(\ell+1)}_j = x^{(\ell)}_j$ for $j\in \{1,\ldots,n\}\setminus \{\ell+1\}$. 
 
-The above procedure suggests how to find $(x^{(\ell+1)},y^{(\ell+1)})$ from $(x^{(\ell)},y^{(\ell)})$. The DomToIP algorithm initializes with $(x^{(0)},y^{(0)})=(x,y)$ and  iteratively calls this procedure in order to obtain $(x^{(t)},y^{(t)})$. 
+The above procedure suggests how to find $(x^{(\ell+1)},y^{(\ell+1)})$ from $(x^{(\ell)},y^{(\ell)})$. The Dom2IP algorithm initializes with $(x^{(0)},y^{(0)})=(x,y)$ and  iteratively calls this procedure in order to obtain $(x^{(t)},y^{(t)})$. 
 \iffalse{
 \begin{algorithm}[H]
 	\KwIn{$(x,y)\in \dom(S)$}
@@ -33,7 +33,7 @@ The above procedure suggests how to find $(x^{(\ell+1)},y^{(\ell+1)})$ from $(x^
 		}
 	}
 	\label{domtoIPalg}
-	\caption{The DomToIP algorithm}
+	\caption{The Dom2IP algorithm}
 \end{algorithm}
 }\fi
 We prove that indeed $(x^{(t)},y^{(t)})\in S$. 
@@ -51,7 +51,7 @@ We prove that indeed $(x^{(t)},y^{(t)})\in S$.
 	\begin{equation}
 	\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*\leq gx^{(\ell+1)}
 	\end{equation}
-	So for $j\in \{1,\ldots,n\}$ where $x^{(\ell+1)}_j=0$, we have $z^i_j=0$ for $i=1,\ldots,k$. Hence, $\tilde{z}^i\leq x^{(\ell+1)}$ for $i=1,\ldots,k$. Hence, there exists $(z,w)\in S$ such that $z\leq x^{(\ell+1)}$. We claim that $(z,w)\in \IP^{(\ell+1)}$. If $(z,w)\notin \IP^{(\ell+1)}$ we must have $1\leq j \leq \ell$ such that $z_j < x^{(\ell+1)}_{j}$, and thus $z_j = 0$ and $x^{(\ell+1)}_j=1$. Without loss of generality assume $j$ is minimum number satisfying $z_j < x^{(\ell+1)}_{j}$. Consider iteration $j$ of the DomToIP algorithm. Notice that $z\leq x^{(\ell+1)}\leq x^{(j)}$. We have $x^{(j)}_j=1$ which implies when we solved $\DOMtoS(x^{(j-1)})$ the optimal value was strictly larger than zero. However, $(z,w)$ is a feasible solution to $\DOMtoS(x^{(j-1)})$ and gives an objective value of 0. This is a contradiction, so $(z,w)\in \IP^{(\ell+1)}$.
+	So for $j\in \{1,\ldots,n\}$ where $x^{(\ell+1)}_j=0$, we have $z^i_j=0$ for $i=1,\ldots,k$. Hence, $\tilde{z}^i\leq x^{(\ell+1)}$ for $i=1,\ldots,k$. Hence, there exists $(z,w)\in S$ such that $z\leq x^{(\ell+1)}$. We claim that $(z,w)\in \IP^{(\ell+1)}$. If $(z,w)\notin \IP^{(\ell+1)}$ we must have $1\leq j \leq \ell$ such that $z_j < x^{(\ell+1)}_{j}$, and thus $z_j = 0$ and $x^{(\ell+1)}_j=1$. Without loss of generality assume $j$ is minimum number satisfying $z_j < x^{(\ell+1)}_{j}$. Consider iteration $j$ of the Dom2IP algorithm. Notice that $z\leq x^{(\ell+1)}\leq x^{(j)}$. We have $x^{(j)}_j=1$ which implies when we solved $\DOMtoS(x^{(j-1)})$ the optimal value was strictly larger than zero. However, $(z,w)$ is a feasible solution to $\DOMtoS(x^{(j-1)})$ and gives an objective value of 0. This is a contradiction, so $(z,w)\in \IP^{(\ell+1)}$.
 	
 	Now for the second case, assume $z^*_{\ell+1} > 0$. We have $x^{(\ell+1)}_{\ell+1}=1$. Notice that for each point $z\in \LP^{(\ell)}$ we have $z_{\ell+1} >0$, so for each $z\in \IP^{(\ell)}$ we have $z_{\ell+1}>0$, i.e. $z_{\ell+1}=1$. This means that $(z,w)\in \IP^{(\ell+1)}$, and $\IP^{(\ell+1)} \neq \emptyset$.
 	
