@@ -2,7 +2,7 @@
 
 \section{FDT for 2EC}\label{2EC}
 
-In Section \ref{binaryfdt} our focus was on binary MILPs. In this section, in an attempt to extend FDT to \{0,1,2\} problems we introduce an FDT algorithm for a 2-edge-connected multigraph problem. Given a graph $G=(V,E)$ a multi-subset of edges $F$ of $G$ is a 2-edge-connected multigraph of $G$ if for each set $\emptyset\subset U \subset V$, the number of edge in $F$ that have one endpoint in $U$ and one not in $U$ is at least 2. In the 2EC problem, we are given non-negative costs on the edge of $G$ and the goal is to find the minimum cost 2-edge-connected multigraph of $G$. Notice that, no optimal solution ever takes 3 copies of an edge in 2EC, hence we assume that we can take an edge at most 2 times. The natural linear programming relaxation is $\EC(G) = \{x\in [0,2]^E: x(\delta(U))\geq 2 \mbox{ for } \emptyset \subset U \subset V\}$. Notice that $\dom(\EC(G))\cap [0,2]^{E} = \EC(G)$, since 2EC is a covering problem. We want to prove Theorem \ref{FDT2EC}.
+In Section \ref{binaryfdt} our focus was on binary MILPs. In this section, in an attempt to extend FDT to \{0,1,2\} problems we introduce an FDT algorithm for a 2-edge-connected multigraph problem. Given a graph $G=(V,E)$, a multi-subset of edges $F$ of $G$ is a 2-edge-connected multigraph of $G$ if for each set $\emptyset\subset U \subset V$, the number of edges in $F$ that have one endpoint in $U$ and one not in $U$ is at least 2. In the 2EC problem, we are given non-negative costs on the edge of $G$ and the goal is to find the minimum cost 2-edge-connected multigraph of $G$. Notice that, no optimal solution ever takes 3 copies of an edge in 2EC, hence we assume that we can take  each edge at most 2 times. The natural linear programming relaxation is $\EC(G) = \{x\in [0,2]^E: x(\delta(U))\geq 2 \mbox{ for } \emptyset \subset U \subset V\}$. Notice that $\dom(\EC(G))\cap [0,2]^{E} = \EC(G)$, since 2EC is a covering problem. We want to prove Theorem \ref{FDT2EC}.
 \FDTEC*
 We do not know the exact value for $g_{\EC}$, but we know $\frac{6}{5} \leq g_{\EC} \leq \frac{3}{2}$ \cite{carr-ravi,Wolsey1980}. Also, we need to remark that polyhedral version of Christofides' algorithm provides a $\frac{3}{2}$-approximation for 2EC, i.e. we already have an algorithm with $C\leq \frac{3}{2}$. However, we showed in Section \ref{experiment} that in practice the constant $C$ for the FDT algorithm for 2EC is much better than $\frac{3}{2}$ for FEPs of order 10.
 
@@ -21,7 +21,7 @@ First, we need a branching lemma. Observe that  the following branching lemma is
 		\quad\quad& \max\quad \;\sum_{j=0,1,2}\lambda_j\\
 		&\;\text{s.t.} \quad x^j(\delta(U))\geq 2\lambda_j \;& \mbox{ for $\emptyset \subset U \subset V$, and $j=0,1,2$} \label{feasibility2ec}\\
 		&\;{\color{white}{\text{s.t.}} }\quad 0 \leq x^j \leq 2\lambda_j\; &\mbox{ for $j=0,1,2$}\label{bound2ec}\\
-		&\;{\color{white}{\text{s.t.}} }\quad x^j_e = j\; &\mbox{ for $j=0,1,2$}\label{branchcoordinate2ec}\\
+		&\;{\color{white}{\text{s.t.}} }\quad x^j_e = j\cdot\lambda_j\; &\mbox{ for $j=0,1,2$}\label{branchcoordinate2ec}\\
 		&\;{\color{white}{\text{s.t.}} }\quad x^j_f \geq \lambda_j \; &\mbox{ for $f\in E$ where $x_f \geq 1$, and $j=0,1,2$}\label{1edges2ec}\\
 		&\;{\color{white}{\text{s.t.}} }\quad x^0 + x^1+x^2 \leq x\label{packing2ec}\\
 		&\;{\color{white}{\text{s.t.}} }\quad \lambda_0,\lambda_1,\lambda_2 \geq 0
