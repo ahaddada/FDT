@@ -4,15 +4,15 @@
 
 In Section \ref{binaryfdt} our focus was on binary MILPs. In this section, in an attempt to extend FDT to \{0,1,2\} problems we introduce an FDT algorithm for a 2-edge-connected multigraph problem. Given a graph $G=(V,E)$, a multi-subset of edges $F$ of $G$ is a 2-edge-connected multigraph of $G$ if for each set $\emptyset\subset U \subset V$, the number of edges in $F$ that have one endpoint in $U$ and one not in $U$ is at least 2. In the 2EC problem, we are given non-negative costs on the edge of $G$ and the goal is to find the minimum cost 2-edge-connected multigraph of $G$. Notice that, no optimal solution ever takes 3 copies of an edge in 2EC, hence we assume that we can take  each edge at most 2 times. The natural linear programming relaxation is $\EC(G) = \{x\in [0,2]^E: x(\delta(U))\geq 2 \mbox{ for } \emptyset \subset U \subset V\}$. Notice that $\dom(\EC(G))\cap [0,2]^{E} = \EC(G)$, since 2EC is a covering problem. We want to prove Theorem \ref{FDT2EC}.
 \FDTEC*
-We do not know the exact value for $g_{\EC}$, but we know $\frac{6}{5} \leq g_{\EC} \leq \frac{3}{2}$ \cite{carr-ravi,Wolsey1980}. Also, we need to remark that polyhedral version of Christofides' algorithm provides a $\frac{3}{2}$-approximation for 2EC, i.e. we already have an algorithm with $C\leq \frac{3}{2}$. However, we showed in Section \ref{experiment} that in practice the constant $C$ for the FDT algorithm for 2EC is much better than $\frac{3}{2}$ for FEPs of order 10.
+We do not know the exact value for $g_{\EC}$, but we know $\frac{6}{5} \leq g_{\EC} \leq \frac{3}{2}$ \cite{carr-ravi,Wolsey1980}. Also, we need to remark that the polyhedral analysis of Christofides' algorithm provides a $\frac{3}{2}$-approximation for 2EC, i.e. we already have an algorithm with $C\leq \frac{3}{2}$ \cite{Wolsey1980}. However, we will show in Section \ref{experiment} that in practice the constant $C$ for the FDT algorithm for 2EC is much better than $\frac{3}{2}$ for FEPs of order 10.
 
 The FDT algorithm for 2EC is very similar to the one for binary MILPs, but there are some differences as well. A natural thing to do is to have three branches for each node of the FDT tree, however, the branches that are equivalent to setting a variable to $1$, might need further decomposition. That is the main difficulty when dealing with $\{0,1,2\}$-MILPs.
 
 First, we need a branching lemma. Observe that  the following branching lemma is essentially a translation of Lemma \ref{LPClemma} for $\{0,1,2\}$ problems except for one additional clause. 
-
+\arash{put $\hat{x}^1$}
 \begin{restatable}{lemma}{2ECLPC}
 	\label{LPC2EC}
-	Given $x\in \EC(G)$, and $e\in E$ we can find in polynomial time vectors $x^0,x^1$ and $x^2$ and scalars $\gamma_0,\gamma_1$, and $\gamma_2$ such that: (i) $\gamma_0 + \gamma_1 +\gamma_2 \geq \frac{ 1}{g_{\EC}}$, (ii) $x^0,x^1,$ and $x^2$ are in  $ \EC(G)$, (iii) $x^0_e=0$, $x^1_e=1$, and $x^2_e=2$, (iv) $\gamma_0 x^0 + \gamma_1{x}^1  + \gamma_2x^2\leq {x}$, (v) for $f\in E$ with ${x}_f\geq 1$, we have $x^j_f\geq 1$ for $j=0,1,2$.
+	Given $x\in \EC(G)$, and $e\in E$ we can find in polynomial time vectors $\hat{x}^0,\hat{x}^1$ and $\hat{x}^2$ and scalars $\gamma_0,\gamma_1$, and $\gamma_2$ such that: (i) $\gamma_0 + \gamma_1 +\gamma_2 \geq \frac{ 1}{g_{\EC}}$, (ii) $\hat{x}^0,\hat{x}^1,$ and $\hat{x}^2$ are in  $ \EC(G)$, (iii) $\hat{x}^0_e=0$, $\hat{x}^1_e=1$, and $\hat{x}^2_e=2$, (iv) $\gamma_0 \hat{x}^0 + \gamma_1{\hat{x}}^1  + \gamma_2\hat{x}^2\leq {x}$, (v) for $f\in E$ with ${x}_f\geq 1$, we have $\hat{x}^j_f\geq 1$ for $j=0,1,2$.
 \end{restatable}
 
 \begin{proof}
@@ -33,7 +33,7 @@ First, we need a branching lemma. Observe that  the following branching lemma is
 		Suppose for contradiction $\sum_{j=0,1,2}\gamma_j = \frac{1}{g_{\EC}} - \epsilon$ for some $\epsilon >0$. Construct graph $G'$ by removing edge $f$ with $x_f\geq 1$ and replacing it with a path $P_f$ of length $\ceil{\frac{2}{\epsilon}}$. Define $x'_h = x_h$ for each edge $h$ such that $x_h<1$. For each $h\in P_f$ let $x'_h= x_f$ for all $f$ with $x_f\geq 1$. It is easy to check that $x'\in \EC(G')$. By Theorem \ref{CV} there exists $\theta \in [0,1]^k$, with $\sum_{i=1}^{k}\theta_i = 1$ and 2-edge-connected multigraphs $F'_i$ of $G'$ for $i=1,\ldots,k$ such that 
 		$\sum_{i=1}^{k}\theta_i \chi^{F'_i}\leq g_{\EC}x'$. 
 		
-		Note that each $F'_i$ contains at least one copy of every edge in any path $P_f$, except for at most one edge in the path. We will obtain 2-edge-connected multigraphs $F_1,\ldots,F_k$ of $G$ using $F'_1,\ldots,F'_k$, respectively. To obtain $F_i$ first remove all $P_f$ paths from $F'_i$. Suppose there is an edge $h$ in $P_f$ such that $\chi^{F'_i}_h=0$, this means that for any edge $p\in P_f$ such that $p\neq h$, $\chi^{F'_i}_p=2$. In this case, let $\chi^{F_i}_f=2$, i.e. add two copies of $f$ to $F_i$. If there are at least two edges $h,h'\in P_f$ with $\chi^{F'_i}_h=\chi^{F'_i}_{h'} = 1$, let $\chi^{F_i}_f=1$, i.e. add one copy of $f$ to $F_i$. If for all edge $h\in P_f$, we have $\chi^{F'_i}_h=2$, then let $\chi^{F_i}_f=2$. For $f\in E$ with $x_f<1$ we have
+		Note that each $F'_i$ contains at least one copy of every edge in any path $P_f$, except for at most one edge in the path. We will obtain 2-edge-connected multigraphs $F_1,\ldots,F_k$ of $G$ using $F'_1,\ldots,F'_k$, respectively. To obtain $F_i$ first remove all $P_f$ paths from $F'_i$. Suppose there is an edge $h$ in $P_f$ such that $\chi^{F'_i}_h=0$, this means that for any edge $p\in P_f$ such that $p\neq h$, $\chi^{F'_i}_p=2$. In this case, let $\chi^{F_i}_f=2$, i.e. add two copies of $f$ to $F_i$. If there are at least two edges $h,h'\in P_f$ with $\chi^{F'_i}_h=\chi^{F'_i}_{h'} = 1$, let $\chi^{F_i}_f=1$, i.e. add one copy of $f$ to $F_i$. If for all edges $h\in P_f$, we have $\chi^{F'_i}_h=2$, then let $\chi^{F_i}_f=2$. For $f\in E$ with $x_f<1$ we have
 		\begin{equation}
 		\sum_{i=1}^{k}\theta_i \chi^{F_i}_f=\sum_{i=1}^{k}\theta_i \chi^{F'_i}_f\leq g_{\EC}x'_f= g_{\EC}x_f.
 		\end{equation}
@@ -42,14 +42,14 @@ First, we need a branching lemma. Observe that  the following branching lemma is
 			\sum_{i=1}^{k}\theta_i \chi^{F_i}_f&\leq \sum_{i=1}^{k}\theta_i\frac{\sum_{h\in P_f}\chi^{F'_i}_h}{\ceil{\frac{2}{\epsilon}}-1}\\
 			&= \frac{\sum_{h\in P_f} \sum_{i=1}^{k}\theta_i\chi^{F'_i}_h}{\ceil{\frac{2}{\epsilon}}-1}\\
 			&\leq \frac{\sum_{h\in P_f} g_{\EC}x'_h}{\ceil{\frac{2}{\epsilon}}-1}\\
-			&= \frac{\sum_{h\in P_f} g_{\EC}x'_h}{\ceil{\frac{2}{\epsilon}}-1}\\
+			&= \frac{\sum_{h\in P_f} g_{\EC}x_f}{\ceil{\frac{2}{\epsilon}}-1}\\
 			&= \frac{\ceil{\frac{2}{\epsilon}}}{\ceil{\frac{2}{\epsilon}}-1}g_{\EC}x_f
 		\end{align*}
 		Therefore, we have 
 		\begin{equation}
-		x' \geq \sum_{i\in [k]: \chi^{F_i}_e=1}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi^{F_i}+\sum_{i\in [k]: \chi^{F_i}_e=2}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi^{F_i}.
+		x_e \geq \sum_{i\in [k]: \chi^{F_i}_e=1}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi_e^{F_i}+\sum_{i\in [k]: \chi^{F_i}_e=2}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi_e^{F_i}.
 		\end{equation}
-		Let $x^j = \sum_{i\in [k]: \chi^{F_i}_e=j}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi^{F_i}$ and $\theta_j =  \sum_{i\in [k]: \chi^{F_i}_e=j}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}$ for $j=0,1,2$. It is easy to check that $x^j$ , $\theta_j$ for $j=0,1,2$ is a feasible solution to the LP above. Notice that $\sum_{j=0,1,2}\theta_j = \frac{\ceil{\frac{2}{\epsilon}}-1}{g_{\EC}\ceil{\frac{2}{\epsilon}}}$. By assumption, we have $\frac{\ceil{\frac{2}{\epsilon}}-1}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\leq  \frac{1}{g_{\EC}}-\epsilon$. However, this means $2\leq 1$ which is a contradiction.
+		Let $x^j$ be such that $x_e^j = \sum_{i\in [k]: \chi^{F_i}_e=j}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\chi^{F_i}$ and $\theta_j =  \sum_{i\in [k]: \chi^{F_i}_e=j}\frac{\theta_i(\ceil{\frac{2}{\epsilon}}-1)}{g_{\EC}\ceil{\frac{2}{\epsilon}}}$ for $j=0,1,2$. It is easy to check that $x^j$ , $\theta_j$ for $j=0,1,2$ is a feasible solution to the LP above. Notice that $\sum_{j=0,1,2}\theta_j = \frac{\ceil{\frac{2}{\epsilon}}-1}{g_{\EC}\ceil{\frac{2}{\epsilon}}}$. By assumption, we have $\frac{\ceil{\frac{2}{\epsilon}}-1}{g_{\EC}\ceil{\frac{2}{\epsilon}}}\leq  \frac{1}{g_{\EC}}-\epsilon$. However, this means $2\leq 1$ which is a contradiction.
 	\end{proof}
 	This concludes the proof. \end{proof}
 
@@ -62,9 +62,9 @@ In contrast to FDT for binary MIPs where we round up the fractional variables th
 \end{lemma}
 The proof is similar to Lemma \ref{prune}, but we need to use property (v) in Lemma \ref{LPC2EC} to prove that (a) also holds.
 \begin{proof}
-	We proceed by induction on the $i$. Define $L_0=\{(x^*,1)\}$. It is easy to check all the properties are satisfied. Now, suppose by induction we have $L_{i-1}$ for some $i=1,\ldots,t$ that satisfies all the properties. For each solution $x^\ell$ in $L_{i-1}$ apply Lemma \ref{LPC2EC} on $x^\ell$ and $e_{i}$ to obtain $x^{\ell j}$ and $\lambda_{\ell j}$ for $j=0,1,2$. Let $L'$ be the collection that contains $(x^{\ell j},\lambda_\ell \cdot \lambda_{\ell j})$ for $j=0,1,2$, when applied to all $(x^\ell,\lambda_\ell)$ in $L_{i-1}$. Similar to the proof in Lemma \ref{prune} one can check that $L_i$ satisfies properties (b), (c). We now verify property (a). Consider a solution $x^\ell$ in $L_{i-1}$. For $e\in \{e_1,\ldots,e_{i-1}\}$ if $x^\ell_e =0$, then by property (iv) in Lemma \ref{LPC2EC} we have $x^{\ell j}=0$ for $j=0,1,2$. Otherwise by induction we have $x^{\ell}_{e}\geq 1$ in which case property (v) in Lemma \ref{LPC2EC} ensures that $x^{\ell j}_e\geq 1$ for $j=0,1,2$. Also, $x^{\ell j}_{e_i}= j$, so $x^{\ell j}_{e_i}=0$ or $x^{\ell j}_{e_i}\geq 1$ for $j=0,1,2$. 
+	We proceed by induction on $i$. Define $L_0=\{(x^*,1)\}$. It is easy to check all the properties are satisfied. Now, suppose by induction we have $L_{i-1}$ for some $i=1,\ldots,t$ that satisfies all the properties. For each solution $x^\ell$ in $L_{i-1}$ apply Lemma \ref{LPC2EC} on $x^\ell$ and $e_{i}$ to obtain $x^{\ell j}$ and $\lambda_{\ell j}$ for $j=0,1,2$. Let $L'$ be the collection that contains $(x^{\ell j},\lambda_\ell \cdot \lambda_{\ell j})$ for $j=0,1,2$, when applied to all $(x^\ell,\lambda_\ell)$ in $L_{i-1}$. Similar to the proof in Lemma \ref{prune} one can check that $L_i$ satisfies properties (b), (c). We now verify property (a). Consider a solution $x^\ell$ in $L_{i-1}$. For $e\in \{e_1,\ldots,e_{i-1}\}$ if $x^\ell_e =0$, then by property (iv) in Lemma \ref{LPC2EC} we have $x^{\ell j}_e=0$ for $j=0,1,2$. Otherwise by induction we have $x^{\ell}_{e}\geq 1$ in which case property (v) in Lemma \ref{LPC2EC} ensures that $x^{\ell j}_e\geq 1$ for $j=0,1,2$. Also, $x^{\ell j}_{e_i}= j$, so $x^{\ell j}_{e_i}=0$ or $x^{\ell j}_{e_i}\geq 1$ for $j=0,1,2$. 
 	
-	Finally, if $|L'|\geq t$ we let $L_i=L'$, otherwise apply $\prun(L')$ to obtain $L_{i}$.
+	Finally, if $|L'|\leq t$ we let $L_i=L'$, otherwise apply $\prun(L')$ to obtain $L_{i}$ with $|L_i|\leq t$	.
 \end{proof}
 
 Consider the solutions $x$ in $L_t$. For each variable $e$ we have $x_e=0$ or $x_e\geq 1$. 

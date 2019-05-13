@@ -1,12 +1,13 @@
 \section{Finding a feasible solution}\label{domTOIP}
-Consider a formulation instance $I=(A,G,b)$. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I),P(I)\in [0,1]^n\times \mathbb{R}^p$. For simplicity in the notation we denote $P(I),S(I),$ and $g(I)$ with $P$, $S$, and $g$ for this section and the next section. Also, for both sections we assume $t=|\spp(x)|$. Without loss of generality we can assume $x_i = 0$ for $i=t+1,\ldots,n$. For polyhedron $L$ in $\mathbb{R}^{n\times p}$ let $\dom(L)= \{(x,y)\in \mathbb{R}^n\times \mathbb{R}^p: x\geq x' \text{ for some } (x',y')\in L\}$, and we call $\dom(L)$ the dominant of $L$.
+Consider a formulation instance $I=(A,G,b)$. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I),P(I)\subseteq [0,1]^n\times \mathbb{R}^p$. For simplicity in the notation we denote $P(I),S(I),$ and $g(I)$ with $P$, $S$, and $g$ for this section and the next section. Also, for both sections we assume $t=|\spp(x)|$. Without loss of generality we can assume $x_i = 0$ for $i=t+1,\ldots,n$. For polyhedron $L$ in $\mathbb{R}^{n\times p}$ let $\dom(L)= \{(x,y)\in \mathbb{R}^n\times \mathbb{R}^p: x\geq x' \text{ for some } (x',y')\in L\}$, and we call $\dom(L)$ the dominant of $L$.
 
 In this section we prove Theorem \ref{domtoIP}. In fact, we prove a stronger result. 
 \begin{lemma}\label{domlemma}
 	Given $(x,y)\in \dom(P)$ where $x\in \mathbb{Z}^n$, there is an algorithm (the DomToIP algorithm) that finds $(\bar{x},\bar{y})\in S$ in polynomial time, such that $\bar{x}\leq x$.\end{lemma}
 
 
-We prove Lemma \ref{domlemma} by introducing an algorithm that ``fixes" the variables iteratively, starting from $x_1$ and ending at $x_t$. Suppose we run the algorithm for $\ell\in \{0,\ldots,t-1\}$ iterations and we have $(x^{(\ell)},y^{(\ell)})\in \dom(P)$  such that $x^{(\ell)}_i\in \{0,1\}$ for $i=1,\ldots,t$. Now consider the following linear program. The variables of this linear program are the $z\in \mathbb{R}^n$ variables and $w\in \mathbb{R}^p$.
+We prove Lemma \ref{domlemma} by introducing an algorithm that ``fixes" the variables iteratively, starting from $x_1$ and ending at $x_t$. Suppose we run the algorithm for $\ell\in \{0,\ldots,t-1\}$ iterations and we have $(x^{(\ell)},y^{(\ell)})\in \dom(P)$  such that $x^{(\ell)}_i\in \{0,1\}$ for $i=1,\ldots,n$. Now consider the following linear program. The variables of this linear program are the $z\in \mathbb{R}^n$ variables and $w\in \mathbb{R}^p$. 
+
 \begin{align}
 	\DOMtoS(x^{(\ell)})\quad\quad& \min\quad \;z_{\ell+1}\\
 	&\;\text{s.t.} \quad \;\;Az+ Gw\geq b \\
@@ -43,18 +44,18 @@ We prove that indeed $(x^{(t)},y^{(t)})\in S$. First, we need to show that in an
 	\LP^{(\ell)}&= \{(z,w)\in P\; : \; z\leq x^{(\ell)} \mbox{ and } z_j=x_j^{(\ell)} \mbox{ for } j=1,\ldots,\ell\}, \text{ and}\\
 	\IP^{(\ell)}&= \{(z,w)\in \LP^{(\ell)}\; : \; z\in \{0,1\}^n\}.
 	\end{align*}
-	Notice that if $\LP^{(\ell)}$ is a non-empty set then $\DOMtoS(x^{(\ell)})$ is feasible. We show by induction on $\ell$ that $\LP^{(\ell)}$ and $\IP^{(\ell)}$ are not empty sets for $\ell=0,\ldots,t-1$. First notice that $\LP^{(0)}$ is clearly feasible since by definition $(x^{(0)},y^{(0)})\in \dom(P)$, meaning there exists $(z,w)\in P$ such that $z\leq x^{(0)}$. By Theorem \ref{CV}, there exists $(\tilde{z}^i,\tilde{w}^i) \in S$ and $\theta_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k} \theta_i = 1$ and $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz$.	Thus we have $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz\leq gx^{(0)}$. So if $x^{(0)}_j=0$, then $ \sum_{i=1}^{k}\theta_i \tilde{z}_j^i =0$, which implies that $\tilde{z}^i_j=0$ for all $i=1,\ldots,k$ and $j= 1,\ldots,n$ where $x^{(0)}_j=0$. Also recall that $x^{(0)}\in \mathbb{Z}^n$.	Hence, $\tilde{z}^i\leq x^{(0)}$ for $i=1,\ldots,k$. Therefore $(\tilde{z}^i,\tilde{w}^i)\in \IP^{(0)}$ for $i=1,\ldots,k$, which implies $\IP^{(0)}\neq \emptyset$.
+	Notice that if $\LP^{(\ell)}$ is a non-empty set then $\DOMtoS(x^{(\ell)})$ is feasible. We show by induction on $\ell$ that $\LP^{(\ell)}$ and $\IP^{(\ell)}$ are not empty sets for $\ell=0,\ldots,t-1$. First notice that $\LP^{(0)}$ is clearly non-empty since by definition $(x^{(0)},y^{(0)})\in \dom(P)$, meaning there exists $(z,w)\in P$ such that $z\leq x^{(0)}$. By Theorem \ref{CV}, there exists $(\tilde{z}^i,\tilde{w}^i) \in S$ and $\theta_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k} \theta_i = 1$ and $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz$.	Thus we have $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz\leq gx^{(0)}$. So if $x^{(0)}_j=0$, then $ \sum_{i=1}^{k}\theta_i \tilde{z}_j^i =0$, which implies that $\tilde{z}^i_j=0$ for all $i=1,\ldots,k$ and $j= 1,\ldots,n$ where $x^{(0)}_j=0$. Also recall that $x^{(0)}\in \mathbb{Z}^n$.	Hence, $\tilde{z}^i\leq x^{(0)}$ for $i=1,\ldots,k$. Therefore $(\tilde{z}^i,\tilde{w}^i)\in \IP^{(0)}$ for $i=1,\ldots,k$, which implies $\IP^{(0)}\neq \emptyset$.
 	
 	Now assume $\IP^{(\ell)}$ is non-empty for some $\ell \in \{0,\ldots,t-2\}$. Since $\IP^{(\ell)}\subseteq\LP^{(\ell)}$ we have $\LP^{(\ell)}\neq \emptyset$ and hence the $\DOMtoS(x^{(\ell)})$ has an optimal solution $(z^*,w^*)$. 
 	
-	We consider two cases. In the first case, we have $z^*_{\ell+1}=0$. In this case we have $x^{(\ell+1)}_{\ell+1}=0$. Since $z^*\leq x^{(\ell+1)}$, we have $(z^*,w^*)\in \LP^{(\ell+1)}$. Also, $(z^*,w^*)\in P$. By Theorem \ref{CV} there exists $(\tilde{z}^i,\tilde{w}^i)\in S$ and $\theta_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k} \theta_i = 1$ and  $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*$ . We have $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*\leq gx^{(\ell+1)}$
-	So for $j\in \{1,\ldots,n\}$ where $x^{(\ell+1)}_j=0$, we have $z^i_j=0$ for $i=1,\ldots,k$. Hence, $\tilde{z}^i\leq x^{(\ell+1)}$ for $i=1,\ldots,k$. Hence, there exists $(z,w)\in S$ such that $z\leq x^{(\ell+1)}$. We claim that $(z,w)\in \IP^{(\ell+1)}$. If $(z,w)\notin \IP^{(\ell+1)}$ we must have $1\leq j \leq \ell$ such that $z_j < x^{(\ell+1)}_{j}$, and thus $z_j = 0$ and $x^{(\ell+1)}_j=1$. Without loss of generality assume $j$ is minimum number satisfying $z_j < x^{(\ell+1)}_{j}$. Consider iteration $j$ of the Dom2IP algorithm. Notice that $z\leq x^{(\ell+1)}\leq x^{(j)}$. We have $x^{(j)}_j=1$ which implies when we solved $\DOMtoS(x^{(j-1)})$ the optimal value was strictly larger than zero. However, $(z,w)$ is a feasible solution to $\DOMtoS(x^{(j-1)})$ and gives an objective value of 0. This is a contradiction, so $(z,w)\in \IP^{(\ell+1)}$.
+	We consider two cases. In the first case, we have $z^*_{\ell+1}=0$. In this case we have $x^{(\ell+1)}_{\ell+1}=0$. Since $z^*\leq x^{(\ell+1)}$, we have $(z^*,w^*)\in \LP^{(\ell+1)}$. Also, $(z^*,w^*)\in P$. By Theorem \ref{CV} there exists $(\tilde{z}^i,\tilde{w}^i)\in S$ and $\theta_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k} \theta_i = 1$ and  $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*$. We have $\sum_{i=1}^{k}\theta_i \tilde{z}^i \leq gz^*\leq gx^{(\ell+1)}$
+	So for $j\in \{1,\ldots,n\}$ where $x^{(\ell+1)}_j=0$, we have $z^i_j=0$ for $i=1,\ldots,k$. Hence, $\tilde{z}^i\leq x^{(\ell+1)}$ for $i=1,\ldots,k$. Hence, there exists $(z,w)\in S$ such that $z\leq x^{(\ell+1)}$. We claim that $(z,w)\in \IP^{(\ell+1)}$. If $(z,w)\notin \IP^{(\ell+1)}$ we must have $1\leq j \leq \ell$ such that $z_j < x^{(\ell+1)}_{j}$, and thus $z_j = 0$ and $x^{(\ell+1)}_j=1$. Without loss of generality assume $j$ is minimum number satisfying $z_j < x^{(\ell+1)}_{j}$. Consider iteration $j$ of the DomToIP algorithm. Notice that $z\leq x^{(\ell+1)}\leq x^{({j-1})}\leq x^{(j)}$. We have $x^{(j)}_j=1$ which implies when we solved $\DOMtoS(x^{(j-1)})$ the optimal value was strictly larger than zero. However, $(z,w)$ is a feasible solution to $\DOMtoS(x^{(j-1)})$ and gives an objective value of 0. This is a contradiction, so $(z,w)\in \IP^{(\ell+1)}$.
 	
 	Now for the second case, assume $z^*_{\ell+1} > 0$. We have $x^{(\ell+1)}_{\ell+1}=1$. Notice that for each point $z\in \LP^{(\ell)}$ we have $z_{\ell+1} >0$, so for each $z\in \IP^{(\ell)}$ we have $z_{\ell+1}>0$, i.e. $z_{\ell+1}=1$. This means that $(z,w)\in \IP^{(\ell+1)}$, and $\IP^{(\ell+1)} \neq \emptyset$.
 	
 	Now consider $(x^{(t)},y^{(t)})$. Let $(z,y^{(t)})$ be the optimal solution to $\LP^{(t-1)}$. If $x^{(t)} = 0$, we have $x^{(t)} = z$, which implies that $(x^{(t)},y^{(t)})\in P$, and since $x^{(t)}\in \{0,1\}^n$ we have $(x^{(t)},y^{(t)})\in S$. If $x^{(t)} =1$, it must be the case that $z_t > 0$. By the argument above there is a point $(z',w')\in \IP^{(t-1)}$. We show that $x^{(t)} = z'$. For $j=1,\ldots,n-1$ we have $z'_j= x_j^{(t-1)}=x_j^{(t)}$. We just need to show that $z'_j = 1$. Assume $z'_j = 0$ for contradiction, then $(z',w')\in \LP^{(t-1)}$ has objective value of $0$ for $\DOMtoS(x^{(t-1)})$, this is a contradiction to $(z,w)$ being the optimal solution. This concludes the proof of Lemma \ref{domlemma}. 
 	
-	Notice that Lemma \ref{domlemma} implies Theorem \ref{domtoIP}, since it is easy to obtain an integer point in $\dom(P)$: rounding up any fractional point in $P$ gives us a point in $\dom(P)$.
+	Notice that Lemma \ref{domlemma} implies Theorem \ref{domtoIP}, since it is easy to obtain an integer point in $\dom(P)$: rounding up any fractional point in $P$ gives us an integral point in $\dom(P)$.
 
 
 
@@ -152,19 +153,19 @@ We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integr
 \end{proof}
 
 \paragraph{From leaves of FDT to feasible solutions}
-For the leaves of the FDT tree,  $L_t$, we have that every solution $(x,y)$ in $L_t$ has $x\in\{0,1\}^n$ and $(x,y)\in \dom(P)$. By applying Lemma \ref{domlemma} we can obtain a point $(x',y')\in S$ such that $x'\leq x$. This conclude the description of the FDT algorithm and proves Theorem \ref{binaryFDT}. See Algorithm \ref{FDTFull} for a summary of the FDT algorithm.
+For the leaves of the FDT tree,  $L_t$, we have that every solution $(x,y)$ in $L_t$ has $x\in\{0,1\}^n$ and $(x,y)\in \dom(P)$. By applying Lemma \ref{domlemma} we can obtain a point $(x',y')\in S$ such that $x'\leq x$. This concludes the description of the FDT algorithm and proves Theorem \ref{binaryFDT}. See Algorithm \ref{FDTFull} for a summary of the FDT algorithm.
 	
 	\vspace*{10pt}
 	
 	\begin{algorithm}[H]\label{FDTFull}
-		\KwIn{$P= \{(x,y)\in \mathbb{R}^{n\times p}: Ax+Gy\geq b\}$ and $S=\{(x,y)\in P: x\in \{0,1\}^n\}$ such that $g=\max_{c\in \mathbb{R}^n_+ }\frac{\min_{(x,y)\in }cx}{\min_{(x,y)\in P}cx}$ is finite, $(x^*,y^*)\in P$}
-		\KwOut{$(z^i,w^i)\in S$ and $\lambda_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\lambda_i = 1$, and $\sum_{i=1}^{k}\lambda_iz^i\leq g^tx^*$ }
+		\KwIn{$P= \{(x,y)\in \mathbb{R}^{n+ p}: Ax+Gy\geq b\}$ and $S=\{(x,y)\in P: x\in \{0,1\}^n\}$ such that $g=\max_{c\in \mathbb{R}^n_+ }\frac{\min_{(x,y)\in S }cx}{\min_{(x,y)\in P}cx}$ is finite, $(x^*,y^*)\in P$}
+		\KwOut{$(z^i,w^i)\in S$ and $\lambda_i\geq 0$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\lambda_i = 1$, and $\sum_{i=1}^{k}\lambda_iz^i\leq g^kx^*$  for a $k\leq t$}
 		$L^0\leftarrow [(x^*,y^*),1]$\\
 		\For{$i=1$ \textbf{to} $t$}{
 			$L'\leftarrow \emptyset$\\
 			\For{$[(x,y),\lambda] \in L^i$}{
 				Apply Lemma \ref{round-up} to obtain $[(\hat{x}^0,\hat{y}^0),\gamma_0]$ and $[(\hat{x}^1,\hat{y}^1),\gamma_1]$\\
-				$L' \leftarrow L' \cup \{[(\hat{x}^0,\hat{y}^0),\gamma_0]\} \cup \{[(\hat{x}^1,\hat{y}^1),\gamma_1]\}$\\			
+				$L' \leftarrow L' \cup \{[(\hat{x}^0,\hat{y}^0),\lambda\gamma_0]\} \cup \{[(\hat{x}^1,\hat{y}^1),\lambda\gamma_1]\}$\\			
 			}
 			Apply $\prun(L')$ to obtain $L^{i+1}$. 
 		}
@@ -176,4 +177,3 @@ For the leaves of the FDT tree,  $L_t$, we have that every solution $(x,y)$ in $
 		\caption{Fractional Decomposition Tree Algorithm}
 	\end{algorithm}
 	
-
