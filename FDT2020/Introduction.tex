@@ -1,0 +1,184 @@
+\nocite{IPbook}
+\section{Introduction}\label{chapter:intro}
+
+
+In combinatorial optimization the aim is to find the optimal solution in a discrete and
+usually finite yet large set of solutions. For many specific combinatorial optimization problems such a solution can be found efficiently. For many others, finding optimal or in many cases near optimal solutions is NP-hard. A common approach to deal with such problems is relaxing the discrete solution set into a continuous set, where the optimization problem becomes tractable. Obtaining feasible solutions by means of such a relaxation requires an additional step of rounding the potentially fractional solution of the continuous relaxation into integer solutions.
+
+In this paper, our focus is on linear relaxation of combinatorial
+optimization problems. Combinatorial optimization was pioneered by Edmonds even before efficient algorithms for solving linear programming problems where introduced by Khachiyan \cite{Khachiyan} and later by Karmarkar \cite{Karmarkar1984}. For problems such as the \textsc{Minimum Cost Spanning Tree Problem} there are linear programming relaxations whose basic feasible solutions coincide with  integral solutions, i.e. spanning trees. For other problems the value of the linear programming relaxation provides a bound (lower bound for a minimization problem and upper bound for a maximization problem) on the optimal solution. A common and successful approach is to round these (potentially) fractional solutions into integer solutions for the combinatorial optimization problem at hand. The Integrality gap of a linear relaxation of an integer programming problem is the worst case ratio between the objective values of the discrete problem and the continuous problem. Equivalently, the integrality gap of the linear programming relaxation is a limit to the rounding approach: rounding a fractional solution into an integer solution incurs
+a multiplicative cost proportional to the integrality gap. In this dissertation we study integrality gaps for different combinatorial optimization problems and introduce new rounding algorithms that imply bounds on their respective integrality gaps. 
+
+\section{Integrality Gap}
+\iffalse{
+
+Let $S$ denote the set of feasible solutions to a combinatorial optimization problem. For instance, for many problems in network optimization, set $S$ is a subset of $ \{0,1\}^n$ where each coordinate of a point in $S$ indicates the absence or presence of the corresponding edge in a solution, and $n$ is the number of edges in the network. Suppose set $S$ can be described as $S=\{x\in \mathbb{Z}^n: Ax\geq b, x\geq 0 \}$ for some $A\in \mathbb{R}^{m\times n}$ and $b\in \mathbb{R}^m$. (Pure) Integer Programming (IP) asks for $\min_{x\in S}cx$ for some $c\in \mathbb{R}^n$. Integer programming is NP-hard and in fact, it is even NP-complete to decide whether set $S$ is empty or not \cite{GareyJohnson}. The convex hull of $S$ denoted by $\conv(S)$ is the minimal convex set containing $S$ and can be formulated as follows.
+\begin{equation*}
+\conv(S) =\{\sum_{i=1}^{k} \lambda_i x^i: x^i \in S \text{ for } i =1,\ldots,k,\; \lambda_i \geq 0 \text{ for } i = 1,\ldots,k \text{, and } \sum_{i=1}^{k}\lambda_i = 1\}.
+\end{equation*}
+
+A fundamental fact in polyhedral theory is that $\min_{c\in S} S = \min_{c\in S} \conv(S)$. Notice that $\conv(S)$ is a polyhedron and optimizing a linear function subject to the points lying in a polyhedron can be done in polynomial time in the number of variables and constraints in the description of $\conv(S)$. Such a description, however, might have exponential size in the description of set $S$.
+
+A natural way to bound the solution to the integer program $\min_{x\in S} cx$ is to relax the integrality constraints. Let $L= \{x\in \mathbb{R}^n: Ax\geq b, x\geq 0\}$. Contrary to integer programming, the optimal solution to $\min_{x\in L}cx$ can be efficiently found. Set $L$ is called the linear programming relaxation of $S$. Since we relaxed the integrality requirement on $x$, we have	
+\begin{equation}\label{lp-lower-bound}
+\min_{x\in L} cx \leq \min_{x\in S}cx.
+\end{equation}
+For most relevant applications and for the entirety of this dissertation we assume $c$ is a non-negative vector and  $c\neq 0$, i.e. $c$ has a positive value in at least one coordinate. Following this assumption we can rewrite (\ref{lp-lower-bound}) as 
+\begin{equation}
+\frac{\min_{x\in S}cx}{\min_{x\in L} cx}\geq 1.
+\end{equation}
+Since we are concerned with the worst-case analysis, we consider 
+
+\vspace*{5pt}
+\noindent\fbox{%
+	\parbox{\textwidth}{%
+		\vspace*{3pt}
+		\begin{equation}\label{eq:IG}
+		g=\max_{c\in \mathbb{R}^n_{\geq 0}}\frac{\min_{x\in S}cx}{\min_{x\in L} cx}.
+		\end{equation}
+	}%
+}
+\vspace*{3pt}
+
+If $g=1$, we say that the linear programming formulation is a perfect formulation. Otherwise we have $g>1$. In this case, we cannot hope to achieve an integer solution with cost lower than $(g-\epsilon)\cdot (\min_{x\in L}cx)$, for any constant $\epsilon>0$. Thus, a lower bound on $g$ provide a certificate for impossibility of approximation via the linear relaxation for which the gap is $g$. On the other hand, an upper bound of $\alpha$ for $g$ is often accompanied with an $\alpha$-approximation algorithm. This is not always the case, as we will later discuss in details.
+
+We refer to $g$ as the integrality gap of the linear relaxation. For a polyhedron $P\in \mathbb{R}^n$ let the \textit{dominant of $P$} be $\{x\in \mathbb{R}^n: \exists y \in P: x\geq y\}$ and denote it by $\dom(P)$. Goemans \cite{goemansblocking} gave a characterization of integrality gap based on convex combinations when $\conv(S)=\mathcal{D}(\conv(S))$. Carr and Vempala \cite{Carr2004} generalized this characterization.
+
+
+\vspace*{5pt}
+\noindent\fbox{%
+	\parbox{\textwidth}{%
+		\begin{thm}[\cite{Carr2004}]\label{CV}
+			Let $S=\{x\in \mathbb{Z}^n: Ax\geq 0,x\geq 0\}$, and $L= \{x\in \mathbb{R}^n: Ax\geq 0, x\geq 0\}$ be the linear relaxation of $S$. Then
+			\begin{equation*}
+			\max_{c\in \mathbb{R}^n_{\geq 0}}\frac{\min_{x\in S}cx}{\min_{x\in L} cx}= \min \{\alpha: \alpha\cdot x \in \mathcal{D}(\conv(S)) \text{ for all $x\in L$}\}.
+			\end{equation*}
+		\end{thm}
+	}%
+}
+\vspace*{5pt}
+
+
+
+
+A polynomial time algorithm for proving an upper bound on integrality gap is called an LP-based approximation algorithm. For many well studied problems, we still do not know the exact integrality gap and the gap between the best known lower bound and the upper bound on the integrality gap are open. In some cases, there are known upper bounds, yet there is no known approximation algorithm, meaning that the proofs do not yield polynomial time algorithms.
+}\fi
+
+In this paper we focus on finding solutions to general Integer Linear Programs (IP). Integer Programming (and more generally Mixed Integer Linear Programming) can be used to model many practical optimization problems including scheduling, logistics and resource allocation. Recall that the set of feasible points for a pure IP (henceforth IP) is the set
+\begin{equation}
+S(A,b)= \{x\in \mathbb{Z}^{n}\;:\; Ax\geq b\}  \label{S}.
+\end{equation}
+If we drop the integrality constraints, we have the linear relaxation of set $S(A,b)$,
+\begin{equation}
+P(A,b) = \{x\in \mathbb{R}^{n}\;:\; Ax\geq b\}. \label{P}
+\end{equation}
+
+Let $I=(A,b)$ denote an instance. Then $S(I)$ and $P(I)$ denote $S(A,b)$ and $P(A,b)$, respectively. Given a linear objective function $c$, recall that an IP is $\min \;\{cx:\; x \in S(I)\}$. It is  NP-hard even to determine if an IP instance has a feasible solution~\cite{GareyJohnson}. However, intelligent branch-and-bound strategies allow commercial and open-source MILP solvers to give exact solutions (or near-optimal solution with provable bound) to many specific instances of NP-hard combinatorial optimization problems. 
+
+Relaxing the integrality constraints gives the polynomial-time-solvable linear-programming relaxation: $\min \;\{cx:\;x\in P(I) \}$.  The optimal value of this linear program (LP), denoted $z_{\lp}(I,c)$, is a lower bound on the optimal value for the IP, denoted $z_{\IP}(I,c)$. The solutions can also provide some useful global structure, even though the fractional values might not directly meaningful. 
+
+Many researchers (see \cite{davids,vazirani}) have developed polynomial-time LP-based approximation algorithms that find solutions for special classes of IPs whose cost are provably smaller than $C\cdot z_{LP}(I,c)$. The approximation factor $C$ can be a constant or depend on the input parameters of the IP, e.g. $O(\log(n))$ where $n$ is the number of variables in the formulation of the IP (the dimension of the problem). However, for many combinatorial optimization problems there is a limit to such techniques based on LP relaxations, represented  by the {integrality gap} of the IP formulation. Recall that integrality gap $g(I)$ for instance $I$ is defined to be $g(I)= \max_{c\geq 0}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}$. An example of instance specific integrality gap is the integrality gap of the subtour elimination relaxation for the 2-edge-connected spanning multigraph problem on $n$ vertices. The instance is the complete graph on $n$ vertices. Alexander et al. \cite{alexander2006integrality} showed the instance specific integrality gap of the subtour elimination relaxation for the 2-edge-connected multigraph problem for instances of the problem with $n= 10$ is at most $\frac{7}{6}$.
+
+This value depends on the constraints in (\ref{S}).  We cannot hope to find solutions for the IP with objective values better than $g(I)\cdot z_{LP}(I,c)$. 
+
+More generally we can define the integrality gap for a class of instances $\mathcal{I}$ as follows.% In this case, the integrality gap for problem $\mathcal{I}$ is
+\begin{equation}\label{gapproblem}
+g(\mathcal{I}) = \max_{c\geq 0 , I\in\mathcal{I}}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}.
+\end{equation}
+For example, the aforementioned integrality gap of the subtour elimination relaxation for the 2-edge-connected multigraph problem is at most $\frac{3}{2}$ \cite{wolsey} and at least $\frac{6}{5}$ \cite{alexander2006integrality}. Therefore, we cannot hope to obtain an LP-based $(\frac{6}{5}-\epsilon)$-approximation algorithm for this problem using this LP relaxation.
+
+
+Our methods apply theory connecting integrality gaps to sets of feasible solutions. Instances $I$ with  $g(I)=1$ has $P(I)=\conv(S(I))$, the convex hull of the lattice of feasible points. In this case, $P(I)$ is an \textit{integral} polyhedron. The spanning tree polytope of graph $G$, $\st(G)$, and the perfect-matching polytope of graph $G$, $\permat(G)$, have this property (\cite{Edmonds2003,edmondsPM}). For such problems there is an algorithm to express vector $x\in P(I)$ as a convex combination of points in $S(I)$ in polynomial time \cite{cons-cara}.
+\begin{proposition}\label{cara}
+	If $g(I)=1$, then for $x\in P(I)$ there exists $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $\tilde{x}^i\in S(I)$ for $i\in [k]$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq x$. Moreover, we can find such a convex combination in polynomial time.
+\end{proposition}
+
+An equivalent way of describing Proposition \ref{cara} is the following Theorem of Carr and Vempala \cite{Carr2004}.
+
+\begin{thm}[Carr, Vempala \cite{Carr2004}] \label{CV2}
+	Let $x\in P(I)$. There exists $\theta \in [0,1]^k$ where $\sum_{i=1}^{k}\theta_i =1$ and $\tilde{x}^i\in \dom(S(I))$ for $i\in [k]$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq Cx$ if and only if $g(I) \leq C$.
+\end{thm}
+Recall that $\dom(P(I))$ is the set of points $x'$ such that there exists a point $x\in P$ with $x'\geq x$, also known as the dominant of $P(I)$. For covering problems the polyhedron is essentially the same as its dominant, but this is not true in general. While there is an exact algorithm for problems with gap $1$ as stated in Proposition \ref{cara}, Theorem~\ref{CV2} is existential, with no construction.
+%In contrast to Proposition \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time.
+%This points to an interesting open question. 
+% We show later, for $I$ with $g(I)<\infty$, the notation of dominant is in fact useful.
+\iffalse
+
+\begin{question*}\label{question1}
+	Assume reasonable complexity assumptions (such as UGC or $\textrm{P}\neq \textrm{NP}$). Given instance $I$ with $1<g(I)<\infty$ and $(x,y)\in P(I)$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in \dom(\conv(S(I)))$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq g(I)x$ in polynomial time?
+\end{question*}
+
+This seems to be a very hard question. A more specific question is of more interest.
+
+\begin{question}\label{question2}
+	Assume reasonable complexity assumptions, a specific problem $\mathcal{I}$ with  $1<g({\mathcal{I}})<\infty$, and $(x,y)\in P(I)$ for some $I\in \mathcal{I}$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $(\tilde{x}^i,\tilde{y}^i)\in S(I)$ for $i=1,\ldots,k$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq g(\mathcal{I})x$ in polynomial time?
+\end{question}
+Although Question \ref{question2} is wide open, for some problems there are polynomial time algorithms closing the gap. For example, for generalized Steiner forest problem \cite{jain} gave an LP-based 2-approximation algorithm. The gap for this problem is also lower bounded by 2. Same holds for the set covering problem \cite{randomizedrounding}. In fact, for set cover the approximation algorithm achieving the same factor as the integrality gap lower bound, is a \textit{randomized rounding} algorithm. Raghavan and Thompson \cite{randomizedrounding} showed that this technique achieves provably good approximation for many combinatorial optimization problems.  
+
+If we relax Question \ref{question1} (resp. Question \ref{question2}), but multiplying $g(I)$ (resp. $g(\mathcal{I})$) by a factor $C$, they are still very interesting, since they will provide upper bounds on the integrality gap of the instance (resp. the problem). The results in this paper serve this purpose.
+\fi
+To study integrality gaps, we wish to find such a solution constructively: assuming reasonable complexity assumptions, a specific problem $\mathcal{I}$ with  $1<g(\mathcal{I})<\infty$, and $x\in P(I)$ for some $I\in \mathcal{I}$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $\tilde{x}^i\in S(I)$ for $i\in [k]$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq Cx$ in polynomial time? We wish to find the smallest factor $C$ as possible.
+
+\section{Contributions of this paper} 
+ 
+We give a general approximation framework for solving binary IPs.  Consider the set of point described by sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume in addition that $S(I),P(I)\subseteq [0,1]^n$. For a vector $x\in \mathbb{R}_{\geq 0}^n$ such that $x\in P(I)$, let $\spp(x)= \{i \in [n]: x_i \neq 0\}$. For an integer $\beta$ let $\{\beta\}^n$ be the vector $y\in \mathbb{R}^n$ with $y_i=\beta$ for $i\in [n]$.
+
+
+We introduce the \textit{Fractional Decomposition Tree Algorithm} (FDT) which is a polynomial-time algorithm that given a point $x\in P(I)$ produces a convex combination of feasible points in $S(I)$ that are dominated by a ``factor" $C$ of $x$ in the coordinates corresponding to $x$. If $C = g(I)$, it would be optimal. However we can only guarantee a factor of $g(I)^{|\spp(x)|}$. FDT relies on iteratively solving linear programs that are about the same size as the description of $P(I)$.
+
+\begin{restatable}{thm}{binaryFDT}
+	\label{binaryFDT}
+	Assume $1\leq g(I) 	<\infty$. 	
+	The Fractional Decomposition Tree (FDT) algorithm, given $x^*\in P(I)$, produces in polynomial time $\lambda\in [0,1]^k$ and $z^1,\ldots,z^k \in S(I)$ such that $k\leq |\spp(x^*)|$, $\sum_{i=1}^{k}\lambda_i z^i\leq \min(Cx^*,\{1\}^{n})$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g(I)^{|\spp(x^*)|}$.
+\end{restatable}
+
+A subroutine of the FDT, called the DomToIP algorithm, finds feasible solutions to any IP with finite gap. This can be of independent interest, especially in proving that a model has unbounded gap.
+\begin{restatable}{thm}{DomToIP}
+	\label{domtoIP}
+	Assume $1\leq g(I) < \infty$. The DomToIP algorithm finds $\hat{x}\in S(I)$ in polynomial time.
+\end{restatable}
+
+For a generic IP instance $I$ it is NP-hard to even decide if the set of feasible solutions $S(I)$ is empty or not. There are a number of heuristics for this purpose, such as the feasibility pump algorithm \cite{fp1,fp2}. These heuristics are often very effective and fast in practice, however, they can sometimes fail to find a feasible solution. Moreover, these heuristics do not provide any bounds on the quality of the solution they find. 
+
+Here is how the FDT algorithm works in a high level: in iteration $i$ the algorithm maintains a convex combination of  vectors in $\mathcal{D}(L(I))$ that have a 0 or 1 value for coordinates indexed $0,\ldots,i-1$. Let $y$ be a vector in the convex combination in iteration $i$ of the algorithm. We solve a linear programming problem that gives us $\theta\in [0,1]$ and $y^0,y^1\in \mathcal{D}(L(I))$ such that $g(I) y\geq \theta_1y^0 + (1-\theta) y^1$ and $y^0_i=0$ and $y^1_i=1$. We then replace $y$ in the convex combination with $\frac{\theta}{g(I)}y^0 +\frac{1-\theta}{g(I)}y^1$. Repeating this for every vector in the convex combination from previous iteration yields a convex combination  of points that is ``more'' integral. If in any iteration there are too many points in the convex combination we solve a linear programming problem that ``prunes'' the convex combination. At the end we find a convex combination of integer solutions $\mathcal{D}(L(I))$. For each such solution $z$ we invoke the DomToIP algorithm (see Section \ref{domTOIP}) to find $z'\in S(I)$ where $z'\leq z$.
+
+
+One can extend the FDT algorithm for binary IPs into covering $\{0,1,2\}$ IPs by losing a factor $2^{|\spp(x)|}$ on top of the loss for FDT. In order to eradicate this extra factor, we need to treat the coordinate $i$ with $x_i=1$ differently. We focus on the \textsc{2-edge-connected multigraph graph problem (2EC)}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^{E}_{\geq 0}$ find a 2-edge-connected multi-subgraph (henceforth a multigraph) of $G$ with minimum cost. The natural linear programming relaxation for this problem is 
+\begin{equation}
+\min \{cx \; : \; x(\delta(U))\geq 2 \; \text{ for }\emptyset \subset U \subset V, \; x\in [0,2]^E\}
+\end{equation}
+We denote the feasible region of this LP by $\subtour(G)$. Let $\2ec(G)$ be the convex hull of incidence vectors of 2-edge-connected multigraphs of graph $G$. Following the definition in (\ref{gapproblem}) have
+\begin{equation}
+g(\2ec) = \max_{c\geq 0 , G}\frac{\min_{x\in \2ec(G)} cx}{\min_{x\in \subtour(G)} cx}.
+\end{equation}
+
+\begin{restatable}{thm}{FDTEC}
+	\label{FDT2EC}
+	Let $G=(V,E)$ and $x$ be an extreme point of  $\subtour(G)$. The FDT algorithm for 2EC produces $\lambda\in [0,1]^k$ and 2-edge-connected multigraphs $F_1,\ldots,F_k$ such that $k\leq 2|V|-1$, $\sum_{i=1}^{k}\lambda_i \chi^{F_i}\leq \min(Cx,\{2\}^n)$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g(\2ec)^{|E_x|}$.
+\end{restatable}
+
+\subsection{Experiments.} Although the bound guaranteed in both Theorems \ref{binaryFDT} and \ref{FDT2EC} are very large, we show that in practice, the algorithm works very well for network design problems described above. We show how one might use FDT to investigate the integrality gap for such well-studied problems.
+
+
+\subsubsection{Minimum vertex cover problem}
+
+TODO
+
+\subsubsection{Tree augmentation problem}
+In the \textsc{Tree Augmentation Problem (TAP)} we are given a  graph $G=(V,E)$, a tree $T$. We also have a cost vector $c\in \mathbb{R}^{E\setminus T}_{\geq 0}$. A subset $F$ of $E\setminus T$ is called a \textit{feasible augmentation} if $(V,T\cup F)$ is a 2-edge-connected graph. In TAP we seek the minimum cost feasible augmentation. The natural linear programming relaxation for TAP is 
+\begin{equation}
+\min \{cx\; : \; \sum_{\ell \in \cov(e)} x_{\ell} \geq 1 \text{ for } e\in T, \; x\in [0,1]^{E\setminus T}\}.
+\end{equation}
+where $\cov(e)$ is set of edges $\ell \in E\setminus T$ such that $e$ is in the unique cycle of $T\cup \{\ell\}$. We call the LP above the cut-LP. The integrality gap of the cut-LP is known to be between $\frac{3}{2}$ \cite{32gaptap} and $2$ \cite{FJ81}. We create random fractional extreme points of the cut-LP and round them using FDT. For the instances that we create the blow-up factor is always below $\frac{3}{2}$ providing an upper bound for such instances.
+
+\subsubsection{2-edge-connected multigraph problem}
+Known polyhedral structure makes it easier to study integrality gaps for such problems. We use the idea of fundamental extreme point \cite{carrravi,boydcarr,Carr2004} to create the ``hardest'' LP solutions to decompose.
+
+
+There are fairly good bounds for the integrality gap for TSP or 2EC. Benoit and Boyd \cite{TSPcompute} used a quadratic program to show the integrality gap of the subtour elimination relaxation for the TSP, $g(\tsp)$, is at most $\frac{20}{17}$ for graphs with at most 10 vertices. Alexander et al. \cite{alexander2006integrality} used the same ideas to provide an upper bound of $\frac{7}{6}$ for $g(\2ec)$ on graphs with at most 10 vertices. 
+
+A \textit{Carr-Vempala point} $x$ is a fractional point in the subtour elimination relaxation where the fractional edges of $x$, edges $e$ with $0<x_e<1$, form a Hamiltonian cycle. For $\2ec$ we show that the integrality gap is at most $\frac{6}{5}$ for Carr-Vempala points with at most 12 vertices on the Hamiltonian cycle formed by the fractional edges. For Carr-Vempala points we assume that 1-edges are replaced by long paths of 1-edges making these points into potentially harder to round instances.
+
+
+
+

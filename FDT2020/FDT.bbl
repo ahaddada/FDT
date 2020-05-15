@@ -1,0 +1,112 @@
+\begin{thebibliography}{CKKK08}
+
+\bibitem[ABE06]{alexander2006integrality}
+Anthony Alexander, Sylvia Boyd, and Paul Elliott{-}Magwood.
+\newblock On the integrality gap of the 2-edge connected subgraph problem.
+\newblock Technical report, TR-2006-04, SITE, University of Ottawa, 2006.
+
+\bibitem[BB08]{TSPcompute}
+Geneviève Benoit and Sylvia Boyd.
+\newblock Finding the exact integrality gap for small {T}raveling {S}alesman
+  {P}roblems.
+\newblock {\em Mathematics of Operations Research}, 33(4):921--931, 2008.
+
+\bibitem[BC11]{boydcarr}
+Sylvia Boyd and Robert Carr.
+\newblock Finding low cost {TSP} and 2-matching solutions using certain
+  half-integer subtour vertices.
+\newblock {\em Discrete Optimization}, 8(4):525 -- 539, 2011.
+
+\bibitem[BP90]{boydpulley}
+S~Boyd and W.~R. Pulleyblank.
+\newblock Optimizing over the subtour polytope of the travelling salesman
+  problem.
+\newblock {\em Mathematical Programming}, 49:163--187, 1990.
+
+\bibitem[CCZ14]{IPbook}
+Michele Conforti, Gerard Cornuejols, and Giacomo Zambelli.
+\newblock {\em Integer Programming}.
+\newblock Springer Publishing Company, Incorporated, 2014.
+
+\bibitem[CKKK08]{32gaptap}
+J.~Cheriyan, H.~Karloff, R.~Khandekar, and J.~Könemann.
+\newblock On the integrality ratio for tree augmentation.
+\newblock {\em Operations Research Letters}, 36(4):399 -- 401, 2008.
+
+\bibitem[CR98]{carrravi}
+Robert Carr and R.~Ravi.
+\newblock A new bound for the 2-edge connected subgraph problem.
+\newblock In {\em IPCO}, 1998.
+
+\bibitem[CV04]{Carr2004}
+Robert Carr and Santosh Vempala.
+\newblock On the {H}eld-{K}arp relaxation for the asymmetric and symmetric
+  traveling salesman problems.
+\newblock {\em Mathematical Programming}, 100(3):569--587, Jul 2004.
+
+\bibitem[Edm65]{edmondsPM}
+Jack Edmonds.
+\newblock Maximum matching and a polyhedron with 0, 1-vertices.
+\newblock {\em Journal of Research of the National Bureau of Standards B},
+  69:125--130, 1965.
+
+\bibitem[Edm70]{Edmonds2003}
+Jack Edmonds.
+\newblock {\em Submodular Functions, Matroids, and Certain Polyhedra}, pages
+  11--26.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1970.
+
+\bibitem[FGL05]{fp1}
+Matteo Fischetti, Fred Glover, and Andrea Lodi.
+\newblock The feasibility pump.
+\newblock {\em Mathematical Programming}, 104(1):91--104, Sep 2005.
+
+\bibitem[FJ81]{FJ81}
+Greg~N. Frederickson and Joseph. Ja’Ja’.
+\newblock Approximation algorithms for several graph augmentation problems.
+\newblock {\em SIAM Journal on Computing}, 10(2):270--283, 1981.
+
+\bibitem[FS09]{fp2}
+Matteo Fischetti and Domenico Salvagnin.
+\newblock Feasibility pump 2.0.
+\newblock {\em Mathematical Programming Computation}, 1(2):201--222, Oct 2009.
+
+\bibitem[GJ90]{GareyJohnson}
+Michael~R. Garey and David~S. Johnson.
+\newblock {\em Computers and Intractability; A Guide to the Theory of
+  NP-Completeness}.
+\newblock W. H. Freeman \& Co., USA, 1990.
+
+\bibitem[GLS93]{cons-cara}
+Martin Gr{\"o}tschel, L{\'a}szl{\'o} Lov{\'a}sz, and Alexander Schrijver.
+\newblock {\em Geometric Algorithms and Combinatorial Optimization}, volume~2.
+\newblock Second corrected edition edition, 1993.
+
+\bibitem[Kar84]{Karmarkar1984}
+N.~Karmarkar.
+\newblock A new polynomial-time algorithm for linear programming.
+\newblock {\em Combinatorica}, 4(4):373--395, Dec 1984.
+
+\bibitem[Kha80]{Khachiyan}
+L.G. Khachiyan.
+\newblock Polynomial algorithms in linear programming.
+\newblock {\em USSR Computational Mathematics and Mathematical Physics},
+  20(1):53 -- 72, 1980.
+
+\bibitem[Vaz01]{vazirani}
+Vijay~V. Vazirani.
+\newblock {\em Approximation Algorithms}.
+\newblock Springer-Verlag, Berlin, Heidelberg, 2001.
+
+\bibitem[Wol80]{wolsey}
+Laurence~A. Wolsey.
+\newblock {\em Heuristic analysis, linear programming and branch and bound},
+  pages 121--134.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1980.
+
+\bibitem[WS11]{davids}
+David~P. Williamson and David~B. Shmoys.
+\newblock {\em The Design of Approximation Algorithms}.
+\newblock Cambridge University Press, USA, 1st edition, 2011.
+
+\end{thebibliography}
