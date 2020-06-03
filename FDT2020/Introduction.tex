@@ -73,11 +73,11 @@ If we drop the integrality constraints, we have the linear relaxation of set $S(
 P(A,b) = \{x\in \mathbb{R}^{n}\;:\; Ax\geq b\}. \label{P}
 \end{equation}
 
-Let $I=(A,b)$ denote an instance. Then $S(I)$ and $P(I)$ denote $S(A,b)$ and $P(A,b)$, respectively. Given a linear objective function $c$, recall that an IP is $\min \;\{cx:\; x \in S(I)\}$. It is  NP-hard even to determine if an IP instance has a feasible solution~\cite{GareyJohnson}. However, intelligent branch-and-bound strategies allow commercial and open-source MILP solvers to give exact solutions (or near-optimal solution with provable bound) to many specific instances of NP-hard combinatorial optimization problems. 
+Let $I=(A,b)$ denote an instance. Then $S(I)$ and $P(I)$ denote $S(A,b)$ and $P(A,b)$, respectively. Given a linear objective function $c$, recall that an IP is $\min \;\{cx:\; x \in S(I)\}$. It is  NP-hard even to determine if an IP instance has a feasible solution~\cite{GareyJohnson}. However, intelligent branch-and-bound strategies allow commercial and open-source MILP solvers to give exact solutions (or nearoptimal solutions with a provable bound) to many specific instances of NP-hard combinatorial optimization problems. 
 
-Relaxing the integrality constraints gives the polynomial-time-solvable linear-programming relaxation: $\min \;\{cx:\;x\in P(I) \}$.  The optimal value of this linear program (LP), denoted $z_{\lp}(I,c)$, is a lower bound on the optimal value for the IP, denoted $z_{\IP}(I,c)$. The solutions can also provide some useful global structure, even though the fractional values might not directly meaningful. 
+Relaxing the integrality constraints gives the polynomial time solvable linear programming relaxation: $\min \;\{cx:\;x\in P(I) \}$.  The optimal value of this linear program (LP), denoted $z_{\lp}(I,c)$, is a lower bound on the optimal value for the IP, denoted $z_{\IP}(I,c)$. The solutions can also provide some useful global structure, even though the fractional values might not be directly meaningful. 
 
-Many researchers (see \cite{davids,vazirani}) have developed polynomial-time LP-based approximation algorithms that find solutions for special classes of IPs whose cost are provably smaller than $C\cdot z_{LP}(I,c)$. The approximation factor $C$ can be a constant or depend on the input parameters of the IP, e.g. $O(\log(n))$ where $n$ is the number of variables in the formulation of the IP (the dimension of the problem). However, for many combinatorial optimization problems there is a limit to such techniques based on LP relaxations, represented  by the {integrality gap} of the IP formulation. Recall that integrality gap $g(I)$ for instance $I$ is defined to be $g(I)= \max_{c\geq 0}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}$. An example of instance specific integrality gap is the integrality gap of the subtour elimination relaxation for the 2-edge-connected spanning multigraph problem on $n$ vertices. The instance is the complete graph on $n$ vertices. Alexander et al. \cite{alexander2006integrality} showed the instance specific integrality gap of the subtour elimination relaxation for the 2-edge-connected multigraph problem for instances of the problem with $n= 10$ is at most $\frac{7}{6}$.
+Many researchers (see \cite{davids,vazirani}) have developed polynomial time LP-based approximation algorithms that find solutions for special classes of IPs whose cost are provably smaller than $C\cdot z_{LP}(I,c)$. The approximation factor $C$ can be a constant or depend on the input parameters of the IP, e.g. $O(\log(n))$ where $n$ is the number of variables in the formulation of the IP (the dimension of the problem). However, for many combinatorial optimization problems there is a limit to such techniques based on LP relaxations, represented  by the {integrality gap} of the IP formulation. Recall that integrality gap $g(I)$ for instance $I$ is defined to be $g(I)= \max_{c\geq 0}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}$. An example of an instance specific integrality gap is the integrality gap of the subtour elimination relaxation for the 2-edge-connected spanning multigraph problem on $n$ vertices. The instance is the complete graph on $n$ vertices. Alexander et al. \cite{alexander2006integrality} showed the instance specific integrality gap of the subtour elimination relaxation for the 2-edge-connected multigraph problem for instances of the problem with $n= 10$ is at most $\frac{7}{6}$.
 
 This value depends on the constraints in (\ref{S}).  We cannot hope to find solutions for the IP with objective values better than $g(I)\cdot z_{LP}(I,c)$. 
 
@@ -96,7 +96,7 @@ Our methods apply theory connecting integrality gaps to sets of feasible solutio
 An equivalent way of describing Proposition \ref{cara} is the following Theorem of Carr and Vempala \cite{Carr2004}.
 
 \begin{thm}[Carr, Vempala \cite{Carr2004}] \label{CV2}
-	Let $x\in P(I)$. There exists $\theta \in [0,1]^k$ where $\sum_{i=1}^{k}\theta_i =1$ and $\tilde{x}^i\in \dom(S(I))$ for $i\in [k]$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq Cx$ if and only if $g(I) \leq C$.
+	We have $g(I) \leq C$ if and only if for  $x\in P(I)$ there exists $\theta \in [0,1]^k$ where $\sum_{i=1}^{k}\theta_i =1$ and $\tilde{x}^i\in \dom(S(I))$ for $i\in [k]$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq Cx$.
 \end{thm}
 Recall that $\dom(P(I))$ is the set of points $x'$ such that there exists a point $x\in P$ with $x'\geq x$, also known as the dominant of $P(I)$. For covering problems the polyhedron is essentially the same as its dominant, but this is not true in general. While there is an exact algorithm for problems with gap $1$ as stated in Proposition \ref{cara}, Theorem~\ref{CV2} is existential, with no construction.
 %In contrast to Proposition \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time.
@@ -117,7 +117,7 @@ Although Question \ref{question2} is wide open, for some problems there are poly
 
 If we relax Question \ref{question1} (resp. Question \ref{question2}), but multiplying $g(I)$ (resp. $g(\mathcal{I})$) by a factor $C$, they are still very interesting, since they will provide upper bounds on the integrality gap of the instance (resp. the problem). The results in this paper serve this purpose.
 \fi
-To study integrality gaps, we wish to find such a solution constructively: assuming reasonable complexity assumptions, a specific problem $\mathcal{I}$ with  $1<g(\mathcal{I})<\infty$, and $x\in P(I)$ for some $I\in \mathcal{I}$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $\tilde{x}^i\in S(I)$ for $i\in [k]$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq Cx$ in polynomial time? We wish to find the smallest factor $C$ as possible.
+To study integrality gaps, we wish to find such a solution constructively: assuming reasonable complexity assumptions, a specific problem $\mathcal{I}$ with  $1<g(\mathcal{I})<\infty$, and $x\in P(I)$ for some $I\in \mathcal{I}$, can we find $\theta \in [0,1]^k$, where $\sum_{i=1}^{k}\theta_i =1$ and $\tilde{x}^i\in S(I)$ for $i\in [k]$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq Cx$ in polynomial time? We wish to find the smallest factor $C$ possible.
 
 \section{Contributions of this paper} 
  
@@ -162,8 +162,11 @@ g(\2ec) = \max_{c\geq 0 , G}\frac{\min_{x\in \2ec(G)} cx}{\min_{x\in \subtour(G)
 
 \subsubsection{Minimum vertex cover problem}
 
-TODO
-
+In the \textsc{minimum vetex cover problem (VC)} we are given a graph $G=(V,E)$ and $c\in \mathbb{R}^E_{\geq 0}$. A subset of $U$ of $V$ is a \textit{vertex cover} if for $e\in E$ at least one endpoint of $e$ is in $U$. The goal in VC is to find the minimum cost vertex cover. The linear programming relaxation for VC is
+\begin{equation}
+\min \{cx \; : \; x_u + x_v \geq	 1 \text{ for } e=uv \in E, \; x\in [0,1]^{V}\}.
+\end{equation}
+The integrality gap of this formulation is exactly 2. It is shown that it is NP-hard to approximte VC within any factor sctrictly better than 2 \cite{}. We run FDT on challenge test cases \cite{} and compare it with CPLEX IP solver and feasiblity pump. 
 \subsubsection{Tree augmentation problem}
 In the \textsc{Tree Augmentation Problem (TAP)} we are given a  graph $G=(V,E)$, a tree $T$. We also have a cost vector $c\in \mathbb{R}^{E\setminus T}_{\geq 0}$. A subset $F$ of $E\setminus T$ is called a \textit{feasible augmentation} if $(V,T\cup F)$ is a 2-edge-connected graph. In TAP we seek the minimum cost feasible augmentation. The natural linear programming relaxation for TAP is 
 \begin{equation}
