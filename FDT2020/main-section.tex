@@ -1,8 +1,8 @@
 
-
-	\subsection{Notations}
+\iffalse{
+	\subsection{Notation}
 	For vectors $x,y\in \mathbb{R}_{n}$ we say $x$ dominates $y$ if $x_i\geq y_i$ for $i= 1,\ldots,n$. For $m\times n$ matrix $A$, let $A_j$ be the $j$-th row of $A$ and $A^j$ be the $j$-th column of $A$. For a set $S$ of vectors in $\mathbb{R}_{n}$, $\conv(S)$ is the convex hull of all the points in $S$.
-
+}\fi
 \section{Finding a Feasible Solution}\label{domTOIP}
 Consider an instance $I=(A,b)$ of the IP formulation. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I)\subseteq \{0,1\}^n$ and $P(I)\subseteq [0,1]^n$. For simplicity in the notation we denote $P(I),S(I),$ and $g(I)$ with $P$, $S$, and $g$ for this section and the next section. Also, for both sections we assume $t=|\spp(x)|$. Without loss of generality we can assume $x_i = 0$ for $i=t+1,\ldots,n$.
 
@@ -177,7 +177,7 @@ We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integr
 
 \section{FDT for 2EC}\label{2EC}
 
-In Section \ref{binaryfdt} our focus was on binary IPs. In this section, in an attempt to extend FDT to \{0,1,2\} problems we introduce an FDT algorithm for a 2-edge-connected multigraph problem. Given a graph $G=(V,E)$ a multi-subset of edges $F$ of $G$ is a 2-edge-connected multigraph of $G$ if for each set $\emptyset\subset U \subset V$, the number of edge in $F$ that have one endpoint in $U$ and one not in $U$ is at least 2. Recall that in the 2EC, we are given non-negative costs on the edges of $G$ and the goal is to find the minimum cost 2-edge-connected multigraph of $G$. The natural linear programming relaxation is $\min \{cx \; : \; x\in \subtour(G)\}$ where $\subtour(G) = \{x\in [0,2]^E: x(\delta(U))\geq 2 \mbox{ for } \emptyset \subset U \subset V\}$. Notice that, no optimal solution ever takes 3 copies of an edge in 2EC, hence we assume that we can take an edge at most 2 times, hence in this chapter (unlike in the previous chapters) we work with a bounded version of $\subtour(G)$.  Notice that $\dom(\subtour(G))\cap [0,2]^{E} = \subtour(G)$. Thus, we also assume a multigraph can contain at most 2 copies of any edge in the graph. We want to prove Theorem \ref{FDT2EC}.
+In Section \ref{binaryfdt} our focus was on binary IPs. In this section, in an attempt to extend FDT to \{0,1,2\} problems we introduce an FDT algorithm for a 2-edge-connected multigraph problem. Given a graph $G=(V,E)$ a multi-subset of edges $F$ of $G$ is a 2-edge-connected multigraph of $G$ if for each set $\emptyset\subset U \subset V$, the number of edge in $F$ that have one endpoint in $U$ and one not in $U$ is at least 2. Recall that in the 2EC, we are given non-negative costs on the edges of $G$ and the goal is to find the minimum cost 2-edge-connected multigraph of $G$. We want to prove Theorem \ref{FDT2EC}.
 \FDTEC*
 We do not know the exact value for $g(\2ec)$, but we know $\frac{6}{5} \leq g(\2ec) \leq \frac{3}{2}$ \cite{alexander2006integrality,wolsey}. The FDT algorithm for 2EC is very similar to the one for binary IPs, but there are some differences as well. A natural thing to do is to have three branches for each node of the FDT tree, however, the branches that are equivalent to setting a variable to $1$, might need further decomposition. That is the main difficulty when dealing with $\{0,1,2\}$-IPs.
 
@@ -251,7 +251,10 @@ The FDT algorithm for 2EC iteratively applies Lemmas \ref{LPC2EC} and \ref{2ecpr
 \sum_{(x,\lambda)\in L_t} \frac{\lambda}{\sum_{(x,\lambda)\in L_t}\lambda} \floor{x} \leq \frac{1}{\sum_{(x,\lambda)\in L_t}\lambda} \sum_{(x,\lambda)\in L_t} \lambda {x} \leq g^t_{\2ec} x^*.
 \end{align*}
 \section{Computational Experiments with FDT}\label{experiment}
-We ran FDT on two network design problems: TAP and 2EC. 
+We ran FDT on three network design problems: VC, TAP and 2EC. 
+\paragraph{FDT on VC instances from (PACE 2019) \cite{PACE}.}
+
+
 
 \paragraph{FDT on randomly generated instances of TAP.}
 Recall that in TAP we are given a tree $T=(V,E)$, and a set of links $L$ between vertices in $V$ and costs $c\in \mathbb{R}^{L}_{\geq 0}$. A feasible augmentation is $L'\subseteq L$ such that $T+L'$ is 2-edge-connected. In TAP we wish to find the minimum-cost feasible augmentation. The integrality gap of the cut-LP for TAP is defined as 
@@ -274,18 +277,22 @@ We know $\frac{3}{2}\leq g(\tap)\leq 2$~\cite{FJ81,32gaptap}. Notice that $\min_
 	
 \end{table}
 
-\paragraph{Computational comparison between Christofides' algorithm and FDT for 2EC on Carr-Vempala points.} We implemented the polyhedral version of Christofides' algorithm \cite{wolsey}. In particular, we implemented the $O$-join augmentation in Christofides' algorithm, in a way that minimizes the average usage of every edge in the $O$-join augmentation across the convex combination of spanning trees. In particular, let $x\in \subt(G_x)$. It is easy to check that $\frac{n-1}{n}x\in \st(G_x)$, hence we can write $x= \sum_{i=1}^{k}\lambda_i\chi^{T_i}$ where $T_i$ is spanning tree of $G_x$, $\sum_{i=1}^{k}\lambda_i=1$, and $\lambda_i\geq 0$ for $i\in [k]$. Let $O_i$ be the set of odd degree vertices of $T_i$. We then solve the following LP that allows us to find parity corrections that are good for the whole convex combination.
-\begin{align}\label{ojoinaverage}
-\min \{ \alpha:\;&\sum_{i=1}^{k} \lambda_i	y^i = \alpha \cdot x,\;\\\nonumber &y^i(\delta(U)) \geq 1 \;\mbox{for $U\subseteq V(G_x), |V\cap O_i|$ odd},\;  y^i\in [0,1]^{E_x} \; \mbox{for $i\in [k]$}\}.
-\end{align}
+\paragraph{Computational comparison between Christofides' algorithm and FDT for 2EC on Carr-Vempala points.} 
+
+First we need to describe the polyhedral version Christofides' algorithm. We do this specifically for the Carr-Vempala points. Let $x$ be a Carr-Vempala points defined on a graph $G=(V,E)$. It is well known that $\frac{|V|-1}{|V|}\cdot x$ is in the convex hull of incidence vectors of spanning trees of $G$. Hence, we can write $\frac{|V|-1}{|V|}\cdot x= \sum_{i=1}^{k}\lambda_i\chi^{T_i}$ where $T_i$ is spanning tree of $G$, $\sum_{i=1}^{k}\lambda_i=1$, and $\lambda_i\geq 0$ for $i\in [k]$. Let $O_i$ be the set of odd degree vertices of $T_i$. It is easy to see that $\frac{x}{2}$ is in the convex hull of incidence vectors of $O_i$-join of $G$, namely $O_i\join(G)$~\footnote{For graph $G=(V,E)$ and $O\subseteq V$ with $|O|$ even, and $O$-join of $G$ is a subgraph of $G$ that has odd degree on the vertices in $O$ and even degree on vertices in $V\setminus O$.}. 
+
+ We then solve the following LP that allows us to find parity corrections that are good for the whole convex combination.
+\begin{equation}\label{ojoinaverage}
+\min \{ \alpha:\;\sum_{i=1}^{k} \lambda_i y^i = \alpha \cdot x,\;  y^i \in O_i\join(G) \; \mbox{for $i\in [k]$}\}.
+\end{equation}
 The variables in the above LP are $y^i\in \mathbb{R}^{E_x}_{
-\geq 0}$ for $i\in [k]$. For each $i\in [k]$ we have $y^i\in \mathcal{D}(O_i\join(G_x))$. This formulation allows the instance specific approximation ratio of Christofides' algorithm to be below $\frac{3}{2}$. Recall that a Carr-Vempala point consists of a Hamiltonian cycle of fractional edges.  Figure \ref{fdtvschris} shows FDT's solutions on all Carr-Vempala points with at most 10 vertices on the Hamiltonian cycle formed by the fractional edges are always better than those from the polyhedral version of Christofides' algorithm. In more details, in Figure \ref{fdtvschris} the horizontal axis of the plot is indexed with the 60 Carr-Vempala points that we considered. For each Carr-Vempala point $x$, there are two data points. The value of the first data point depicted by a circle on the vertical axis is $\frac{n-1}{n}+\alpha$ where $n$ is the number of vertices in the Hamiltonian cycle formed by fractional edges of $x$ and $\alpha$ is the optimal solution to (\ref{ojoinaverage}). 
+\geq 0}$ for $i\in [k]$. For each $i\in [k]$ we have $y^i\in O_i\join(G_x)$. This formulation allows the instance specific approximation ratio of Christofides' algorithm to be below $\frac{3}{2}$. Recall that a Carr-Vempala point consists of a Hamiltonian cycle of fractional edges.  Figure \ref{fdtvschris} shows FDT's solutions on all Carr-Vempala points defined on graphs with 10 vertices are always better than those from the polyhedral version of Christofides' algorithm. In more details, in Figure \ref{fdtvschris} the horizontal axis of the plot is indexed with the 60 Carr-Vempala points that we considered. For each Carr-Vempala point $x$, there are two data points. The value of the first data point depicted by a circle on the vertical axis is $\frac{|V|-1}{|V|}+\alpha$  and $\alpha$ is the optimal solution to (\ref{ojoinaverage}). 
 The value of the second data point depicted by a cross on the vertical axis is $C$ where $C$ is obtained from applying Theorem \ref{FDT2EC} to $x$. In other words, Figure \ref{fdtvschris} is comparing the upper bounds on the instances specific integrality gap certified by Christofides' algorithm  and FDT algorithm for 2EC.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=9cm,scale=1.4]{"fdt vs christofides".png}
-	\caption{Polyhedral version of Christofides' algorithm vs FDT on all Carr-Vempala points with 10 vertices on the Hamiltonian cycle of the fractional-edges.}
+	\includegraphics[width=9cm,scale=1.4]{"fdt-vs-christofides".png}
+	\caption{Polyhedral version of Christofides' algorithm vs FDT on all Carr-Vempala points defined on graphs with 10 vertices.}
 	\label{fdtvschris}
 \end{figure}
 \paragraph{FDT for 2EC on Carr-Vempala points.}

@@ -166,9 +166,9 @@ In the \textsc{minimum vetex cover problem (VC)} we are given a graph $G=(V,E)$ 
 \begin{equation}
 \min \{cx \; : \; x_u + x_v \geq	 1 \text{ for } e=uv \in E, \; x\in [0,1]^{V}\}.
 \end{equation}
-The integrality gap of this formulation is exactly 2. It is shown that it is NP-hard to approximte VC within any factor sctrictly better than 2 \cite{}. We run FDT on challenge test cases \cite{} and compare it with CPLEX IP solver and feasiblity pump. 
+The integrality gap of this formulation is exactly 2. It is shown that it is UG-hard to approximte VC within any factor sctrictly better than 2 \cite{UGhardVC}. We compare  FDT and the feasbility pump heuristic \cite{fp1} on the PACE 2019\footnote{ Parameterized Algorithms and Computational Experiments Challenge 2019: \url{https://pacechallenge.org/2019/}} challenge test cases \cite{PACE} and compare its performance with 
 \subsubsection{Tree augmentation problem}
-In the \textsc{Tree Augmentation Problem (TAP)} we are given a  graph $G=(V,E)$, a tree $T$. We also have a cost vector $c\in \mathbb{R}^{E\setminus T}_{\geq 0}$. A subset $F$ of $E\setminus T$ is called a \textit{feasible augmentation} if $(V,T\cup F)$ is a 2-edge-connected graph. In TAP we seek the minimum cost feasible augmentation. The natural linear programming relaxation for TAP is 
+In the \textsc{Tree Augmentation Problem (TAP)} we are given a  graph $G=(V,E)$, a a spanning tree $T$ of $G$. We also have a cost vector $c\in \mathbb{R}^{E\setminus T}_{\geq 0}$. A subset $F$ of $E\setminus T$ is called a \textit{feasible augmentation} if $(V,T\cup F)$ is a 2-edge-connected graph. In TAP we seek the minimum cost feasible augmentation. The natural linear programming relaxation for TAP is 
 \begin{equation}
 \min \{cx\; : \; \sum_{\ell \in \cov(e)} x_{\ell} \geq 1 \text{ for } e\in T, \; x\in [0,1]^{E\setminus T}\}.
 \end{equation}
@@ -180,7 +180,7 @@ Known polyhedral structure makes it easier to study integrality gaps for such pr
 
 There are fairly good bounds for the integrality gap for TSP or 2EC. Benoit and Boyd \cite{TSPcompute} used a quadratic program to show the integrality gap of the subtour elimination relaxation for the TSP, $g(\tsp)$, is at most $\frac{20}{17}$ for graphs with at most 10 vertices. Alexander et al. \cite{alexander2006integrality} used the same ideas to provide an upper bound of $\frac{7}{6}$ for $g(\2ec)$ on graphs with at most 10 vertices. 
 
-A \textit{Carr-Vempala point} $x$ is a fractional point in the subtour elimination relaxation where the fractional edges of $x$, edges $e$ with $0<x_e<1$, form a Hamiltonian cycle. For $\2ec$ we show that the integrality gap is at most $\frac{6}{5}$ for Carr-Vempala points with at most 12 vertices on the Hamiltonian cycle formed by the fractional edges. For Carr-Vempala points we assume that 1-edges are replaced by long paths of 1-edges making these points into potentially harder to round instances.
+Consider a graph $G=(V,E)$. A \textit{Carr-Vempala point} $x\in \mathbb{R}^E$ is a fractional point in $\subtour(G)$ where the edges $e$ with $0<x_e<1$ form a Hamiltonian cycle of $G$. Carr and Vempala \cite{Carr2004} showed that $g(\2ec)$ for instances where the optimal solution to $\min_{x\in \subtour(G)}cx$ is a Carr-Vempala point. We show that the integrality gap is at most $\frac{6}{5}$ for Carr-Vempala points with at most 12 vertices on the Hamiltonian cycle formed by the fractional edges. For Carr-Vempala points we assume that 1-edges are replaced by long paths of 1-edges making these points into potentially harder to round instances.
 
 
 
