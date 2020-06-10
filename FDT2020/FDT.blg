@@ -1,11 +1,11 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: FDT.aux
 The style file: alpha.bst
-Illegal, another \bibstyle command---line 182 of file FDT.aux
+Illegal, another \bibstyle command---line 187 of file FDT.aux
  : \bibstyle
  :          {abbrv}
 I'm skipping whatever remains of this command
 Database file #1: haddadan-ref.bib
-I was expecting a `,' or a `}'---line 937 of file haddadan-ref.bib
+I was expecting a `,' or a `}'---line 973 of file haddadan-ref.bib
  :  keywords = {Approximation algorithms, 4 } 
  :                                            -covering 2-factors, { 3, Minimum 2-edge connected spanning subgraphs}
 I'm skipping whatever remains of this entry

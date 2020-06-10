@@ -5,6 +5,12 @@ Anthony Alexander, Sylvia Boyd, and Paul Elliott{-}Magwood.
 \newblock On the integrality gap of the 2-edge connected subgraph problem.
 \newblock Technical report, TR-2006-04, SITE, University of Ottawa, 2006.
 
+\bibitem[AKS11]{UGhardVC}
+Per Austrin, Subhash Khot, and Muli Safra.
+\newblock Inapproximability of vertex cover and independent set in bounded
+  degree graphs.
+\newblock {\em Theory of Computing}, 7(3):27--43, 2011.
+
 \bibitem[BB08]{TSPcompute}
 Geneviève Benoit and Sylvia Boyd.
 \newblock Finding the exact integrality gap for small {T}raveling {S}alesman
@@ -44,6 +50,16 @@ Robert Carr and Santosh Vempala.
   traveling salesman problems.
 \newblock {\em Mathematical Programming}, 100(3):569--587, Jul 2004.
 
+\bibitem[DFH19]{PACE}
+M.~Ayaz Dzulfikar, Johannes~K. Fichte, and Markus Hecher.
+\newblock {The PACE 2019 Parameterized Algorithms and Computational Experiments
+  Challenge: The Fourth Iteration (Invited Paper)}.
+\newblock In Bart M.~P. Jansen and Jan~Arne Telle, editors, {\em 14th
+  International Symposium on Parameterized and Exact Computation (IPEC 2019)},
+  volume 148 of {\em Leibniz International Proceedings in Informatics
+  (LIPIcs)}, pages 25:1--25:23, Dagstuhl, Germany, 2019. Schloss
+  Dagstuhl--Leibniz-Zentrum fuer Informatik.
+
 \bibitem[Edm65]{edmondsPM}
 Jack Edmonds.
 \newblock Maximum matching and a polyhedron with 0, 1-vertices.
@@ -81,6 +97,11 @@ Michael~R. Garey and David~S. Johnson.
 Martin Gr{\"o}tschel, L{\'a}szl{\'o} Lov{\'a}sz, and Alexander Schrijver.
 \newblock {\em Geometric Algorithms and Combinatorial Optimization}, volume~2.
 \newblock Second corrected edition edition, 1993.
+
+\bibitem[Goe95]{goemansblocking}
+Michel~X. Goemans.
+\newblock Worst-case comparison of valid inequalities for the {TSP}.
+\newblock {\em Mathematical Programming}, 69(1):335--349, Jul 1995.
 
 \bibitem[Kar84]{Karmarkar1984}
 N.~Karmarkar.
