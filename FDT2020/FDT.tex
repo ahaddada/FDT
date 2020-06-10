@@ -1,5 +1,15 @@
 \documentclass[11pt,notitlepage]{article}
 
+\newcommand{\cindy}[1]{\textcolor{green!60!black}{(Cindy: #1)}}
+\newcommand{\arash}[1]{\textcolor{blue}{(Arash: #1)}}
+\newcommand{\bob}[1]{\textcolor{red}{(Bob: #1)}}
+% To drop all comments, just comment out \iffalse and \fi
+\iffalse
+\renewcommand{\cindy}[1]{}
+\renewcommand{\arash}[1]{}
+\renewcommand{\bob}[1]{}
+\fi
+
 \usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype, array,
 graphicx, verbatim, listings, color, fancybox}
 \usepackage[pdftex]{hyperref}
@@ -138,6 +148,8 @@ graphicx, verbatim, listings, color, fancybox}
 \begin{document}{\bibliographystyle{alpha}}
 
 \begin{abstract}
+We present a new algorithm, Fractional Decomposition Tree (FDT) for finding a feasible solution for an integer program (IP) where all variables are binary. FDT runs in polynomial time and is guaranteed to find a feasible integer solution provided the integrality gap is bounded. The algorithm gives a construction for Carr and Vempala's theorem that any feasible solution to the IP's linear-programming relaxation, when scaled by the instance integrality gap, dominates a convex combination of feasible solutions. FDT is also a tool for studying the integrality gap of IP formulations.  We demonstrate that with experiments studying the integrality gap of two problems: optimally augmenting a tree to a 2-edge-connected graph and finding a minimum-cost 2-edge-connected multi-subgraph (2EC). We also give a simplified algorithm, Dom2IP, that more quickly determines if an instance has an unbounded integrality gap. We show that FDT's speed and approximation quality compare well to that of feasibility pump on moderate-sized instances of the vertex cover problem. For a particular set of hard-to-decompose fractional 2EC solutions, FDT always gave a better integer solution than the best previous approximation algorithm (Christofides).
+
 
 \end{abstract}
 \clearpage
