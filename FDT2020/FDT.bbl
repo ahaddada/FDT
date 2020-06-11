@@ -114,6 +114,11 @@ L.G. Khachiyan.
 \newblock {\em USSR Computational Mathematics and Mathematical Physics},
   20(1):53 -- 72, 1980.
 
+\bibitem[Sch03]{schrijverbook}
+A.~Schrijver.
+\newblock {\em Combinatorial Optimization - Polyhedra and Efficiency}.
+\newblock Springer, 2003.
+
 \bibitem[Vaz01]{vazirani}
 Vijay~V. Vazirani.
 \newblock {\em Approximation Algorithms}.
