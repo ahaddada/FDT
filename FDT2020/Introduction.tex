@@ -86,9 +86,7 @@ Many researchers (see \cite{davids,vazirani}) have developed polynomial time LP-
  \end{equation}
  In this case the instance-specific integrality gap is the integrality gap of the subtour-elimination relaxation for the 2EC on graph with $n$ vertices. \cindy{We might need to define the problem or have a forward pointer.} \arash{See above}. Alexander et al. \cite{alexander2006integrality} showed the instance-specific integrality gap of the subtour elimination relaxation for the 2EC for instances of the problem with $n= 10$ is at most $\frac{7}{6}$.
 
-This value depends on the constraints in (\ref{S}).  We cannot hope to find solutions for the IP with objective values better than $g(I)\cdot z_{LP}(I,c)$. 
-
-More generally we can define the integrality gap for a class of instances $\mathcal{I}$ as follows.% In this case, the integrality gap for problem $\mathcal{I}$ is
+The value of $g(I)$ depends on the constraints in (\ref{S}).  We cannot hope to find solutions for the IP with objective values better than $g(I)\cdot z_{LP}(I,c)$. More generally we can define the integrality gap for a class of instances $\mathcal{I}$ as follows.% In this case, the integrality gap for problem $\mathcal{I}$ is
 \begin{equation}\label{gapproblem}
 g(\mathcal{I}) = \max_{c\geq 0 , I\in\mathcal{I}}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}.
 \end{equation}
@@ -153,18 +151,18 @@ For a generic IP instance $I$ it is NP-hard to even decide if the set of feasibl
 Here is how the FDT algorithm works in a high level: in iteration $i$ the algorithm maintains a convex combination of  vectors in $\mathcal{D}(L(I))$ that have a 0 or 1 value for coordinates indexed $0,\ldots,i-1$. Let $y$ be a vector in the convex combination in iteration $i$ of the algorithm. We solve a linear programming problem that gives us $\theta\in [0,1]$ and $y^0,y^1\in \mathcal{D}(L(I))$ such that $g(I) y\geq \theta_1y^0 + (1-\theta) y^1$ and $y^0_i=0$ and $y^1_i=1$. We then replace $y$ in the convex combination with $\frac{\theta}{g(I)}y^0 +\frac{1-\theta}{g(I)}y^1$. Repeating this for every vector in the convex combination from previous iteration yields a convex combination  of points that is ``more'' integral. If in any iteration there are too many points in the convex combination we solve a linear programming problem that ``prunes'' the convex combination. At the end we find a convex combination of integer solutions $\mathcal{D}(L(I))$. For each such solution $z$ we invoke the DomToIP algorithm (see Section \ref{domTOIP}) to find $z'\in S(I)$ where $z'\leq z$.
 
 
-One can extend the FDT algorithm for binary IPs into covering $\{0,1,2\}$ IPs by losing a factor $2^{|\spp(x)|}$ on top of the loss for FDT. In order to eradicate this extra factor, we need to treat the coordinate $i$ with $x_i=1$ differently. We focus on the \textsc{2-edge-connected multigraph graph problem (2EC)}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^{E}_{\geq 0}$ find a 2-edge-connected multi-subgraph (henceforth a multigraph) of $G$ with minimum cost. The natural linear programming relaxation for this problem is 
+One can extend the FDT algorithm for binary IPs into covering $\{0,1,2\}$ IPs by losing a factor $2^{|\spp(x)|}$ on top of the loss for FDT. In order to eradicate this extra factor, we need to treat the coordinate $i$ with $x_i=1$ differently. We focus on the \textsc{2-edge-connected multi-subgraph graph problem (2EC)}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^{E}_{\geq 0}$ find a 2-edge-connected multi-subgraph of $G$ with minimum cost. The natural linear programming relaxation for this problem is 
 \begin{equation}
 \min \{cx \; : \; x(\delta(U))\geq 2 \; \text{ for }\emptyset \subset U \subset V, \; x\in [0,2]^E\}
 \end{equation}
-We denote the feasible region of this LP by $\subtour(G)$. Let $\2ec(G)$ be the convex hull of incidence vectors of 2-edge-connected multigraphs of graph $G$. Following the definition in (\ref{gapproblem}) have
+We denote the feasible region of this LP by $\subtour(G)$. Let $\2ec(G)$ be the convex hull of incidence vectors of 2-edge-connected multi-subgraphs of graph $G$. Following the definition in (\ref{gapproblem}) have
 \begin{equation}
 g(\2ec) = \max_{c\geq 0 , G}\frac{\min_{x\in \2ec(G)} cx}{\min_{x\in \subtour(G)} cx}.
 \end{equation}
 
 \begin{restatable}{thm}{FDTEC}
 	\label{FDT2EC}
-	Let $G=(V,E)$ and $x$ be an extreme point of  $\subtour(G)$. The FDT algorithm for 2EC produces $\lambda\in [0,1]^k$ and 2-edge-connected multigraphs $F_1,\ldots,F_k$ such that $k\leq 2|V|-1$, $\sum_{i=1}^{k}\lambda_i \chi^{F_i}\leq \min(Cx,\{2\}^n)$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g(\2ec)^{|E_x|}$.
+	Let $G=(V,E)$ and $x$ be an extreme point of  $\subtour(G)$. The FDT algorithm for 2EC produces $\lambda\in [0,1]^k$ and 2-edge-connected multi-subgraphs $F_1,\ldots,F_k$ such that $k\leq 2|V|-1$, $\sum_{i=1}^{k}\lambda_i \chi^{F_i}\leq \min(Cx,\{2\}^n)$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g(\2ec)^{|E_x|}$.
 \end{restatable}
 
 \subsection{Experiments.} Although the bound guaranteed in both Theorems \ref{binaryFDT} and \ref{FDT2EC} are very large, we show that in practice, the algorithm works very well for network design problems described above. We show how one might use FDT to investigate the integrality gap for such well-studied problems. \cindy{TODO: forward pointers to the sections with more details.}
@@ -184,7 +182,7 @@ In the \textsc{Tree Augmentation Problem (TAP)} we are given a  graph $G=(V,E)$,
 \end{equation}
 where $\cov(e)$ is set of edges $\ell \in E\setminus T$ such that $e$ is in the unique cycle of $T\cup \{\ell\}$. We call the LP above the cut-LP. The integrality gap of the cut-LP is known to be between $\frac{3}{2}$ \cite{32gaptap} and $2$ \cite{FJ81}. We create random fractional extreme points of the cut-LP and round them using FDT. For the instances that we create the blow-up factor is always below $\frac{3}{2}$ providing an upper bound for such instances.
 
-\subsubsection{2-edge-connected multigraph problem}
+\subsubsection{2-edge-connected multi-subgraph problem}
 Known polyhedral structure makes it easier to study integrality gaps for such problems. We use the idea of fundamental extreme point \cite{carrravi,boydcarr,Carr2004} to create the ``hardest'' LP solutions to decompose.
 
 

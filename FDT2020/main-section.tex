@@ -143,14 +143,13 @@ We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integr
 		\prun(L')\quad\quad\quad \{\max \sum_{j=1}^{|L'|} \theta_j\;:\; \sum_{j=1}^{|L'|} \theta_j x^j_i\leq x^*_i \mbox{ for $i\in [t]$},\; \theta\geq 0 \}
 		\end{equation}
 		
-		Notice that $\theta = \gamma$ is in fact a feasible solution to $\prun(L')$. Let $\theta^*$ be the optimal vertex solution to this LP. Since the problem is in $\mathbb{R}^{|L'|}$,  $\theta^*$ has to satisfy $|L'|$ linearly independent constraints at equality. However, there are only $t$ constraints of type $ \sum_{j=1}^{|L'|} \theta_j x^j_i\leq x^*_i$. Therefore, there are at most $t$ coordinates of $\theta^*_j$ that are non-zero. Set $L_{i+1}$ which consists of $x^j$ for $j=1,\ldots,|L'|$ and their corresponding multipliers $\theta^*_j$ satisfy the properties in the statement of the lemma. Notice that, we can discard the nodes in $L_{i+1}$ that have $\theta^*_j=0$, so $|L_{i+1}| \leq t$. Also, since $\theta^*$ is optimal and $\gamma$ is feasible for $\prun(L')$, we have $\sum_{j=1}^{|L'|} \theta^*_j \geq \sum_{j=1}^{|L'|}\gamma_j \geq \frac{1}{g^{i+1}}$. 
-	
-	\end{proof}
+		Notice that $\theta = \gamma$ is in fact a feasible solution to $\prun(L')$. Let $\theta^*$ be the optimal vertex solution to this LP. Since the problem is in $\mathbb{R}^{|L'|}$,  $\theta^*$ has to satisfy $|L'|$ linearly independent constraints at equality. However, there are only $t$ constraints of type $ \sum_{j=1}^{|L'|} \theta_j x^j_i\leq x^*_i$. Therefore, there are at most $t$ coordinates of $\theta^*_j$ that are non-zero. Set $L_{i+1}$ which consists of $x^j$ for $j=1,\ldots,|L'|$ and their corresponding multipliers $\theta^*_j$ satisfy the properties in the statement of the lemma. Notice that, we can discard the nodes in $L_{i+1}$ that have $\theta^*_j=0$, so $|L_{i+1}| \leq t$. Also, since $\theta^*$ is optimal and $\gamma$ is feasible for $\prun(L')$, we have $\sum_{j=1}^{|L'|} \theta^*_j \geq \sum_{j=1}^{|L'|}\gamma_j \geq \frac{1}{g^{i+1}}$. \end{proof}
 	
 	\paragraph{From leaves of FDT to feasible solutions.}
 	For the leaves of the FDT tree,  $L_t$, we have that every solution $x$ in $L_t$ has $x\in\{0,1\}^n$ and $x\in \dom(P)$. By applying Lemma \ref{domlemma} we can obtain a point $x'\in S$ such that $x'\leq x$. This concludes the description of the FDT algorithm and proves Theorem \ref{binaryFDT}. See Algorithm \ref{FDTFull} for a summary of the FDT algorithm.
 	
-	\vspace*{10pt}
+	\vspace*{8pt}
+	
 	
 	\begin{algorithm}[H]\label{FDTFull}
 		\KwIn{$P= \{x\in \mathbb{R}^{n}: Ax\geq b\}$ and $S=\{x\in P: x\in \{0,1\}^n\}$ such that $g=\max_{c\in \mathbb{R}^n_+ }\frac{\min_{x\in S}cx}{\min_{x\in P}cx}$ is finite, $x^*\in P$}
@@ -173,11 +172,34 @@ We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integr
 	\end{algorithm}
 	
 	
+\vspace{8pt}
+It is not difficut to see that the number of nodes in the FDT tree is $O(n^2)$. A faster way to achieve feasible solutions with good quality for an IP with bounded integrality gap is an algorithm that takes a random dive into the FDT tree, hence only visiting $O(n)$ nodes. 
+
+	
+	\vspace*{8pt}
+	
+	\begin{algorithm}[H]\label{FDT-dive}
+		\KwIn{$P= \{x\in \mathbb{R}^{n}: Ax\geq b\}$ and $S=\{x\in P: x\in \{0,1\}^n\}$ such that $g=\max_{c\in \mathbb{R}^n_+ }\frac{\min_{x\in S}cx}{\min_{x\in P}cx}$ is finite, $x^*\in P$}
+		\KwOut{$z \in S$}
+		$y = x^*$\\
+		\For{$i=1$ \textbf{to} $t$}{
+			
+			Apply Lemma \ref{round-up} to obtain $[\hat{x}^0,\gamma_0]$ and $[\hat{x}^1,\gamma_1]$\\
+			$i \sim\text{Bernoulli}(\frac{\gamma_0}{\gamma_0+\gamma_1})$\\
+			$y\rightarrow \hat{x}^i$
+			
+		}
+		Apply Algorithm \ref{domtoIPalg} to $y$ to obtain $z\in S$\\
+		\textbf{return} $z$
+		\caption{Dive FDT Algorithm}
+	\end{algorithm}
+	
+
 
 
 \section{FDT for 2EC}\label{2EC}
 
-In Section \ref{binaryfdt} our focus was on binary IPs. In this section, in an attempt to extend FDT to \{0,1,2\} problems we introduce an FDT algorithm for a 2-edge-connected multigraph problem. Given a graph $G=(V,E)$ a multi-subset of edges $F$ of $G$ is a 2-edge-connected multigraph of $G$ if for each set $\emptyset\subset U \subset V$, the number of edge in $F$ that have one endpoint in $U$ and one not in $U$ is at least 2. Recall that in the 2EC, we are given non-negative costs on the edges of $G$ and the goal is to find the minimum cost 2-edge-connected multigraph of $G$. We want to prove Theorem \ref{FDT2EC}.
+In Section \ref{binaryfdt} our focus was on binary IPs. In this section, in an attempt to extend FDT to \{0,1,2\} problems we introduce an FDT algorithm for a 2-edge-connected multi-subgraph problem. Given a graph $G=(V,E)$ a multi-subset of edges $F$ of $G$ is a 2-edge-connected multi-subgraph of $G$ if for each set $\emptyset\subset U \subset V$, the number of edge in $F$ that have one endpoint in $U$ and one not in $U$ is at least 2. Recall that in the 2EC, we are given non-negative costs on the edges of $G$ and the goal is to find the minimum cost 2-edge-connected multi-subgraph of $G$. We want to prove Theorem \ref{FDT2EC}.
 \FDTEC*
 We do not know the exact value for $g(\2ec)$, but we know $\frac{6}{5} \leq g(\2ec) \leq \frac{3}{2}$ \cite{alexander2006integrality,wolsey}. The FDT algorithm for 2EC is very similar to the one for binary IPs, but there are some differences as well. A natural thing to do is to have three branches for each node of the FDT tree, however, the branches that are equivalent to setting a variable to $1$, might need further decomposition. That is the main difficulty when dealing with $\{0,1,2\}$-IPs.
 
@@ -203,10 +225,10 @@ First, we need a branching lemma. Observe that  the following branching lemma is
 		We have $\gamma_0 + \gamma_1+\gamma_2\geq \frac{1}{g(\2ec)}$.
 	\end{claim}
 	\begin{cproof}
-		Suppose for contradiction $\sum_{j=0,1,2}\gamma_j = \frac{1}{g(\2ec)} - \epsilon$ for some $\epsilon >0$. Construct graph $G'$ by removing edge $f$ with $x_f\geq 1$ and replacing it with a path $P_f$ of length $\ceil{\frac{2}{\epsilon}}$. Define $x'_h = x_h$ for each edge $h$ such that $x_h<1$. For each $h\in P_f$ let $x'_h= x_f$ for all $f$ with $x_f\geq 1$. It is easy to check that $x'\in \subtour(G')$. By Theorem \ref{CV2} there exists $\theta \in [0,1]^k$, with $\sum_{i=1}^{k}\theta_i = 1$ and 2-edge-connected multigraphs $F'_i$ of $G'$ for $i=1,\ldots,k$ such that 
+		Suppose for contradiction $\sum_{j=0,1,2}\gamma_j = \frac{1}{g(\2ec)} - \epsilon$ for some $\epsilon >0$. Construct graph $G'$ by removing edge $f$ with $x_f\geq 1$ and replacing it with a path $P_f$ of length $\ceil{\frac{2}{\epsilon}}$. Define $x'_h = x_h$ for each edge $h$ such that $x_h<1$. For each $h\in P_f$ let $x'_h= x_f$ for all $f$ with $x_f\geq 1$. It is easy to check that $x'\in \subtour(G')$. By Theorem \ref{CV2} there exists $\theta \in [0,1]^k$, with $\sum_{i=1}^{k}\theta_i = 1$ and 2-edge-connected multi-subgraphs $F'_i$ of $G'$ for $i=1,\ldots,k$ such that 
 		$\sum_{i=1}^{k}\theta_i \chi^{F'_i}\leq g(\2ec)x'$. 
 		
-		Note that each $F'_i$ contains at least one copy of every edge in any path $P_f$, except for at most one edge in the path. We will obtain 2-edge-connected multigraphs $F_1,\ldots,F_k$ of $G$ using $F'_1,\ldots,F'_k$, respectively. To obtain $F_i$ first remove all $P_f$ paths from $F'_i$. Suppose there is an edge $h$ in $P_f$ such that $\chi^{F'_i}_h=0$, this means that for any edge $p\in P_f$ such that $p\neq h$, $\chi^{F'_i}_p=2$. In this case, let $\chi^{F_i}_f=2$, i.e. add two copies of $f$ to $F_i$. If there are at least one edge $h\in P_f$ with $\chi^{F'_i}_h= 1$, let $\chi^{F_i}_f=1$, i.e. add one copy of $f$ to $F_i$. If for all edges $h\in P_f$, we have $\chi^{F'_i}_h=2$, then let $\chi^{F_i}_f=2$. For $f\in E$ with $x_f<1$ we have
+		Note that each $F'_i$ contains at least one copy of every edge in any path $P_f$, except for at most one edge in the path. We will obtain 2-edge-connected multi-subgraphs $F_1,\ldots,F_k$ of $G$ using $F'_1,\ldots,F'_k$, respectively. To obtain $F_i$ first remove all $P_f$ paths from $F'_i$. Suppose there is an edge $h$ in $P_f$ such that $\chi^{F'_i}_h=0$, this means that for any edge $p\in P_f$ such that $p\neq h$, $\chi^{F'_i}_p=2$. In this case, let $\chi^{F_i}_f=2$, i.e. add two copies of $f$ to $F_i$. If there are at least one edge $h\in P_f$ with $\chi^{F'_i}_h= 1$, let $\chi^{F_i}_f=1$, i.e. add one copy of $f$ to $F_i$. If for all edges $h\in P_f$, we have $\chi^{F'_i}_h=2$, then let $\chi^{F_i}_f=2$. For $f\in E$ with $x_f<1$ we have
 		\begin{equation}
 		\sum_{i=1}^{k}\theta_i \chi^{F_i}_f=\sum_{i=1}^{k}\theta_i \chi^{F'_i}_f\leq g(\2ec)x'_f= g(\2ec)x_f.
 		\end{equation}
@@ -246,13 +268,16 @@ Consider the solutions $x$ in $L_t$. For each variable $e$ we have $x_e=0$ or $x
 	Suppose not. Then there is a set of vertices $\emptyset \subset U \subset V$ such that $\sum_{e\in \delta(U)}\floor{x_e}<2$. Since $x\in \subtour(G)$ we have $\sum_{e\in \delta(U)}x_e \geq 2$. Therefore, there is an edge $f\in \delta(U)$ such that $x_f$ is fractional. By property (a) in Lemma \ref{2ecpruning}, we have $1<  x_f < 2$. Therefore, there is another edge $h$ in $\delta(U)$ such that $x_h>0$, which implies that $x_h\geq 1$. But in this case $\sum_{e\in \delta(U)}\floor{x_e}\geq  \floor{x_f}+\floor{x_h}  \geq 2$. This is a contradiction.
 \end{proof}
 
-The FDT algorithm for 2EC iteratively applies Lemmas \ref{LPC2EC} and \ref{2ecpruning} to variables $x_1,\ldots,x_t$ to obtain leaf point solutions $L_t$. Finally, we just need to apply Lemma \ref{rounddown} to obtain the 2-edge-connected multigraphs from every solution in $L_t$. Notice that since $x$ is an extreme point we have $t\leq 2|V|-1$ \cite{boydpulley}. By Lemma \ref{2ecpruning} we have
+The FDT algorithm for 2EC iteratively applies Lemmas \ref{LPC2EC} and \ref{2ecpruning} to variables $x_1,\ldots,x_t$ to obtain leaf point solutions $L_t$. Finally, we just need to apply Lemma \ref{rounddown} to obtain the 2-edge-connected multi-subgraphs from every solution in $L_t$. Notice that since $x$ is an extreme point we have $t\leq 2|V|-1$ \cite{boydpulley}. By Lemma \ref{2ecpruning} we have
 \begin{align*}
 \sum_{(x,\lambda)\in L_t} \frac{\lambda}{\sum_{(x,\lambda)\in L_t}\lambda} \floor{x} \leq \frac{1}{\sum_{(x,\lambda)\in L_t}\lambda} \sum_{(x,\lambda)\in L_t} \lambda {x} \leq g^t_{\2ec} x^*.
 \end{align*}
 \section{Computational Experiments with FDT}\label{experiment}
 We ran FDT on three network design problems: VC, TAP and 2EC. 
+
+We implemented the experiments for VC and TAP in Python running on a linux workstation (Ubuntu 18.04.3) with 8 cores of Intel(R) Core(TM) i7-8565U CPU  1.80GHz processors and 1Mb of cache. We used the CPLEX 12.9.0.0 solver to solve the pyomo LP models. The experiments on 2EC are done on a Windows machine and coded in AMPL with CPLEX as the solver.
 \paragraph{FDT on VC instances from (PACE 2019) \cite{PACE}.}
+
 
 
 
@@ -286,13 +311,13 @@ First we need to describe the polyhedral version Christofides' algorithm. We do 
 \min \{ \alpha:\;\sum_{i=1}^{k} \lambda_i y^i = \alpha \cdot x,\;  y^i \in O_i\join(G) \; \mbox{for $i\in [k]$}\}.
 \end{equation}
 The variables in the above LP are $y^i\in \mathbb{R}^{E_x}_{
-\geq 0}$ for $i\in [k]$. For each $i\in [k]$ we have $y^i\in O_i\join(G_x)$. This formulation allows the instance specific approximation ratio of Christofides' algorithm to be below $\frac{3}{2}$. Recall that a Carr-Vempala point consists of a Hamiltonian cycle of fractional edges.  Figure \ref{fdtvschris} shows FDT's solutions on all Carr-Vempala points defined on graphs with 10 vertices are always better than those from the polyhedral version of Christofides' algorithm. In more details, in Figure \ref{fdtvschris} the horizontal axis of the plot is indexed with the 60 Carr-Vempala points that we considered. For each Carr-Vempala point $x$, there are two data points. The value of the first data point depicted by a circle on the vertical axis is $\frac{|V|-1}{|V|}+\alpha$  and $\alpha$ is the optimal solution to (\ref{ojoinaverage}). 
+\geq 0}$ for $i\in [k]$. For each $i\in [k]$ we have $y^i\in O_i\join(G_x)$. This formulation allows the instance specific approximation ratio of Christofides' algorithm to be below $\frac{3}{2}$. Recall that a Carr-Vempala point consists of a signle cycle of fractional edges.  Figure \ref{fdtvschris} shows FDT's solutions on all Carr-Vempala points that have 10 vertices on the cycle formed by fractional edges. We show for these points the apporoximation factor provided by FDT is always better than those from the polyhedral version of Christofides' algorithm. In more details, in Figure \ref{fdtvschris} the horizontal axis of the plot is indexed with the 60 Carr-Vempala points that we considered. For each Carr-Vempala point $x$, there are two data points. The value of the first data point depicted by a circle on the vertical axis is $\frac{|V|-1}{|V|}+\alpha$  and $\alpha$ is the optimal solution to (\ref{ojoinaverage}). 
 The value of the second data point depicted by a cross on the vertical axis is $C$ where $C$ is obtained from applying Theorem \ref{FDT2EC} to $x$. In other words, Figure \ref{fdtvschris} is comparing the upper bounds on the instances specific integrality gap certified by Christofides' algorithm  and FDT algorithm for 2EC.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=9cm,scale=1.4]{"fdt-vs-christofides".png}
-	\caption{Polyhedral version of Christofides' algorithm vs FDT on all Carr-Vempala points defined on graphs with 10 vertices.}
+	\caption{Polyhedral version of Christofides' algorithm vs FDT on all Carr-Vempala points that have 10 vertices on the single cycle formed by fractional edges.}
 	\label{fdtvschris}
 \end{figure}
 \paragraph{FDT for 2EC on Carr-Vempala points.}
