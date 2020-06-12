@@ -24,6 +24,7 @@ Reducing the integrality gap of an IP formulation has two advantages.  It can le
 In this paper, we give a method to find feasible solutions for IPs if the integrality gap is bounded. The method is also a tool for evaluating the integrality gap for a formulation.  Researcher can use it to determine whether they should expend effort to find new classes of cuts.  They can also use it to help guide theory for finding tighter bounds on the integrality gap for classic problems like the traveling salesman problem.
 
 % A common approach to Integer programming is considering their linear relaxation.
+\cindy{TODO: this has to move to a logical place, problem in the more formal treatment below.}
 For some problems such as the \textsc{Minimum Cost Spanning Tree Problem} there are linear programming relaxations whose basic feasible solutions coincide with  integral solutions, i.e. spanning trees.
 
 %A common and successful approach is to round these (potentially) fractional solutions into integer solutions for the optimization problem at hand. The Integrality gap of a linear relaxation of an integer programming problem is the worst case ratio between the objective values of the discrete problem and the continuous problem. Equivalently, the integrality gap of the linear programming relaxation is a limit to the rounding approach: rounding a fractional solution into an integer solution incurs a multiplicative cost proportional to the integrality gap. In this paper we study integrality gaps for different combinatorial optimization problems and introduce new rounding algorithms that imply bounds on their respective integrality gaps. 
@@ -82,7 +83,7 @@ We refer to $g$ as the integrality gap of the linear relaxation. For a polyhedro
 
 A polynomial time algorithm for proving an upper bound on integrality gap is called an LP-based approximation algorithm. For many well studied problems, we still do not know the exact integrality gap and the gap between the best known lower bound and the upper bound on the integrality gap are open. In some cases, there are known upper bounds, yet there is no known approximation algorithm, meaning that the proofs do not yield polynomial time algorithms.
 }\fi 
-The set of feasible points for a pure IP (henceforth IP) is the set
+We now describe IPs and our methods more formally. The set of feasible points for a pure IP (henceforth IP) is the set
 \begin{equation}
 S(A,b)= \{x\in \mathbb{Z}^{n}\;:\; Ax\geq b\}  \label{S}.
 \end{equation}
