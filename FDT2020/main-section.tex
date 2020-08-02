@@ -272,7 +272,7 @@ The FDT algorithm for 2EC iteratively applies Lemmas \ref{LPC2EC} and \ref{2ecpr
 \begin{align*}
 \sum_{(x,\lambda)\in L_t} \frac{\lambda}{\sum_{(x,\lambda)\in L_t}\lambda} \floor{x} \leq \frac{1}{\sum_{(x,\lambda)\in L_t}\lambda} \sum_{(x,\lambda)\in L_t} \lambda {x} \leq g^t_{\2ec} x^*.
 \end{align*}
-\section{Computational Experiments with FDT}\label{experiment}
+\section{Computational Experiments with FDT}\label{sec:experiment}
 We ran FDT on three network design problems: VC, TAP and 2EC. 
 
 We implemented the experiments for VC and TAP in Python running on a linux workstation (Ubuntu 18.04.3) with 8 cores of Intel(R) Core(TM) i7-8565U CPU  1.80GHz processors and 1Mb of cache. We used the CPLEX 12.9.0.0 solver to solve the pyomo LP models. The experiments on 2EC are done on a Windows machine and coded in AMPL with CPLEX as the solver.
