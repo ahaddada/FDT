@@ -5,9 +5,11 @@
 \newcommand{\bob}[1]{\textcolor{red}{(Bob: #1)}}
 % To drop all comments, just comment out \iffalse and \fi
 
+\iffalse
 \renewcommand{\cindy}[1]{}
 \renewcommand{\arash}[1]{}
 \renewcommand{\bob}[1]{}
+\fi
 
 
 \usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype, array,
@@ -156,7 +158,7 @@ the U.S. Office of Naval Research under award number N00014-18-1-2099.}
 \and \textsc{Cynthia A. Phillips}\thanks{Sandia National Laboratories  {\tt{caphill@sandia.gov}}. Sandia National Laboratories is a multi-mission laboratory managed and operated by National Technology and Engineering Solutions of Sandia, LLC., a wholly owned subsidiary of Honeywell International, Inc., for the U.S. Department of Energy’s National Nuclear Security Administration under contract DE-NA0003525.}}
 
 
-\begin{document}{\bibliographystyle{alpha}}
+\begin{document}
 
 
 
@@ -170,8 +172,8 @@ We present a new algorithm, Fractional Decomposition Tree (FDT) for finding a fe
 \input{Introduction}
 \input{main-section}
 
-
-\bibliographystyle{abbrv}
+\bibliographystyle{alpha}
+%\bibliographystyle{abbrv}
 \bibliography{FDT}
 
 

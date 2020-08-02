@@ -333,7 +333,7 @@ First we need to describe the polyhedral version Christofides' algorithm. We do 
 \end{equation}
 The variables in the above LP are $y^i\in \mathbb{R}^{E_x}_{
 \geq 0}$ for $i\in [k]$. For each $i\in [k]$ we have $y^i\in O_i\join(G_x)$. This formulation allows the instance specific approximation ratio of Christofides' algorithm to be below $\frac{3}{2}$. Recall that a Carr-Vempala point consists of a signle cycle of fractional edges.  Figure \ref{fdtvschris} shows FDT's solutions on all Carr-Vempala points that have 10 vertices on the cycle formed by fractional edges. We show for these points the apporoximation factor provided by FDT is always better than those from the polyhedral version of Christofides' algorithm. In more details, in Figure \ref{fdtvschris} the horizontal axis of the plot is indexed with the 60 Carr-Vempala points that we considered. For each Carr-Vempala point $x$, there are two data points. The value of the first data point depicted by a circle on the vertical axis is $\frac{|V|-1}{|V|}+\alpha$  and $\alpha$ is the optimal solution to (\ref{ojoinaverage}). 
-The value of the second data point depicted by a cross on the vertical axis is $C$ where $C$ is obtained from applying Theorem \ref{FDT2EC} to $x$. In other words, Figure \ref{fdtvschris} is comparing the upper bounds on the instances specific integrality gap certified by Christofides' algorithm  and FDT algorithm for 2EC.
+The value of the second data point depicted by a cross on the vertical axis is $C$ where $C$ is obtained from applying Theorem \ref{FDT2EC} to $x$. In other words, Figure \ref{fdtvschris} is comparing the instance-specific upper bound on integrality gap certified by Christofides' algorithm to the approximation factor of the FDT algorithm for 2EC.
 
 \begin{figure}[h!]
 	\centering
@@ -355,3 +355,10 @@ We ran FDT for 2EC on 963 fractional extreme points of $\subtour(G)$. We enumera
 		\label{table2EC}
 	\end{small}
 \end{table}
+
+\cindy{
+Most papers have a ``discussion and conclusions'' section. It doesn't have to be long and it doesn't have to repeat the paper contributions said before. It can include extensions or thoughts/discussions that don't easily fit into the main body. It can include new insights into the value of work now that the reader understands it better. Here are some thoughts about what could go there:
+1) Bob was quite insistent at one point that we describe how to extend to continuous variables as long as they are not in the objective function. Can we state that in a conclusion and very briefly summarize what would change for this case?
+2) Open questions/future research.  Any thoughts on open theory questions?  Experimental questions would include doing a more high-performance version (e.g. in C or C++) to run on larger instances, and a more comprehensive set of experiments to determine on what kind of problems FDT is likely to outperform other general heuristics.
+3) TODO: more after I have gone all the way through.
+}
