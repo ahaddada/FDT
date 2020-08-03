@@ -1,13 +1,27 @@
 \section{Concluding Remarks}
 
-The results in Sections \ref{sec:binaryfdt}, \ref{sec:domTOIP} and \ref{sec:2EC} hold if the intial integer program has some auxilliary continuous variables\footnote{Here by auxilliary variables we mean a variable that does not participate in the objective function}, i.e. when we have 
+The results in Sections \ref{sec:domTOIP}, \ref{sec:binaryfdt}  and \ref{sec:2EC} hold if the intial integer program has some auxilliary continuous variables\footnote{Here by auxilliary variables we mean a variable that does not participate in the objective function}. That is, when we have 
 \begin{equation*}
 S(A,b) = \{x\in \mathbb{Z}^n\times \mathbb{R}^p: Ax\geq b\},
 \end{equation*}
-where the last $p$ variables are continous, $P(A,b) = \{x\in \mathbb{R}^n: Ax\geq b\}$ and define
+where the last $p$ variables are continous, $P(A,b) = \{x\in \mathbb{R}^n: Ax\geq b\}$
+\cindy{should this be $P(A,b) = \{x\in \mathbb{R}^{n+p}: Ax\geq b\}$?}
+and define
 \begin{equation*}
 g(I) = \max_{c\in \mathbb{R}^n_+}\frac{\min_{x\in S(A,b)} \sum_{i=1}^{n}c_ix_i}{\min_{x\in P(A,b)} \sum_{i=1}^{n}c_ix_i},
 \end{equation*}
 our main results work. In fact our implementation of the subtour elimination formulation is based on an extended formulation with auxiliary variables (see \cite{subtour-extended}). We removed this extension to make the presentation simpler.
 
-Fractional Decomposition Tree is a tool to experminetally evaluate the known bounds (and conjectured bounds) on the integrality gap of combinatorial optimization IP formulations. We hope that applying this tool to a wide range of problems can be a tool to guide conjectures on the upper bounds of integrality gap or at least narrow down the instances for which a closer look is required for the study of integrality gap.
+Our experiments in Section~\ref{sec:experiment} give a proof of concept. They show that its plausible FDT will have practical benefit as an IP heuristic for problems with appropriate structure. FDT performance will likely improve in a future more high-performance version coded in C or C++, perhaps able to take advantage of the low-level parallelism available on all modern platforms (even laptops).  This will allow tests on larger instances. We leave as future work a more comprehensive set of experiments to determine on which kinds of problems FDT is likely to outperform other general heuristics. Any consistent structure of such instances could lead to proofs of better approximation bounds.
+
+Fractional Decomposition Tree is a tool to experimentally evaluate the known bounds (and conjectured bounds) on the integrality gap of combinatorial optimization IP formulations. We hope that applying this tool to a wide range of problems can be a tool to guide conjectures on the upper bounds of integrality gap or at least narrow down the instances for which a closer look is required for the study of integrality gap.
+
+
+\cindy{
+Here's my original comment on a conclusion section with updated list.
+Most papers have a ``discussion and conclusions'' section. It doesn't have to be long and it doesn't have to repeat the paper contributions said before. It can include extensions or thoughts/discussions that don't easily fit into the main body. It can include new insights into the value of work now that the reader understands it better. Here are some thoughts about what could go there:
+1)DONE: Bob was quite insistent at one point that we describe how to extend to continuous variables as long as they are not in the objective function. Can we state that in a conclusion and very briefly summarize what would change for this case?
+2) Open questions/future research.  Any thoughts on open theory questions?
+3) DONE: Experimental questions would include doing a more high-performance version (e.g. in C or C++) to run on larger instances, and a more comprehensive set of experiments to determine on what kind of problems FDT is likely to outperform other general heuristics.
+4) TODO: more after I have gone all the way through.
+}

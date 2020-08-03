@@ -278,7 +278,7 @@ The FDT algorithm for 2EC iteratively applies Lemmas \ref{LPC2EC} and \ref{2ecpr
 \section{Computational Experiments with FDT}\label{sec:experiment}
 We ran FDT on three network design problems: VC, TAP and 2EC. 
 
-We implemented the experiments for VC and TAP in Python running on a linux workstation (Ubuntu 18.04.3) with 8 cores of Intel(R) Core(TM) i7-8565U CPU  1.80GHz processors and 1Mb of cache. We used the CPLEX 12.9.0.0 solver to solve the pyomo LP models. The experiments on 2EC are done on a Windows machine and coded in AMPL with CPLEX as the solver.
+We implemented the experiments for VC and TAP in Python running on a linux workstation (Ubuntu 18.04.3) with 8 cores of Intel(R) Core(TM) i7-8565U CPU  1.80GHz processors and 1Mb of cache. We used the CPLEX 12.9.0.0 solver to solve the pyomo LP models. We ran the experiments for 2EC on a Windows machine, coded in AMPL with CPLEX as the solver.
 \paragraph{FDT on VC instances from (PACE 2019) \cite{PACE}.}
 
 
@@ -359,9 +359,4 @@ We ran FDT for 2EC on 963 fractional extreme points of $\subtour(G)$. We enumera
 	\end{small}
 \end{table}
 
-\cindy{
-Most papers have a ``discussion and conclusions'' section. It doesn't have to be long and it doesn't have to repeat the paper contributions said before. It can include extensions or thoughts/discussions that don't easily fit into the main body. It can include new insights into the value of work now that the reader understands it better. Here are some thoughts about what could go there:
-1) Bob was quite insistent at one point that we describe how to extend to continuous variables as long as they are not in the objective function. Can we state that in a conclusion and very briefly summarize what would change for this case?
-2) Open questions/future research.  Any thoughts on open theory questions?  Experimental questions would include doing a more high-performance version (e.g. in C or C++) to run on larger instances, and a more comprehensive set of experiments to determine on what kind of problems FDT is likely to outperform other general heuristics.
-3) TODO: more after I have gone all the way through.
-}
+
