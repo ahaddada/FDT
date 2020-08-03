@@ -4,12 +4,15 @@
 	For vectors $x,y\in \mathbb{R}_{n}$ we say $x$ dominates $y$ if $x_i\geq y_i$ for $i= 1,\ldots,n$. For $m\times n$ matrix $A$, let $A_j$ be the $j$-th row of $A$ and $A^j$ be the $j$-th column of $A$. For a set $S$ of vectors in $\mathbb{R}_{n}$, $\conv(S)$ is the convex hull of all the points in $S$.
 }\fi
 \section{Finding a Feasible Solution}\label{domTOIP}
-Consider an instance $I=(A,b)$ of the IP formulation. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I)\subseteq \{0,1\}^n$ and $P(I)\subseteq [0,1]^n$. For simplicity in the notation we denote $P(I),S(I),$ and $g(I)$ with $P$, $S$, and $g$ for this section and the next section. Also, for both sections we assume $t=|\spp(x)|$. Without loss of generality we can assume $x_i = 0$ for $i=t+1,\ldots,n$.
+In this section we give the algorithm for DomToIP and prove its performance (Theorem~\ref{DomtoIP}).
+
+Consider an instance $I=(A,b)$ of the IP formulation. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I)\subseteq \{0,1\}^n$ and $P(I)\subseteq [0,1]^n$. For simplicity in the notation we assume and instance $I$ and denote $P(I),S(I),$ and $g(I)$ by $P$, $S$, and $g$ for this section and the next section. Also, for both sections we assume $t=|\spp(x)|$. Without loss of generality we can assume $x_i = 0$ for $i=t+1,\ldots,n$.
+\cindy{TODO: Is this something that should be clear to the reader with what they know at this point? Does it need an explanation? Does it need an explanation at the end of this section or the next?}
 
 In this section we prove Theorem \ref{domtoIP}. In fact, we prove a stronger result. 
 \begin{lemma}\label{domlemma}
 	Given $\tilde{x}\in \dom(P)$ and $\tilde{x}\in \{0,1\}^n$, there is an algorithm (the DomToIP algorithm) that finds $\bar{x}\in S$ in polynomial time, such that $\bar{x}\leq \tilde{x}$.\end{lemma}
-Notice that Lemma \ref{domlemma} implies Theorem \ref{domtoIP}, since it is easy to obtain an integer point in $\dom(P)$: rounding up any fractional point in $P$ gives us a point in $\dom(P)$.
+Notice that Lemma \ref{domlemma} implies Theorem \ref{domtoIP}, since it is easy to obtain an integer point in $\dom(P)$: numerically rounding up any fractional point in $P$ gives us a point in $\dom(P)$.
 
 \subsection{Proof of Lemma \ref{domlemma}: The DomToIP Algorithm}
 
