@@ -282,7 +282,9 @@ We implemented the experiments for VC and TAP in Python running on a linux works
 \paragraph{FDT on VC instances from (PACE 2019) \cite{PACE}.}
 
 
-We compared Dive FDT (Algorithm \ref{FDT-dive}) with feasbility pump \cite{fp1} in the terms of time spent solving LP relaxations and the quality of solution provided by each algorithm. The results are presented in Figure \ref{fpvsfdt}. 
+We compared Dive FDT (Algorithm \ref{FDT-dive}) with feasbility pump \cite{fp1} in terms of running time
+% spent solving LP relaxations
+and the quality of solution provided by each algorithm. We used the small (200 vertex) test cases from the PACE 2019 vertex-cover challenge. The results are presented in Figure \ref{fpvsfdt}. 
 
 \begin{figure}[h!]
 \begin{subfigure}{.5\textwidth}
@@ -295,20 +297,24 @@ We compared Dive FDT (Algorithm \ref{FDT-dive}) with feasbility pump \cite{fp1} 
 	\begin{subfigure}{.5\textwidth}
 	\centering
 	\includegraphics[width=8cm,scale=1]{"fjvsfdt".png}
-	\caption{FDT vs the 2-approximation for TAP\cite{FJ81} on randomly generated extreme points of the cut-LP.}
+%	\caption{FDT vs the 2-approximation for TAP\cite{FJ81} on randomly generated extreme points of the cut-LP.}
+	\caption{TAP on our random instances: FDT run on LP optimal vs the 2-approximation for TAP\cite{FJ81}.}
 	\label{fjvsfdt}
 	\end{subfigure}
 	\caption{Computational experiments with the FDT algorithm}
 	\label{fdtcomp}
 \end{figure}
 \paragraph{FDT on randomly generated instances of TAP.}
-Recall that in TAP we are given a tree $T=(V,E)$, and a set of links $L$ between vertices in $V$ and costs $c\in \mathbb{R}^{L}_{\geq 0}$. A feasible augmentation is $L'\subseteq L$ such that $T+L'$ is 2-edge-connected. In TAP we wish to find the minimum-cost feasible augmentation. The integrality gap of the cut-LP for TAP is defined as 
+Recall that in the tree-augmentation problem (TAP) we are given a tree $T=(V,E)$, a set of non-tree links $L$ between vertices in $V$ and costs $c\in \mathbb{R}^{L}_{\geq 0}$. A feasible augmentation is $L'\subseteq L$ such that $T+L'$ is 2-edge-connected. In TAP we wish to find the minimum-cost feasible augmentation. The integrality gap of the cut LP for TAP (given in (\ref{eq:cutLP})) is
 \begin{equation*}
-g(\tap) = \max_{c\in \mathbb{R}^L_{\geq 0}} \frac{\min_{x\in\tap(T,L)} cx}{\min_{x\in\cut(T,L)} cx}.
+g(\tap) = \max_{c\in \mathbb{R}^L_{\geq 0}} \frac{\min_{x\in\tap(T,L)} cx}{\min_{x\in\cut(T,L)} cx},
 \end{equation*}  
+where $TAP(T,L)$ is the feasible set for the IP and $CUT(T,L)$ is the feasible set for the cut LP (relaxation). We know $\frac{3}{2}\leq g(\tap)\leq 2$~\cite{FJ81,32gaptap}. Notice that $\min_{x\in \tap(T,L)}cx$ is a binary IP. 
 
-We know $\frac{3}{2}\leq g(\tap)\leq 2$~\cite{FJ81,32gaptap}. Notice that $\min_{x\in \tap(T,L)}cx$ is a binary IP. 
-We considered full binary trees with 3 to 7 levels. We assume the set of links to be the set of all pairs of leaves of the trees and we choose the costs of the links uniformly at random.  We then ran binary FDT and chose the solution that is gives the minimum cost. We then compared it with the circulation-based 2-approximation algorithm of Frederickson and Ja'Ja' \cite{FJ81} in Figure \ref{fjvsfdt}.  
+As input for our experiments, we considered full binary trees with 3 to 7 levels with a link for each pairs of leaves. We set the link costs uniformly at random.  We summarize these test instances in Table~\ref{tableTAP}. We ran binary FDT on each test instance and chose the solution with minimum cost. We compare the FDT solutions to those from the circulation-based 2-approximation algorithm of Frederickson and J\'{a}J\'{a}~\cite{FJ81} in Figure \ref{fjvsfdt}.  
+\cindy{We should say something about running time.  Since we showed running time in part a, the reader will just assume otherwise that our running time is terrible compared to the Fredrickson and J\'{a}J\'{a} algorithm.}
+\cindy{It may be too late now, but it might be easier to understand the results if there is another figure that shows instance number vs the ratio  FDT gap/FJ gap.  It's hard to pair corresponding points with the current figure.  I would suggest replacing the current figure with that, but then we'd lose the absolute gap values.}
+\cindy{Please check my new caption for Figure 2b.  The old one is just commented out.}
 
 
 \begin{table}[h!]
@@ -325,7 +331,13 @@ We considered full binary trees with 3 to 7 levels. We assume the set of links t
 		\end{tabular}\caption{Summary of the randomly generated instances of TAP.} \label{tableTAP}
 	\end{small}
 \end{table}
-For all these 450 fractional extreme points of the cut-LP our experiments showed that the integrality gap $g(\tap)$ is at most $\frac{3}{2}$ when restricted to the instances considered. In fact, only for one instance the upper bound we provided by our experiment is at $\frac{3}{2}$.  For 425 instances, the upper bound is $\frac{4}{3}$, for 22 instances it is $\frac{6}{5}$, for 2 instances it is $\frac{8}{7}$.
+\cindy{Please check the edits to the next paragraph carefully to ensure I captured what you were trying to say.}
+For all 450 instances in our experiments, running FDT on the LP optimal (fractional extreme point) of the cut LP gave a feasible solution with value at most a factor $\frac{3}{2}$ larger than the LP lower bound.  Such a feasible solution gives an upper bound on the integrality gap $g(\tap)$ of that specific instance of at most $\frac{3}{2}$.
+\cindy{There are 450 instances, so you tested one extreme point (the LP optimal) per instance?  I'm assuming that was the LP optimal.}
+%when restricted to the instances considered.
+In fact, the integrality gap upper bound derived this way was equal to $\frac{3}{2}$ for only one instance.
+%the upper bound we provided by our experiment is at $\frac{3}{2}$.
+For 425 instances, the integrality gap upper bound was $\frac{4}{3}$, for 22 instances it was $\frac{6}{5}$, for 2 instances it was $\frac{8}{7}$.
 \paragraph{Computational comparison between Christofides' algorithm and FDT for 2EC on Carr-Vempala points.} 
 
 First we need to describe the polyhedral version Christofides' algorithm. We do this specifically for the Carr-Vempala points. Let $x$ be a Carr-Vempala points defined on a graph $G=(V,E)$. It is well known that $\frac{|V|-1}{|V|}\cdot x$ is in the convex hull of incidence vectors of spanning trees of $G$. Hence, we can write $\frac{|V|-1}{|V|}\cdot x= \sum_{i=1}^{k}\lambda_i\chi^{T_i}$ where $T_i$ is spanning tree of $G$, $\sum_{i=1}^{k}\lambda_i=1$, and $\lambda_i\geq 0$ for $i\in [k]$. Let $O_i$ be the set of odd degree vertices of $T_i$. It is easy to see that $\frac{x}{2}$ is in the convex hull of incidence vectors of $O_i$-join of $G$, namely $O_i\join(G)$~\footnote{For graph $G=(V,E)$ and $O\subseteq V$ with $|O|$ even, and $O$-join of $G$ is a subgraph of $G$ that has odd degree on the vertices in $O$ and even degree on vertices in $V\setminus O$.}. 
