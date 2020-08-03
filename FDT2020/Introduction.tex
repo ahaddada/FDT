@@ -175,7 +175,7 @@ Consider the set of points described by sets $S(I)$ and $P(I)$ as in (\ref{S}) a
 For a vector $x\in \mathbb{R}_{\geq 0}^n$ such that $x\in P(I)$, let the {\em support} of $x$ be $\spp(x)= \{i \in [n]: x_i \neq 0\}$. For an integer $\beta$ let $\{\beta\}^n$ be the vector $y\in \mathbb{R}^n$ with $y_i=\beta$ for $i\in [n]$.
 
 
-We introduce the \textit{Fractional Decomposition Tree Algorithm} (FDT) which runs in polynomial time algorithm. Given a point $x\in P(I)$ FDT produces a convex combination of feasible points in $S(I)$ that are dominated coordinatewise by a ``factor" $C$ times $x$.
+In Section~\ref{binaryfdt} we introduce the \textit{Fractional Decomposition Tree Algorithm} (FDT) which runs in polynomial time algorithm. Given a point $x\in P(I)$ FDT produces a convex combination of feasible points in $S(I)$ that are dominated coordinatewise by a ``factor" $C$ times $x$.
 % in the coordinates corresponding to $x$.
 If $C = g(I)$, it would be optimal. However we can only guarantee a factor of $g(I)^{|\spp(x)|}$. FDT iteratively solves linear programs that are about the same size as the description of $P(I)$.
 
@@ -185,7 +185,7 @@ If $C = g(I)$, it would be optimal. However we can only guarantee a factor of $g
 	The Fractional Decomposition Tree (FDT) algorithm, given $x^*\in P(I)$, produces in polynomial time $\lambda\in [0,1]^k$ and $z^1,\ldots,z^k \in S(I)$ such that $k\leq |\spp(x^*)|$, $\sum_{i=1}^{k}\lambda_i z^i\leq \min(Cx^*,\{1\}^{n})$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g(I)^{|\spp(x^*)|}$.
 \end{restatable}
 
-A subroutine of the FDT, called the DomToIP algorithm, finds feasible solutions to any IP with finite gap. This can be of independent interest, especially in proving that a model has unbounded gap.
+In Section~\ref{domTOIP} we describe a subroutine of the FDT, called the DomToIP algorithm, which finds feasible solutions to any IP with finite gap. This can be of independent interest, especially in proving that a model has unbounded gap.
 \begin{restatable}{thm}{DomToIP}
 	\label{domtoIP}
 	Assume $1\leq g(I) < \infty$. The DomToIP algorithm finds $\hat{x}\in S(I)$ in polynomial time.
