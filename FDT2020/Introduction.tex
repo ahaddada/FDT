@@ -175,7 +175,7 @@ Consider the set of points described by sets $S(I)$ and $P(I)$ as in (\ref{S}) a
 For a vector $x\in \mathbb{R}_{\geq 0}^n$ such that $x\in P(I)$, let the {\em support} of $x$ be $\spp(x)= \{i \in [n]: x_i \neq 0\}$. For an integer $\beta$ let $\{\beta\}^n$ be the vector $y\in \mathbb{R}^n$ with $y_i=\beta$ for $i\in [n]$.
 
 
-In Section~\ref{binaryfdt} we introduce the \textit{Fractional Decomposition Tree Algorithm} (FDT) which runs in polynomial time algorithm. Given a point $x\in P(I)$ FDT produces a convex combination of feasible points in $S(I)$ that are dominated coordinatewise by a ``factor" $C$ times $x$.
+In Section~\ref{sec:binaryfdt} we introduce the \textit{Fractional Decomposition Tree Algorithm} (FDT) which runs in polynomial time algorithm. Given a point $x\in P(I)$ FDT produces a convex combination of feasible points in $S(I)$ that are dominated coordinatewise by a ``factor" $C$ times $x$.
 % in the coordinates corresponding to $x$.
 If $C = g(I)$, it would be optimal. However we can only guarantee a factor of $g(I)^{|\spp(x)|}$. FDT iteratively solves linear programs that are about the same size as the description of $P(I)$.
 
@@ -185,7 +185,7 @@ If $C = g(I)$, it would be optimal. However we can only guarantee a factor of $g
 	The Fractional Decomposition Tree (FDT) algorithm, given $x^*\in P(I)$, produces in polynomial time $\lambda\in [0,1]^k$ and $z^1,\ldots,z^k \in S(I)$ such that $k\leq |\spp(x^*)|$, $\sum_{i=1}^{k}\lambda_i z^i\leq \min(Cx^*,\{1\}^{n})$, and $\sum_{i=1}^{k}\lambda_i = 1$. Moreover, $C\leq g(I)^{|\spp(x^*)|}$.
 \end{restatable}
 
-In Section~\ref{domTOIP} we describe a subroutine of the FDT, called the DomToIP algorithm, which finds feasible solutions to any IP with finite gap. This can be of independent interest, especially in proving that a model has unbounded gap.
+In Section~\ref{sec:domTOIP} we describe a subroutine of the FDT, called the DomToIP algorithm, which finds feasible solutions to any IP with finite gap. This can be of independent interest, especially in proving that a model has unbounded gap.
 \begin{restatable}{thm}{DomToIP}
 	\label{domtoIP}
 	Assume $1\leq g(I) < \infty$. The DomToIP algorithm finds $\hat{x}\in S(I)$ in polynomial time.
@@ -195,10 +195,13 @@ In Section~\ref{domTOIP} we describe a subroutine of the FDT, called the DomToIP
 %\cindy{TODO: This implies we know $g(I)$, which is not true in general.  We should add how we bound/estimate it.  I'll return to this after putting that detail back in core if you (Arash) haven't added it by then.}
 %\arash{Isn't $P(I)$ the feasible region defined above. I keep $L(I)$ for now but we can replace it later if needed.} \arash{I fixed below so that I don't imply we know $g(I)$, we also might to clearly state that somewhere?}
 
-Here is how the FDT algorithm works at a high level for an instance $I$ with LP feasible region $P(I)$: in iteration $i$ the algorithm maintains a convex combination of  vectors in $\mathcal{D}(P(I))$ that have a 0 or 1 value for coordinates indexed $0,\ldots,i-1$. Let $y$ be a vector in the convex combination from iteration $i-1$. We solve a linear programming problem that gives us $\theta_0,\theta_1\in [0,1]$ and $y^0,y^1\in \mathcal{D}(P(I))$ such that $y\geq \theta_0 y^0 + \theta_1 y^1$, $\theta_0+\theta_1\leq g(I)$, $y^0_i=0$ and $y^1_i=1$. We then replace $y$ in the convex combination with $\frac{\theta_0}{\theta_0+\theta_1}y^0 +\frac{\theta_1}{\theta_0+\theta_1}y^1$.  Repeating this for every vector in the convex combination from the previous iteration yields a new convex combination of points. It is ``more'' integral because now all vectors in the convex combination are integral in their first $i+1$ elements. If in any iteration there are too many points in the convex combination,  we solve a linear programming problem that ``prunes'' the convex combination. At the end we have a convex combination of integer solutions $\mathcal{D}(P(I))$. For each such solution $z$ we invoke the DomToIP algorithm (see Section \ref{domTOIP}) to find $z'\in S(I)$ where $z'\leq z$.
+Here is how the FDT algorithm works at a high level for an instance $I$ with LP feasible region $P(I)$: in iteration $i$ the algorithm maintains a convex combination of  vectors in $\mathcal{D}(P(I))$ that have a 0 or 1 value for coordinates indexed $0,\ldots,i-1$. Let $y$ be a vector in the convex combination from iteration $i-1$. We solve a linear programming problem that gives us $\theta_0,\theta_1\in [0,1]$ and $y^0,y^1\in \mathcal{D}(P(I))$ such that $y\geq \theta_0 y^0 + \theta_1 y^1$, $\theta_0+\theta_1\leq g(I)$, $y^0_i=0$ and $y^1_i=1$. We then replace $y$ in the convex combination with $\frac{\theta_0}{\theta_0+\theta_1}y^0 +\frac{\theta_1}{\theta_0+\theta_1}y^1$.  Repeating this for every vector in the convex combination from the previous iteration yields a new convex combination of points. It is ``more'' integral because now all vectors in the convex combination are integral in their first $i+1$ elements. If in any iteration there are too many points in the convex combination,  we solve a linear programming problem that ``prunes'' the convex combination. At the end we have a convex combination of integer solutions $\mathcal{D}(P(I))$. For each such solution $z$ we invoke the DomToIP algorithm
+% CAP: forward pointer earlier now
+% (see Section~\ref{sec:domTOIP})
+to find $z'\in S(I)$ where $z'\leq z$.
 
 
-One can extend the FDT algorithm for binary IPs into covering\footnote{A covering IP has nonnegative constraint matrix, objective coefficients and right-hand side ($A,b,c$).} $\{0,1,2\}$ IPs by losing a factor $2^{|\spp(x)|}$ on top of the loss for FDT. To eradicate this extra factor, we must treat the coordinate $i$ with $x_i=1$ differently. We focus on the 2-edge-connected multi-subgraph graph problem (2EC) defined above.  It's subtour-elimination LP relaxation is given in (\ref{eq:subtour}).
+One can extend the FDT algorithm for binary IPs into covering\footnote{A covering IP has nonnegative constraint matrix, objective coefficients and right-hand side ($A,b,c$).} $\{0,1,2\}$ IPs by losing a factor $2^{|\spp(x)|}$ on top of the loss for FDT. To eradicate this extra factor, we must treat the coordinate $i$ with $x_i=1$ differently. In Section~\ref{sec:2EC} we focus on the 2-edge-connected multi-subgraph graph problem (2EC) defined above.  It's subtour-elimination LP relaxation is given in (\ref{eq:subtour}).
 %}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^{E}_{\geq 0}$ find a 2-edge-connected multi-subgraph of $G$ with minimum cost. The natural linear programming relaxation for this problem is 
 %\begin{equation}
 %\min \{cx \; : \; x(\delta(U))\geq 2 \; \text{ for }\emptyset \subset U \subset V, \; x\in [0,2]^E\}

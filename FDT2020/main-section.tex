@@ -3,8 +3,8 @@
 	\subsection{Notation}
 	For vectors $x,y\in \mathbb{R}_{n}$ we say $x$ dominates $y$ if $x_i\geq y_i$ for $i= 1,\ldots,n$. For $m\times n$ matrix $A$, let $A_j$ be the $j$-th row of $A$ and $A^j$ be the $j$-th column of $A$. For a set $S$ of vectors in $\mathbb{R}_{n}$, $\conv(S)$ is the convex hull of all the points in $S$.
 }\fi
-\section{Finding a Feasible Solution}\label{domTOIP}
-In this section we give the algorithm for DomToIP and prove its performance (Theorem~\ref{DomtoIP}).
+\section{Finding a Feasible Solution}\label{sec:domTOIP}
+In this section we give the algorithm for DomToIP and prove its performance (Theorem~\ref{domtoIP}).
 
 Consider an instance $I=(A,b)$ of the IP formulation. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I)\subseteq \{0,1\}^n$ and $P(I)\subseteq [0,1]^n$. For simplicity in the notation we assume and instance $I$ and denote $P(I),S(I),$ and $g(I)$ by $P$, $S$, and $g$ for this section and the next section. Also, for both sections we assume $t=|\spp(x)|$. Without loss of generality we can assume $x_i = 0$ for $i=t+1,\ldots,n$.
 \cindy{TODO: Is this something that should be clear to the reader with what they know at this point? Does it need an explanation? Does it need an explanation at the end of this section or the next?}
@@ -69,7 +69,7 @@ Now consider $x^{(t)}$. Let $z$ be the optimal solution to $\LP^{(t-1)}$. If $x^
 
 
 \section{FDT on Binary IPs}
-\label{binaryfdt}
+\label{sec:binaryfdt}
 
 Assume we are given a point $x^*\in P$. For instance, $x^*$ can be the optimal solution of minimizing a cost function $cx$ over set $P$, which provides a lower bound on $\min_{(x,y)\in S(I)} cx$.  In this section, we prove Theorem \ref{binaryFDT} by describing the Fractional Decomposition Tree (FDT) algorithm. We also remark that if $g(I)=1$, then the algorithm will give an exact decomposition of any feasible solution. 
 
@@ -200,9 +200,9 @@ It is not difficut to see that the number of nodes in the FDT tree is $O(n^2)$. 
 
 
 
-\section{FDT for 2EC}\label{2EC}
+\section{FDT for 2EC}\label{sec:2EC}
 
-In Section \ref{binaryfdt} our focus was on binary IPs. In this section, in an attempt to extend FDT to \{0,1,2\} problems we introduce an FDT algorithm for a 2-edge-connected multi-subgraph problem. Given a graph $G=(V,E)$ a multi-subset of edges $F$ of $G$ is a 2-edge-connected multi-subgraph of $G$ if for each set $\emptyset\subset U \subset V$, the number of edges in $F$ that have one endpoint in $U$ and one not in $U$ is at least 2. In 2EC, we are given non-negative costs on the edges of $G$ and the goal is to find the minimum cost 2-edge-connected multi-subgraph of $G$. We want to prove Theorem \ref{FDT2EC}.
+In Section~\ref{sec:binaryfdt} our focus was on binary IPs. In this section, in an attempt to extend FDT to \{0,1,2\} problems we introduce an FDT algorithm for a 2-edge-connected multi-subgraph problem. Given a graph $G=(V,E)$ a multi-subset of edges $F$ of $G$ is a 2-edge-connected multi-subgraph of $G$ if for each set $\emptyset\subset U \subset V$, the number of edges in $F$ that have one endpoint in $U$ and one not in $U$ is at least 2. In 2EC, we are given non-negative costs on the edges of $G$ and the goal is to find the minimum cost 2-edge-connected multi-subgraph of $G$. We want to prove Theorem \ref{FDT2EC}.
 \FDTEC*
 We do not know the exact value for $g(\2ec)$, but we know $\frac{6}{5} \leq g(\2ec) \leq \frac{3}{2}$ \cite{alexander2006integrality,wolsey}. The FDT algorithm for 2EC is very similar to the one for binary IPs, but there are some differences as well. A natural thing to do is to have three branches for each node of the FDT tree, however, the branches that are equivalent to setting a variable to $1$, might need further decomposition. That is the main difficulty when dealing with $\{0,1,2\}$-IPs.
 

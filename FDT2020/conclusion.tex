@@ -1,6 +1,6 @@
 \section{Concluding Remarks}
 
-The results in Sections \ref{binaryfdt}, \ref{domTOIP} and \ref{2EC} hold if the intial integer program has soem auxilliary continious variables\footnote{Here by auxilliary variables we mean a variable that does not participate in the objective function}, i.e. when we have 
+The results in Sections \ref{sec:binaryfdt}, \ref{sec:domTOIP} and \ref{sec:2EC} hold if the intial integer program has some auxilliary continuous variables\footnote{Here by auxilliary variables we mean a variable that does not participate in the objective function}, i.e. when we have 
 \begin{equation*}
 S(A,b) = \{x\in \mathbb{Z}^n\times \mathbb{R}^p: Ax\geq b\},
 \end{equation*}
@@ -8,6 +8,6 @@ where the last $p$ variables are continous, $P(A,b) = \{x\in \mathbb{R}^n: Ax\ge
 \begin{equation*}
 g(I) = \max_{c\in \mathbb{R}^n_+}\frac{\min_{x\in S(A,b)} \sum_{i=1}^{n}c_ix_i}{\min_{x\in P(A,b)} \sum_{i=1}^{n}c_ix_i},
 \end{equation*}
-our main results work. In fact out implementation of the subtour elimination formulation is based on an extended formulation with auxiliary variables (see \cite{subtour-extended}). We removed this extension in order to make the presentation simpler.
+our main results work. In fact our implementation of the subtour elimination formulation is based on an extended formulation with auxiliary variables (see \cite{subtour-extended}). We removed this extension to make the presentation simpler.
 
-Fractional Decomposition Tree is a tool to experminetally evaluate the known bounds (and conjectured bounds) on integrality gap of combinatorial optimization problems. We hope that applying this tool to a wide range of problems can be successful in refuting conjectures on the upper bounds of integrality gap or at least narrow down the instances for which a closer look is required for the study of integrality gap.
+Fractional Decomposition Tree is a tool to experminetally evaluate the known bounds (and conjectured bounds) on the integrality gap of combinatorial optimization IP formulations. We hope that applying this tool to a wide range of problems can be a tool to guide conjectures on the upper bounds of integrality gap or at least narrow down the instances for which a closer look is required for the study of integrality gap.
