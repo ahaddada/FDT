@@ -327,17 +327,17 @@ As input for our experiments, we considered full binary trees with 3 to 7 levels
 			 & $14$ & $28$ & $100$ \\ 
 			 & $30$ & $120$ & $100$ \\
 			 & $62$ & $496$ & $100$ \\ 
-			  & $126$ & $2016$ & $50$ \\  \hline \\
+			  & $126$ & $2016$ & $100$ \\  \hline \\
 		\end{tabular}\caption{Summary of the randomly generated instances of TAP.} \label{tableTAP}
 	\end{small}
 \end{table}
 \cindy{Please check the edits to the next paragraph carefully to ensure I captured what you were trying to say.}
-For all 450 instances in our experiments, running FDT on the LP optimal (fractional extreme point) of the cut LP gave a feasible solution with value at most a factor $\frac{3}{2}$ larger than the LP lower bound.  Such a feasible solution gives an upper bound on the integrality gap $g(\tap)$ of that specific instance of at most $\frac{3}{2}$.
+For all 500 instances in our experiments, running FDT on the LP optimal (fractional extreme point) of the cut LP gave a feasible solution with value at most a factor $\frac{3}{2}$ larger than the LP lower bound.  Such a feasible solution gives an upper bound on the integrality gap $g(\tap)$ of that specific instance of at most $\frac{3}{2}$.
 \cindy{There are 450 instances, so you tested one extreme point (the LP optimal) per instance?  I'm assuming that was the LP optimal.}
 %when restricted to the instances considered.
 In fact, the integrality gap upper bound derived this way was equal to $\frac{3}{2}$ for only one instance.
 %the upper bound we provided by our experiment is at $\frac{3}{2}$.
-For 425 instances, the integrality gap upper bound was $\frac{4}{3}$, for 22 instances it was $\frac{6}{5}$, for 2 instances it was $\frac{8}{7}$.
+For 480 instances, the integrality gap upper bound was $\frac{4}{3}$, for 16 instances it was $\frac{6}{5}$, for 2 instances it was $\frac{8}{7}$, for 1 instance it was $\frac{10}{9}$. 
 \arash{it's all correct, I'm running the experiments again to get the running time so these numbers might change.}
 \paragraph{Computational comparison between Christofides' algorithm and FDT for 2EC on Carr-Vempala points.} 
 
