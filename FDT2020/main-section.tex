@@ -7,7 +7,7 @@
 In this section we give the algorithm for DomToIP and prove its performance (Theorem~\ref{domtoIP}).
 
 Consider an instance $I=(A,b)$ of the IP formulation. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I)\subseteq \{0,1\}^n$ and $P(I)\subseteq [0,1]^n$. For simplicity in the notation we assume an instance $I$ and denote $P(I),S(I),$ and $g(I)$ by $P$, $S$, and $g$ for this section and the next section. Also, for both sections we assume $t=|\spp(x)|$. Without loss of generality we can assume $x_i = 0$ for $i=t+1,\ldots,n$.
-\cindy{TODO: Is this something that should be clear to the reader with what they know at this point? Does it need an explanation? Does it need an explanation at the end of this section or the next?}
+\cindy{TODO: Is this something that should be clear to the reader with what they know at this point? Does it need an explanation? Does it need an explanation at the end of this section or the next?}\arash{this is just a relabeling of the indices.}
 
 In this section we prove Theorem \ref{domtoIP}. In fact, we prove a stronger result. 
 \begin{lemma}\label{domlemma}
@@ -309,7 +309,7 @@ Recall that in the tree-augmentation problem (TAP) we are given a tree $T=(V,E)$
 \begin{equation*}
 g(\tap) = \max_{c\in \mathbb{R}^L_{\geq 0}} \frac{\min_{x\in\tap(T,L)} cx}{\min_{x\in\cut(T,L)} cx},
 \end{equation*}  
-where $TAP(T,L)$ is the feasible set for the IP and $CUT(T,L)$ is the feasible set for the cut LP (relaxation). We know $\frac{3}{2}\leq g(\tap)\leq 2$~\cite{FJ81,32gaptap}. Notice that $\min_{x\in \tap(T,L)}cx$ is a binary IP. 
+where $TAP(T,L)$ is the feasible set for the IP and $CUT(T,L)$ is the feasible set for the cut LP (relaxation). \arash{Did you intentionally change the TAP and CUT module? They print as italic now as opposed to how they look in $\tap(T,L)$ and $\cut(T,L)$} We know $\frac{3}{2}\leq g(\tap)\leq 2$~\cite{FJ81,32gaptap}. Notice that $\min_{x\in \tap(T,L)}cx$ is a binary IP. 
 
 As input for our experiments, we considered full binary trees with 3 to 7 levels with a link for each pairs of leaves. We set the link costs uniformly at random.  We summarize these test instances in Table~\ref{tableTAP}. We ran binary FDT on each test instance and chose the solution with minimum cost. We compare the FDT solutions to those from the circulation-based 2-approximation algorithm of Frederickson and J\'{a}J\'{a}~\cite{FJ81} in Figure \ref{fjvsfdt}.  
 \cindy{We should say something about running time.  Since we showed running time in part a, the reader will just assume otherwise that our running time is terrible compared to the Fredrickson and J\'{a}J\'{a} algorithm.}
@@ -327,17 +327,18 @@ As input for our experiments, we considered full binary trees with 3 to 7 levels
 			 & $14$ & $28$ & $100$ \\ 
 			 & $30$ & $120$ & $100$ \\
 			 & $62$ & $496$ & $100$ \\ 
-			  & $126$ & $2016$ & $50$ \\  \hline \\
+			  & $126$ & $2016$ & $100$ \\  \hline \\
 		\end{tabular}\caption{Summary of the randomly generated instances of TAP.} \label{tableTAP}
 	\end{small}
 \end{table}
 \cindy{Please check the edits to the next paragraph carefully to ensure I captured what you were trying to say.}
-For all 450 instances in our experiments, running FDT on the LP optimal (fractional extreme point) of the cut LP gave a feasible solution with value at most a factor $\frac{3}{2}$ larger than the LP lower bound.  Such a feasible solution gives an upper bound on the integrality gap $g(\tap)$ of that specific instance of at most $\frac{3}{2}$.
+For all 500 instances in our experiments, running FDT on the LP optimal (fractional extreme point) of the cut LP gave a feasible solution with value at most a factor $\frac{3}{2}$ larger than the LP lower bound.  Such a feasible solution gives an upper bound on the integrality gap $g(\tap)$ of that specific instance of at most $\frac{3}{2}$.
 \cindy{There are 450 instances, so you tested one extreme point (the LP optimal) per instance?  I'm assuming that was the LP optimal.}
 %when restricted to the instances considered.
 In fact, the integrality gap upper bound derived this way was equal to $\frac{3}{2}$ for only one instance.
 %the upper bound we provided by our experiment is at $\frac{3}{2}$.
-For 425 instances, the integrality gap upper bound was $\frac{4}{3}$, for 22 instances it was $\frac{6}{5}$, for 2 instances it was $\frac{8}{7}$.
+For 480 instances, the integrality gap upper bound was $\frac{4}{3}$, for 16 instances it was $\frac{6}{5}$, for 2 instances it was $\frac{8}{7}$, for 1 instance it was $\frac{10}{9}$. 
+\arash{it's all correct, I'm running the experiments again to get the running time so these numbers might change.}
 \paragraph{Computational comparison between Christofides' algorithm and FDT for 2EC on Carr-Vempala points.} 
 
 We first describe the polyhedral version of Christofides' algorithm specifically for Carr-Vempala points.
