@@ -6,14 +6,14 @@
 \section{Finding a Feasible Solution}\label{sec:domTOIP}
 In this section we give the algorithm for DomToIP and prove its performance (Theorem~\ref{domtoIP}).
 
-Consider an instance $I=(A,b)$ of the IP formulation. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I)\subseteq \{0,1\}^n$ and $P(I)\subseteq [0,1]^n$. For simplicity in the notation we assume an instance $I$ and denote $P(I),S(I),$ and $g(I)$ by $P$, $S$, and $g$ for this section and the next section. Also, for both sections we assume $t=|\spp(x)|$. Without loss of generality we can assume $x_i = 0$ for $i=t+1,\ldots,n$.
-\cindy{TODO: Is this something that should be clear to the reader with what they know at this point? Does it need an explanation? Does it need an explanation at the end of this section or the next?}\arash{this is just a relabeling of the indices.} \cindy{Sorry.  I didn't understand that you meant the solution has that property. Right? The vector $x$ isn't defined in this paragraph and it's not in the next lemma either. If $x$ is the output of DomToIP, then we should say that.  ``Without loss of generality the solution $x$ returned by DomToIP has ...''}
+Consider an instance $I=(A,b)$ of the IP formulation. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I)\subseteq \{0,1\}^n$ and $P(I)\subseteq [0,1]^n$. For simplicity in the notation we assume an instance $I$ and denote $P(I),S(I),$ and $g(I)$ by $P$, $S$, and $g$ for this section and the next section. Also, for both sections let $x^*$ be the optimal solution to the LP formulation and assume $t=|\spp(x^*)|$. Without loss of generality we can assume $x^*_i = 0$ for $i=t+1,\ldots,n$.
+\cindy{TODO: Is this something that should be clear to the reader with what they know at this point? Does it need an explanation? Does it need an explanation at the end of this section or the next?}\arash{this is just a relabeling of the indices.} \cindy{Sorry.  I didn't understand that you meant the solution has that property. Right? The vector $x$ isn't defined in this paragraph and it's not in the next lemma either. If $x$ is the output of DomToIP, then we should say that.  ``Without loss of generality the solution $x$ returned by DomToIP has ...''}\arash{I see your point, please see if the change made it better}
 
 In this section we prove Theorem \ref{domtoIP}. In fact, we prove a stronger result. 
 \begin{lemma}\label{domlemma}
 	Given $\tilde{x}\in \dom(P)$ and $\tilde{x}\in \{0,1\}^n$, there is an algorithm (the DomToIP algorithm) that finds $\bar{x}\in S$ in polynomial time, such that $\bar{x}\leq \tilde{x}$.\end{lemma}
-Notice that Lemma \ref{domlemma} implies Theorem \ref{domtoIP}, since it is easy to obtain an integer point in $\dom(P)$: numerically rounding up any fractional point in $P$ gives us a point in $\dom(P)$.
-
+Notice that Lemma \ref{domlemma} implies Theorem \ref{domtoIP}, since it is easy to obtain an integer point in $\dom(P)$: numerically rounding up $x^*$ (or any fractional point in $P$) gives us a point in $\dom(P)$. Hence, we can assume in the proof below that $\tilde{x}_i= 0$ for $i=t+1,\ldots,n$. 
+\arash{I also made a change based on the change above}
 \subsection{Proof of Lemma \ref{domlemma}: The DomToIP Algorithm}
 
 We start by introducing an algorithm that ``fixes" the variables iteratively, starting from the first coordinate and ending at the $t$-th coordinate. Suppose we run the algorithm for $\ell\in \{0,\ldots,t-1\}$ iterations and in each iteration we find $x^{(\ell)}\in \dom(P)$  such that $x^{(\ell)}_i\in \{0,1\}$ for $i=1,\ldots,\ell$. Notice that we can set $x^{(0)}=\tilde{x}$. Now consider the following linear program. The variables of this linear program are the $z\in \mathbb{R}^n$ variables.
@@ -70,8 +70,8 @@ Now consider $x^{(t)}$. Let $z$ be the optimal solution to $\LP^{(t-1)}$. If $x^
 
 \section{FDT on Binary IPs}
 \label{sec:binaryfdt}
-
-Assume we are given a point $x^*\in P$. For instance, $x^*$ can be the optimal solution of minimizing a cost function $cx$ over set $P$, which provides a lower bound on $\min_{(x,y)\in S(I)} cx$.  In this section, we prove Theorem \ref{binaryFDT} by describing the Fractional Decomposition Tree (FDT) algorithm. We also remark that if $g(I)=1$, then the algorithm will give an exact decomposition of any feasible solution. 
+\arash{I made a small change here based on our discussion in the bottom of page 8}
+Recall that $x^*$ was the optimal solution of minimizing a cost function $cx$ over set $P$, which provides a lower bound on $\min_{(x,y)\in S(I)} cx$.  In this section, we prove Theorem \ref{binaryFDT} by describing the Fractional Decomposition Tree (FDT) algorithm. We also remark that if $g(I)=1$, then the algorithm will give an exact decomposition of any feasible solution. 
 
 
 The FDT algorithm grows a tree similar to the classic branch-and-bound search tree for integer programs. Each node represents a partially integral vector $\bar{x}$ in $\dom(P)$ together with a multiplier $\bar{\lambda}$. The solutions contained in the nodes of the tree become progressively more integral at each level. In each level of the tree, the algorithm maintain a conic combination of points with the properties mentioned above. Leaves of the FDT tree contain solutions with integer values for all the $x$ variables that dominate a point in $P$. In Lemma  \ref{domlemma} we saw how to turn these into points in $S$. 
