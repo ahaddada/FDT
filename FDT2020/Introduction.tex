@@ -239,66 +239,14 @@ where $\cov(e)$ for $e \in T$ is the set of edges $\ell \in E\setminus T$ such t
 \subsubsection{2-edge-connected multi-subgraph problem}
 Known polyhedral structure makes it easier to study integrality gaps for such problems. We use the idea of fundamental extreme point \cite{carrravi,boydcarr,Carr2004} to create the ``hardest'' LP solutions to decompose.
 
-There are fairly good bounds for the integrality gap for the Traveling Salesman Problem (TSP, see \cite{tspbook}) or 2EC 
+There are fairly good bounds for the integrality gap for the Traveling Salesman Problem (TSP, see \cite{tspbook}) or 2EC.
 %\cindy{We don't define the TSP, though probably don't need to since that really is so classical, and we don't mention it again.  We could consider citing the TSP book.}
 Benoit and Boyd~\cite{TSPcompute} used a quadratic program to show the integrality gap of the subtour elimination relaxation for the TSP, $g(\tsp)$, is at most $\frac{20}{17}$ for graphs with at most 10 vertices. Alexander et al. \cite{alexander2006integrality} used the same ideas to provide an upper bound of $\frac{7}{6}$ for $g(\2ec)$ on graphs with at most 10 vertices. 
 
-Consider a graph $G=(V,E)$. A \textit{Carr-Vempala point} $x\in \mathbb{R}^E$ is a fractional point in $\subtour(G)$ where the edges $e$ with $0<x_e<1$ form a single cycle in $G$ and the vertices on the cycle are connected via vertex-disjoint paths of edges $e$ with $x_e =1$ (see Figure \ref{fig:CVpoint})
+Consider a graph $G=(V,E)$. A \textit{Carr-Vempala point} $x\in \mathbb{R}^E$ is a fractional point in $\subtour(G)$ where the edges $e$ with $0<x_e<1$ form a single cycle in $G$ and the vertices on the cycle are connected via vertex-disjoint paths of edges $e$ with $x_e =1$ (see Figure \ref{fig:CVpoint}).
 %\cindy{Every pair of vertices on the cycle is connected this way? It sounds like that, though I don't recall that being necessary. We probably have a figure from an old version we could include if it's not too much trouble.  This will help reviewers and future readers understand much more easily, especially that there could be far more than 12 vertices in the overall solution.}
 
-\arash{I added this figure \ref{fig:CVpoint} but maybe we can put it later in the experiments section to make the introduction shorter?} \cindy{Yes that would be fine, if the reader could also use that figure then.  They could page forward to see the figure when reading the introduction.}
-
-\begin{figure}
-\centering
-\begin{tikzpicture}[scale=0.4]
-
-
-\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,4) (0,-4)};
-\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(2.83,2.83) (-4,0)};
-\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(4,0) (-2.83,-2.83)};
-\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(-2.83,2.83) (2.83,-2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,4) (2.83,2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(4,0) (2.83,2.83)};
-
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(4,0) (2.83,-2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,-4) (2.83,-2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,-4) (-2.83,-2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(-4,0) (-2.83,-2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(-4,0) (-2.83,2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,4) (-2.83,2.83)};
-
-
-\draw[black,fill=white] (0,4) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (4,0) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (0,-4) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (-4,0) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (2.83,2.83) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (-2.83,-2.83) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (2.83,-2.83) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (-2.83,2.83) ellipse (0.5 cm  and 0.5 cm);
-
-\node (1) at (0,4) {{1}};
-\node (2) at (2.83,2.83) {{2}};
-\node (3) at (4,0) {{3}};
-\node (4) at (2.83,-2.83) {{4}};
-\node (5) at (0,-4) {{5}};
-\node (6) at (-2.83,-2.83) {{6}};
-\node (7) at (-4,0) {{7}};
-\node (8) at (-2.83,2.83) {{8}};
-\end{tikzpicture}
-\caption{A Carr-Vempala point with 8 vertices on its cycle. Solid lines are edges with value strictly between $0$ and $1$. Dashed edges represent paths where each edge on the path has $x_e =1$. There can be an arbitrary number of degree-$2$ vertices on the dashed paths.}
-\label{fig:CVpoint}
-\end{figure}
-
-
+%\arash{I added this figure \ref{fig:CVpoint} but maybe we can put it later in the experiments section to make the introduction shorter?} \cindy{Yes that would be fine, if the reader could also use that figure then.  They could page forward to see the figure when reading the introduction.}
 
 Carr and Vempala \cite{Carr2004} showed that $g(\2ec)$ is achieved for instances where the optimal solution to $\min_{x\in \subtour(G)}cx$ is a Carr-Vempala point. We show that the integrality gap is at most $\frac{6}{5}$ for Carr-Vempala points with at most 12 vertices on the cycle formed by the fractional edges.
 \cindy{This sounds like a contribution of the paper.} \arash{Yes, particlarly since a similar research question have been studied by \cite{alexander2006integrality} and \cite{TSPcompute}}
