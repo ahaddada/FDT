@@ -7,13 +7,13 @@
 In this section we give the algorithm for DomToIP and prove its performance (Theorem~\ref{domtoIP}).
 
 Consider an instance $I=(A,b)$ of the IP formulation. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I)\subseteq \{0,1\}^n$ and $P(I)\subseteq [0,1]^n$. For simplicity in the notation we assume an instance $I$ and denote $P(I),S(I),$ and $g(I)$ by $P$, $S$, and $g$ for this section and the next section. Also, for both sections let $x^*$ be the optimal solution to the LP formulation and assume $t=|\spp(x^*)|$. Without loss of generality we can assume $x^*_i = 0$ for $i=t+1,\ldots,n$.
-\cindy{TODO: Is this something that should be clear to the reader with what they know at this point? Does it need an explanation? Does it need an explanation at the end of this section or the next?}\arash{this is just a relabeling of the indices.} \cindy{Sorry.  I didn't understand that you meant the solution has that property. Right? The vector $x$ isn't defined in this paragraph and it's not in the next lemma either. If $x$ is the output of DomToIP, then we should say that.  ``Without loss of generality the solution $x$ returned by DomToIP has ...''}\arash{I see your point, please see if the change made it better} \cindy{Yes, thanks.  We can delete this conversation after you see this response.}
+%\cindy{TODO: Is this something that should be clear to the reader with what they know at this point? Does it need an explanation? Does it need an explanation at the end of this section or the next?}\arash{this is just a relabeling of the indices.} \cindy{Sorry.  I didn't understand that you meant the solution has that property. Right? The vector $x$ isn't defined in this paragraph and it's not in the next lemma either. If $x$ is the output of DomToIP, then we should say that.  ``Without loss of generality the solution $x$ returned by DomToIP has ...''}\arash{I see your point, please see if the change made it better} \cindy{Yes, thanks.  We can delete this conversation after you see this response.}
 
 In this section we prove Theorem \ref{domtoIP}. In fact, we prove a stronger result. 
 \begin{lemma}\label{domlemma}
 	Given $\tilde{x}\in \dom(P)$ and $\tilde{x}\in \{0,1\}^n$, there is an algorithm (the DomToIP algorithm) that finds $\bar{x}\in S$ in polynomial time, such that $\bar{x}\leq \tilde{x}$.\end{lemma}
 Notice that Lemma \ref{domlemma} implies Theorem \ref{domtoIP}, since it is easy to obtain an integer point in $\dom(P)$: numerically rounding up $x^*$ (or any fractional point in $P$) gives us a point in $\dom(P)$. Hence, we can assume in the proof below that $\tilde{x}_i= 0$ for $i=t+1,\ldots,n$. 
-\arash{I also made a change based on the change above}\cindy{Thanks!}
+%\arash{I also made a change based on the change above}\cindy{Thanks!}
 \subsection{Proof of Lemma \ref{domlemma}: The DomToIP Algorithm}
 
 We start by introducing an algorithm that ``fixes" the variables iteratively, starting from the first coordinate and ending at the $t$-th coordinate. Suppose we run the algorithm for $\ell\in \{0,\ldots,t-1\}$ iterations and in each iteration we find $x^{(\ell)}\in \dom(P)$  such that $x^{(\ell)}_i\in \{0,1\}$ for $i=1,\ldots,\ell$. Notice that we can set $x^{(0)}=\tilde{x}$. Now consider the following linear program. The variables of this linear program are the $z\in \mathbb{R}^n$ variables.
@@ -70,7 +70,7 @@ Now consider $x^{(t)}$. Let $z$ be the optimal solution to $\LP^{(t-1)}$. If $x^
 
 \section{FDT on Binary IPs}
 \label{sec:binaryfdt}
-\arash{I made a small change here based on our discussion in the bottom of page 8}\cindy{Thanks!}
+%\arash{I made a small change here based on our discussion in the bottom of page 8}\cindy{Thanks!}
 Recall that $x^*$ was the optimal solution of minimizing a cost function $cx$ over set $P$, which provides a lower bound on $\min_{(x,y)\in S(I)} cx$.  In this section, we prove Theorem \ref{binaryFDT} by describing the Fractional Decomposition Tree (FDT) algorithm. We also remark that if $g(I)=1$, then the algorithm will give an exact decomposition of any feasible solution. 
 
 
@@ -341,7 +341,7 @@ For all 500 instances in our experiments, running FDT on the LP optimal (fractio
 In fact, the integrality gap upper bound derived this way was equal to $\frac{3}{2}$ for only one instance.
 %the upper bound we provided by our experiment is at $\frac{3}{2}$.
 For 480 instances, the integrality gap upper bound was $\frac{4}{3}$, for 16 instances it was $\frac{6}{5}$, for 2 instances it was $\frac{8}{7}$, for 1 instance it was $\frac{10}{9}$. 
-\arash{it's all correct, I'm running the experiments again to get the running time so these numbers might change.}
+%\arash{it's all correct, I'm running the experiments again to get the running time so these numbers might change.}
 \paragraph{Computational comparison between Christofides' algorithm and FDT for 2EC on Carr-Vempala points.} 
 
 We first describe the polyhedral version of Christofides' algorithm specifically for Carr-Vempala points.
