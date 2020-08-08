@@ -237,6 +237,7 @@ In the \textsc{Tree Augmentation Problem (TAP)} we are given a  graph $G=(V,E)$,
 where $\cov(e)$ for $e \in T$ is the set of edges $\ell \in E\setminus T$ such that $e$ is in the unique cycle of $T\cup \{\ell\}$. Another way to think of $\cov(e)$ is that if we remove edge $e$ from tree $T$, this partitions the vertices into two connected sets $U$ and $V-U$.  Then $\cov(e) = \delta(U)$ is the set of edges $\ell \neq e$ that cross the cut between $U$ and $V-U$, and whose addition would reconnect the tree. We call the LP above the cut LP. The integrality gap of the cut LP is known to be between $\frac{3}{2}$ \cite{32gaptap} and $2$ \cite{FJ81}. We create random fractional extreme points of the cut LP and apply FDT to find integral solutions. For our instances, the ratio of the value of the feasible solution to the LP lower bound is always below $\frac{3}{2}$. This provides evidence that the integrality gap for such instances may be less than $\frac{3}{2}$.
 
 \subsubsection{2-edge-connected multi-subgraph problem}
+\label{sec:2EC-intro}
 Known polyhedral structure makes it easier to study integrality gaps for such problems. We use the idea of fundamental extreme point \cite{carrravi,boydcarr,Carr2004} to create the ``hardest'' LP solutions to decompose.
 
 There are fairly good bounds for the integrality gap for the Traveling Salesman Problem (TSP, see \cite{tspbook}) or 2EC.
