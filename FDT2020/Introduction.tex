@@ -117,7 +117,7 @@ The integrality gap $g(I)$ for instance $I$ is: $$g(I)= \max_{c\geq 0}\frac{z_{I
 where $z_{IP}(I,c)$ is the optimal solution to the integer program and $z_{LP}(I,c)$ is the solution to the linear-programming relaxation.
 \end{definition}
 
-In general the integrality gap is defined similarly for any objective function, but we wish to be explicit about the class of problems we assume in this paper. For example consider the minimum cost \textsc{2-edge-connected multi-subgraph problem (2EC)}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^E_{\geq 0}$, 2EC asks for the minimum cost 2-edge-connected subgraph of $G$, with multiedges allowed. A graph is 2-edge-connected if there are at least two edge-disjoint paths between every pair of vertices.  A linear programming relaxation for this problem, known as the {\em subtour-elimination} relaxation, is
+In general the integrality gap is defined similarly for any objective function, but we wish to be explicit about the class of problems we assume in this paper. For example consider the minimum cost \textsc{2-edge-connected multi-subgraph problem (2EC)}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^E_{\geq 0}$, 2EC asks for the minimum cost 2-edge-connected subgraph of $G$, with multi-edges allowed. A graph is 2-edge-connected if there are at least two edge-disjoint paths between every pair of vertices.  A linear programming relaxation for this problem, known as the {\em subtour-elimination} relaxation, is
  \begin{equation}\min \{cx: \sum_{e\in \delta(U)}x_e \geq 2 \mbox{ for } \emptyset \subsetneq U \subsetneq V,\; x\in [0,2]^{E}\}, 
  \label{eq:subtour}
  \end{equation}
@@ -130,7 +130,7 @@ The value of $g(I)$ depends on the constraints in~(\ref{S}).  We cannot hope to 
 \begin{equation}\label{gapproblem}
 g(\mathcal{I}) = \max_{c\geq 0 , I\in\mathcal{I}}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}.
 \end{equation}
-For example, the integrality gap of the subtour elimination relaxation for the 2EC is at most $\frac{3}{2}$ \cite{wolsey} and at least $\frac{6}{5}$ \cite{alexander2006integrality}. Therefore, we cannot hope to obtain an LP-based $(\frac{6}{5}-\epsilon)$-approximation algorithm for this problem using this LP relaxation to bound the quality of a feasible solution.
+For example, the integrality gap of the subtour-elimination relaxation for the 2EC is at most $\frac{3}{2}$ \cite{wolsey} and at least $\frac{6}{5}$ \cite{alexander2006integrality}. Therefore, we cannot hope to obtain an LP-based $(\frac{6}{5}-\epsilon)$-approximation algorithm for this problem using this LP relaxation to bound the quality of a feasible solution.
 
 Our methods apply theory connecting integrality gaps to sets of feasible solutions. Instances $I$ with $g(I)=1$ have $P(I)=\conv(S(I))$, the convex hull of the lattice of feasible points. In this case, $P(I)$ is an \textit{integral} polyhedron. The spanning tree polytope of graph $G$, $\st(G)$, and the perfect-matching polytope of graph $G$, $\permat(G)$, have this property (\cite{Edmonds2003,edmondsPM}). Thus the linear-programming relaxation for minimum-cost spanning tree has basic feasible solutions (vertices) that are integral solutions, i.e. spanning trees. For such problems there is an algorithm to express vector $x\in P(I)$ (a feasible LP solution) as a convex combination of points in $S(I)$ (feasible IP solutions) in polynomial time \cite{cons-cara}.
 % The number of feasible solutions ($k$) in the convex combination can vary by instance.
@@ -206,7 +206,7 @@ One can extend the FDT algorithm for binary IPs into covering\footnote{A coverin
 %\begin{equation}
 %\min \{cx \; : \; x(\delta(U))\geq 2 \; \text{ for }\emptyset \subset U \subset V, \; x\in [0,2]^E\}
 %\end{equation}
-For input graph $G$, let $\subtour(G)$ denote the feasible region of this LP. Let $\2ec(G)$ be the convex hull of incidence vectors\footnote{The incidence vector $x$ of a 2-edge-connected multigraph has an element for each edge $e$, with $x_e \in \{0,1,2\}$ indicating the number of times edge $e$ appears in the solution.} of 2-edge-connected multi-subgraphs of graph $G$. Following the definition in (\ref{gapproblem}) have
+For input graph $G$, let $\subtour(G)$ denote the feasible region of this LP. Let $\2ec(G)$ be the convex hull of incidence vectors\footnote{The incidence vector $x$ of a 2-edge-connected multi-subgraph has an element for each edge $e$, with $x_e \in \{0,1,2\}$ indicating the number of times edge $e$ appears in the solution.} of 2-edge-connected multi-subgraphs of graph $G$. Following the definition in (\ref{gapproblem}) have
 \begin{equation}
 g(\2ec) = \max_{c\geq 0 , G}\frac{\min_{x\in \2ec(G)} cx}{\min_{x\in \subtour(G)} cx}.
 \end{equation}
@@ -242,7 +242,7 @@ Known polyhedral structure makes it easier to study integrality gaps for such pr
 
 There are fairly good bounds for the integrality gap for the Traveling Salesman Problem (TSP, see \cite{tspbook}) or 2EC.
 %\cindy{We don't define the TSP, though probably don't need to since that really is so classical, and we don't mention it again.  We could consider citing the TSP book.}
-Benoit and Boyd~\cite{TSPcompute} used a quadratic program to show the integrality gap of the subtour elimination relaxation for the TSP, $g(\tsp)$, is at most $\frac{20}{17}$ for graphs with at most 10 vertices. Alexander et al. \cite{alexander2006integrality} used the same ideas to provide an upper bound of $\frac{7}{6}$ for $g(\2ec)$ on graphs with at most 10 vertices. 
+Benoit and Boyd~\cite{TSPcompute} used a quadratic program to show the integrality gap of the subtour-elimination relaxation for the TSP, $g(\tsp)$, is at most $\frac{20}{17}$ for graphs with at most 10 vertices. Alexander et al. \cite{alexander2006integrality} used the same ideas to provide an upper bound of $\frac{7}{6}$ for $g(\2ec)$ on graphs with at most 10 vertices. 
 
 Consider a graph $G=(V,E)$. A \textit{Carr-Vempala point} $x\in \mathbb{R}^E$ is a fractional point in $\subtour(G)$ where the edges $e$ with $0<x_e<1$ form a single cycle in $G$ and the vertices on the cycle are connected via vertex-disjoint paths of edges $e$ with $x_e =1$ (see Figure \ref{fig:CVpoint}).
 %\cindy{Every pair of vertices on the cycle is connected this way? It sounds like that, though I don't recall that being necessary. We probably have a figure from an old version we could include if it's not too much trouble.  This will help reviewers and future readers understand much more easily, especially that there could be far more than 12 vertices in the overall solution.}
