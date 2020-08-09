@@ -70,30 +70,30 @@ We also have $x^{(j)}_j=1$ which implies when we solved $\HelperLP(x^{(j-1)})$ t
 
 Now for the second case, assume $z^*_{\ell+1} > 0$. We set $x^{(\ell+1)}_{\ell+1}=1$. For each point $z\in \LP^{(\ell)}$ we have $z_{\ell+1} >0$, so for each $z\in \IP^{(\ell)}$ we have $z_{\ell+1}>0$, i.e. $z_{\ell+1}=1$. This means that $z\in \IP^{(\ell+1)}$, and $\IP^{(\ell+1)} \neq \emptyset$.
 
-Now consider $x^{(t)}$. Let $z$ be the optimal solution to $\LP^{(t-1)}$. If $x^{(t)}_t = 0$, we have $x^{(t)} = z$, which implies that $x^{(t)}\in P$, and since $x^{(t)}\in \{0,1\}^n$ we have $x^{(t)}\in S$. If $x^{(t)}_t =1$, it must be the case that $z_t > 0$. By the argument above there is a point $z'\in \IP^{(t-1)}$. We show that $x^{(t)} = z'$. For $j\in [t-1]$ we have $z'_j= x_j^{(t-1)}=x_j^{(t)}$. We just need to show that $z'_t = 1$. Assume $z'_t	 = 0$ for contradiction, then $z'\in \LP^{(t-1)}$ has objective value of $0$ for $\HelperLP(x^{(t-1)})$, this is a contradiction to $z$ being the optimal solution. This concludes the proof of Lemma \ref{domlemma}. 
-
-
+Now consider $x^{(t)}$. Let $z$ be the optimal solution to $\LP^{(t-1)}$. If $x^{(t)}_t = 0$, we have $x^{(t)} = z$, which implies that $x^{(t)}\in P$, and since $x^{(t)}\in \{0,1\}^n$ we have $x^{(t)}\in S$. If $x^{(t)}_t =1$, it must be the case that $z_t > 0$. By the argument above there is a point $z'\in \IP^{(t-1)}$. We show that $x^{(t)} = z'$. For $j\in [t-1]$ we have $z'_j= x_j^{(t-1)}=x_j^{(t)}$. We just need to show that $z'_t = 1$. Assume $z'_t	 = 0$ for contradiction. Then $z'\in \LP^{(t-1)}$ has objective value $0$ for $\HelperLP(x^{(t-1)})$. This is a contradiction to $z$ being the optimal solution to $\LP^{(t-1)}$. This concludes the proof of Lemma \ref{domlemma}. 
 
 
 
 \section{FDT on Binary IPs}
 \label{sec:binaryfdt}
 %\arash{I made a small change here based on our discussion in the bottom of page 8}\cindy{Thanks!}
-Recall that $x^*$ was the optimal solution of minimizing a cost function $cx$ over set $P$, which provides a lower bound on $\min_{(x,y)\in S(I)} cx$.  In this section, we prove Theorem \ref{binaryFDT} by describing the Fractional Decomposition Tree (FDT) algorithm. We also remark that if $g(I)=1$, then the algorithm will give an exact decomposition of any feasible solution. 
+Recall that $x^*$ was the optimal solution to minimizing a cost function $cx$ over set $P$, which provides a lower bound on $\min_{(x,y)\in S(I)} cx$.  In this section, we prove Theorem \ref{binaryFDT} by describing the Fractional Decomposition Tree (FDT) algorithm. We also remark that if $g(I)=1$, then the algorithm gives an exact decomposition of any feasible solution. 
 
 
-The FDT algorithm grows a tree similar to the classic branch-and-bound search tree for integer programs. Each node represents a partially integral vector $\bar{x}$ in $\dom(P)$ together with a multiplier $\bar{\lambda}$. The solutions contained in the nodes of the tree become progressively more integral at each level. In each level of the tree, the algorithm maintain a conic combination of points with the properties mentioned above. Leaves of the FDT tree contain solutions with integer values for all the $x$ variables that dominate a point in $P$. In Lemma  \ref{domlemma} we saw how to turn these into points in $S$. 
+The FDT algorithm grows a tree similar to the classic branch-and-bound search tree for integer programs. Each node represents a partially integral vector $\bar{x}$ in $\dom(P)$ together with a multiplier $\bar{\lambda}$. The solutions contained in the nodes of the tree become progressively more integral at each level. In each level of the tree, the algorithm maintain a conic combination of points with the properties mentioned above. Leaves of the FDT tree contain integral solutions
+%with integer values for all the $x$ variables
+that dominate a point in $P$. In Lemma~\ref{domlemma} we saw how to turn these into points in $S$. 
 
 \paragraph{Branching on a node.}
 We begin with the following lemmas that show how the FDT algorithm branches on a variable.
 \begin{lemma}\label{LPClemma}
-	Given $x'\in \dom(P)$ and $\ell\in [n]$ where $x'_{\ell}<1$, we can find in polynomial time vectors $\hat{x}^0,\hat{x}^1$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that: (i) $\gamma_0 + \gamma_1  \geq 1/g$, (ii) $\hat{x}^0$ and $\hat{x}^1$ are in  $ P$
-	,(iii) $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$, (iv) $\gamma_0 \hat{x}^0 + \gamma_1\hat{x}^1 \leq x'$.
+	Given $x'\in \dom(P)$ and $\ell\in [n]$ where $x'_{\ell}<1$, in polynomial time we can find vectors $\hat{x}^0,\hat{x}^1$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that: (i) $\gamma_0 + \gamma_1  \geq 1/g$, (ii) $\hat{x}^0$ and $\hat{x}^1$ are in  $ P$, (iii) $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$, and (iv) $\gamma_0 \hat{x}^0 + \gamma_1\hat{x}^1 \leq x'$.
 \end{lemma}
 
 
 \begin{proof}	
-	Consider the following linear program which we denote by $\LPC(\ell,x')$. The variables of $\LPC(\ell,x')$ are $\gamma_0,\gamma_1$ and $x^0$ and $x^1$. 
+	Consider the following linear program which we denote by $\LPC(\ell,x')$. The variables of $\LPC(\ell,x')$ are $\gamma_0,\gamma_1$ and $x^0$ and $x^1$.
+\cindy{I think you mean that the $\lambda$s are variables, not $\gamma$s.  However the above lemma uses $\gamma$ and then there is a mix of $\lambda$ and $\gamma$ below the LP. Can you please check that you intend to have both types and they are used properly?}
 	\begin{align}
 	\LPC(\ell,x')\quad\quad& \max\quad \;\lambda_0+\lambda_1\\
 	&\;\text{s.t.} \quad Ax^j \geq b\lambda_j & \mbox{ for $j=0,1$} \label{feasibility}\\
