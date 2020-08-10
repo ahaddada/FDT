@@ -92,8 +92,8 @@ We begin with the following lemmas that show how the FDT algorithm branches on a
 
 
 \begin{proof}	
-	Consider the following linear program which we denote by $\LPC(\ell,x')$. The variables of $\LPC(\ell,x')$ are $\gamma_0,\gamma_1$ and $x^0$ and $x^1$.
-\cindy{I think you mean that the $\lambda$s are variables, not $\gamma$s.  However the above lemma uses $\gamma$ and then there is a mix of $\lambda$ and $\gamma$ below the LP. Can you please check that you intend to have both types and they are used properly?}
+	Consider the following linear program which we denote by $\LPC(\ell,x')$. The variables of $\LPC(\ell,x')$ are $\lambda_0$, $\lambda_1$, $x^0$ and $x^1$.
+% \cindy{I think you mean that the $\lambda$s are variables, not $\gamma$s.  However the above lemma uses $\gamma$ and then there is a mix of $\lambda$ and $\gamma$ below the LP. Can you please check that you intend to have both types and they are used properly?}
 	\begin{align}
 	\LPC(\ell,x')\quad\quad& \max\quad \;\lambda_0+\lambda_1\\
 	&\;\text{s.t.} \quad Ax^j \geq b\lambda_j & \mbox{ for $j=0,1$} \label{feasibility}\\
@@ -103,7 +103,9 @@ We begin with the following lemmas that show how the FDT algorithm branches on a
 	&\;{\color{white}{\text{s.t.}} }\quad \lambda_0,\lambda_1 \geq 0
 	\end{align}
 	
-	Let $x^0,x^1$, and $\gamma_0,\gamma_1$ be an optimal solution to the LP above. Let $\hat{x}^0 = x^0/\gamma_0$, $\hat{x}^1=x^1/\gamma_1$. This choice satisfies  (ii), (iii), (iv). To show that (i) is also satisfied we prove the following claim.
+	Let $x^0$, $x^1$, $\lambda_0$, and $\lambda_1$ be an optimal solution to the LP above. Set $\gamma_0=\lambda_0$ and $\gamma_1 = lambda_1$.
+\cindy{The sentence right before this is how I think you link the $\lambda$ in the LP to the $\gamma$ constants in the Lemma statement and the claim below, etc.}
+Let $\hat{x}^0 = x^0/\gamma_0$, $\hat{x}^1=x^1/\gamma_1$. This choice satisfies  (ii), (iii), (iv). To show that (i) is also satisfied we prove the following claim.
 	
 	\begin{claim}\label{CVexists}
 		We have $\gamma_0 + \gamma_1\geq 1/g$.
@@ -147,7 +149,7 @@ We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integr
 	(a) If $x\in L_i$, then $x_j \in \{0,1\}$ for $j\in [i]$, i.e. the first $i$ coordinates of a solution in level $i$ are integral, (b) $\sum_{[x,\lambda]\in L_i} \lambda\geq\frac{1}{g^i}$, (c) $\sum_{[x,\lambda]\in L_i}\lambda x \leq x^*$, (d) $|L_i|\leq t$.
 \end{lemma}
 \begin{proof}
-	We prove this lemma using induction but one can clearly see how to turn this proof into a polynomial time algorithm. Let $L_0$ be the set that contains a single node (\textit{root of the FDT tree}) with $x^*$ and multiplier 1. It is easy to check all the requirements in the lemma are satisfied for this choice.
+	We prove this lemma using induction but one can clearly see how to turn this proof into a polynomial time algorithm. Let $L_0$ be the set that contains a single node (\textit{root of the FDT tree}) with $x^*$ and multiplier 1. All the requirements in the lemma are satisfied for this choice.
 	
 	Suppose by induction that we have constructed sets $L_0,\ldots,L_i$. Let the solutions in $L_i$ be $x^j$ for $j\in [k]$ and $\lambda_j$ be their multipliers, respectively. For each $j\in[k]$ if $x^j_{i+1}=1$ we add the pair $(x^j,\lambda_j)$ to $L'$. Otherwise,	applying Lemma \ref{round-up} (setting $x'= x^j$ and $\ell = i+1$) we can find $x^{j0}$, $x^{j1}$, $\lambda^0_j$ and $\lambda^1_j$ with the properties (i) to (v) in Lemma \ref{round-up}. Add the pairs  $(x^{j0} ,\lambda_j\lambda^0_j)$ and  $(x^{j1} ,\lambda_j\lambda^1_j)$ to $L'$. It is easy to check that set $L'$ is a suitable candidate for $L_{i+1}$, i.e. set $L'$ satisfies (a), (b) and (c). However we can only ensure that $|L'|\leq 2k\leq 2t$, and might have $|L'|>t$. We call the following linear program $\prun(L')$. Let $L' = \{[x^1,\gamma_1],\ldots,[x^{|L'|},\gamma_{|L'|}]\}$. The variables of $\prun(L')$ are scalar variables $\theta_j$ for each node $j$ in $L'$.  
 		\begin{equation}
