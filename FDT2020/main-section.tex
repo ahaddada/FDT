@@ -18,7 +18,7 @@ Hence, we can assume in the proof below that $\tilde{x}_i= 0$ for $i=t+1,\ldots,
 %\arash{I also made a change based on the change above}\cindy{Thanks!}
 \subsection{Proof of Lemma \ref{domlemma}: The DomToIP Algorithm}
 
-We introduce an algorithm that considers each of the variables iteratively, starting from the first coordinate and ending at the $t$-th coordinate. If the initial (integral) point $\tilde{x}$ has the variable set to $1$, the algorithm tries to reduce the variable to $0$ if possible. We run the algorithm for $\ell\in \{0,\ldots,t-1\}$ iterations and in each iteration we find $x^{(\ell)}\in \dom(P)$  such that $x^{(\ell)}_i\in \{0,1\}$ for $i=1,\ldots,\ell$.
+We introduce an algorithm that considers each of the variables iteratively, starting from the first coordinate and ending at the $t$-th coordinate. If the initial (integral) point $\tilde{x}$ has the variable set to $1$, the algorithm tries to reduce the variable to $0$ if possible. \arash{A caution here: the phrase if possible a bit vague here. We round down to zero, if there is feasible solution to LP (so a point in $P(I)$, such that the first $\ell$ coordinates of it are all equal to the point $x^{(\ell)}$ that we have in iteration $\ell$ and its $\ell+1$-th coordinate is 0}. We run the algorithm for $\ell\in \{0,\ldots,t-1\}$ iterations and in each iteration we find $x^{(\ell)}\in \dom(P)$  such that $x^{(\ell)}_i\in \{0,1\}$ for $i=1,\ldots,\ell$.
 \cindy{I think the previous sentence also added to my confusion before (along with the term ``fix'' which I have replaced).  After $\ell$ iterations the first $\ell$ components are integer, but they were integer before.  Did you intend to say that we finalize a 0-1 value for the first $\ell$ coordinates?}
 We can set $x^{(0)}=\tilde{x}$. Now consider the following linear program. The variables of this linear program are the $z\in \mathbb{R}^n$.
 \begin{align}
@@ -106,7 +106,7 @@ We begin with the following lemmas that show how the FDT algorithm branches on a
 	Let $x^0$, $x^1$, $\lambda_0$, and $\lambda_1$ be an optimal solution to the LP above. Set $\gamma_0=\lambda_0$ and $\gamma_1 = \lambda_1$.
 \cindy{The sentence right before this is how I think you link the $\lambda$ in the LP to the $\gamma$ constants in the Lemma statement and the claim below, etc.}
 Let $\hat{x}^0 = x^0/\gamma_0$, $\hat{x}^1=x^1/\gamma_1$. This choice satisfies  (ii), (iii), (iv). To show that (i) is also satisfied we prove the following claim.
-	
+	\arash{Now that I notice, we use $\lambda_0,\lambda_1,x^0,x^1}$ to represnt a feasible solution to the system 13-18. Since the optimal solution is use only for the duration of one sentence above maybe we can change the notation for the optimal solution. For instance use $y^0,y^1, \lambda^*_0,\lambda^*_1$}
 	\begin{claim}\label{CVexists}
 		We have $\gamma_0 + \gamma_1\geq 1/g$.
 	\end{claim}
