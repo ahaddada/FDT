@@ -23,7 +23,7 @@ However, there is substantial research into finding a feasible, provably-good ap
 There is substantial research into finding a feasible, provably-good approximate solution for TODO, and even (computationally) provably optimal solutions to specific IP instances. \cindy{TODO: probably need to informally distinguish between a IP for a general problem, and a specific instance when the parameters are set.}
 \fi
 
-A major tool for finding feasible solutions for discrete optimization problems expressed as IPs is the {\em linear-programming (LP) relaxation} for the IP formulation. This is a new problem created by relaxing the integrality constraints for an IP instance, allowing the variables to take continuous (rational) values. Linear programs can be solved in polynomial time. The objective value of the linear programming relaxation provides a bound (lower bound for a minimization problem and upper bound for a maximization problem) on the optimal solution to the IP instance. The solutions can also provide some useful global structure, even though the fractional values might not be directly meaningful. 
+A major tool for finding feasible solutions for discrete optimization problems expressed as IPs is the {\em linear-programming (LP) relaxation} for the IP formulation. This is a new problem created by relaxing the integrality constraints for an IP instance, allowing the variables to take continuous (rational) values. Linear programs can be solved in polynomial time. The objective value of the linear-programming relaxation provides a bound (lower bound for a minimization problem and upper bound for a maximization problem) on the optimal solution to the IP instance. The solutions can also provide some useful global structure, even though the fractional values might not be directly meaningful. 
 
 {\em LP-based approximation algorithms} use LP relaxations to find provably good approximate feasible solutions to IP problems in polynomial time. At the highest level, they involve solving the LP relaxation, using special structure from the problem to find a feasible solution, and proving that the objective value of the solution is no more than $C$ times worse than the bound from the LP relaxation. The approximation factor $C$ can be a constant or depend on the input parameters of the IP, e.g. $O(\log(n))$ where $n$ is the number of variables in the formulation of the IP (the dimension of the problem).
 
@@ -51,7 +51,7 @@ Let $S$ denote the set of feasible solutions to a combinatorial optimization pro
 
 A fundamental fact in polyhedral theory is that $\min_{c\in S} S = \min_{c\in S} \conv(S)$. Notice that $\conv(S)$ is a polyhedron and optimizing a linear function subject to the points lying in a polyhedron can be done in polynomial time in the number of variables and constraints in the description of $\conv(S)$. Such a description, however, might have exponential size in the description of set $S$.
 
-A natural way to bound the solution to the integer program $\min_{x\in S} cx$ is to relax the integrality constraints. Let $L= \{x\in \mathbb{R}^n: Ax\geq b, x\geq 0\}$. Contrary to integer programming, the optimal solution to $\min_{x\in L}cx$ can be efficiently found. Set $L$ is called the linear programming relaxation of $S$. Since we relaxed the integrality requirement on $x$, we have	
+A natural way to bound the solution to the integer program $\min_{x\in S} cx$ is to relax the integrality constraints. Let $L= \{x\in \mathbb{R}^n: Ax\geq b, x\geq 0\}$. Contrary to integer programming, the optimal solution to $\min_{x\in L}cx$ can be efficiently found. Set $L$ is called the linear-programming relaxation of $S$. Since we relaxed the integrality requirement on $x$, we have	
 \begin{equation}\label{lp-lower-bound}
 \min_{x\in L} cx \leq \min_{x\in S}cx.
 \end{equation}
@@ -72,7 +72,7 @@ Since we are concerned with the worst-case analysis, we consider
 }
 \vspace*{3pt}
 
-If $g=1$, we say that the linear programming formulation is a perfect formulation. Otherwise we have $g>1$. In this case, we cannot hope to achieve an integer solution with cost lower than $(g-\epsilon)\cdot (\min_{x\in L}cx)$, for any constant $\epsilon>0$. Thus, a lower bound on $g$ provide a certificate for impossibility of approximation via the linear relaxation for which the gap is $g$. On the other hand, an upper bound of $\alpha$ for $g$ is often accompanied with an $\alpha$-approximation algorithm. This is not always the case, as we will later discuss in details.
+If $g=1$, we say that the linear-programming formulation is a perfect formulation. Otherwise we have $g>1$. In this case, we cannot hope to achieve an integer solution with cost lower than $(g-\epsilon)\cdot (\min_{x\in L}cx)$, for any constant $\epsilon>0$. Thus, a lower bound on $g$ provide a certificate for impossibility of approximation via the linear relaxation for which the gap is $g$. On the other hand, an upper bound of $\alpha$ for $g$ is often accompanied with an $\alpha$-approximation algorithm. This is not always the case, as we will later discuss in details.
 
 We refer to $g$ as the integrality gap of the linear relaxation. For a polyhedron $P\in \mathbb{R}^n$ let the \textit{dominant of $P$} be $\{x\in \mathbb{R}^n: \exists y \in P: x\geq y\}$ and denote it by $\dom(P)$. Goemans \cite{goemansblocking} gave a characterization of integrality gap based on convex combinations when $\conv(S)=\mathcal{D}(\conv(S))$. Carr and Vempala \cite{Carr2004} generalized this characterization.
 
@@ -106,7 +106,7 @@ P(A,b) = \{x\in \mathbb{R}^{n}\;:\; Ax\geq b\}. \label{P}
 \end{equation}
 Let $I=(A,b)$ denote an instance. Then $S(I)$ and $P(I)$ denote $S(A,b)$ and $P(A,b)$, respectively. Given a linear objective function $c$, an IP is $\min \;\{cx:\; x \in S(I)\}$. 
 
-Relaxing the integrality constraints gives the polynomial-time-solvable linear programming relaxation: $\min \;\{cx:\;x\in P(I) \}$.  The optimal value of this linear program (LP), denoted $z_{\lp}(I,c)$, is a lower bound on the optimal value for the IP, denoted $z_{\IP}(I,c)$. 
+Relaxing the integrality constraints gives the polynomial-time-solvable linear-programming relaxation: $\min \;\{cx:\;x\in P(I) \}$.  The optimal value of this linear program (LP), denoted $z_{\lp}(I,c)$, is a lower bound on the optimal value for the IP, denoted $z_{\IP}(I,c)$. 
 
 Many researchers (see \cite{davids,vazirani}) have developed polynomial time LP-based approximation algorithms that find solutions for special classes of IPs whose cost are provably at most $C\cdot z_{LP}(I,c)$ for some (possibly constant) function $C$. If the analysis uses the LP bound to prove the approximation quality, then $C$ is at least the integrality gap.
 %However, for many combinatorial optimization problems there is a limit to such techniques based on LP relaxations, represented  by the {integrality gap} of the IP formulation.
@@ -117,7 +117,7 @@ The integrality gap $g(I)$ for instance $I$ is: $$g(I)= \max_{c\geq 0}\frac{z_{I
 where $z_{IP}(I,c)$ is the optimal solution to the integer program and $z_{LP}(I,c)$ is the solution to the linear-programming relaxation.
 \end{definition}
 
-In general the integrality gap is defined similarly for any objective function, but we wish to be explicit about the class of problems we assume in this paper. For example consider the minimum cost \textsc{2-edge-connected multi-subgraph problem (2EC)}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^E_{\geq 0}$, 2EC asks for the minimum cost 2-edge-connected subgraph of $G$, with multi-edges allowed. A graph is 2-edge-connected if there are at least two edge-disjoint paths between every pair of vertices.  A linear programming relaxation for this problem, known as the {\em subtour-elimination} relaxation, is
+In general the integrality gap is defined similarly for any objective function, but we wish to be explicit about the class of problems we assume in this paper. For example consider the minimum cost \textsc{2-edge-connected multi-subgraph problem (2EC)}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^E_{\geq 0}$, 2EC asks for the minimum cost 2-edge-connected subgraph of $G$, with multi-edges allowed. A graph is 2-edge-connected if there are at least two edge-disjoint paths between every pair of vertices.  A linear-programming relaxation for this problem, known as the {\em subtour-elimination} relaxation, is
  \begin{equation}\min \{cx: \sum_{e\in \delta(U)}x_e \geq 2 \mbox{ for } \emptyset \subsetneq U \subsetneq V,\; x\in [0,2]^{E}\}, 
  \label{eq:subtour}
  \end{equation}
@@ -195,7 +195,7 @@ In Section~\ref{sec:domTOIP} we describe a subroutine of the FDT, called the Dom
 %\cindy{TODO: This implies we know $g(I)$, which is not true in general.  We should add how we bound/estimate it.  I'll return to this after putting that detail back in core if you (Arash) haven't added it by then.}
 %\arash{Isn't $P(I)$ the feasible region defined above. I keep $L(I)$ for now but we can replace it later if needed.} \arash{I fixed below so that I don't imply we know $g(I)$, we also might to clearly state that somewhere?}
 
-Here is how the FDT algorithm works at a high level for an instance $I$ with LP feasible region $P(I)$: in iteration $i$ the algorithm maintains a convex combination of  vectors in $\mathcal{D}(P(I))$ that have a 0 or 1 value for coordinates indexed $0,\ldots,i-1$. Let $y$ be a vector in the convex combination from iteration $i-1$. We solve a linear programming problem that gives us $\theta_0,\theta_1\in [0,1]$ and $y^0,y^1\in \mathcal{D}(P(I))$ such that $y\geq \theta_0 y^0 + \theta_1 y^1$, $\theta_0+\theta_1\leq g(I)$, $y^0_i=0$ and $y^1_i=1$. We then replace $y$ in the convex combination with $\frac{\theta_0}{\theta_0+\theta_1}y^0 +\frac{\theta_1}{\theta_0+\theta_1}y^1$.  Repeating this for every vector in the convex combination from the previous iteration yields a new convex combination of points. It is ``more'' integral because now all vectors in the convex combination are integral in their first $i+1$ elements. If in any iteration there are too many points in the convex combination,  we solve a linear programming problem that ``prunes'' the convex combination. At the end we have a convex combination of integer solutions $\mathcal{D}(P(I))$. For each such solution $z$ we invoke the DomToIP algorithm
+Here is how the FDT algorithm works at a high level for an instance $I$ with LP feasible region $P(I)$: in iteration $i$ the algorithm maintains a convex combination of  vectors in $\mathcal{D}(P(I))$ that have a 0 or 1 value for coordinates indexed $0,\ldots,i-1$. Let $y$ be a vector in the convex combination from iteration $i-1$. We solve a linear-programming problem that gives us $\theta_0,\theta_1\in [0,1]$ and $y^0,y^1\in \mathcal{D}(P(I))$ such that $y\geq \theta_0 y^0 + \theta_1 y^1$, $\theta_0+\theta_1\leq g(I)$, $y^0_i=0$ and $y^1_i=1$. We then replace $y$ in the convex combination with $\frac{\theta_0}{\theta_0+\theta_1}y^0 +\frac{\theta_1}{\theta_0+\theta_1}y^1$.  Repeating this for every vector in the convex combination from the previous iteration yields a new convex combination of points. It is ``more'' integral because now all vectors in the convex combination are integral in their first $i+1$ elements. If in any iteration there are too many points in the convex combination,  we solve a linear-programming problem that ``prunes'' the convex combination. At the end we have a convex combination of integer solutions $\mathcal{D}(P(I))$. For each such solution $z$ we invoke the DomToIP algorithm
 % CAP: forward pointer earlier now
 % (see Section~\ref{sec:domTOIP})
 to find $z'\in S(I)$ where $z'\leq z$.
@@ -224,13 +224,13 @@ g(\2ec) = \max_{c\geq 0 , G}\frac{\min_{x\in \2ec(G)} cx}{\min_{x\in \subtour(G)
 
 \subsubsection{Minimum vertex cover problem}
 
-In the \textsc{minimum vertex cover problem (VC)} we are given a graph $G=(V,E)$ and $c\in \mathbb{R}^E_{\geq 0}$. A subset of $U$ of $V$ is a \textit{vertex cover} if for all $e\in E$ at least one endpoint of $e$ is in $U$. The goal in VC is to find the minimum-cost vertex cover. The linear programming relaxation for VC is
+In the \textsc{minimum vertex cover problem (VC)} we are given a graph $G=(V,E)$ and $c\in \mathbb{R}^E_{\geq 0}$. A subset of $U$ of $V$ is a \textit{vertex cover} if for all $e\in E$ at least one endpoint of $e$ is in $U$. The goal in VC is to find the minimum-cost vertex cover. The linear-programming relaxation for VC is
 \begin{equation}
 \min \{cx \; : \; x_u + x_v \geq	 1 \text{ for all } e=uv \in E, \; x\in [0,1]^{V}\}.
 \end{equation}
 The integrality gap of this formulation is exactly 2 \cite{davids}. Austrin, Khot and Safra~\cite{UGhardVC} show that it is UG-hard to approximate VC within any factor strictly better than 2. We compare  FDT and the feasbility pump heuristic \cite{fp1} on the small instances of the PACE\footnote{ Parameterized Algorithms and Computational Experiments: \url{https://pacechallenge.org/2019/}} 2019 challenge test cases \cite{PACE}. FDT was 3-5x slower, but still ran in seconds. It always gave a better vertex cover. For some instances the FDT solution's relative gap with respect to the optimal was half that of feasibility pump.
 \subsubsection{Tree augmentation problem}
-In the \textsc{Tree Augmentation Problem (TAP)} we are given a  graph $G=(V,E)$, a spanning tree $T$ of $G$ and a cost vector $c\in \mathbb{R}^{E\setminus T}_{\geq 0}$. A subset $F$ of $E\setminus T$ is called a \textit{feasible augmentation} if $(V,T\cup F)$ is a 2-edge-connected graph. In TAP we seek the minimum cost feasible augmentation. The natural linear programming relaxation for TAP is 
+In the \textsc{Tree Augmentation Problem (TAP)} we are given a  graph $G=(V,E)$, a spanning tree $T$ of $G$ and a cost vector $c\in \mathbb{R}^{E\setminus T}_{\geq 0}$. A subset $F$ of $E\setminus T$ is called a \textit{feasible augmentation} if $(V,T\cup F)$ is a 2-edge-connected graph. In TAP we seek the minimum cost feasible augmentation. The natural linear-programming relaxation for TAP is 
 \begin{equation}\label{eq:cutLP}
 \min \{cx\; : \; \sum_{\ell \in \cov(e)} x_{\ell} \geq 1 \text{ for } e\in T, \; x\in [0,1]^{E\setminus T}\}.
 \end{equation}
@@ -257,9 +257,11 @@ Note that the number of vertices in these instances can be arbitrarily high sinc
 \subsection{Contribution summary}
 In summary, this papers's contributions are:
 \begin{itemize}
-\item We give an algorithm to express any feasible point for the LP relaxation of a binary IP (or a \{0,1,2\} IP) as a convex combination of feasible solutions, provided the IP integrality gap is bounded.  This is the Fractional Decomposition Tree (FDT) algorithm.
-\item We give a simpler, faster algorithm algorithm to give one feasible solution for any IP with bounded integrality gap. If this algorithm fails, then the integrality gap is infinite.
-\item We experimentally show that FDT can give good approximate solutions to small instances of vertex-cover and tree-augmentation problems.
+\item We give an algorithm to express any feasible point for the LP relaxation of a binary IP
+%(or a \{0,1,2\} IP) 
+as a convex combination of feasible solutions, provided the IP integrality gap is bounded.  This is the Fractional Decomposition Tree (FDT) algorithm.
+\item We give a simple  algorithm to give a feasible solution for any binary IP with bounded integrality gap. If this algorithm fails, then the integrality gap is infinite.
+\item We experimentally show that FDT can give good approximate solutions to small instances of vertex-cover and tree augmentation problems.
 \item We show that the integrality gap for 2EC (minimum 2-edge-connected sub-multigraph) is at most $\frac{6}{5}$ for Carr-Vempala points with at most $12$ vertices on the cycle formed by the fractional edges, matching the lower bound for integrality gap for 2EC for these instances.
 \item We demonstrate (with tree augmentation and 2EC) how FDT exeriments can support theoretical work on integrality gaps for specific problems.
 \end{itemize}
