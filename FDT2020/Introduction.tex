@@ -254,6 +254,14 @@ Carr and Vempala \cite{Carr2004} showed that $g(\2ec)$ is achieved for instances
 Note that the number of vertices in these instances can be arbitrarily high since the paths of edges with $x$-value 1 can be arbitrarily long.
 
 \cindy{We probably need an explicit list of contributions.  It could be another subsection of the introduction.  This will help the reviewer and eventually, if published, the reader.}
-
+\subsection{Contribution summary}
+In summary, this papers's contributions are:
+\begin{itemize}
+\item We give an algorithm to express any feasible point for the LP relaxation of a binary IP (or a \{0,1,2\} IP) as a convex combination of feasible solutions, provided the IP integrality gap is bounded.  This is the Fractional Decomposition Tree (FDT) algorithm.
+\item We give a simpler, faster algorithm algorithm to give one feasible solution for any IP with bounded integrality gap. If this algorithm fails, then the integrality gap is infinite.
+\item We experimentally show that FDT can give good approximate solutions to small instances of vertex-cover and tree-augmentation problems.
+\item We show that the integrality gap for 2EC (minimum 2-edge-connected sub-multigraph) is at most $\frac{6}{5}$ for Carr-Vempala points with at most $12$ vertices on the cycle formed by the fractional edges, matching the lower bound for integrality gap for 2EC for these instances.
+\item We demonstrate (with tree augmentation and 2EC) how FDT exeriments can support theoretical work on integrality gaps for specific problems.
+\end{itemize}
 
 
