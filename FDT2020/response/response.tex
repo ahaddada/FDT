@@ -1,0 +1,287 @@
+\documentclass[11pt,epsf]{article}
+%\documentstyle[12pt,psfig,draft]{article}
+
+%% These ``comments'' only appear with [draft] option
+\long\def\comment#1{\ifdim\overfullrule>0pt{\sf[{#1}]}\fi}
+\def\mn{\medskip}
+
+\usepackage{amsmath}
+\usepackage{comment,amsthm,graphicx}
+\usepackage{latexsym}
+\usepackage{epsfig}
+\usepackage{bbm}
+\usepackage[usenames]{color}
+\usepackage{colordvi, xcolor}
+\usepackage{pdfsync}
+\usepackage{amsfonts}
+
+\usepackage{color}
+\usepackage{appendix}
+
+\setlength{\topmargin}{-0.0in}
+\setlength{\textheight}{8.2in}
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\evensidemargin}{-0.0in}
+\setlength{\textwidth}{6.5in}
+\addtolength{\parskip}{2pt}
+\addtolength{\itemsep}{0.1in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{proposition}{Proposition}
+\newtheorem{claim}{Claim} \newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{observation}{Observation}
+\newtheorem{exercise}{Exercise}
+\newtheorem{hypothesis}{Hypothesis}
+
+\newcommand{{\Ex}}{\mathbb{E}}
+\newcommand{{\TM}}{T^C}
+
+\newcommand{{\C}}{\mathcal{C}}
+\newcommand{{\Ob}}{\Omega}
+
+\newcommand{{\bchords}}{Black$-$Chords}
+\newcommand{{\wchords}}{White$-$Chords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifx\pdftexversion\undefined
+\usepackage[colorlinks,linkcolor=black,filecolor=black,citecolor=black,urlco
+lor=black,pdfstartview=FitH]{hyperref}
+\else
+\usepackage[colorlinks,linkcolor=blue,filecolor=blue,citecolor=blue,urlcolor
+=blue,pdfstartview=FitH]{hyperref}
+\fi
+\newcommand{\supp}{{\rm supp}}
+\newcommand{\opt}{{\rm OPT}}
+\newcommand{\disc}{{\rm disc}}
+%\newcommand{\choos}[2] {\left( \begin{array}{c} #1\\#2
+
+
+
+
+
+%\end{array} \right)}
+\newcommand{\namedref}[2]{\hyperref[#2]{#1~\ref*{#2}}}
+\newcommand{\sectionref}[1]{\namedref{Section}{#1}}
+\newcommand{\factref}[1]{\namedref{Fact}{#1}}
+\newcommand{\appendixref}[1]{\namedref{Appendix}{#1}}
+\newcommand{\subsectionref}[1]{\namedref{Subsection}{#1}}
+\newcommand{\theoremref}[1]{\namedref{Theorem}{#1}}
+\newcommand{\defref}[1]{\namedref{Definition}{#1}}
+\newcommand{\figureref}[1]{\namedref{Figure}{#1}}
+\newcommand{\claimref}[1]{\namedref{Claim}{#1}}
+\newcommand{\lemmaref}[1]{\namedref{Lemma}{#1}}
+\newcommand{\tableref}[1]{\namedref{Table}{#1}}
+\newcommand{\propref}[1]{\namedref{Proposition}{#1}}
+\newcommand{\obref}[1]{\namedref{Observation}{#1}}
+\newcommand{\eqnref}[1]{\namedref{Equation}{#1}}
+\newcommand{\remarkref}[1]{\namedref{Remark}{#1}}
+\newcommand{\corollaryref}[1]{\namedref{Corollary}{#1}}
+\newcommand{\propertyref}[1]{\namedref{Property}{#1}}
+%\input{psfig}
+
+\newcommand{\alert}[1]{\textbf{\color{red}
+[[[#1]]]}\marginpar{\textbf{\color{red}**}}\typeout{ALERT:
+\the\inputlineno: #1}}
+
+\newenvironment{cproof}
+{\begin{proof}
+ [Proof.]
+ \vspace{-1.5\parsep}%-3.2\parsep} %%%For use with US letter
+}
+{\renewcommand{\qed}{\hfill $\Diamond$} \end{proof}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\newcommand{\qed}{\hspace*{\fill}\mbox{$\Box$}}
+\newcommand{\choos}[2] {\left( \begin{array}{c} #1\\#2
+\end{array} \right)}
+
+
+
+%\input{psfig}
+
+\begin{document} \bibliographystyle{alpha}
+\def\proofend{\hfill$\Box$\medskip}
+\def\Proof{\noindent{\bf Proof:\ \ }}
+\def\Sketch{\noindent{\bf Sketch:\ \ }}
+\def\eps{\epsilon}
+\newcommand{\arash}[1]{\noindent{\bf {\color{blue!60!black}{\sc Arash:}  #1}}}
+\newcommand{\cindy}[1]{\noindent{\bf {\color{magenta!80!black}{\sc Cindy:}  #1}}}
+\newcommand{\response}[1]{\noindent{{\color{blue!80!black}  #1}}}
+\iffalse
+\renewcommand{\arash}[1]{}
+\renewcommand{\cindy}[1]{}
+\fi
+\title{Responses to reviewers comments}
+\maketitle
+
+
+\section{General Response}
+\response{We thank the editor and reviewers for their insighful and constructive comments. 
+}
+
+\section{Detailed Responses}
+
+
+\subsection{Reviewer \#1}
+\begin{itemize}
+\item Introduction: Introduction jumps between describing methods and problems the methods are applied to. The there is a subsection 1.2 Experiments with more problem descriptions. Please restructure the introduction so
+that the flow is more logical.
+
+\item p. 2, last paragraph: “Integrality gap” is defined with respect to an IP instance, instead of a family of IP instances (IP formulation) for a problem. This makes the paragraph rather awkward to read, because the statements are not correct as stated.
+
+\item p. 3, below equation (1): Why is $A$ defined as a matrix of rational numbers but $b$ a vector or real numbers?
+\item p. 3: Is there a reason why you choose to not include the coefficients of the objective function in an instance?
+\item p. 4, Definition 1: Now the integrality gap is defined with respect to a matrix $A$ and vector $b$, taking the supremum (not maximum, please correct) over all coefficients $c$, that are nonnegative. This is inconsistent
+with the previous statement, and also nonstandard as far as I know. Please add some remarks for the reader about this choice. Also, the importance of considering $c \geq 0$ only should be emphasized more in the text (it is of
+vital importance when using Carr-Vempala).
+\item p. 4, equation (4): supremum instead of maximum
+\item p. 5, Proposition 2: Please specify where this is stated in [GLS93].
+\item p. 5, below Proposition 2: I don’t see that Proposition 2 and Theorem 3 are equivalent as stated. (Also in light of the remark about one result having an algorithm, and the other not.)
+\item p. 6, Theorem 4: “Moreover, [. . .]” — $C$ is not specified otherwise; replace “Moreover” by “where”.
+\item p. 6, Theorem 5: Why “$1\leq$”? Is that not automatic?
+\item p. 6, below Theorem 5: “in iteration i the algorithm maintains a convex combination of vecotrs” — please phrase this more precisely 
+\item p. 6, near bottom: “It’s subtour-elimination...” — Its
+\item p. 7, equation (5): sup instead of max
+\item p. 7, Theorem 6: “Moreover, [. . .]” — $C$ is not specified otherwise; replace “Moreover” by “where”.
+\item p. 9, last bullet point of Contribution summary: “can support theoretical work” — be more specific about what you did, and what it showed. 
+\item p. 9, Lemma 7: add $\tilde{x}$ right after “Given an integral vector”
+\item p. 9, bottom: Isn’t it even easier? Is $\{1\}^n$ not a point in $\mathcal{D}(P)$ (provided
+$P\neq \emptyset$)?
+\item p. 11, 3rd line below definitions of $LP^{(\ell)}$ and $IP^{(\ell)}$ : “By Theorem 3, there
+exist [not exists] $\tilde{z}_i\in S$". In the statement of Theorem 3 this is $\mathcal{D}(S)$. Is
+$S$ the same as $\mathcal{D}(S)$ here? If so explain.
+(`)
+If not, can you still draw the conclusion that $IP^{(\ell)}\neq \emptyset$?
+\item p. 11, third paragraph: Same problem as previous bullet point.
+\item p. 13, top of page: Same problem.
+\item p. 24 and following, references: missing capitalization in a few entries
+
+\end{itemize}
+
+
+\subsection{Reviewer 2}
+
+
+\subsubsection{Major Comments}
+The computational results seem quite weak to me. The classic Feasibility Pump heuristic is known to produce solutions of fairly poor quality; it is designed primarily to produce feasible solutions to potentially difficult MIPs
+quickly. On TAP and 2EC, the authors compare to problem-specific approximation algorithms that are not particularly designed to produce high quality solutions either.
+\begin{enumerate}
+
+\item The abstract is misleading in multiple ways. First, it says that the paper will give a constructive version of the Carr-Vempala theorem but does not mention the rather large loss in quality of g to (potentially) g n . Secondly,
+it says that “[Dom2IP] more quickly determines if an instance has an unbounded integrality gap” but really this algorithm will only sometimes provide proof that the integrality gap is unbounded; it is not guaranteed
+to certify this. Lastly, it is claimed that Christofides’ algorithm is the “best previous approximation algorithm”. But Christofides is only best wrt. its theoretical approximation guarantee not its practical performance
+which is what is compared in the paper. 
+\item The paper should mention the randomized metarounding algorithm by Carr and Vempala and compare it to the FDT algorithm. 
+\item In the proofs of Lemma 8 and Lemma 11, I do not see why it can be assumed that $\lambda_0,\lambda_1,\lambda_2>0$. I think one has to allow the case in which
+the branching step returns just 1 or (in the case of 2EC) just 2 vectors.
+4. As noted before, I find the comparisons against the FP heuristic on VC
+and the 2-approximation for TAP rather dubious. To show that the FDT
+algorithm performs much better than the theoretical $g^{|supp(x)|}$ bound, just comparing to the initial fractional solution is all that is needed. On the other hand, if the goal is to show that the FDT algorithm works well as a
+general purpose feasibility heuristic, then comparing to a FDT to a more modern variant of FP (e.g. as in the Feasibility Pump 2.0 paper) would be more reasonable.
+
+\end{enumerate}
+
+\subsubsection{Minor Comments}
+\begin{enumerate}
+
+\item  The abstract says “Dom2IP” but the paper mostly uses “DomToIP”. 
+\item In Theorem 3, I think $\mathcal{D}(S(I))$ should just be $S(I)$.
+\item On page 6, “which runs in polynomial time algorithm” should be “which runs in polynomial time”.
+\item On page 6, the use of $\theta_0$ and $\theta_1$ is not consistent with how $\gamma_0$ and $\gamma_1$ are
+defined in Lemma 8.
+\item In Theorem 6, is $E_x=\mbox{supp}(x)$?
+\item On page 8, the wording “We use the idea of fundamental extreme point to create the hardest LP solutions to decompose.” seems to suggest that this is something that will be done in this paper.
+\item On page 8, you refer to Figure 2 but this figure only shows up on page 23.
+\item You mention that the Dom2IP algorithm can be used to prove that an IPs integrality gap is unbounded. How effective is this?
+\item Lemma 9 requires $\gamma_0 + \gamma_1 \leq 1$. Perhaps this should already be included
+in Lemma 8.
+\item In the proof of Lemma 9, “We need to show that $\gamma_0\hat{x}^0_j + \gamma\hat{x}^1_j \leq gx'_j.$" has
+an extra g in it.
+\item On page 13, “nodes in level $L_i$” should be “nodes in level $i$” and “points
+in the leaves” should be just “leaves.”
+\item On page 24, “applying this tool . . . can be a tool” is redundant. 
+\end{enumerate}
+
+\subsection{Reviewer \#3}
+
+\subsubsection{Main Comments}
+
+
+
+\subsubsection{Detailed Comments}
+\begin{itemize}
+\item I’m attaching a file with line numbers. I strongly recommend for any future submission
+using the lineno package, because it makes my job as a reviewer much easier. I will refer to
+pairs (page number, line number) below.
+
+\item (2,10) “we have formulated” – better to say “instances … are known” and give a reference, e.g. to MIPLIB; or if you have some particularly hard instances in mind that YOU have formulated, you can refer to them, but this should be a fairly widely known
+fact. 
+\item (2,14) “the” -> “these”?
+\item (2,26) “from the problem” – what problem? Maybe “using special problem structure together with the result of an LP relaxation to obtain an integer feasible solution
+whose value is at most C times the value of the LP optimum” or something like that.
+\item (3,7) you say that a separation oracle should return a most violated constraint, but I don’t think this is the standard definition of e.g. Grötschel-Lovász-Schrijver – any violated constraint suffices to get polynomial convergence. 
+\item (3,11) “it could not before” -> “they could not before”
+\item (3,23) “ResearcherS”
+\item (4,26) “We cannot hope to find…” – you’ve said this already.
+\item (5,8) “express A vector”
+\item (5,10) Please define $[0,1]$ which appears in $[0,1]^k$ . It seems you mean the closed interval between 0 and 1, but it is very commonly also used to be the set $\{0,1\}$, so clarification is in order.
+\item (5,16) “of A blocking type”
+\item (5,23) “assuming” –> “under”
+\item (5,30) ”$S(I)\in \{0,1\}^n$ should be $\subseteq$ instead of $\in$
+\item (6,1) delete “algorithm”
+\item (6,3) “it would be optimal” - what is “it”?
+\item (6,3) “we can only guarantee a factor of” I think it would be clearer to say “we can
+only guarantee $C\leq g(I)$ ... ”
+\item (6,7) how does the $\min$ in $\min(Cx^*, {0,1}^n )$ work? Coordinate-wise, or?
+\item (6,27) “It’s” –> “Its”
+\item (7,5) what is $\chi^{F_i}$ ? I suppose it is the characteristic vector of $F_i$ but you should state
+this clearly. Also, what is $E_x$ ? is it the number of edges of $x$, that is, $\mbox{supp}(x)|$? Again
+please state clearly.
+\item (7,13) “A subset of $U$ of $V$ ” – delete first “of”
+\item (7,18) define or comment on UG-hard
+\item (7,19) “feasbility” –> “feasibility”
+\item (7,20) “3-5x slower” use “$\times$” (\\times) instead of “x”
+\item (7,29) Large space before “Note” - something fishy is going on here.
+\item (9,14) add your experimental results about VC here also
+\item (10,7) again, large space
+\item (10,14) it seems to me that the definition of the coordinates of $x^{(\ell+1)}$ other than $\ell+1$
+should appear in the algorithm too, not just here.
+\item (11,14-25) I’m getting tripped up at line 17. I understand the case for coordinates which have $x_j=0$. But where do you deal with those that do not? I suppose I’m just
+missing something obvious, but so could any other reader. Please clarify your proof here.
+\item (12,10) “maintainS” 
+\item (13,28) “Growing and Pruning THE FDT tree”
+\item (14,12) “It is easy to check” <– you do this quite a bit. Please go through your paper and
+pay attention to all the “easy to check”, “obvious”, “clearly” etc. If these things really are easy, then just state them and don’t waste space. However, if some observation is necessary, think about the clearest and most concise way to impart this observation to the reader, and then do that instead of telling the reader that it should be “easy”. 
+\item (14,12) “THE set $L'$”
+\item (14,25) “From THE leaves”
+\item (16,11-17) You should discuss why the intuitive approach of binarizing an LP (just split each variable into two binary variables and copy the respective column of the
+constraint matrix) does not lead to the same or better result. Or maybe it does?
+\item (19,14) “1Mb cache” – I looked up this CPU and it has 1MB of L2 cache. Note that
+1Mb $\neq$ 1MB, and “cache” is quite an ambiguous term (there are several types of CPU
+cache). Moreover, the amount of cache is a property of the CPU and is usually not
+stated, so I would just not comment on it. If you must, give a correct capacity and
+indicate the level of the cache.
+\item (19,22-26) Is there no good benchmark set for TAP? If not, please mention that as
+the reason why you study random instances. (It is not good practise in experimental
+algorithmics to study random instances unless necessary.)
+\item (20,22) One idea to consider and comment on: did you warm-start each computation of FDT? It seems to me that you could reuse the model that FDT solves in each
+iteration – basically, you only change the objective and fix the variables which corresponds to changing lower/upper bounds, so you should be able to save time on
+building / destroying the model. I’m not sure how much the pruning model can be reused. Either way, please comment on this idea. The idea was successful elsewhere,
+e.g. https://arxiv.org/abs/1911.08636 
+\item (21,10) Christofides’ algorithm is no longer the fastest https://arxiv.org/abs/2007.01409
+\item (21,10-11) “In the classic graph-based…” <– this is a weird sentence; you should say
+that you will re-cap the algorithm and then you can describe it. Right now it comes
+out of nowhere.
+
+
+\end{itemize}
+
+\end{document}
