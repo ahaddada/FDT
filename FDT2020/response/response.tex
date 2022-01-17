@@ -214,21 +214,33 @@ general purpose feasibility heuristic, then comparing to a FDT to a more modern 
 \begin{enumerate}
 
 \item  The abstract says “Dom2IP” but the paper mostly uses “DomToIP”. 
+\response{Fixed.}
 \item In Theorem 3, I think $\mathcal{D}(S(I))$ should just be $S(I)$.
-\item On page 6, “which runs in polynomial time algorithm” should be “which runs in polynomial time”.
+\response{NOT FINAL: The proof of this theorem only shows it for the dominant of $S(I)$ and not $S(I)$ itself, although for many problems of interest we have $S(I)=\mathcal{D}(S(I))$. }
+
+\item On page 6, “which runs in polynomial time algorithm” should be “which runs in polynomial time”. 
+\response{Fixed.}
 \item On page 6, the use of $\theta_0$ and $\theta_1$ is not consistent with how $\gamma_0$ and $\gamma_1$ are
-defined in Lemma 8.
-\item In Theorem 6, is $E_x=\mbox{supp}(x)$?
+defined in Lemma 8. 
+\response{Fixed and switched to $\gamma_0$ and $\gamma_1$ in the overview to be consistent with Lemma 8.}
+\item In Theorem 6, is $E_x=\mbox{supp}(x)$? \response{Fixed. We added the definition of $E_x$ right before Theorem 6.}
+
+
 \item On page 8, the wording “We use the idea of fundamental extreme point to create the hardest LP solutions to decompose.” seems to suggest that this is something that will be done in this paper.
+\response{We changed the wording as follows: Known polyhedral structure makes it easier to study integrality gaps for such problems. In particular, for the subtour-elimination relaxation [CR98, BC11, CV04] introduced fundamental extreme points that create the ``hardest'' LP solutions to decompose.}.
 \item On page 8, you refer to Figure 2 but this figure only shows up on page 23.
-\item You mention that the Dom2IP algorithm can be used to prove that an IPs integrality gap is unbounded. How effective is this?
+
+\response{The figure is moved to page 3.}
+\item You mention that the Dom2IP algorithm can be used to prove that an IPs integrality gap is unbounded. How effective is this? \arash{need to think about this.}
 \item Lemma 9 requires $\gamma_0 + \gamma_1 \leq 1$. Perhaps this should already be included
 in Lemma 8.
+\response{Fixed. Also added a constraint into the formulation of LPC that ensures $\lambda_0 + \lambda_1\leq 1$ and corresponding changes in the proof of the Claim.}
 \item In the proof of Lemma 9, “We need to show that $\gamma_0\hat{x}^0_j + \gamma\hat{x}^1_j \leq gx'_j.$" has
-an extra g in it.
+an extra $g$ in it.
+\response{Fixed.}
 \item On page 13, “nodes in level $L_i$” should be “nodes in level $i$” and “points
-in the leaves” should be just “leaves.”
-\item On page 24, “applying this tool . . . can be a tool” is redundant. 
+in the leaves” should be just “leaves.” \response{Fixed.}
+\item On page 24, “applying this tool . . . can be a tool” is redundant. \response{Fixed.}
 \end{enumerate}
 
 \subsection{Reviewer \#3}

@@ -107,7 +107,7 @@ that dominate a point in $P$. In Lemma~\ref{domlemma} we saw how to turn these i
 \paragraph{Branching on a node.}
 We begin with the following lemmas that show how the FDT algorithm branches on a variable.
 \begin{lemma}\label{LPClemma}
-	Given $x'\in \dom(P)$ and $\ell\in [n]$ where $x'_{\ell}<1$, in polynomial time we can find vectors $\hat{x}^0,\hat{x}^1$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that: (i) $\gamma_0 + \gamma_1  \geq 1/g$, (ii) $\hat{x}^0$ and $\hat{x}^1$ are in  $ P$, (iii) $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$, and (iv) $\gamma_0 \hat{x}^0 + \gamma_1\hat{x}^1 \leq x'$.
+	Given $x'\in \dom(P)$ and $\ell\in [n]$ where $x'_{\ell}<1$, in polynomial time we can find vectors $\hat{x}^0,\hat{x}^1$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that: (i) $1/g \leq \gamma_0 + \gamma_1  \leq 1$, (ii) $\hat{x}^0$ and $\hat{x}^1$ are in  $ P$, (iii) $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$, and (iv) $\gamma_0 \hat{x}^0 + \gamma_1\hat{x}^1 \leq x'$.
 \end{lemma}
 
 
@@ -120,6 +120,7 @@ We begin with the following lemmas that show how the FDT algorithm branches on a
 	&\;{\color{white}{\text{s.t.}} }\quad 0 \leq x^j \leq \lambda_j &\mbox{ for $j=0,1$}\label{bound}\\
 	&\;{\color{white}{\text{s.t.}} }\quad x^0_\ell = 0,\; x^1_\ell =\lambda_1\label{branchcoordinate}\\
 	&\;{\color{white}{\text{s.t.}} }\quad x^0 + x^1 \leq x'\label{packing}\\
+		&\;{\color{white}{\text{s.t.}} }\quad \lambda_0 + \lambda_1  \leq 1\label{mulitplier-packing}\\
 	&\;{\color{white}{\text{s.t.}} }\quad \lambda_0,\lambda_1 \geq 0
 	\end{align}
 	
@@ -140,7 +141,7 @@ Let $\hat{x}^0 = y^0/\lambda^*_0$, $\hat{x}^1=y^1/\lambda^*_1$. This choice sati
 		x'\geq \sum_{i=1}^{k}\frac{\theta_i}{g} \tilde{x}^i
 		={\sum_{i\in [k]: \tilde{x}^i_\ell =0}\frac{\theta_i}{g} \tilde{x}^i}+{\sum_{i\in [k]: \tilde{x}^i_\ell =1}\frac{\theta_i}{g} \tilde{x}^i}.
 		\end{equation}
-		For $j=0,1$, let $x^j = \sum_{i\in [k]:\tilde{x}^i_\ell=j} \frac{\theta_i}{g}\tilde{x}^i$. Also let $\lambda_0=\sum_{i\in [k]: \tilde{x}^i_\ell =0}\frac{\theta_i}{g}$ and $\lambda_1 = \sum_{i\in [k]: \tilde{x}^i_\ell =1}\frac{\theta_i}{g}$. Note that $\lambda_0+\lambda_1 =1/g$. Constraint (\ref{packing}) is satisfied by Inequality (\ref{splitting}). Also, for $j=0,1$ we have
+		For $j=0,1$, let $x^j = \sum_{i\in [k]:\tilde{x}^i_\ell=j} \frac{\theta_i}{g}\tilde{x}^i$. Also let $\lambda_0=\sum_{i\in [k]: \tilde{x}^i_\ell =0}\frac{\theta_i}{g}$ and $\lambda_1 = \sum_{i\in [k]: \tilde{x}^i_\ell =1}\frac{\theta_i}{g}$. Note that $\lambda_0+\lambda_1 =1/g$. Since $g\leq 1$, Constraint (\ref{mulitplier-packing}) is satisfied. Constraint (\ref{packing}) is satisfied by Inequality (\ref{splitting}). Also, for $j=0,1$ we have
 		\begin{equation}
 		Ax^j= \sum_{i\in[k], \tilde{x}^i_\ell = j} \frac{\theta_i}{g} A\tilde{x}^i  \geq b \sum_{i\in[k], \tilde{x}^i_\ell = j} \frac{\theta_i}{g} = b\lambda_j.
 		\end{equation}
@@ -158,12 +159,12 @@ We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integr
 	By Lemma \ref{LPClemma} we can find $\bar{x}^0$, $\bar{x}^1$, $\gamma_0$ and $\gamma_1$ that satisfy (i), (ii), (iii), and (iv). We define $\hat{x}^0$ and $\hat{x}^1$ as follows. For $i=0,1$, for $j\in[\ell-1]$, let $\hat{x}^i_j= \ceil{\bar{x}^i_j}$, for $j=\ell,\ldots,t$ let $\hat{x}^i_j = \bar{x}^i_j$.
 	
 	
-	We now show that $\hat{x}^0$, $\hat{x}^1$, $\gamma_0$, and $\gamma_1$ satisfy all the conditions. Note that conditions (i), (ii), (iii), and (v) are trivially satisfied. Thus we only need to show (iv) holds. We need to show that $\gamma_0 \hat{x}^0_j+\gamma_1\hat{x}^1_j\leq gx'_j$. If $j=\ell,\ldots,t$, then this clearly holds. Hence, assume $j\leq \ell-1$. By the property of $x'$ we have $x'_j\in \{0,1\}$. If $x'_j= 0$, then by Constraint (\ref{packing}) we have $\bar{x}^0_j = \bar{x}^1_j=0$. Therefore, $\hat{x}^i_j=0$ for $i=0,1$, so (iv) holds. Otherwise if $x'_j = 1$, then we have
+	We now show that $\hat{x}^0$, $\hat{x}^1$, $\gamma_0$, and $\gamma_1$ satisfy all the conditions. Note that conditions (i), (ii), (iii), and (v) are trivially satisfied. Thus we only need to show (iv) holds. We need to show that $\gamma_0 \hat{x}^0_j+\gamma_1\hat{x}^1_j\leq x'_j$. If $j=\ell,\ldots,t$, then this clearly holds. Hence, assume $j\leq \ell-1$. By the property of $x'$ we have $x'_j\in \{0,1\}$. If $x'_j= 0$, then by Constraint (\ref{packing}) we have $\bar{x}^0_j = \bar{x}^1_j=0$. Therefore, $\hat{x}^i_j=0$ for $i=0,1$, so (iv) holds. Otherwise if $x'_j = 1$, then we have
 	$\gamma_0\hat{x}^0_j+\gamma_1\hat{x}^1_j\leq \gamma_0+\gamma_1\leq 1\leq x'_j.$ 
 	Therefore (v) holds.
 \end{proof}
 
-\paragraph{Growing and Pruning FDT tree.} The FDT algorithm maintains nodes $L_i$ in iteration $i$ of the algorithm. The nodes in $L_i$ correspond to the nodes in level $L_i$ of the FDT tree. The points in the leaves of the FDT tree, $L_t$, are points in $\dom(P)$ and are integral for all integer variables.
+\paragraph{Growing and Pruning FDT tree.} The FDT algorithm maintains nodes $L_i$ in iteration $i$ of the algorithm. The nodes in $L_i$ correspond to the nodes in level $i$ of the FDT tree. The leaves of the FDT tree, $L_t$, are points in $\dom(P)$ and are integral for all integer variables.
 
 
 \begin{lemma}\label{prune}
@@ -430,57 +431,6 @@ The variables in the above LP are $y^i\in \mathbb{R}^{E}_{\geq 0}$ for $i\in [k]
 Figure \ref{fdtvschris} shows FDT's solutions on all Carr-Vempala points that have 10 vertices on the cycle formed by fractional edges. We show for these points the apporoximation factor provided by FDT is always better than those from the polyhedral version of Christofides' algorithm. In Figure~\ref{fdtvschris} the horizontal axis of the plot is indexed with the 60 Carr-Vempala points that we considered. For each Carr-Vempala point $x$, there are two data points. The value of the first data point depicted by a circle on the vertical axis is $\frac{|V|-1}{|V|}+\alpha$  where $\alpha$ is the optimal solution to (\ref{ojoinaverage}).
 %\cindy{TODO: say when giving the LP~(\ref{ojoinaverage}) how that gives a solution to TAP with this value.}
 The value of the second data point depicted by a cross on the vertical axis is $C$ where $C$ is obtained from applying Theorem \ref{FDT2EC} to $x$. In other words, Figure \ref{fdtvschris} is comparing the instance-specific upper bound on integrality gap certified by Christofides' algorithm to the approximation factor of the FDT algorithm for 2EC.
-
-\begin{figure}
-\centering
-\begin{tikzpicture}[scale=0.4]
-
-
-\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,4) (0,-4)};
-\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(2.83,2.83) (-4,0)};
-\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(4,0) (-2.83,-2.83)};
-\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(-2.83,2.83) (2.83,-2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,4) (2.83,2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(4,0) (2.83,2.83)};
-
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(4,0) (2.83,-2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,-4) (2.83,-2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,-4) (-2.83,-2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(-4,0) (-2.83,-2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(-4,0) (-2.83,2.83)};
-
-\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,4) (-2.83,2.83)};
-
-
-\draw[black,fill=white] (0,4) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (4,0) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (0,-4) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (-4,0) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (2.83,2.83) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (-2.83,-2.83) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (2.83,-2.83) ellipse (0.5 cm  and 0.5 cm);
-\draw[black,fill=white] (-2.83,2.83) ellipse (0.5 cm  and 0.5 cm);
-
-\node (1) at (0,4) {{1}};
-\node (2) at (2.83,2.83) {{2}};
-\node (3) at (4,0) {{3}};
-\node (4) at (2.83,-2.83) {{4}};
-\node (5) at (0,-4) {{5}};
-\node (6) at (-2.83,-2.83) {{6}};
-\node (7) at (-4,0) {{7}};
-\node (8) at (-2.83,2.83) {{8}};
-\end{tikzpicture}
-\caption{A Carr-Vempala point with 8 vertices on its cycle. Solid lines are edges with value strictly between $0$ and $1$. Dashed edges represent paths where each edge on the path has $x_e =1$. There can be an arbitrary number of degree-$2$ vertices on the dashed paths.}
-\label{fig:CVpoint}
-\end{figure}
-
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=9cm,scale=1.4]{christofides-vs-fdt.png}

@@ -177,7 +177,7 @@ Consider the set of points described by sets $S(I)$ and $P(I)$ as in (\ref{S}) a
 For a vector $x\in \mathbb{R}_{\geq 0}^n$ such that $x\in P(I)$, let the {\em support} of $x$ be $\spp(x)= \{i \in [n]: x_i \neq 0\}$. For an integer $\beta$ let $\{\beta\}^n$ be the vector $y\in \mathbb{R}^n$ with $y_i=\beta$ for $i\in [n]$.
 
 
-In Section~\ref{sec:binaryfdt} we introduce the \textit{Fractional Decomposition Tree Algorithm} (FDT) which runs in polynomial time algorithm. Given a point $x\in P(I)$ FDT produces a convex combination of feasible points in $S(I)$ that are dominated coordinatewise by a ``factor" $C$ times $x$.
+In Section~\ref{sec:binaryfdt} we introduce the \textit{Fractional Decomposition Tree Algorithm} (FDT) which is polynomial time algorithm. Given a point $x\in P(I)$ FDT produces a convex combination of feasible points in $S(I)$ that are dominated coordinatewise by a ``factor" $C$ times $x$.
 % in the coordinates corresponding to $x$.
 If $C = g(I)$, it would be optimal. However we can only guarantee a factor of $g(I)^{|\spp(x)|}$. FDT iteratively solves linear programs that are about the same size as the description of $P(I)$.
 
@@ -196,7 +196,7 @@ In Section~\ref{sec:domTOIP} we describe a subroutine of the FDT, called the Dom
 %\cindy{TODO: This implies we know $g(I)$, which is not true in general.  We should add how we bound/estimate it.  I'll return to this after putting that detail back in core if you (Arash) haven't added it by then.}
 %\arash{Isn't $P(I)$ the feasible region defined above. I keep $L(I)$ for now but we can replace it later if needed.} \arash{I fixed below so that I don't imply we know $g(I)$, we also might to clearly state that somewhere?}
 
-Here is how the FDT algorithm works at a high level for an instance $I$ with LP feasible region $P(I)$: in iteration $i-1$ the algorithm computes a convex combination of vectors in $\mathcal{D}(P(I))$ that have a 0 or 1 value for coordinates indexed $1,\ldots,i-1$. Let $y$ be a vector in this convex combination from iteration $i-1$. In iteration $i$, we solve a linear-programming problem that gives us $\theta_0,\theta_1\in [0,1]$ and $y^0,y^1\in \mathcal{D}(P(I))$ such that $y\geq \theta_0 y^0 + \theta_1 y^1$, $\theta_0+\theta_1\leq g(I)$, $y^0_i=0$ and $y^1_i=1$. We then replace $y$ in the convex combination with $\frac{\theta_0}{\theta_0+\theta_1}y^0 +\frac{\theta_1}{\theta_0+\theta_1}y^1$.  Repeating this for every vector in the convex combination from the previous iteration yields a new convex combination of points in $\dom(P(I))$. It is ``more'' integral because now all vectors in the convex combination are integral in their first $i$ coordinates. If in any iteration there are too many points in the convex combination,  we solve a linear-programming problem that ``prunes'' the convex combination. At the end we have a convex combination of integer solutions $\mathcal{D}(P(I))$. For each such solution $z$ we invoke the DomToIP algorithm
+Here is how the FDT algorithm works at a high level for an instance $I$ with LP feasible region $P(I)$: in iteration $i-1$ the algorithm computes a convex combination of vectors in $\mathcal{D}(P(I))$ that have a 0 or 1 value for coordinates indexed $1,\ldots,i-1$. Let $y$ be a vector in this convex combination from iteration $i-1$. In iteration $i$, we solve a linear-programming problem that gives us $\gamma_0,\gamma_1\in [0,1]$ and $y^0,y^1\in \mathcal{D}(P(I))$ such that $y\geq \gamma_0 y^0 + \gamma_1 y^1$, $\gamma_0+\\gamma_1\leq g(I)$, $y^0_i=0$ and $y^1_i=1$. We then replace $y$ in the convex combination with $\frac{\gamma_0}{\gamma_0+\gamma_1}y^0 +\frac{\gamma_1}{\gamma_0+\gamma_1}y^1$.  Repeating this for every vector in the convex combination from the previous iteration yields a new convex combination of points in $\dom(P(I))$. It is ``more'' integral because now all vectors in the convex combination are integral in their first $i$ coordinates. If in any iteration there are too many points in the convex combination,  we solve a linear-programming problem that ``prunes'' the convex combination. At the end we have a convex combination of integer solutions $\mathcal{D}(P(I))$. For each such solution $z$ we invoke the DomToIP algorithm
 % CAP: forward pointer earlier now
 % (see Section~\ref{sec:domTOIP})
 to find $z'\in S(I)$ where $z'\leq z$.
@@ -241,20 +241,69 @@ where $\cov(e)$ for $e \in T$ is the set of edges $\ell \in E\setminus T$ such t
 
 \subsubsection{2-edge-connected multi-subgraph problem}
 \label{sec:2EC-intro}
-Known polyhedral structure makes it easier to study integrality gaps for such problems. We use the idea of fundamental extreme point \cite{carrravi,boydcarr,Carr2004} to create the ``hardest'' LP solutions to decompose.
+Known polyhedral structure makes it easier to study integrality gaps for such problems. In particular, for the subtour-elimination relaxation \cite{carrravi,boydcarr,Carr2004} introduced fundamental extreme points that create the ``hardest'' LP solutions to decompose.
 
 There are fairly good bounds for the integrality gap for the Traveling Salesman Problem (TSP, see \cite{tspbook}) or 2EC.
 %\cindy{We don't define the TSP, though probably don't need to since that really is so classical, and we don't mention it again.  We could consider citing the TSP book.}
 Benoit and Boyd~\cite{TSPcompute} used a quadratic program to show the integrality gap of the subtour-elimination relaxation for the TSP, $g(\tsp)$, is at most $\frac{20}{17}$ for graphs with at most 10 vertices. Alexander et al. \cite{alexander2006integrality} used the same ideas to provide an upper bound of $\frac{7}{6}$ for $g(\2ec)$ on graphs with at most 10 vertices. 
 
 Consider a graph $G=(V,E)$. A \textit{Carr-Vempala point} $x\in \mathbb{R}^E$ is a fractional point in $\subtour(G)$ where the edges $e$ with $0<x_e<1$ form a single cycle in $G$ and the vertices on the cycle are connected via vertex-disjoint paths of edges $e$ with $x_e =1$ (see Figure \ref{fig:CVpoint}).
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.4]
+
+
+\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,4) (0,-4)};
+\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(2.83,2.83) (-4,0)};
+\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(4,0) (-2.83,-2.83)};
+\draw [dashed] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(-2.83,2.83) (2.83,-2.83)};
+
+\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,4) (2.83,2.83)};
+
+\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(4,0) (2.83,2.83)};
+
+
+\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(4,0) (2.83,-2.83)};
+
+\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,-4) (2.83,-2.83)};
+
+\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,-4) (-2.83,-2.83)};
+
+\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(-4,0) (-2.83,-2.83)};
+
+\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(-4,0) (-2.83,2.83)};
+
+\draw [-] [black, line width=0.2mm] plot [smooth, tension=0] coordinates {(0,4) (-2.83,2.83)};
+
+
+\draw[black,fill=white] (0,4) ellipse (0.5 cm  and 0.5 cm);
+\draw[black,fill=white] (4,0) ellipse (0.5 cm  and 0.5 cm);
+\draw[black,fill=white] (0,-4) ellipse (0.5 cm  and 0.5 cm);
+\draw[black,fill=white] (-4,0) ellipse (0.5 cm  and 0.5 cm);
+\draw[black,fill=white] (2.83,2.83) ellipse (0.5 cm  and 0.5 cm);
+\draw[black,fill=white] (-2.83,-2.83) ellipse (0.5 cm  and 0.5 cm);
+\draw[black,fill=white] (2.83,-2.83) ellipse (0.5 cm  and 0.5 cm);
+\draw[black,fill=white] (-2.83,2.83) ellipse (0.5 cm  and 0.5 cm);
+
+\node (1) at (0,4) {{1}};
+\node (2) at (2.83,2.83) {{2}};
+\node (3) at (4,0) {{3}};
+\node (4) at (2.83,-2.83) {{4}};
+\node (5) at (0,-4) {{5}};
+\node (6) at (-2.83,-2.83) {{6}};
+\node (7) at (-4,0) {{7}};
+\node (8) at (-2.83,2.83) {{8}};
+\end{tikzpicture}
+\caption{A Carr-Vempala point with 8 vertices on its cycle. Solid lines are edges with value strictly between $0$ and $1$. Dashed edges represent paths where each edge on the path has $x_e =1$. There can be an arbitrary number of degree-$2$ vertices on the dashed paths.}
+\label{fig:CVpoint}
+\end{figure}
 %\cindy{Every pair of vertices on the cycle is connected this way? It sounds like that, though I don't recall that being necessary. We probably have a figure from an old version we could include if it's not too much trouble.  This will help reviewers and future readers understand much more easily, especially that there could be far more than 12 vertices in the overall solution.}
 
 %\arash{I added this figure \ref{fig:CVpoint} but maybe we can put it later in the experiments section to make the introduction shorter?} \cindy{Yes that would be fine, if the reader could also use that figure then.  They could page forward to see the figure when reading the introduction.}
 %\arash{I changed the paragraph below a little bit, can you check?} \cindy{Looks good. I just changed one sentence to the active voice.  If you're OK with that, you can delete these 2 comments. Thanks!}
-Carr and Vempala \cite{Carr2004} showed that $g(\2ec)$ is achieved for instances where the optimal solution to $\min_{x\in \subtour(G)}cx$ is a Carr-Vempala point. Multiple groups of researchers have conjectured that $g(\2ec)\leq \frac{6}{5}$ (see \cite{alexander2006integrality,boydlegault,hn19}, but the only known upper bound on $g(\2ec)$ stands at $\frac{3}{2}$ \cite{wolsey}. We show that the integrality gap is at most $\frac{6}{5}$ for Carr-Vempala points with at most 12 vertices on the cycle formed by the fractional edges, thereby confirming the conjecture for these instances.
-\cindy{This sounds like a contribution of the paper.} \arash{Yes, particlarly since a similar research question have been studied by \cite{alexander2006integrality} and \cite{TSPcompute}}
-Note that the number of vertices in these instances can be arbitrarily high since the paths of edges with $x$-value 1 can be arbitrarily long.
+Carr and Vempala \cite{Carr2004} showed that $g(\2ec)$ is achieved for instances where the optimal solution to $\min_{x\in \subtour(G)}cx$ is a Carr-Vempala point. Multiple groups of researchers have conjectured that $g(\2ec)\leq \frac{6}{5}$ (see \cite{alexander2006integrality,boydlegault,hn19}, but the only known upper bound on $g(\2ec)$ stands at $\frac{3}{2}$ \cite{wolsey}. We show that the integrality gap is at most $\frac{6}{5}$ for Carr-Vempala points with at most 12 vertices on the cycle formed by the fractional edges, thereby confirming the conjecture for these instances.\cindy{This sounds like a contribution of the paper.} \arash{Yes, particlarly since a similar research question have been studied by \cite{alexander2006integrality} and \cite{TSPcompute}}Note that the number of vertices in these instances can be arbitrarily high since the paths of edges with $x$-value 1 can be arbitrarily long.
 
 \cindy{We probably need an explicit list of contributions.  It could be another subsection of the introduction.  This will help the reviewer and eventually, if published, the reader.}
 \subsection{Contribution summary}
