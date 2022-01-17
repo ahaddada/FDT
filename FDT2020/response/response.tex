@@ -1,6 +1,5 @@
 \documentclass[11pt,epsf]{article}
 %\documentstyle[12pt,psfig,draft]{article}
-
 %% These ``comments'' only appear with [draft] option
 \long\def\comment#1{\ifdim\overfullrule>0pt{\sf[{#1}]}\fi}
 \def\mn{\medskip}
@@ -138,30 +137,52 @@ that the flow is more logical.
 \item p. 2, last paragraph: “Integrality gap” is defined with respect to an IP instance, instead of a family of IP instances (IP formulation) for a problem. This makes the paragraph rather awkward to read, because the statements are not correct as stated.
 
 \item p. 3, below equation (1): Why is $A$ defined as a matrix of rational numbers but $b$ a vector or real numbers?
+
+\response{Fixed. Both $A$ and $b$ are comprised of rational numbers.}
 \item p. 3: Is there a reason why you choose to not include the coefficients of the objective function in an instance?
+\response{Not final! We choose this definition because it allows us to talk about instance specific integrality gaps (or integrality gap in the special cases).}
+
 \item p. 4, Definition 1: Now the integrality gap is defined with respect to a matrix $A$ and vector $b$, taking the supremum (not maximum, please correct) over all coefficients $c$, that are nonnegative. This is inconsistent
 with the previous statement, and also nonstandard as far as I know. Please add some remarks for the reader about this choice. Also, the importance of considering $c \geq 0$ only should be emphasized more in the text (it is of
 vital importance when using Carr-Vempala).
 \item p. 4, equation (4): supremum instead of maximum
+\response{Fixed.}
 \item p. 5, Proposition 2: Please specify where this is stated in [GLS93].
 \item p. 5, below Proposition 2: I don’t see that Proposition 2 and Theorem 3 are equivalent as stated. (Also in light of the remark about one result having an algorithm, and the other not.)
+\response{Fixed. Now we say they are similar statement. We also tried to word the statements in a way to draw the similarity between the two.}
+
+
+
 \item p. 6, Theorem 4: “Moreover, [. . .]” — $C$ is not specified otherwise; replace “Moreover” by “where”.
+\response{Fixed.}
 \item p. 6, Theorem 5: Why “$1\leq$”? Is that not automatic?
+\response{We added the lower bound as a reminder to the reader, but we removed since we agree that it is redundant.}
 \item p. 6, below Theorem 5: “in iteration i the algorithm maintains a convex combination of vecotrs” — please phrase this more precisely 
+\response{Done. The algorithm computes a convex combination from the one constructed in the last iteration that is progressively more integral.}
 \item p. 6, near bottom: “It’s subtour-elimination...” — Its
+\response{Fixed.}
 \item p. 7, equation (5): sup instead of max
+\response{Fixed.}
 \item p. 7, Theorem 6: “Moreover, [. . .]” — $C$ is not specified otherwise; replace “Moreover” by “where”.
+\response{Fixed.}
 \item p. 9, last bullet point of Contribution summary: “can support theoretical work” — be more specific about what you did, and what it showed. 
+\response{This sentence is now added to this bullet: In particular, we computationally prove an upper bound on small instances of 2EC with a specific structure.}
 \item p. 9, Lemma 7: add $\tilde{x}$ right after “Given an integral vector”
+\response{Fixed.}
 \item p. 9, bottom: Isn’t it even easier? Is $\{1\}^n$ not a point in $\mathcal{D}(P)$ (provided
-$P\neq \emptyset$)?
+$P\neq \emptyset$)? \response{Correct, however, the proof would be simpler if restrict the solution to the support of $x$. That's why we use the round-up (i.e. the support of solution).}
 \item p. 11, 3rd line below definitions of $LP^{(\ell)}$ and $IP^{(\ell)}$ : “By Theorem 3, there
 exist [not exists] $\tilde{z}_i\in S$". In the statement of Theorem 3 this is $\mathcal{D}(S)$. Is
 $S$ the same as $\mathcal{D}(S)$ here? If so explain.
-(`)
-If not, can you still draw the conclusion that $IP^{(\ell)}\neq \emptyset$?
+(`) If not, can you still draw the conclusion that
+$IP^{(\ell)}\neq \emptyset$?
+
+
+\response{Thank you for pointing this out. We corrected to say $\tilde{z}^i\in \mathcal{D}(S)$. We also added this observation at the beginning of section 2 that is cross-reference in the proofs: Any point $x\in [0,1]^n$ that is a convex combination of points in $\mathcal{D}(S)$, is also a convex combination of points in $\mathcal{D}(S) \cap [0,1]^n$}
 \item p. 11, third paragraph: Same problem as previous bullet point.
+\response{Fixed with referencing the Observation above.}
 \item p. 13, top of page: Same problem.
+\response{Fixed with referencing the Observation above.}
 \item p. 24 and following, references: missing capitalization in a few entries
 
 \end{itemize}
