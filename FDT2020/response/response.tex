@@ -254,35 +254,45 @@ in the leaves” should be just “leaves.” \response{Fixed.}
 \item I’m attaching a file with line numbers. I strongly recommend for any future submission
 using the lineno package, because it makes my job as a reviewer much easier. I will refer to
 pairs (page number, line number) below.
-
+\response{Thank you for the recommendation. We added line numbers to the document.}
 \item (2,10) “we have formulated” – better to say “instances … are known” and give a reference, e.g. to MIPLIB; or if you have some particularly hard instances in mind that YOU have formulated, you can refer to them, but this should be a fairly widely known
 fact. 
+\response{MIPLIB citation added and the wording is changed as suggested.}
+
 \item (2,14) “the” -> “these”?
 \item (2,26) “from the problem” – what problem? Maybe “using special problem structure together with the result of an LP relaxation to obtain an integer feasible solution
 whose value is at most C times the value of the LP optimum” or something like that.
+\response{Paragraph reworded as follows: Many combinatorial optimization problems can be formulated as IPs. An {\em LP-based approximation algorithm} uses the LP relaxations to the IP formulation to find provably good approximate feasible integer solutions in polynomial time. At the highest level, this involves solving the LP relaxation, using special  problem structure to find a feasible integer solution, and proving that the objective value of the solution is no more than $C$ times worse than the bound from the LP relaxation. The approximation factor $C$ can be a constant or depend on the input parameters of the IP, e.g. $O(\log(n))$ where $n$ is the number of variables in the formulation of the IP (the dimension of the problem).}
 \item (3,7) you say that a separation oracle should return a most violated constraint, but I don’t think this is the standard definition of e.g. Grötschel-Lovász-Schrijver – any violated constraint suffices to get polynomial convergence. 
+\response{Fixed.}
 \item (3,11) “it could not before” -> “they could not before”
+\response{Fixed.}
 \item (3,23) “ResearcherS”
-\item (4,26) “We cannot hope to find…” – you’ve said this already.
-\item (5,8) “express A vector”
-\item (5,10) Please define $[0,1]$ which appears in $[0,1]^k$ . It seems you mean the closed interval between 0 and 1, but it is very commonly also used to be the set $\{0,1\}$, so clarification is in order.
-\item (5,16) “of A blocking type”
-\item (5,23) “assuming” –> “under”
-\item (5,30) ”$S(I)\in \{0,1\}^n$ should be $\subseteq$ instead of $\in$
-\item (6,1) delete “algorithm”
-\item (6,3) “it would be optimal” - what is “it”?
+\response{Fixed.}
+\item (4,26) “We cannot hope to find…” – you’ve said this already. \response{The sentence was removed.}
+\item (5,8) “express A vector” \response{Fixed.}
+\item (5,10) Please define $[0,1]$ which appears in $[0,1]^k$ . It seems you mean the closed interval between 0 and 1, but it is very commonly also used to be the set $\{0,1\}$, so clarification is in order. \response{Added: , where $[0,1]^n = \{x\in \mathbb{R}^n, 0\leq x_i\leq 1 \mbox{ for } i\in[n]\}$ and $\{0,1\}^n = [0,1]^n \cap \mathbb{Z}^n$.}
+\item (5,16) “of A blocking type” \response{Fixed.}
+\item (5,23) “assuming” –> “under” \response{Fixed as suggested.}
+\item (5,30) ”$S(I)\in \{0,1\}^n$ should be $\subseteq$ instead of $\in$ \response{Fixed.}
+\item (6,1) delete “algorithm” \cite{Fixed.}
+\item (6,3) “it would be optimal” - what is “it”? \response{Rephrased as follows: If $C = g(I)$, FDT would have been optimal.}
 \item (6,3) “we can only guarantee a factor of” I think it would be clearer to say “we can
-only guarantee $C\leq g(I)$ ... ”
+only guarantee $C\leq g(I)$ ... ” \response{Fixed as suggested.}
 \item (6,7) how does the $\min$ in $\min(Cx^*, {0,1}^n )$ work? Coordinate-wise, or?
-\item (6,27) “It’s” –> “Its”
+\response{ Yes. But we removed this point-wise minimizing from the statement to make it simpler to state.}
+\item (6,27) “It’s” –> “Its” 
+\response{Fixed.}
 \item (7,5) what is $\chi^{F_i}$ ? I suppose it is the characteristic vector of $F_i$ but you should state
 this clearly. Also, what is $E_x$ ? is it the number of edges of $x$, that is, $\mbox{supp}(x)|$? Again
-please state clearly.
-\item (7,13) “A subset of $U$ of $V$ ” – delete first “of”
-\item (7,18) define or comment on UG-hard
+please state clearly.  \response{We added definition of $E_x$ right before Theorem 6 and $\chi$ in the footnote of this page.}
+\item (7,13) “A subset of $U$ of $V$ ” – delete first “of”  
+\response{Fixed.}
+\item (7,18) define or comment on UG-hard \response{Added this in the footnote: UGC is short for Unique Game Conjecture and conjectured to be NP-hard [Khot2002]}
 \item (7,19) “feasbility” –> “feasibility”
-\item (7,20) “3-5x slower” use “$\times$” (\\times) instead of “x”
-\item (7,29) Large space before “Note” - something fishy is going on here.
+\response{Fixed.}
+\item (7,20) “3-5x slower” use “$\times$” (\\times) instead of “x”\response{Fixed.}
+\item (7,29) Large space before “Note” - something fishy is going on here. \response{Fixed.}
 \item (9,14) add your experimental results about VC here also
 \item (10,7) again, large space
 \item (10,14) it seems to me that the definition of the coordinates of $x^{(\ell+1)}$ other than $\ell+1$
@@ -313,6 +323,7 @@ e.g. https://arxiv.org/abs/1911.08636
 \item (21,10-11) “In the classic graph-based…” <– this is a weird sentence; you should say
 that you will re-cap the algorithm and then you can describe it. Right now it comes
 out of nowhere.
+
 
 
 \end{itemize}
