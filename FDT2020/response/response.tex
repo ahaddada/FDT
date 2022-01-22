@@ -194,6 +194,10 @@ $IP^{(\ell)}\neq \emptyset$?
 \subsubsection{Major Comments}
 The computational results seem quite weak to me. The classic Feasibility Pump heuristic is known to produce solutions of fairly poor quality; it is designed primarily to produce feasible solutions to potentially difficult MIPs
 quickly. On TAP and 2EC, the authors compare to problem-specific approximation algorithms that are not particularly designed to produce high quality solutions either.
+\response{Our comparison of FDT to feasibility pump is to main showcase a use case of the algorithm and a direction that could be possibly explored. We are not offering FDT as a replacement for FP. We will add remarks that make this clear to the reader.
+
+We respectfully disagree about the comment for 2EC since we use BOMC and turn it into an instance specific rounding algorithm for subtour elimination points. As presented in Figure 3, we don't settle for the worst-case upper bound of 3/2. Similarly, for TAP, FJ81 is the only rounding algorithm known for the solution of the CUT-LP. Again, we don't use the worst-case upper bound of 2 and use the instance specific gap provided by the algorithm. Also we remark that FDT is a generic algorithm that applies to any type of IP formulation, while BOMC and FJ81 only work for a certain type of formulation.}
+
 \begin{enumerate}
 
 \item The abstract is misleading in multiple ways. First, it says that the paper will give a constructive version of the Carr-Vempala theorem but does not mention the rather large loss in quality of g to (potentially) g n . Secondly,
