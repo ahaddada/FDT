@@ -293,25 +293,35 @@ please state clearly.  \response{We added definition of $E_x$ right before Theor
 \response{Fixed.}
 \item (7,20) “3-5x slower” use “$\times$” (\\times) instead of “x”\response{Fixed.}
 \item (7,29) Large space before “Note” - something fishy is going on here. \response{Fixed.}
-\item (9,14) add your experimental results about VC here also
+\item (9,14) add your experimental results about VC here also 
+\response{Added.}
 \item (10,7) again, large space
+\response{Fixed.}
 \item (10,14) it seems to me that the definition of the coordinates of $x^{(\ell+1)}$ other than $\ell+1$
 should appear in the algorithm too, not just here.
+\response{Line 3 in Algorithm 1 takes care of the other coordinates.}
 \item (11,14-25) I’m getting tripped up at line 17. I understand the case for coordinates which have $x_j=0$. But where do you deal with those that do not? I suppose I’m just
 missing something obvious, but so could any other reader. Please clarify your proof here.
-\item (12,10) “maintainS” 
+\response{Here the goal is to establish that there is a $z\leq x^{(\ell+1)}$. For the coordinates of $x^{(\ell+1)}$ that are zero we show the proof. The other coordinates of $x^{(\ell+1)}$ are 1. So we just need to emphasize that all the $\tilde{z}_i \leq 1$. This is added now, an a reference to an observation we added (Observation 7)}.
+
+\item (12,10) “maintainS”  \response{Fixed.}
 \item (13,28) “Growing and Pruning THE FDT tree”
+\response{Fixed.}
 \item (14,12) “It is easy to check” <– you do this quite a bit. Please go through your paper and
 pay attention to all the “easy to check”, “obvious”, “clearly” etc. If these things really are easy, then just state them and don’t waste space. However, if some observation is necessary, think about the clearest and most concise way to impart this observation to the reader, and then do that instead of telling the reader that it should be “easy”. 
-\item (14,12) “THE set $L'$”
-\item (14,25) “From THE leaves”
+
+\response{Thank you for the reminder. We find several occurrences of trivially, obviously, easy to check and clearly.}
+
+\item (14,12) “THE set $L'$” \response{Fixed.}
+\item (14,25) “From THE leaves” 
+\response{Fixed.}
 \item (16,11-17) You should discuss why the intuitive approach of binarizing an LP (just split each variable into two binary variables and copy the respective column of the
 constraint matrix) does not lead to the same or better result. Or maybe it does?
 \item (19,14) “1Mb cache” – I looked up this CPU and it has 1MB of L2 cache. Note that
 1Mb $\neq$ 1MB, and “cache” is quite an ambiguous term (there are several types of CPU
 cache). Moreover, the amount of cache is a property of the CPU and is usually not
 stated, so I would just not comment on it. If you must, give a correct capacity and
-indicate the level of the cache.
+indicate the level of the cache. \response{We removed the cache amount. Thanks.}
 \item (19,22-26) Is there no good benchmark set for TAP? If not, please mention that as
 the reason why you study random instances. (It is not good practise in experimental
 algorithmics to study random instances unless necessary.)
@@ -320,10 +330,14 @@ iteration – basically, you only change the objective and fix the variables whi
 building / destroying the model. I’m not sure how much the pruning model can be reused. Either way, please comment on this idea. The idea was successful elsewhere,
 e.g. https://arxiv.org/abs/1911.08636 
 \item (21,10) Christofides’ algorithm is no longer the fastest https://arxiv.org/abs/2007.01409
+
+\response{We added a reference to the KKO paper in the footnote.}
 \item (21,10-11) “In the classic graph-based…” <– this is a weird sentence; you should say
 that you will re-cap the algorithm and then you can describe it. Right now it comes
 out of nowhere.
-
+\response{Rewrote this part: Let us remind our reader the Christofides algorithm for TSP: given a graph with edge costs find a minimum spanning tree of the graph. 
+Next, we add an $O$-join, where $O$ is the set of odd-degree vertices in the spanning tree. Note that the solutions to the TSP are also 2-edge-connected, which means that Christofides algorithm also provides solutions to the 2EC.
+The best-of-many Christofides (BOMC) algorithm~[AKS15] works better than the classic Christofides algorithm in practice[GW17].}
 
 
 \end{itemize}

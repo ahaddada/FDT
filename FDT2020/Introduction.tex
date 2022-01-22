@@ -137,7 +137,7 @@ Our methods apply theory connecting integrality gaps to sets of feasible solutio
 
 %\arash{not exactly: Carr-Vempala don't give a construction. The proposition below is a result of constructive version of Carathedory's theorem which I think is implied by the Ellipsoid algorithm, but there are even faster versions of it. In some way the difference between prop 1 and theorem 2 is our initial motivation for thinking of polynomial construction.}
 
-Formally, for some positive integer $k$, given a set of points $S\subseteq \mathbb{R}^k$ and a vector $x\in \mathbb{R}^k$, we say \textit{$x$ \underline{is} as a convex combination of points in $S$} if there exists a positive integer $\ell$ and $\theta \in [0,1]^\ell$, where $\sum_{i=1}^{\ell}\theta_i =1$ and $\tilde{x}^i\in S$ for $i\in [k]$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq x$. If a such a convex combination in polynomial time in the encoding size of the definition of $S$ and $x$, we say  \textit{$x$ \underline{can be written} as a convex combination of points in $S$}
+Formally, for some positive integer $k$, given a set of points $S\subseteq \mathbb{R}^k$ and a vector $x\in \mathbb{R}^k$, we say \textit{$x$ \underline{is} as a convex combination of points in $S$} if there exists a positive integer $\ell$ and $\theta \in [0,1]^\ell$, where $\sum_{i=1}^{\ell}\theta_i =1$ and $\tilde{x}^i\in S$ for $i\in [k]$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq x$. If such a convex combination can be found in time polynomial in the encoding size of the definition of $S$ and $x$, then we say  \textit{$x$ \underline{can be written} as a convex combination of points in $S$}
 
 \begin{proposition}\label{cara}
 	We have $g(I)=1$ if and only if $x\in P(I)$ can be written as a convex combination of points in $S(I)$.
@@ -316,6 +316,7 @@ as a convex combination of feasible solutions, provided the IP integrality gap i
 \item We experimentally show that FDT can give good approximate solutions to small instances of vertex-cover and tree augmentation problems.
 \item We show that the integrality gap for 2EC (minimum 2-edge-connected sub-multigraph) is at most $\frac{6}{5}$ for Carr-Vempala points with at most $12$ vertices on the cycle formed by the fractional edges, matching the lower bound for integrality gap for 2EC for these instances.
 \item We demonstrate (with 2EC) how FDT exeriments can support theoretical work on integrality gaps for specific problems. In particular, we computationally prove an upper bound on small instances of 2EC with a specific structure.
+\item We demonstrate (with VC) how FDT can be used to find feasible solutions of improved quality compared to those from the feasiblity pump \cite{fp1}.
 \end{itemize}
 
 
