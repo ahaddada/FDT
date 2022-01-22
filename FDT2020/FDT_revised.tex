@@ -1,0 +1,185 @@
+\documentclass[11pt,notitlepage]{article}
+
+\newcommand{\cindy}[1]{\textcolor{green!60!black}{(Cindy: #1)}}
+\newcommand{\arash}[1]{\textcolor{blue}{(Arash: #1)}}
+\newcommand{\bob}[1]{\textcolor{red}{(Bob: #1)}}
+% To drop all comments, just comment out \iffalse and \fi
+
+
+\renewcommand{\cindy}[1]{}
+\renewcommand{\arash}[1]{}
+\renewcommand{\bob}[1]{}
+
+
+\usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype, array,
+graphicx, verbatim, listings, color, fancybox}
+\usepackage[pdftex]{hyperref}
+\usepackage{mathtools}
+\usepackage{amsmath, nccmath}
+\usepackage{booktabs}
+\usepackage{glossaries}
+\usepackage{subcaption}
+	
+\usepackage{setspace}
+\usepackage{acro}
+\usepackage{url}
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage{subcaption}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{thmtools}
+\usepackage{bbm}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\pagestyle{plain}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{multicol,multirow}
+
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+\usepackage{epigraph}
+\usepackage{cleveref}
+
+\newcommand{\ee}{e'}
+
+\newcommand{\oc}{\mathrm{oc}}
+\newcommand{\mcc}{\mathcal{C}}
+\newcommand{\NP}{\mathrm{NP}}
+\newcommand{\Pp}{\mathrm{P}}
+\newcommand{\UGC}{\mathrm{UGC}}
+\newcommand{\W}{\mathrm{W}}	
+\newcommand{\FPT}{\mathrm{FPT}}
+\newcommand{\opt}{\mathrm{OPT}}
+\newcommand\floor[1]{\lfloor#1\rfloor}
+\newcommand\ceil[1]{\lceil#1\rceil}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\AF}{\mathbb{A}}
+\newcommand{\BF}{\mathbb{A}}
+\newcommand{\CF}{\mathbb{C}}
+\newcommand{\EC}{\mathrm{2EC}}
+\newcommand{\HK}{\mathrm{LP}}
+\newcommand{\con}{\mathrm{Connector}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\point}{\mathrm{end}}
+
+\newcommand{\gap}{\alpha^{\HK}_{\EC}}
+\newcommand{\Lu}{\mathcal{L}_\ell} 
+\newcommand{\Rv}{\mathcal{R}_\ell} 
+
+\newcommand{\Lup}{\mathcal{L}_{\ell'}} 
+\newcommand{\Rvp}{\mathcal{R}_{\ell'}} 
+
+\newcommand{\Ex}{\mathop{\mathbb{E}}}
+
+\setlength{\tabcolsep}{0.5em} % for the horizontal padding
+{\renewcommand{\arraystretch}{1.3}% for the vertical padding
+	
+\declaretheorem[name=Theorem]{thm}
+\declaretheoremstyle[style=claim,qed=$\Diamond$]{claim}
+\declaretheoremstyle[style=plain,qed=$\square$]{theorem}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[thm]{Corollary}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{problem}{Open Problem}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{observation}[thm]{Observation}
+\newtheorem{proposition}[thm]{Proposition}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{claim}{Claim}
+\newtheorem*{notation}{Notation}
+\newtheorem*{remark}{Remark}
+\newtheorem{example}[thm]{Example}%[section]
+
+%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%
+\DeclareMathOperator{\chord}{chord}
+\DeclareMathOperator{\spp}{supp}
+\DeclareMathOperator{\CC}{CC}
+\DeclareMathOperator{\degree}{deg}
+\DeclareMathOperator{\join}{-\;JOIN}
+\DeclareMathOperator{\oddcut}{ODD-CUT}
+\DeclareMathOperator{\cover}{COVER}
+\DeclareMathOperator{\lp}{LP}
+
+\DeclareMathOperator{\st}{ST}
+\DeclareMathOperator{\connector}{SS}
+\DeclareMathOperator{\LP}{LP}
+\DeclareMathOperator{\IP}{IP}
+\DeclareMathOperator{\dom}{\mathcal{D}}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\subt}{{SEP}}
+\DeclareMathOperator{\subtour}{{Subtour}}
+\DeclareMathOperator{\hamil}{{{Hamilton}}}
+\DeclareMathOperator{\tsp}{{{TSP}}}
+\DeclareMathOperator{\graphtsp}{{{Graph-TSP}}}
+\DeclareMathOperator{\nwtsp}{{{NW-TSP}}}
+\DeclareMathOperator{\2ec}{{{2EC}}}
+\DeclareMathOperator{\ecs}{{{2ECS}}}
+\DeclareMathOperator{\DOMtoS}{{{DomToIP}}}
+\DeclareMathOperator{\LPC}{{{LPC}}}
+\DeclareMathOperator{\prun}{{{Pruning}}}
+\DeclareMathOperator{\HelperLP}{{{FixNextVarLP}}}
+
+\newcommand{\vtree}{\mathrm{\textsc{-tree}}}
+
+\newcommand{\TT}{\mathcal{T}}
+\newcommand{\JJ}{\mathcal{J}}
+\DeclareMathOperator{\ecss}{{{S2ECS}}}
+
+\usepackage{lineno}
+\linenumbers
+
+\DeclareMathOperator{\tap}{{{TAP}}}
+\DeclareMathOperator{\cut}{{{CUT}}}
+\DeclareMathOperator{\permat}{{{PM}}}
+\DeclareMathOperator{\nwec}{{{NW-2ECM}}}
+\DeclareMathOperator{\nwecs}{{{NW-2ECS}}}
+\newenvironment{cproof}
+{\begin{proof}
+ [Proof.]
+ \vspace{-1.5\parsep}%-3.2\parsep} %%%For use with US letter
+}
+{\renewcommand{\qed}{\hfill $\Diamond$} \end{proof}}
+
+\onehalfspacing
+
+\title{Fractional Decomposition Tree Algorithm: A tool for studying the integrality gap of Integer Programs}
+
+
+\author{\textsc{Robert Carr}\thanks{University of New Mexico  {\tt{bobcarr@unm.edu}}. This material is based upon research supported in part by
+the U.S. Office of Naval Research under award number N00014-18-1-2099.}
+\and \textsc{Arash Haddadan}\thanks{University of Virginia  {\tt{ahaddada@virginia.edu}}.  This work was mainly done when this author was a graduate student at Carnegie Mellon University.}
+\and \textsc{Cynthia A. Phillips}\thanks{Sandia National Laboratories  {\tt{caphill@sandia.gov}}. Sandia National Laboratories is a multi-mission laboratory managed and operated by National Technology and Engineering Solutions of Sandia, LLC., a wholly owned subsidiary of Honeywell International, Inc., for the U.S. Department of Energy’s National Nuclear Security Administration under contract DE-NA0003525.}}
+	
+
+\begin{document}
+
+
+
+\maketitle
+
+\begin{abstract}
+We present a new algorithm, Fractional Decomposition Tree (FDT) for finding a feasible solution for an integer program (IP) where all variables are binary. FDT runs in polynomial time and is guaranteed to find a feasible integer solution provided the integrality gap is bounded. The algorithm gives a construction for Carr and Vempala's theorem that any feasible solution to the IP's linear-programming relaxation, when scaled by the instance integrality gap, dominates a convex combination of feasible solutions. FDT is also a tool for studying the integrality gap of IP formulations.  We demonstrate that with experiments studying the integrality gap of two problems: optimally augmenting a tree to a 2-edge-connected graph and finding a minimum-cost 2-edge-connected multi-subgraph (2EC). We also give a simplified algorithm, DomToIP, that more quickly determines if an instance has an unbounded integrality gap. We show that FDT's speed and approximation quality compare well to that of feasibility pump on moderate-sized instances of the vertex cover problem. For a particular set of hard-to-decompose fractional 2EC solutions, FDT always gave a better integer solution than the best previous approximation algorithm (Christofides).
+\end{abstract}
+
+\clearpage
+\input{Introduction}
+\input{main-section}
+\input{conclusion}
+\bibliographystyle{alpha}
+%\bibliographystyle{abbrv}
+\bibliography{FDT}
+
+
+\end{document}
+
+
+
+	
