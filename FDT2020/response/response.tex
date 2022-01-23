@@ -321,6 +321,8 @@ pay attention to all the “easy to check”, “obvious”, “clearly” etc. 
 \response{Fixed.}
 \item (16,11-17) You should discuss why the intuitive approach of binarizing an LP (just split each variable into two binary variables and copy the respective column of the
 constraint matrix) does not lead to the same or better result. Or maybe it does?
+\response{We added this paragraph in the discussion of why $\{0,1,2\}$ problems are different from binary problems: Another approach to a $\{0,1,2\}$ problem could be to ``binarize'' the variables, but splitting each variable into two binary copies and solving the binary problem via FDT for binary IPs (Theorem \ref{FDTFull}). One potential issue that can arise by doing this is that the binary version of a problem might have a larger integrality gap compared to the one that allows larger multiplicity. One example of this is the 2EC problem considered in this section. As mentioned above, we have $g(\mbox{2EC})\leq \frac{3}{2}$, while $g(\mbox{2ECSS})\geq \frac{3}{2}$, where 2ECSS is a problem equivalent to 2EC but without any doubled edges allowed {CKKK08}.}
+
 \item (19,14) “1Mb cache” – I looked up this CPU and it has 1MB of L2 cache. Note that
 1Mb $\neq$ 1MB, and “cache” is quite an ambiguous term (there are several types of CPU
 cache). Moreover, the amount of cache is a property of the CPU and is usually not
