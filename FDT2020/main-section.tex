@@ -101,9 +101,6 @@ The FDT algorithm grows a tree similar to the classic branch-and-bound search tr
 %with integer values for all the $x$ variables
 that dominate a point in $P$. In Lemma~\ref{domlemma} we saw how to turn these into points in $S$. 
 
-
-We also make the following assumption that make the presentation of the results simpler: for $\ell \in [n]$ the set $\{x\in P: x_\ell = 0\}$ is empty, we assume that every point in $P$ has 1 in the $\ell$-th coordinate, i.e. constraints matrix $A$ contains the valid constraint that $x_\ell \geq 1$. We make this assumption to enusre that we always have a two branches when branching on a fractional coordinate of a point.
-
 \paragraph{Branching on a node.}
 We begin with the following lemmas that show how the FDT algorithm branches on a variable.
 \begin{lemma}\label{LPClemma}
