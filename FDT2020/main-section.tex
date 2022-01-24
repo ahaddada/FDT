@@ -101,10 +101,13 @@ The FDT algorithm grows a tree similar to the classic branch-and-bound search tr
 %with integer values for all the $x$ variables
 that dominate a point in $P$. In Lemma~\ref{domlemma} we saw how to turn these into points in $S$. 
 
+
+We also make the following assumption that make the presentation of the results simpler: for $\ell \in [n]$ the set $\{x\in P: x_\ell = 0\}$ is empty, we assume that every point in $P$ has 1 in the $\ell$-th coordinate, i.e. constraints matrix $A$ contains the valid constraint that $x_\ell \geq 1$. We make this assumption to enusre that we always have a two branches when branching on a fractional coordinate of a point.
+
 \paragraph{Branching on a node.}
 We begin with the following lemmas that show how the FDT algorithm branches on a variable.
 \begin{lemma}\label{LPClemma}
-	Given $x'\in \dom(P)$ and $\ell\in [n]$ where $x'_{\ell}<1$, in polynomial time we can find vectors $\hat{x}^0,\hat{x}^1$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that: (i) $1/g \leq \gamma_0 + \gamma_1  \leq 1$, (ii) $\hat{x}^0$ and $\hat{x}^1$ are in  $ P$, (iii) $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$, and (iv) $\gamma_0 \hat{x}^0 + \gamma_1\hat{x}^1 \leq x'$.
+	Given $x'\in \dom(P)$ and $\ell\in [n]$ where $0 \leq x'_{\ell}<1$, in polynomial time we can find vectors $\hat{x}^0,\hat{x}^1$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that: (i) $1/g \leq \gamma_0 + \gamma_1  \leq 1$, (ii) if $\gamma_i > 0$, then $\hat{x}^i \in P$ for $i=0,1$, (iii) $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$, and (iv) $\gamma_0 \hat{x}^0 + \gamma_1\hat{x}^1 \leq x'$.
 \end{lemma}
 
 
@@ -121,10 +124,7 @@ We begin with the following lemmas that show how the FDT algorithm branches on a
 	&\;{\color{white}{\text{s.t.}} }\quad \lambda_0,\lambda_1 \geq 0
 	\end{align}
 	
-	Let $y^0$, $y^1$, $\lambda^*_0$, and $\lambda^*_1$ be an optimal solution to the LP above. Set $\gamma_0=\lambda^*_0$ and $\gamma_1 = \lambda^*_1$.
-%Let $x^0$, $x^1$, $\lambda_0$, and $\lambda_1$ be an optimal solution to the LP above. Set $\gamma_0=\lambda_0$ and $\gamma_1 = \lambda_1$.
-\cindy{The sentence right before this is how I think you link the $\lambda$ in the LP to the $\gamma$ constants in the Lemma statement and the claim below, etc.}
-Let $\hat{x}^0 = y^0/\lambda^*_0$, $\hat{x}^1=y^1/\lambda^*_1$. This choice satisfies  (ii), (iii), (iv). To show that (i) is also satisfied we prove the following claim.
+	Let $y^0$, $y^1$, $\lambda^*_0$, and $\lambda^*_1$ be an optimal solution to the LP above. For $i = 0,1$, if $\lambda^*_i = 0$, then let $\gamma_i=0$ and $\hat{x}^i = \{i\}^n$, otherwise let $\gamma_i = \lambda_i$ and $\hat{x}^i=y^i/\lambda_i$.\cindy{The sentence right before this is how I think you link the $\lambda$ in the LP to the $\gamma$ constants in the Lemma statement and the claim below, etc.} This choice satisfies  (ii), (iii), (iv). To show that (i) is also satisfied we prove the following claim.
 	\arash{Now that I notice, we use $\lambda_0,\lambda_1,x^0,x^1$ to represnt a feasible solution to the system 13-18. Since the optimal solution is use only for the duration of one sentence above maybe we can change the notation for the optimal solution. For instance use $y^0,y^1, \lambda^*_0,\lambda^*_1$}
 \cindy{I think I made the changes you suggested.  I also used the LP optima to set the $\hat{x}$.  Please check.}
 	\begin{claim}\label{CVexists}
@@ -149,7 +149,7 @@ Let $\hat{x}^0 = y^0/\lambda^*_0$, $\hat{x}^1=y^1/\lambda^*_1$. This choice sati
 
 We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integral, we can find solutions with more integral components.
 \begin{lemma}\label{round-up}
-	Given $x'\in \dom(P)$ where $x'_1,\ldots,x'_{\ell-1}\in \{0,1\}$ and $x'_{\ell}<1$ for some $\ell\geq 1$ we can find in polynomial time vectors $\hat{x}^0,\hat{x}^1$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that: (i) ${ 1}/{g}\leq \gamma_0 + \gamma_1  \leq 1$, (ii) $\hat{x}^0$ and $\hat{x}^1$ are in  $\dom( P)$, (iii) $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$, (iv) $ \gamma_0\hat{x}^0 +\gamma_1 \hat{x}^1 \leq
+	Given $x'\in \dom(P)$ where $x'_1,\ldots,x'_{\ell-1}\in \{0,1\}$ and $x'_{\ell}<1$ for some $\ell\geq 1$ we can find in polynomial time vectors $\hat{x}^0,\hat{x}^1$ and scalars $\gamma_0,\gamma_1 \in [0,1]$ such that: (i) ${ 1}/{g}\leq \gamma_0 + \gamma_1  \leq 1$, (ii) if $\gamma_i>0$, then $\hat{x}^i\in \dom(P)$ for $i=0,1$, (iii) $\hat{x}^0_\ell=0$ and $\hat{x}^1_\ell=1$, (iv) $ \gamma_0\hat{x}^0 +\gamma_1 \hat{x}^1 \leq
 	x'$,(v) $\hat{x}^i_j\in \{0,1\}$ for $i=0,1$ and $j\in[\ell-1]$.
 \end{lemma} 
 \begin{proof}
@@ -161,7 +161,7 @@ We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integr
 	Therefore (v) holds.
 \end{proof}
 
-\paragraph{Growing and Pruning the FDT tree.} The FDT algorithm maintains nodes $L_i$ in iteration $i$ of the algorithm. The nodes in $L_i$ correspond to the nodes in level $i$ of the FDT tree. The leaves of the FDT tree, $L_t$, are points in $\dom(P)$ and are integral for all integer variables.
+\paragraph{Growing and Pruning the FDT tree.} The FDT algorithm maintains nodes $L_i$ in iteration $i$ of the algorithm with multiplier strictly larger than 0. The nodes in $L_i$ correspond to the nodes in level $i$ of the FDT tree. The leaves of the FDT tree, $L_t$, are points in $\dom(P)$ and are integral for all integer variables.
 
 
 \begin{lemma}\label{prune}
@@ -192,7 +192,11 @@ We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integr
 			$L'\leftarrow \emptyset$\\
 			\For{$[x,\lambda] \in L^i$}{
 				Apply Lemma \ref{round-up} to obtain $[\hat{x}^0,\gamma_0]$ and $[\hat{x}^1,\gamma_1]$\\
-				$L' \leftarrow L' \cup \{[\hat{x}^0,\lambda\cdot\gamma_0]\} \cup \{[\hat{x}^1,\lambda\cdot\gamma_1]\}$\\			
+				\For{$j=0,1$}{
+				\If {$\gamma_j > 0$}{
+				$L' \leftarrow L' \cup \{[\hat{x}^j,\lambda\cdot\gamma_j]\}$
+				}		
+			}	
 			}
 			Apply Lemma \ref{prune} to prune $L'$ to obtain $L^{i+1}$. 
 		}
@@ -236,13 +240,13 @@ In Section~\ref{sec:binaryfdt} our focus was on binary IPs. In this section, in 
 \FDTEC*
 We do not know the exact value for $g(\2ec)$, but we know $\frac{6}{5} \leq g(\2ec) \leq \frac{3}{2}$ \cite{alexander2006integrality,wolsey}\footnote{The recent result of \cite{KKO}  shows that $g(\2ec) \leq \frac{3}{2}-\epsilon$ for a tiny but constant $\epsilon >0$.}. The FDT algorithm for 2EC is very similar to the one for binary IPs, but there are some differences as well. A natural thing to do is to have three branches for each node of the FDT tree, however, the branches that are equivalent to setting a variable to $1$, might need further decomposition. That is the main difficulty when dealing with $\{0,1,2\}$-IPs.
 
-Another approach to a $\{0,1,2\}$ problem could be to ``binarize'' the variables, but splitting each variable into two binary copies and solving the binary problem via FDT for binary IPs (Theorem \ref{binaryFDT}). One potential issue that can arise by doing this is that the binary version of a problem might have a larger integrality gap compared to the one that allows larger multiplicity. For instance, as mentioned above we have $g(\2ec)\leq \frac{3}{2}$ and  $g(\mbox{2ECSS})\geq \frac{3}{2}$, where 2ECSS is a problem equivalent to $\2ec$ but without any doubled edges allowed \cite{32gaptap}\footnote{In light of the recent paper of \cite{KKO} we now know that $g(\2ec)< g(\mbox{2ECSS})$.}
+Another approach to a $\{0,1,2\}$ problem could be to split each variable into two binary copies and solving the binary problem via FDT for binary IPs (Theorem \ref{binaryFDT}). One potential issue that can arise by doing this is that the binary version of a problem might have a larger integrality gap compared to the one that allows larger multiplicity. For instance, as mentioned above we have $g(\2ec)\leq \frac{3}{2}$ and  $g(\mbox{2ECSS})\geq \frac{3}{2}$, where 2ECSS is a problem equivalent to $\2ec$ but without any doubled edges allowed \cite{32gaptap}\footnote{In light of the recent paper of \cite{KKO} we now know that $g(\2ec)< g(\mbox{2ECSS})$.}.
 
 First, we need a branching lemma. Observe that  the following branching lemma is essentially a translation of Lemma \ref{LPClemma} for $\{0,1,2\}$ problems except for one additional clause. 
 
 \begin{restatable}{lemma}{2ECLPC}
 	\label{LPC2EC}
-	Given $x\in \subtour(G)$, and $e\in E$ we can find in polynomial time vectors $x^0,x^1$ and $x^2$ and scalars $\gamma_0,\gamma_1$, and $\gamma_2$ such that: (i) $\gamma_0 + \gamma_1 +\gamma_2 \geq { 1}/{g(\2ec)}$, (ii) $x^0,x^1,$ and $x^2$ are in  $ \subtour(G)$, (iii) $x^0_e=0$, $x^1_e=1$, and $x^2_e=2$, (iv) $\gamma_0 x^0 + \gamma_1{x}^1  + \gamma_2x^2\leq {x}$, (v) for $f\in E$ with ${x}_f\geq 1$, we have $x^j_f\geq 1$ for $j=0,1,2$.
+	Given $x\in \subtour(G)$, and $e\in E$ we can find in polynomial time vectors $x^0,x^1$ and $x^2$ and scalars $\gamma_0,\gamma_1$, and $\gamma_2$ such that: (i) $\gamma_0 + \gamma_1 +\gamma_2 \geq { 1}/{g(\2ec)}$, (ii) if $\gamma_i > 0$, then $x^i \in \subtour(G)$ for $i=0,1,2$, (iii) $x^0_e=0$, $x^1_e=1$, and $x^2_e=2$, (iv) $\gamma_0 x^0 + \gamma_1{x}^1  + \gamma_2x^2\leq {x}$, (v) for $f\in E$ with ${x}_f\geq 1$, we have $x^j_f\geq 1$ for $j=0,1,2$ with $\gamma_j > 0$.
 \end{restatable}
 
 \begin{proof}
@@ -255,7 +259,7 @@ First, we need a branching lemma. Observe that  the following branching lemma is
 	&\;{\color{white}{\text{s.t.}} }\quad x^j_f \geq \lambda_j \; &\mbox{ for $f\in E$ where $x_f \geq 1$, and $j=0,1,2$}\label{1edges2ec}\\
 	&\;{\color{white}{\text{s.t.}} }\quad x^0 + x^1+x^2 \leq x\label{packing2ec}\\
 	&\;{\color{white}{\text{s.t.}} }\quad \lambda_0,\lambda_1,\lambda_2 \geq 0
-	\end{align}	Let $x^j$, $\gamma_j$ for $j=0,1,2$ be an optimal solution solution to the LP above. Let $\hat{x}^{j}={x^j}/{\gamma_j}$ for $j=0,1,2$ where $\gamma_j>0$. If $\gamma_j=0$, let $\hat{x}^{j}=0$. Observe that  (ii), (iii), (iv), and (v) are satisfied with this choice. We can also show that $\gamma_0+\gamma_1+\gamma_2\geq {1}/{g(\2ec)}$, which means that (i) is also satisfied. The proof is similar to the proof of the claim in Lemma \ref{LPClemma}, but we need to replace each $f\in E$ with $x_f\geq 1$ with a suitably long path to ensure that Constraint (\ref{1edges2ec}) is also satisfied.	
+	\end{align}	Let $x^j$, $\gamma_j$ for $j=0,1,2$ be an optimal solution solution to the LP above. For $j=0,1,2$, if $\gamma_j = 0$, then let $\hat{x}^j=\{j\}^E$, otherwise let $\hat{x}^{j}={x^j}/{\gamma_j}$ for $j=0,1,2$ where $\gamma_j>0$. Observe that  (ii), (iii), (iv), and (v) are satisfied with this choice. We can also show that $\gamma_0+\gamma_1+\gamma_2\geq {1}/{g(\2ec)}$, which means that (i) is also satisfied. The proof is similar to the proof of the claim in Lemma \ref{LPClemma}, but we need to replace each $f\in E$ with $x_f\geq 1$ with a suitably long path to ensure that Constraint (\ref{1edges2ec}) is also satisfied.	
 	\begin{claim}\label{CVexists}
 		We have $\gamma_0 + \gamma_1+\gamma_2\geq \frac{1}{g(\2ec)}$.
 	\end{claim}

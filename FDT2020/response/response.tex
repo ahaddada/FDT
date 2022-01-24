@@ -207,7 +207,8 @@ which is what is compared in the paper.
 \item The paper should mention the randomized metarounding algorithm by Carr and Vempala and compare it to the FDT algorithm. 
 \item In the proofs of Lemma 8 and Lemma 11, I do not see why it can be assumed that $\lambda_0,\lambda_1,\lambda_2>0$. I think one has to allow the case in which
 the branching step returns just 1 or (in the case of 2EC) just 2 vectors.
-4. As noted before, I find the comparisons against the FP heuristic on VC
+\response{Yes. We corrected this in the statement of Lemma 9, 10, 12. Also in the description of the Algorithm 2.}
+\item As noted before, I find the comparisons against the FP heuristic on VC
 and the 2-approximation for TAP rather dubious. To show that the FDT
 algorithm performs much better than the theoretical $g^{|supp(x)|}$ bound, just comparing to the initial fractional solution is all that is needed. On the other hand, if the goal is to show that the FDT algorithm works well as a
 general purpose feasibility heuristic, then comparing to a FDT to a more modern variant of FP (e.g. as in the Feasibility Pump 2.0 paper) would be more reasonable.
@@ -279,7 +280,7 @@ whose value is at most C times the value of the LP optimum” or something like 
 \item (5,16) “of A blocking type” \response{Fixed.}
 \item (5,23) “assuming” –> “under” \response{Fixed as suggested.}
 \item (5,30) ”$S(I)\in \{0,1\}^n$ should be $\subseteq$ instead of $\in$ \response{Fixed.}
-\item (6,1) delete “algorithm” \cite{Fixed.}
+\item (6,1) delete “algorithm” \response{Fixed.}
 \item (6,3) “it would be optimal” - what is “it”? \response{Rephrased as follows: If $C = g(I)$, FDT would have been optimal.}
 \item (6,3) “we can only guarantee a factor of” I think it would be clearer to say “we can
 only guarantee $C\leq g(I)$ ... ” \response{Fixed as suggested.}
