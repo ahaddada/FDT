@@ -33,7 +33,7 @@ If the integrality gap for an IP formulation is large, it is sometimes possible 
 
 Reducing the integrality gap of an IP formulation has two advantages.  It can lead to better LP-based approximation algorithm bounds as described above.  It can also help exact solvers run faster or solve instances they could not before. Exact IP solvers are based on intelligent branch-and-bound strategies.  As mentioned above, commercial and open-source MILP solvers can find exact solutions (or near-optimal solutions with a provable bound) to many specific instances of NP-hard combinatorial optimization problems. These solvers use the LP relaxation to get lower bounds (for minimization problems).  The search requires exponential time in the worst case. But this search is practically feasible when the solver can prune large amounts of the search space.  This happens when the lower bound for a region of the search space (subproblem) is worse than the value of a known feasible solution.  This requires a way to find a good heuristic solution and it requires good lower bounds that are as close to the actual optimal value of an IP subproblem as possible.
 
-In this paper, we give a method to find feasible solutions for IPs if the integrality gap is bounded. The method is also a tool for evaluating the integrality gap for a formulation.  Researchers can use it to determine whether they should expend effort to find new classes of cuts.  They can also use it to help guide theory for finding tighter bounds on the integrality gap for classic problems like the traveling salesman problem.
+In this paper, we give a method to find feasible solutions for IPs if the integrality gap is bounded. The method is also a tool for evaluating the integrality gap for a polyhedron.  Researchers can use it to determine whether they should expend effort to find new classes of cuts.  They can also use it to help guide theory for finding tighter bounds on the integrality gap for classic problems like the traveling salesman problem.
 
 % A common approach to Integer programming is considering their linear relaxation.
 % \cindy{TODO: this has to move to a logical place in the more formal treatment below:
@@ -103,33 +103,43 @@ where matrix $A\in \mathbb{Q}^{m\times n}$ and $b \in \mathbb{Q}^{m}$, where $\m
 \begin{equation}
 P(A,b) = \{x\in \mathbb{R}^{n}\;:\; Ax\geq b\}. \label{P}
 \end{equation}
-Let $I=(A,b)$ denote an instance. Then $S(I)$ and $P(I)$ denote $S(A,b)$ and $P(A,b)$, respectively. Given a linear objective function $c$, an IP is $\min \;\{cx:\; x \in S(I)\}$. 
+Let $I=(A,b)$ denote an instance of a polyhedron (henceforth an instance). Then $S(I)$ and $P(I)$ denote $S(A,b)$ and $P(A,b)$, respectively. Given a linear objective function $c$, an IP is $\min \;\{cx:\; x \in S(I)\}$. 
 
 Relaxing the integrality constraints gives the polynomial-time-solvable linear-programming relaxation: $\min \;\{cx:\;x\in P(I) \}$.  The optimal value of this linear program (LP), denoted $z_{\lp}(I,c)$, is a lower bound on the optimal value for the IP, denoted $z_{\IP}(I,c)$. 
 
-Many researchers (see \cite{davids,vazirani}) have developed polynomial time LP-based approximation algorithms that find solutions for special classes of IPs whose cost are provably at most $C\cdot z_{LP}(I,c)$ for some (possibly constant) function $C$. If the analysis uses the LP bound to prove the approximation quality, then $C$ is at least the integrality gap.
+
 %However, for many combinatorial optimization problems there is a limit to such techniques based on LP relaxations, represented  by the {integrality gap} of the IP formulation.
 %\cindy{Arash: Just read and comment it out if you're OK with this. I'm not sure I got an answer for the following questions, so I'll just make it clear this is the definition we use: Does the integrality gap always require positive objective coefficients?  Or is that an extra restriction in our definition?  Is there a reference that has that restriction?} 
 %\arash{I looked for a formal definition of integrality gap in the literature this is the most descriptive I've found from \cite{davids} as follows: \textit{the integrality gap of an integer program is the worst-case ratio over all instances of the problem of value of an optimal solution to the integer programming formulalation to value of an optimal solution to its linear programming relaxation.}. Based on this definition I think we are not adding a restriction but we are looking at specific type of IPs arising form problems whose instances have non-negative cost vectors which is not a huge stretch as most combinatorial optimization problems are of this forms.}
-\begin{definition}
+\begin{definition}\label{IGofPoly}
 The integrality gap $g(I)$ for instance $I$ is: $$g(I)= \sup_{c\geq 0}\frac{z_{IP}(I,c)}{z_{LP}(I,c)},$$
 where $z_{IP}(I,c)$ is the optimal solution to the integer program and $z_{LP}(I,c)$ is the solution to the linear-programming relaxation.
 \end{definition}
 
-In general the integrality gap is defined similarly for any objective function, but we wish to be explicit about the class of problems we assume in this paper. For example consider the minimum cost \textsc{2-edge-connected multi-subgraph problem (2EC)}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^E_{\geq 0}$, 2EC asks for the minimum cost 2-edge-connected subgraph of $G$, with multi-edges allowed. A graph is 2-edge-connected if there are at least two edge-disjoint paths between every pair of vertices.  A linear-programming relaxation for this problem, known as the {\em subtour-elimination} relaxation, is
- \begin{equation}\min \{cx: \sum_{e\in \delta(U)}x_e \geq 2 \mbox{ for } \emptyset \subsetneq U \subsetneq V,\; x\in [0,2]^{E}\}, 
+Consider an instance of a combinatorial optimization problem $\mathcal{P}$. We can characetrize $\mathcal{P}$ by a set of feasible solutions in $S\in \mathbb{Z}_{\geq 0}^n$ and a cost function $c\in \mathbb{R}_{\geq 0}^n$. In many cases (see \cite{vazirani,shmoyswilliamson}) the set $S$ can decribed as a set of integer points within a polyhedron $P$ (in fact the choice of $P$ need not be unique.) In this case, the integrality gap of $\mathcal{P}$ with respect to $P$ is $\min\{cx:x\in S\}/{\min\{cx:x\in P\}}$. Hence $g(I)$ in Defintion \ref{IGofPoly} is equivalent to the worst-case integrality gap of all instances of a problem with respect to $P(I)$. 
+ 
+A combinatorial optimization problem consists of a family of instances that potentially have different sets of feasible solutions (e.g. due to different sizes). In this case, the integraltiy gap of combinatorial optimization problem with respect to a IP formulation, is the worst case integrality gap of over all instances of the combinatorial optmization problem with the linear relaxation of the respective instance of the IP formulation, or the worst case integrality gap of $I$ for all instances $\mathcal{I}$ in the IP formulation. Therefore, we define,
+ 
+\begin{equation}\label{gapproblem}
+g(\mathcal{I}) = \sup_{I\in\mathcal{I}}g(I).
+\end{equation}
+
+For example consider the minimum cost \textsc{2-edge-connected multi-subgraph problem (2EC)}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^E_{\geq 0}$, 2EC asks for the minimum cost 2-edge-connected subgraph of $G$, with multi-edges allowed. A graph is 2-edge-connected if there are at least two edge-disjoint paths between every pair of vertices.  An IP formulation for this problem, known as the {\em subtour-elimination}, is
+ \begin{equation}\min \{cx: \sum_{e\in \delta(U)}x_e \geq 2 \mbox{ for } \emptyset \subsetneq U \subsetneq V,\; x\in \{0,1,2\}^{E}\}, 
  \label{eq:subtour}
  \end{equation}
-where $\delta(U)$ for vertex subset $U$ is the set of edges that cross the cut defined by $U$.  That is, each $e \in \delta(U)$ has one endpoint in $U$ and the other endpoint in $V-U$.
- In this case the instance-specific integrality gap is the integrality gap of the subtour-elimination relaxation for the 2EC on a graph with $n$ vertices. Alexander et al. \cite{alexander2006integrality} showed this instance-specific integrality gap
-%of the subtour elimination relaxation for the 2EC
-is at most $\frac{7}{6}$ for instances with $n= 10$ .
+where $\delta(U)$ for vertex subset $U$ is the set of edges that cross the cut defined by $U$.  That is, each $e \in \delta(U)$ has one endpoint in $U$ and the other endpoint in $V-U$. We denote the linear relaxation of this IP as $\subtour(G)$. Notice that in this case, $G$ defines the polyhedron, while the pair of $G$ and $c$ defines the instance of 2EC. Let $I_G$ be the polyhedron instance defined by $\subtour(G)$. Then $g(I_G)$ is the worst-case integrality gap 2EC on $G$ over all non-negative cost functions and integrality gap of 2EC is $\max_{G} g(I_G))$. 
 
-The value of $g(I)$ depends on the constraints in~(\ref{S}). More generally we can define the integrality gap for a class of instances $\mathcal{I}$ as follows.% In this case, the integrality gap for problem $\mathcal{I}$ is
-\begin{equation}\label{gapproblem}
-g(\mathcal{I}) = \max_{c\geq 0 , I\in\mathcal{I}}\frac{z_{IP}(I,c)}{z_{LP}(I,c)}.
-\end{equation}
-For example, the integrality gap of the subtour-elimination relaxation for the 2EC is at most $\frac{3}{2}$ \cite{wolsey} and at least $\frac{6}{5}$ \cite{alexander2006integrality}. Therefore, we cannot hope to obtain an LP-based $(\frac{6}{5}-\epsilon)$-approximation algorithm for this problem using this LP relaxation to bound the quality of a feasible solution.
+
+% In this case the instance-specific integrality gap is the integrality gap of the subtour-elimination relaxation for the 2EC on a graph with $n$ vertices. Alexander et al. \cite{alexander2006integrality} showed this instance-specific integrality gap
+%of the subtour elimination relaxation for the 2EC is at most $\frac{7}{6}$ for instances with $n= 10$ .
+
+% The value of $g(I)$ depends on the constraints in~(\ref{S}). More generally we can define the integrality gap for a class of instances $\mathcal{I}$ as follows.% In this case, the integrality gap for problem $\mathcal{I}$ is
+
+
+%Many researchers (see \cite{davids,vazirani}) have developed polynomial time LP-based approximation algorithms that find solutions for special classes of IPs whose cost are provably at most $C\cdot z_{LP}(I,c)$ for some (possibly constant) function $C$. If the analysis uses the LP bound to prove the approximation quality, then $C$ is at least the integrality gap.
+
+%For example, the integrality gap of the subtour-elimination relaxation for the 2EC is at most $\frac{3}{2}$ \cite{wolsey} and at least $\frac{6}{5}$ \cite{alexander2006integrality}. Therefore, we cannot hope to obtain an LP-based $(\frac{6}{5}-\epsilon)$-approximation algorithm for this problem using this LP relaxation to bound the quality of a feasible solution.
 
 Our methods apply theory connecting integrality gaps to sets of feasible solutions. Instances $I$ with $g(I)=1$ have $P(I)=\conv(S(I))$, the convex hull of the lattice of feasible points. In this case, $P(I)$ is an \textit{integral} polyhedron. The spanning tree polytope of graph $G$, $\st(G)$, and the perfect-matching polytope of graph $G$, $\permat(G)$, have this property (\cite{Edmonds2003,edmondsPM}). Thus the linear-programming relaxation for minimum-cost spanning tree has basic feasible solutions (vertices) that are integral solutions, i.e. spanning trees. For such problems there is an algorithm to express a vector $x\in P(I)$ (a feasible LP solution) as a convex combination of points in $S(I)$ (feasible IP solutions) in polynomial time \cite{cons-cara}.
 % The number of feasible solutions ($k$) in the convex combination can vary by instance.
@@ -148,7 +158,7 @@ For the case when $g(I)>1$ a similar statement is as follows. The {\em dominant}
 \begin{thm}[Carr, Vempala \cite{Carr2004}] \label{CV2}
 	We have $g(I) \leq C$ if and only if for $x\in P(I)$ the vector $Cx$ can be is as a convex combination of points in $\dom(S(I))$. 
 \end{thm}
-Goemans \cite{goemansblocking} first introduced Theorem \ref{CV2} for blocking-type polyhedra. While there is an exact algorithm for problems with gap $1$, as stated in Proposition \ref{cara}, Theorem~\ref{CV2} is existential, with no construction.
+Goemans \cite{goemansblocking} first introduced Theorem \ref{CV2} for blocking-type polyhedra. While there is an exact algorithm for problems with gap $1$, as stated in Proposition \ref{cara}, Theorem~\ref{CV2} is existential, with no construction. We remark that Proposition \label{CV2} would not work if we drop the non-negatvitiy constraints on the cost function $c$ in the definition of integrality gap (Defitinon \ref{IGofPoly}).
 %In contrast to Proposition \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time.
 %This points to an interesting open question. 
 % We show later, for $I$ with $g(I)<\infty$, the notation of dominant is in fact useful.
@@ -167,9 +177,10 @@ Although Question \ref{question2} is wide open, for some problems there are poly
 
 If we relax Question \ref{question1} (resp. Question \ref{question2}), but multiplying $g(I)$ (resp. $g(\mathcal{I})$) by a factor $C$, they are still very interesting, since they will provide upper bounds on the integrality gap of the instance (resp. the problem). The results in this paper serve this purpose.
 \fi
-To study integrality gaps, we wish to decompose a suitably scaled linear-programming solution into a convex combination of feasible integer solutions {\bf constructively}. That is, we ask: under reasonable complexity assumptions, given a specific problem $\mathcal{I}$ with  $1<g(\mathcal{I})<\infty$, and $x\in P(I)$ for some $I\in \mathcal{I}$, \textbf{can we write} $Cx$ as a convex combination of points in $\dom(S(I))$? We wish to find the smallest factor $C$ possible. 
 
-Carr and Vempala \cite{metarounding} showed if there an algorithm $\mathcal{A}$ that for $I\in \mathcal{I}$ and $c\geq 0$ finds $z\in S(I)$ with $cz\leq g'cx$ for any $x\in P(I)$, then $g'x$ can be \textbf{write} as a convex combination of points in $S(I)$. However, 
+To study integrality gaps, we wish to decompose a suitably scaled linear-programming solution into a convex combination of feasible integer solutions {\bf constructively}. That is, we ask: under reasonable complexity assumptions, given a specific problem $\mathcal{I}$ with  $1<g(\mathcal{I})<\infty$, and $x\in P(I)$ for some $I\in \mathcal{I}$, \textbf{can we write} $Cx$ as a convex combination of points in $\dom(S(I))$? We wish to find the smallest factor $C$ possible.
+
+Carr and Vempala \cite{metarounding} showed if there an algorithm $\mathcal{A}$ that for $I\in \mathcal{I}$ and $c\geq 0$ finds $z\in S(I)$ with $cz\leq g'cx$ for any $x\in P(I)$, then $g'x$ can be \textbf{write} as a convex combination of points in $S(I)$. However, for many known problems there is a gap between the best known $g'$ and $g(\mathcal{I})$. 
 
 \subsection{Algorithms and Theory Contributions} 
  
