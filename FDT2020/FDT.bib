@@ -39,7 +39,8 @@ series = {STOC '00}
 @misc{MIPLIB,
   title = {{MIPLIB} 2017 -- {T}he {M}ixed {I}nteger {P}rogramming {L}ibrary},
   howpublished = {\url{https://miplib.zib.de/}},
-  note = {Accessed: 2022-01-10}
+  note = {Accessed: 2022-01-10},
+  key = "MIPLIB"
 }
 
 @inbook{KKO,
@@ -351,13 +352,15 @@ author = "L.G. Khachiyan"
 
 
 
-@Inbook{wolsey,
+@Incollection{wolsey,
 	author="Wolsey, Laurence A.",
 	editor="Rayward-Smith, V. J.",
 	title="Heuristic analysis, linear programming and branch and bound",
 	bookTitle="Combinatorial Optimization II",
 	year="1980",
 	publisher="Springer Berlin Heidelberg",
+	series = "Mathematical Programming Studies",
+	volume = "13",
 	address="Berlin, Heidelberg",
 	pages="121--134",
 	abstract="We consider two questions arising in the analysis of heuristic algorithms.(i)Is there a general procedure involved when analysing a particular problem heuristic?(ii)How can heuristic procedures be incorporated into optimising algorithms such as branch and bound?",
@@ -365,6 +368,7 @@ author = "L.G. Khachiyan"
 	doi="10.1007/BFb0120913",
 	url="https://doi.org/10.1007/BFb0120913"
 }
+
 
 @book{vazirani,
 	author = {Vazirani, Vijay V.},
@@ -937,7 +941,7 @@ series = {SODA ’07}
 @inproceedings{TMATCHING,
 	title={Excluded t-Factors in Bipartite Graphs: A Unified Framework for Nonbipartite Matchings and Restricted 2-Matchings},
 	author={Kenjiro Takazawa},
-	booktitle={IPCO},
+	booktitle={Integer Programming and Combinatorial Optimization (IPCO)},
 	year={2017}
 }
 
@@ -955,10 +959,26 @@ series = {SODA ’07}
 
 
 
+@InProceedings{Edmonds2003,
+	author="Edmonds, Jack",
+	editor="J{\"u}nger, Michael
+	and Reinelt, Gerhard
+	and Rinaldi, Giovanni",
+	title="Submodular Functions, Matroids, and Certain Polyhedra",
+	bookTitle="Combinatorial Optimization --- Eureka, You Shrink! Lecture Notes in Computer Science, vol 2570",
+	year="2003",
+	publisher="Springer Berlin Heidelberg",
+	address="Berlin, Heidelberg",
+	pages="11--26",
+	abstract="The viewpoint of the subject of matroids, and related areas of lattice theory, has always been, in one way or another, abstraction of algebraic dependence or, equivalently, abstraction of the incidence relations in geometric representations of algebra. Often one of the main derived facts is that all bases have the same cardinality. (See Van der Waerden, Section 33.)",
+	isbn="978-3-540-36478-8",
+	doi="10.1007/3-540-36478-1_2",
+	url="https://doi.org/10.1007/3-540-36478-1_2"
+}
 
 
 
-@Inbook{Edmonds2003,
+@Inbook{Edmonds2003Prev,
 	author="Edmonds, Jack",
 	editor="J{\"u}nger, Michael
 	and Reinelt, Gerhard
@@ -1336,15 +1356,16 @@ series = {SODA ’07}
 @book{cons-cara,
 	author    = {Martin Gr{\"o}tschel and L{\'a}szl{\'o} Lov{\'a}sz and Alexander Schrijver},
 	title     = {Geometric Algorithms and Combinatorial Optimization},
-	edition   = {Second corrected edition},
+	edition   = {Second corrected},
 	volume    = {2},
 	isbn      = {3-540-56740-2, 0-387-56740-2 (U.S.)},
+	publisher = {Springer-Verlag},
 	year      = {1993},
 }
 @inproceedings{carrravi,
 	title={A New Bound for the 2-Edge Connected Subgraph Problem},
 	author={Robert Carr and R. Ravi},
-	booktitle={IPCO},
+	booktitle={Integer Programming and Combinatorial Optimization (IPCO)},
 	year={1998}
 }
 @article{boydcarr,
@@ -1485,7 +1506,7 @@ keywords = {Approximation algorithms, TSP (traveling salesman problem), linear p
 	year      = {2012}
 }
 @article{shmoyswilliamson,
-title = "Analyzing the {H}eld-{K}arp {TSP} bound: a monotonicity property with application",
+title = "Analyzing the {H}eld-{K}arp tsp bound: a monotonicity property with application",
 journal = "Information Processing Letters",
 volume = "35",
 number = "6",
