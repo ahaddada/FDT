@@ -16,7 +16,7 @@ In this paper we focus on finding feasible solutions to binary Integer Linear Pr
 It is  NP-hard even to determine if an IP instance has a feasible solution~\cite{GareyJohnson}. Given its practical importance, however, there are many commercial (e.g. CPLEX, GUROBI, XPRESS) and free (e.g. CBC) solvers that for specific IP instances can often find solutions that are optimal within a given tolerance. Still there are known moderate-sized IP instances that no commercial solver can currently solve \cite{MIPLIB}. Thus there is value in heuristics to find feasible solutions for general IP instances (see e.g.~\cite{HanafiT2017}).
 %For a generic IP instance $I$ it is NP-hard to even decide if the set of feasible solutions $S(I)$ is empty or not.
 %There are a number of heuristics for this purpose, such as the
-These heuristics, such as the popular Feasibility pump algorithm \cite{fp1,fp2}, are often effective and fast in practice. However, the heuristics can sometimes fail to find a feasible solution. Moreover, these heuristics do not provide any bounds on the quality of the solution they find. 
+These heuristics, such as the popular Feasibility pump algorithm \cite{fp1,fp2}, are often effective and fast in practice. However, these heuristics can sometimes fail to find a feasible solution. Moreover, these heuristics do not provide any bounds on the quality of the solution they find. 
 
 \iffalse
 However, there is substantial research into finding a feasible, provably-good approximate, and even (computationally) provably optimal solutions to specific IP instances. 
@@ -206,6 +206,8 @@ In Section~\ref{sec:domTOIP} we describe a subroutine of the FDT, called the Dom
 	\label{domtoIP}
 	Assume $g(I) < \infty$. The DomToIP algorithm finds $\hat{x}\in S(I)$ in polynomial time.
 \end{restatable}
+
+A keen reader might ask why Theorem \ref{domtoIP} does not imply that P = NP, as one iteratively find a feasible solution $x^*\in S(I)$, and add the constraint $x\leq cx^*-\epsilon$ for some small enough $\epsilon>0$ to $I$ until DomToIP fails to find a feasible solution. However, note that adding constraints to $I$ might result in $g(I)$ becoming infinite, in which case DomToIP would fail to find a feasible solution to the IP. 
 
 %\cindy{Arash, please check how I defined $L(I)$.  It was not defined before.}
 %\cindy{TODO: This implies we know $g(I)$, which is not true in general.  We should add how we bound/estimate it.  I'll return to this after putting that detail back in core if you (Arash) haven't added it by then.}
