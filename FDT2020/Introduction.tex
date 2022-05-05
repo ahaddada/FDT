@@ -116,7 +116,7 @@ The integrality gap $g(I)$ for instance $I$ is: $$g(I)= \sup_{c\geq 0}\frac{z_{I
 where $z_{IP}(I,c)$ is the optimal solution to the integer program and $z_{LP}(I,c)$ is the solution to the linear-programming relaxation.
 \end{definition}
 
-Consider an instance of a combinatorial optimization problem $\mathcal{P}$. We can characterize $\mathcal{P}$ by a set of feasible solutions in $S\in \mathbb{Z}_{\geq 0}^n$ and a cost function $c\in \mathbb{R}_{\geq 0}^n$. In many cases (see \cite{vazirani,shmoyswilliamson}) the set $S$ can described as a set of integer points within a polyhedron $P$ (in fact the choice of $P$ need not be unique.) In this case, the integrality gap of $\mathcal{P}$ with respect to $P$ is $\min\{cx:x\in S\}/{\min\{cx:x\in P\}}$. Hence $g(I)$ in Definition \ref{IGofPoly} is equivalent to the worst-case integrality gap of all instances of a problem with respect to $P(I)$. 
+Consider an instance of a combinatorial optimization problem $\mathcal{P}$. We can characterize $\mathcal{P}$ by a set of feasible solutions in $S\in \mathbb{Z}_{\geq 0}^n$ and a cost function $c\in \mathbb{R}_{\geq 0}^n$. In many cases (see \cite{vazirani,shmoyswilliamson}) the set $S$ is a set of integer points within a polyhedron $P$ (in fact the choice of $P$ need not be unique.) In this case, the integrality gap of problem $\mathcal{P}$ with respect to polyhedron $P$ is $\min\{cx:x\in S\}/{\min\{cx:x\in P\}}$. Hence $g(I)$ in Definition \ref{IGofPoly} is equivalent to the worst-case integrality gap of all instances of a problem with respect to $P(I)$. 
 
 The reason that we define integrality gap for a polyhedron as opposed to an instance of a problem is that our algorithms are independent of the cost function $c$. 
  
