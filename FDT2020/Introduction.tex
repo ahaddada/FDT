@@ -130,7 +130,7 @@ For example consider the minimum cost \textsc{2-edge-connected multi-subgraph pr
  \begin{equation}\min \{cx: \sum_{e\in \delta(U)}x_e \geq 2 \mbox{ for } \emptyset \subsetneq U \subsetneq V,\; x\in \{0,1,2\}^{E}\}, 
  \label{eq:subtour}
  \end{equation}
-where $\delta(U)$ for vertex subset $U$ is the set of edges that cross the cut defined by $U$.  That is, each $e \in \delta(U)$ has one endpoint in $U$ and the other endpoint in $V-U$. We denote the linear relaxation of this IP as $\subtour(G)$. Notice that in this case, $G$ defines the polyhedron, while the pair of $G$ and $c$ defines the instance of 2EC. Let $I_G$ be the polyhedron instance defined by $\subtour(G)$. Then $g(I_G)$ is the worst-case integrality gap 2EC on $G$ over all non-negative cost functions and integrality gap of 2EC is $\sup_{G} g(I_G)$. 
+where $\delta(U)$ for vertex subset $U$ is the set of edges that cross the cut defined by $U$.  That is, each $e \in \delta(U)$ has one endpoint in $U$ and the other endpoint in $V-U$. We denote the linear relaxation of this IP as $\subtour(G)$. Notice that in this case, $G$ defines the polyhedron, while the pair of $G$ and $c$ defines the instance of 2EC. Let $I_G$ be the polyhedron instance defined by $\subtour(G)$. Then $g(I_G)$ is the worst-case integrality gap of 2EC on $G$ over all non-negative cost functions and the integrality gap of 2EC is $\sup_{G} g(I_G)$. 
 
 
 % In this case the instance-specific integrality gap is the integrality gap of the subtour-elimination relaxation for the 2EC on a graph with $n$ vertices. Alexander et al. \cite{alexander2006integrality} showed this instance-specific integrality gap
@@ -149,7 +149,7 @@ Our methods apply theory connecting integrality gaps to sets of feasible solutio
 
 %\arash{not exactly: Carr-Vempala don't give a construction. The proposition below is a result of constructive version of Carathedory's theorem which I think is implied by the Ellipsoid algorithm, but there are even faster versions of it. In some way the difference between prop 1 and theorem 2 is our initial motivation for thinking of polynomial construction.}
 
-Formally, for some positive integer $k$, given a set of points $S\subseteq \mathbb{R}^k$ and a vector $x\in \mathbb{R}^k$, we say \textit{$x$ \underline{is} as a convex combination of points in $S$} if there exists a positive integer $\ell$ and $\theta \in [0,1]^\ell$, where $\sum_{i=1}^{\ell}\theta_i =1$ and $\tilde{x}^i\in S$ for $i\in [k]$ such that $\sum_{i=1}^{k}\theta_i \tilde{x}^i\leq x$. If such a convex combination can be found in time polynomial in the encoding size of the definition of $S$ and $x$, then we say  \textit{$x$ \underline{can be written} as a convex combination of points in $S$}
+Formally, for some positive integer $k$, given a set of points $S\subseteq \mathbb{R}^k$ and a vector $x\in \mathbb{R}^k$, we say \textit{$x$ \underline{is/dominates} a convex combination of points in $S$} if there exists a positive integer $\ell$ and $\theta \in [0,1]^\ell$, where $\sum_{i=1}^{\ell}\theta_i =1$ and $\tilde{x}^i\in S$ for $i\in [\ell]$ such that $\sum_{i=1}^{\ell}\theta_i \tilde{x}^i\leq x$. If such a convex combination can be found in time polynomial in the encoding size of the definition of $S$ and $x$, then we say  \textit{$x$ \underline{can be written} as a convex combination of points in $S$}
 
 \begin{proposition}\label{cara}
 	We have $g(I)=1$ if and only if $x\in P(I)$ can be written as a convex combination of points in $S(I)$.
@@ -158,9 +158,9 @@ Formally, for some positive integer $k$, given a set of points $S\subseteq \math
 For the case when $g(I)>1$ a similar statement is as follows. The {\em dominant} of $P(I)$, which we denote by $\dom(P(I))$, is the set of points $x'$ such that there exists a point $x\in P$ with $x'\geq x$ in every component. A polyhedron is of \textit{a blocking type} if it is equal to its dominant.
 
 \begin{thm}[Carr, Vempala \cite{Carr2004}] \label{CV2}
-	We have $g(I) \leq C$ if and only if for $x\in P(I)$ the vector $Cx$ can be expressed as a convex combination of points in $\dom(S(I))$. 
+	We have $g(I) \leq C$ if and only if for $x\in P(I)$ the vector $Cx$ dominates a convex combination of points in $\dom(S(I))$. 
 \end{thm}
-Goemans \cite{goemansblocking} first introduced Theorem \ref{CV2} for blocking-type polyhedra. While there is an exact algorithm for problems with gap $1$, as stated in Proposition~\ref{cara}, Theorem~\ref{CV2} is existential, with no construction. Proposition~\label{cara} would not work if we drop the non-negativity constraints on the cost function $c$ in the definition of integrality gap (Definition~\ref{IGofPoly}).
+Goemans \cite{goemansblocking} first introduced Theorem \ref{CV2} for blocking-type polyhedra. While there is an exact algorithm for problems with gap $1$, as stated in Theorem~\ref{CV2} is existential, with no construction. Proposition~\label{cara} would not work if we drop the non-negativity constraints on the cost function $c$ in the definition of integrality gap (Definition~\ref{IGofPoly}).
 %In contrast to Proposition \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time.
 %This points to an interesting open question. 
 % We show later, for $I$ with $g(I)<\infty$, the notation of dominant is in fact useful.
@@ -196,13 +196,13 @@ Consider the set of points described by sets $S(I)$ and $P(I)$ as in (\ref{S}) a
 For a vector $x\in \mathbb{R}_{\geq 0}^n$ such that $x\in P(I)$, let the {\em support} of $x$ be $\spp(x)= \{i \in [n]: x_i \neq 0\}$. For an integer $\beta$ let $\{\beta\}^n$ be the vector $y\in \mathbb{R}^n$ with $y_i=\beta$ for $i\in [n]$.
 
 
-In Section~\ref{sec:binaryfdt} we introduce the \textit{Fractional Decomposition Tree} (FDT) which is polynomial time algorithm. Given a point $x\in P(I)$ FDT produces a convex combination of feasible points in $S(I)$ that are dominated coordinatewise by a ``factor" $C$ times $x$.
+In Section~\ref{sec:binaryfdt} we introduce the \textit{Fractional Decomposition Tree} (FDT) which is a polynomial time algorithm. Given a point $x\in P(I)$ FDT produces a convex combination of feasible points in $S(I)$ that are dominated coordinatewise by a ``factor" $C$ times $x$.
 % in the coordinates corresponding to $x$.
 If $C = g(I)$, FDT would have been optimal. However we can only guarantee $C\leq g(I)^{|\spp(x)|}$. FDT iteratively solves linear programs that are about the same size as the description of $P(I)$.
 
 \begin{restatable}{thm}{binaryFDT}
 	\label{binaryFDT}
-	Assume $g(I) 	<\infty$. For $x^*\in P(I)$, using 	the Fractional Decomposition Tree (FDT) algorithm we can write $x$ as a convex combination of points in $S(I)$, where $C\leq g(I)^{|\spp(x^*)|}$.
+	Assume $g(I) 	<\infty$. For $x^*\in P(I)$, using 	the Fractional Decomposition Tree (FDT) algorithm we can write $Cx^*$ as a convex combination of points in $S(I)$, where $C\leq g(I)^{|\spp(x^*)|}$.
 \end{restatable}
 
 In Section~\ref{sec:domTOIP} we describe a subroutine of the FDT, called the DomToIP algorithm, which finds feasible solutions to any IP with finite gap. This can be of independent interest, especially in proving that a model has unbounded gap.
@@ -211,20 +211,20 @@ In Section~\ref{sec:domTOIP} we describe a subroutine of the FDT, called the Dom
 	Assume $g(I) < \infty$. The DomToIP algorithm finds $\hat{x}\in S(I)$ in polynomial time.
 \end{restatable}
 
-A keen reader might ask why Theorem \ref{domtoIP} does not imply that P = NP, as one iteratively find a feasible solution $x^*\in S(I)$, and add the constraint $x\leq cx^*-\epsilon$ for some small enough $\epsilon>0$ to $I$ until DomToIP fails to find a feasible solution. However, note that adding constraints to $I$ might result in $g(I)$ becoming infinite, in which case DomToIP would fail to find a feasible solution to the IP. 
+A keen reader might ask why Theorem \ref{domtoIP} does not imply that P = NP, as one iteratively find a feasible solution $x^*\in S(I)$, and add the constraint $cx\leq cx^*-\epsilon$ for some small enough $\epsilon>0$ to $I$ until DomToIP fails to find a feasible solution. However, note that adding constraints to $I$ might result in $g(I)$ becoming infinite, in which case DomToIP would fail to find a feasible solution to the IP. 
 
 
 %\cindy{Arash, please check how I defined $L(I)$.  It was not defined before.}
 %\cindy{TODO: This implies we know $g(I)$, which is not true in general.  We should add how we bound/estimate it.  I'll return to this after putting that detail back in core if you (Arash) haven't added it by then.}
 %\arash{Isn't $P(I)$ the feasible region defined above. I keep $L(I)$ for now but we can replace it later if needed.} \arash{I fixed below so that I don't imply we know $g(I)$, we also might to clearly state that somewhere?}
 
-Here is how the FDT algorithm works at a high level for an instance $I$ with LP feasible region $P(I)$: in iteration $i-1$ the algorithm computes a convex combination of vectors in $\mathcal{D}(P(I))$ that have a 0 or 1 value for coordinates indexed $1,\ldots,i-1$. Let $y$ be a vector in this convex combination from iteration $i-1$. In iteration $i$, we solve a linear-programming problem that gives us $\gamma_0,\gamma_1\in [0,1]$ and $y^0,y^1\in \mathcal{D}(P(I))$ such that $y\geq \gamma_0 y^0 + \gamma_1 y^1$, $\gamma_0+\\gamma_1\leq g(I)$, $y^0_i=0$ and $y^1_i=1$. We then replace $y$ in the convex combination with $\frac{\gamma_0}{\gamma_0+\gamma_1}y^0 +\frac{\gamma_1}{\gamma_0+\gamma_1}y^1$.  Repeating this for every vector in the convex combination from the previous iteration yields a new convex combination of points in $\dom(P(I))$. It is ``more'' integral because now all vectors in the convex combination are integral in their first $i$ coordinates. If in any iteration there are too many points in the convex combination,  we solve a linear-programming problem that ``prunes'' the convex combination. At the end we have a convex combination of integer solutions $\mathcal{D}(P(I))$. For each such solution $z$ we invoke the DomToIP algorithm
+Here is how the FDT algorithm works at a high level for an instance $I$ with LP feasible region $P(I)$: in iteration $i-1$ the algorithm computes a convex combination of vectors in $\mathcal{D}(P(I))$ that have a 0 or 1 value for coordinates indexed $1,\ldots,i-1$. Let $y$ be a vector in this convex combination from iteration $i-1$. In iteration $i$, we solve a linear-programming problem that gives us $\gamma_0,\gamma_1\in [0,1]$ and $y^0,y^1\in \mathcal{D}(P(I))$ such that $y\geq \gamma_0 y^0 + \gamma_1 y^1$, $\gamma_0+\gamma_1\leq g(I)$, $y^0_i=0$ and $y^1_i=1$. We then replace $y$ in the convex combination with $\frac{\gamma_0}{\gamma_0+\gamma_1}y^0 +\frac{\gamma_1}{\gamma_0+\gamma_1}y^1$.  Repeating this for every vector in the convex combination from the previous iteration yields a new convex combination of points in $\dom(P(I))$. It is ``more'' integral because now all vectors in the convex combination are integral in their first $i$ coordinates. If in any iteration there are too many points in the convex combination,  we solve a linear-programming problem that ``prunes'' the convex combination. At the end we have a convex combination of integer solutions $\mathcal{D}(P(I))$. For each such solution $z$ we invoke the DomToIP algorithm
 % CAP: forward pointer earlier now
 % (see Section~\ref{sec:domTOIP})
 to find $z'\in S(I)$ where $z'\leq z$.
 
 
-One can extend the FDT algorithm for binary IPs into covering\footnote{A covering IP has nonnegative constraint matrix, objective coefficients and right-hand side ($A,b,c$).} $\{0,1,2\}$ IPs by losing a factor $2$ on top of the loss for FDT. To eradicate this extra factor, we must treat the coordinate $i$ with $x_i=1$ differently. In Section~\ref{sec:2EC} we focus on the 2-edge-connected multi-subgraph graph problem (2EC) defined above.  Its subtour-elimination LP relaxation is given in (\ref{eq:subtour}).
+One can extend the FDT algorithm for binary IPs into covering\footnote{A covering IP has nonnegative constraint matrix, right-hand side and objective coefficients ($A,b,c$).} $\{0,1,2\}$ IPs by losing a factor $2$ on top of the loss for FDT. To eradicate this extra factor, we must treat the coordinate $i$ with $x_i=1$ differently. In Section~\ref{sec:2EC} we focus on the 2-edge-connected multi-subgraph graph problem (2EC) defined above.  Its subtour-elimination LP relaxation is given in (\ref{eq:subtour}).
 %}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^{E}_{\geq 0}$ find a 2-edge-connected multi-subgraph of $G$ with minimum cost. The natural linear programming relaxation for this problem is 
 %\begin{equation}
 %\min \{cx \; : \; x(\delta(U))\geq 2 \; \text{ for }\emptyset \subset U \subset V, \; x\in [0,2]^E\}
@@ -333,11 +333,11 @@ In summary, this papers's contributions are:
 \begin{itemize}
 \item We give an algorithm to express any feasible point for the LP relaxation of a binary IP
 %(or a \{0,1,2\} IP) 
-as a convex combination of feasible solutions, provided the IP integrality gap is bounded.  This is the Fractional Decomposition Tree (FDT) algorithm.
+as a convex combination of feasible solutions, provided the IP integrality gap is bounded, when scaled by a factor depending on the integrality gap of the IP formulation.  This is the Fractional Decomposition Tree (FDT) algorithm.
 \item We give a simple  algorithm to give a feasible solution for any binary IP with bounded integrality gap. If this algorithm fails, then the integrality gap is infinite.
 \item We experimentally show that FDT can give good approximate solutions to small instances of vertex-cover and tree augmentation problems.
 \item We show that the integrality gap for 2EC (minimum 2-edge-connected sub-multigraph) is at most $\frac{6}{5}$ for Carr-Vempala points with at most $12$ vertices on the cycle formed by the fractional edges, matching the lower bound for integrality gap for 2EC for these instances.
-\item We demonstrate (with 2EC) how FDT exeriments can support theoretical work on integrality gaps for specific problems. In particular, we computationally prove an upper bound on small instances of 2EC with a specific structure.
+\item We demonstrate (with 2EC) how FDT experiments can support theoretical work on integrality gaps for specific problems. In particular, we computationally prove an upper bound on small instances of 2EC with a specific structure.
 \item We demonstrate (with VC) how FDT can be used to find feasible solutions of improved quality compared to those from the feasiblity pump \cite{fp1}.
 \end{itemize}
 

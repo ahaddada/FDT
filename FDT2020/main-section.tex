@@ -6,11 +6,11 @@
 \section{Finding a Feasible Solution}\label{sec:domTOIP}
 In this section we give the algorithm for DomToIP and prove its performance (Theorem~\ref{domtoIP}).
 
-Consider an IP instance $I=(A,b)$. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I)\subseteq \{0,1\}^n$ and $P(I)\subseteq [0,1]^n$. For simplicity in the notation we assume an instance $I$ and denote $P(I),S(I),$ and $g(I)$ by $P$, $S$, and $g$ for this section and the next section. Also, for both sections let $x^*$ be the optimal solution to the LP formulation and assume $t=|\spp(x^*)|$. Reorder variables as necessary to put all the nonzero variables into the first $t$ indices. So we can assume $x^*_i = 0$ for $i=t+1,\ldots,n$.
+Consider an IP instance $I=(A,b)$. Define sets $S(I)$ and $P(I)$ as in (\ref{S}) and (\ref{P}), respectively. Assume $S(I)\subseteq \{0,1\}^n$ and $P(I)\subseteq [0,1]^n$. For simplicity in the notation we assume an instance $I$ and denote $P(I),S(I),$ and $g(I)$ by $P$, $S$, and $g$ for this section and the next section. Also, for both sections let $x^*$ be the optimal solution to the LP relaxation and assume $t=|\spp(x^*)|$. Reorder variables as necessary to put all the nonzero variables into the first $t$ indices. So we can assume $x^*_i = 0$ for $i=t+1,\ldots,n$.
 
 Before diving into the main results, we state the following simple observation that we will use several times in the proofs of this section and the next section.
 \begin{observation}\label{dom01}
-Any point $x\in [0,1]^n$ that is a convex combination of points in $\dom(S)$, is also a convex combination of points in $\dom(S) \cap [0,1]^n$
+Any point $z\in [0,1]^n$ that is a convex combination of points in $\dom(S)$, is also a convex combination of points in $\dom(S) \cap [0,1]^n$
 \end{observation}
 \begin{proof}
 This is because if there exists ${z}^i\in \dom(S)$ and $\theta_i\geq 0$ for $i\in [k]$ such that $\sum_{i=1}^{k} \theta_i = 1$ and $\sum_{i=1}^{k}\theta_i {z}^i \leq gz$, then 
