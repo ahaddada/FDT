@@ -109,7 +109,7 @@ We begin with the following lemmas that show how the FDT algorithm branches on a
 
 
 \begin{proof}	
-	Consider the following linear program which we denote by $\LPC(\ell,x')$. The variables of $\LPC(\ell,x')$ are $\lambda_0$, $\lambda_1$, $x^0$ and $x^1$.
+	Consider the following linear program which we denote by $\LPC(\ell,x')$. The variables of $\LPC(\ell,x')$ are scalars $\lambda_0$, $\lambda_1$, and vectors $x^0$ and $x^1$.
 % \cindy{I think you mean that the $\lambda$s are variables, not $\gamma$s.  However the above lemma uses $\gamma$ and then there is a mix of $\lambda$ and $\gamma$ below the LP. Can you please check that you intend to have both types and they are used properly?}
 	\begin{align}
 	\LPC(\ell,x')\quad\quad& \max\quad \;\lambda_0+\lambda_1\\
@@ -155,7 +155,7 @@ We now show if $x'$ in the statement of Lemma \ref{LPClemma} is partially integr
 	
 	We now show that $\hat{x}^0$, $\hat{x}^1$, $\gamma_0$, and $\gamma_1$ satisfy all the conditions. Note that conditions (i), (ii), (iii), and (v) are satisfied directly from the  fact that $\bar{x}^0,\bar{x}^1,\gamma_0$ and $\gamma_1$ satisfy these conditions. Thus we only need to show (iv) holds. We need to show that $\gamma_0 \hat{x}^0_j+\gamma_1\hat{x}^1_j\leq x'_j$. If $j=\ell,\ldots,t$, the inequality is satisfied since $\hat{x}^i_j = \bar{x}^i_j$ for $i=0,1$ and property (iv) holds for $\bar{x}^0$ and $\bar{x}^1$. Hence, assume $j\leq \ell-1$. By the property of $x'$ we have $x'_j\in \{0,1\}$. If $x'_j= 0$, then by Constraint (\ref{packing}) we have $\bar{x}^0_j = \bar{x}^1_j=0$. Therefore, $\hat{x}^i_j=0$ for $i=0,1$, so (iv) holds. Otherwise if $x'_j = 1$, then we have
 	$\gamma_0\hat{x}^0_j+\gamma_1\hat{x}^1_j\leq \gamma_0+\gamma_1\leq 1\leq x'_j.$ 
-	Therefore (v) holds.
+	Therefore (iv) holds.
 \end{proof}
 
 \paragraph{Growing and Pruning the FDT tree.} The FDT algorithm maintains nodes $L_i$ in iteration $i$ of the algorithm with multiplier strictly larger than 0. The nodes in $L_i$ correspond to the nodes in level $i$ of the FDT tree. The leaves of the FDT tree, $L_t$, are points in $\dom(P)$ and are integral for all integer variables.
@@ -247,7 +247,7 @@ First, we need a branching lemma. Observe that  the following branching lemma is
 \end{restatable}
 
 \begin{proof}
-	Consider the following LP with variables $\lambda_j$ and $x^j$ for $j=0,1,2$. 
+	Consider the following LP with $\lambda_j$ and $x^j\in \mathbb{R}^E$ for $j=0,1,2$. 
 	\begin{align}
 	\quad\quad& \max\quad \;\sum_{j=0,1,2}\lambda_j\\
 	&\;\text{s.t.} \quad x^j(\delta(U))\geq 2\lambda_j \;& \mbox{ for $\emptyset \subset U \subset V$, and $j=0,1,2$} \label{feasibility2ec}\\
@@ -375,9 +375,9 @@ In fact, the integrality gap upper bound derived this way was equal to $\frac{3}
 %the upper bound we provided by our experiment is at $\frac{3}{2}$.
 For 480 instances, the integrality gap upper bound was $\frac{4}{3}$, for 16 instances it was $\frac{6}{5}$, for 2 instances it was $\frac{8}{7}$, for 1 instance it was $\frac{10}{9}$. 
 %\arash{it's all correct, I'm running the experiments again to get the running time so these numbers might change.}
-\paragraph{Computational comparison between Christofides' algorithm and FDT for 2EC on Carr-Vempala points.} 
+\paragraph{Computational comparison between BOMC and FDT for 2EC on Carr-Vempala points.} 
 
-As described in Section~\ref{sec:2EC-intro}, when the LP optimum for (\ref{eq:subtour}) is a Carr-Vempala point (see Figure~\ref{fig:CVpoint}), the integrality gap of that instance is equal to that of 2EC. So in that sense, these are the hardest fractional points to round to a feasible solution. We now compare the quality of FDT's solution from a Carr-Vempala point to that of Christofides, the best known approximation algorithm\footnote{Recently, \cite{KKO} improved over Christofides algorithm by a small factor.}. Let us remind our reader the Christofides algorithm for TSP: given a graph with edge costs find a minimum spanning tree of the graph.  
+As described in Section~\ref{sec:2EC-intro}, when the LP optimum for (\ref{eq:subtour}) is a Carr-Vempala point (see Figure~\ref{fig:CVpoint}), the integrality gap of that instance is equal to that of 2EC. So in that sense, these are the hardest fractional points to round to a feasible solution. We now compare the quality of FDT's solution from a Carr-Vempala point to BOMC. BOMC (and simply Christofides) provide the best known upper bound on $g(\2ec)$\footnote{Recently, \cite{KKO} improved over Christofides algorithm by a small factor.}. Let us remind our reader the Christofides algorithm for TSP: given a graph with edge costs find a minimum spanning tree of the graph.  
 %Then, since TSP runs on a complete graph, add a perfect matching on the vertices that have odd degree in the spanning tree to make the (multi)-subgraph 2-edge-connected. If we stop that algorithm without shortcutting, we have a feasible solution for Metric-2EC (given a complete graph, find the minimum-cost 2-edge-connected subgraph, with no multiedges).\arash{The following sentence is not accurate, Metric-TSP is the same as TSP on a non-complete graph where we can take multiple copies of the edges, Metric-2EC (given complete graph with metric costs find the minimum cost 2-edge-connected SUBgraph -no doubling of edges-) is the same as 2EC on a non-complete graph where we can take multiple copies of edges.}\cindy{It sounded like 2EC doesn't assume a complete graph.  But I removed the sentence.  Is the following OK?}\arash{Still not quite accurate. The sentence gives the impression that changing matching with $T$-join is the difference between TSP and 2EC, but its the difference between working with complete graph with metric costs and a non-complete graph where doubling edges is allowed.} 
 Next, we add an $O$-join, where $O$ is the set of odd-degree vertices in the spanning tree~\footnote{For graph $G=(V,E)$ and $O\subseteq V$ with $|O|$ even, an $O$-join of $G$ is a subgraph of $G$ that has odd degree on the vertices in $O$ and even degree on vertices in $V\setminus O$. Graphs always have an even number of odd vertices since every edge has two endpoints, giving an even number of endpoints.}. Note that the solutions to the TSP are also 2-edge-connected, which means that Christofides algorithm also provides solutions to the 2EC.
 The best-of-many Christofides (BOMC) algorithm~\cite{AKS15} works better than the classic Christofides algorithm in practice~\cite{GW17}.  The BOMC algorithm samples many spanning trees from the LP relaxation (with edges chosen proportionally to the LP value), augments each spanning tree with minimum cost join on the odd degree vertices of the spanning tree, and takes the best solution.

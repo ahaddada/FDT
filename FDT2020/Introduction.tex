@@ -27,7 +27,7 @@ A major tool for finding feasible solutions for discrete optimization problems e
 
 Many combinatorial optimization problems can be formulated as IPs. An {\em LP-based approximation algorithm} uses the LP relaxations to the IP formulation to find provably good approximate feasible integer solutions in polynomial time. At the highest level, this involves solving the LP relaxation, using special  problem structure to find a feasible integer solution, and proving that the objective value of the solution is no more than $C$ times worse than the bound from the LP relaxation. The approximation factor $C$ can be a constant or depend on the input parameters of the IP, e.g. $O(\log(n))$ where $n$ is the number of variables in the formulation of the IP (the dimension of the problem).
 
-There is an inherent limit to how small $C$ can be for a given IP. The integrality gap for an IP instance is the ratio of the best integer solution to the best solution of the LP relaxation. Any LP-based approximation cannot have an approximation factor $C$ smaller than the integrality gap because there is no feasible solution with an objective value better than a factor of $C$ worse than the optimal solution of the LP relaxation. 
+There is an inherent limit to how small $C$ can be for a given IP. The integrality gap for an IP instance is the ratio of the best integer solution to the best solution of the LP relaxation. No LP-based approximation algorithm can have an approximation factor $C$ smaller than the integrality gap because there is not always a feasible solution to the IP with an objective value better than a factor of $C$ times the optimal solution of the LP relaxation.
 
 If the integrality gap for an IP formulation is large, it is sometimes possible to add families of constraints to the formulation to reduce the integrality gap.  These constraints are redundant for the integer problem, but can make some fractional solutions no longer feasible for the LP. These families of constraints (cuts) can have exponential size (number of constraints) as long as we can provide a polynomial-time separation algorithm. A separation algorithm for a family of constraints takes an optimal solution to an LP instance that explicitly enforces only a (potentially empty) subset of the family. It either confirms that all constraints are satisfied or returns a violated constraint. Thus one can add this constraint and repeat at most a polynomial number of times until all are satisfied.
 
@@ -116,7 +116,7 @@ The integrality gap $g(I)$ for instance $I$ is: $$g(I)= \sup_{c\geq 0}\frac{z_{I
 where $z_{IP}(I,c)$ is the optimal solution to the integer program and $z_{LP}(I,c)$ is the solution to the linear-programming relaxation.
 \end{definition}
 
-Consider an instance of a combinatorial optimization problem $\mathcal{P}$. We can characetrize $\mathcal{P}$ by a set of feasible solutions in $S\in \mathbb{Z}_{\geq 0}^n$ and a cost function $c\in \mathbb{R}_{\geq 0}^n$. In many cases (see \cite{vazirani,shmoyswilliamson}) the set $S$ can decribed as a set of integer points within a polyhedron $P$ (in fact the choice of $P$ need not be unique.) In this case, the integrality gap of $\mathcal{P}$ with respect to $P$ is $\min\{cx:x\in S\}/{\min\{cx:x\in P\}}$. Hence $g(I)$ in Defintion \ref{IGofPoly} is equivalent to the worst-case integrality gap of all instances of a problem with respect to $P(I)$. 
+Consider an instance of a combinatorial optimization problem $\mathcal{P}$. We can characterize $\mathcal{P}$ by a set of feasible solutions in $S\in \mathbb{Z}_{\geq 0}^n$ and a cost function $c\in \mathbb{R}_{\geq 0}^n$. In many cases (see \cite{vazirani,shmoyswilliamson}) the set $S$ can described as a set of integer points within a polyhedron $P$ (in fact the choice of $P$ need not be unique.) In this case, the integrality gap of $\mathcal{P}$ with respect to $P$ is $\min\{cx:x\in S\}/{\min\{cx:x\in P\}}$. Hence $g(I)$ in Definition \ref{IGofPoly} is equivalent to the worst-case integrality gap of all instances of a problem with respect to $P(I)$. 
 
 The reason that we define integrality gap for a polyhedron as opposed to an instance of a problem is that our algorithms are independent of the cost function $c$. 
  
@@ -184,6 +184,10 @@ To study integrality gaps, we wish to decompose a suitably scaled linear-program
 
 Carr and Vempala \cite{metarounding} showed if there an algorithm $\mathcal{A}$ that for $I\in \mathcal{I}$ and $c\geq 0$ finds $z\in S(I)$ with $cz\leq g'cx$ for any $x\in P(I)$, then $g'x$ can be \textbf{write} as a convex combination of points in $S(I)$. However, for many known problems there is a gap between the best known $g'$ and $g(\mathcal{I})$. 
 
+Relatedly, Eisenbrand and Shmonin \cite{eisenbrand} introduced an algorithm that finds the maximum gap between the optimal values of an IP and its LP relaxation over all realizations of vector $b$ (for which the IP is feasible). Their algorithm runs in polynomial-time given $n$ is fixed. In contrast, FDT always runs in time polynomial in $n$, but obtains an upper bound on the integrality gap as opposed to an exact value.
+
+
+
 \subsection{Algorithms and Theory Contributions} 
  
 We give a general approximation framework for solving binary IPs.
@@ -209,6 +213,7 @@ In Section~\ref{sec:domTOIP} we describe a subroutine of the FDT, called the Dom
 
 A keen reader might ask why Theorem \ref{domtoIP} does not imply that P = NP, as one iteratively find a feasible solution $x^*\in S(I)$, and add the constraint $x\leq cx^*-\epsilon$ for some small enough $\epsilon>0$ to $I$ until DomToIP fails to find a feasible solution. However, note that adding constraints to $I$ might result in $g(I)$ becoming infinite, in which case DomToIP would fail to find a feasible solution to the IP. 
 
+
 %\cindy{Arash, please check how I defined $L(I)$.  It was not defined before.}
 %\cindy{TODO: This implies we know $g(I)$, which is not true in general.  We should add how we bound/estimate it.  I'll return to this after putting that detail back in core if you (Arash) haven't added it by then.}
 %\arash{Isn't $P(I)$ the feasible region defined above. I keep $L(I)$ for now but we can replace it later if needed.} \arash{I fixed below so that I don't imply we know $g(I)$, we also might to clearly state that somewhere?}
@@ -219,7 +224,7 @@ Here is how the FDT algorithm works at a high level for an instance $I$ with LP 
 to find $z'\in S(I)$ where $z'\leq z$.
 
 
-One can extend the FDT algorithm for binary IPs into covering\footnote{A covering IP has nonnegative constraint matrix, objective coefficients and right-hand side ($A,b,c$).} $\{0,1,2\}$ IPs by losing a factor $2^{|\spp(x)|}$ on top of the loss for FDT. To eradicate this extra factor, we must treat the coordinate $i$ with $x_i=1$ differently. In Section~\ref{sec:2EC} we focus on the 2-edge-connected multi-subgraph graph problem (2EC) defined above.  Its subtour-elimination LP relaxation is given in (\ref{eq:subtour}).
+One can extend the FDT algorithm for binary IPs into covering\footnote{A covering IP has nonnegative constraint matrix, objective coefficients and right-hand side ($A,b,c$).} $\{0,1,2\}$ IPs by losing a factor $2$ on top of the loss for FDT. To eradicate this extra factor, we must treat the coordinate $i$ with $x_i=1$ differently. In Section~\ref{sec:2EC} we focus on the 2-edge-connected multi-subgraph graph problem (2EC) defined above.  Its subtour-elimination LP relaxation is given in (\ref{eq:subtour}).
 %}: Given a graph $G=(V,E)$ and $c\in \mathbb{R}^{E}_{\geq 0}$ find a 2-edge-connected multi-subgraph of $G$ with minimum cost. The natural linear programming relaxation for this problem is 
 %\begin{equation}
 %\min \{cx \; : \; x(\delta(U))\geq 2 \; \text{ for }\emptyset \subset U \subset V, \; x\in [0,2]^E\}
