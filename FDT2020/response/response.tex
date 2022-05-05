@@ -1,4 +1,5 @@
 \documentclass[11pt,epsf]{article}
+
 %\documentstyle[12pt,psfig,draft]{article}
 %% These ``comments'' only appear with [draft] option
 \long\def\comment#1{\ifdim\overfullrule>0pt{\sf[{#1}]}\fi}
@@ -123,28 +124,40 @@ lor=black,pdfstartview=FitH]{hyperref}
 
 
 \section{General Response}
-\response{We thank the editor and reviewers for their insighful and constructive comments. 
-}
+\response{We thank the editor and reviewers for their insightful and constructive comments. }
 
+
+\arash{TODO: Thank the reviewers at length. Apologies for the delay in submission for the revisions, thanks the editor for the extensions.}
 \section{Detailed Responses}
 
 
-\subsection{Reviewer \#1}
+\subsection{Reviewer 1}
+\subsubsection{Major Comments}
+\response{We have addressed the issue in the proof of Theorem 3 as detailed below. We also made several major revision in our presentation specially with regards to the more technical parts of the paper.}
+\subsubsection{Minor Comments}
 \begin{itemize}
 \item Introduction: Introduction jumps between describing methods and problems the methods are applied to. The there is a subsection 1.2 Experiments with more problem descriptions. Please restructure the introduction so
 that the flow is more logical.
+\response{We agree that the introduction is a little bit lengthy and not direct. However, we wanted to make sure that the reader is familiar with our terminology before diving into the results presentation.
+
+That being said, we have made some changes in the introduction. We hope the new state of the introduction is satisfactory.}
+
 
 \item p. 2, last paragraph: “Integrality gap” is defined with respect to an IP instance, instead of a family of IP instances (IP formulation) for a problem. This makes the paragraph rather awkward to read, because the statements are not correct as stated.
+\response{We made various changes starting from the paragraph before Definition 1 and the discussion that follows, drawing the comparison between different objects that a gap can be defined on and where Definition 1 stands. Our definition is integrality gap of a polyhedron.}
 
 \item p. 3, below equation (1): Why is $A$ defined as a matrix of rational numbers but $b$ a vector or real numbers?
 
 \response{Fixed. Both $A$ and $b$ are comprised of rational numbers.}
 \item p. 3: Is there a reason why you choose to not include the coefficients of the objective function in an instance?
-\response{Not final! We choose this definition because it allows us to talk about instance specific integrality gaps (or integrality gap in the special cases).}
+\response{Added this sentence: The reason that we define integrality gap for a polyhedron as opposed to an instance of a problem is that our algorithms are independent of the cost function $c$. }
 
 \item p. 4, Definition 1: Now the integrality gap is defined with respect to a matrix $A$ and vector $b$, taking the supremum (not maximum, please correct) over all coefficients $c$, that are nonnegative. This is inconsistent
 with the previous statement, and also nonstandard as far as I know. Please add some remarks for the reader about this choice. Also, the importance of considering $c \geq 0$ only should be emphasized more in the text (it is of
 vital importance when using Carr-Vempala).
+
+\response{As stated above, the discussion following Definition 1. We added a remark that $c$ need to be non-negative for Carr-Vempala to works.} 
+
 \item p. 4, equation (4): supremum instead of maximum
 \response{Fixed.}
 \item p. 5, Proposition 2: Please specify where this is stated in [GLS93].
@@ -184,6 +197,7 @@ $IP^{(\ell)}\neq \emptyset$?
 \item p. 13, top of page: Same problem.
 \response{Fixed with referencing the Observation above.}
 \item p. 24 and following, references: missing capitalization in a few entries
+\response{We fixed many instances of missing capitalization.}
 
 \end{itemize}
 
@@ -196,15 +210,20 @@ The computational results seem quite weak to me. The classic Feasibility Pump he
 quickly. On TAP and 2EC, the authors compare to problem-specific approximation algorithms that are not particularly designed to produce high quality solutions either.
 \response{Our comparison of FDT to feasibility pump is to main showcase a use case of the algorithm and a direction that could be possibly explored. We are not offering FDT as a replacement for FP. We will add remarks that make this clear to the reader.
 
-We respectfully disagree about the comment for 2EC since we use BOMC and turn it into an instance specific rounding algorithm for subtour elimination points. As presented in Figure 3, we don't settle for the worst-case upper bound of 3/2. Similarly, for TAP, FJ81 is the only rounding algorithm known for the solution of the CUT-LP. Again, we don't use the worst-case upper bound of 2 and use the instance specific gap provided by the algorithm. Also we remark that FDT is a generic algorithm that applies to any type of IP formulation, while BOMC and FJ81 only work for a certain type of formulation.}
+With respect to Christofides, we mistakenly mentioned comparing FDT with Christofides but we in fact compare FDT with BOMC (Best of Many Christofides) - this has been fixed in the abstract and the paper. As presented in Figure 3, we don't settle for the worst-case upper bound of 3/2. Similarly, for TAP, FJ81 is the only rounding algorithm known for the solution of the CUT-LP. Again, we don't use the worst-case upper bound of 2 and use the instance specific gap provided by the algorithm. Also we remark that FDT is a generic algorithm that applies to any type of IP formulation, while BOMC and FJ81 only work for a certain type of formulation.}
 
 \begin{enumerate}
 
-\item The abstract is misleading in multiple ways. First, it says that the paper will give a constructive version of the Carr-Vempala theorem but does not mention the rather large loss in quality of g to (potentially) g n . Secondly,
+\item The abstract is misleading in multiple ways. First, it says that the paper will give a constructive version of the Carr-Vempala theorem but does not mention the rather large loss in quality of $g$ to (potentially) $g^n$ . Secondly,
 it says that “[Dom2IP] more quickly determines if an instance has an unbounded integrality gap” but really this algorithm will only sometimes provide proof that the integrality gap is unbounded; it is not guaranteed
 to certify this. Lastly, it is claimed that Christofides’ algorithm is the “best previous approximation algorithm”. But Christofides is only best wrt. its theoretical approximation guarantee not its practical performance
 which is what is compared in the paper. 
+
+
+\response{We made several fixed in the abstract that addressed all the points mentioned above.}
 \item The paper should mention the randomized metarounding algorithm by Carr and Vempala and compare it to the FDT algorithm. 
+\response{Added this paragraph right before section 1.1: 
+Carr and Vempala [CV00] showed if there an algorithm $\mathcal{A}$ that for $I\in \mathcal{I}$ and $c\geq 0$ finds $z\in S(I)$ with $cz\leq g'cx$ for any $x\in P(I)$, then $g'x$ can be \textbf{write} as a convex combination of points in $S(I)$. However, for many known problems there is a gap between the best known $g'$ and $g(\mathcal{I})$. }
 \item In the proofs of Lemma 8 and Lemma 11, I do not see why it can be assumed that $\lambda_0,\lambda_1,\lambda_2>0$. I think one has to allow the case in which
 the branching step returns just 1 or (in the case of 2EC) just 2 vectors.
 \response{Yes. We corrected this in the statement of Lemma 9, 10, 12. Also in the description of the Algorithm 2.}
@@ -212,6 +231,8 @@ the branching step returns just 1 or (in the case of 2EC) just 2 vectors.
 and the 2-approximation for TAP rather dubious. To show that the FDT
 algorithm performs much better than the theoretical $g^{|supp(x)|}$ bound, just comparing to the initial fractional solution is all that is needed. On the other hand, if the goal is to show that the FDT algorithm works well as a
 general purpose feasibility heuristic, then comparing to a FDT to a more modern variant of FP (e.g. as in the Feasibility Pump 2.0 paper) would be more reasonable.
+
+\response{The comparisons with FP are not presented to claim that FDT to provide direct comparisons between the two algorithms, but to provide a baseline on the IG upper bounds provided by another LP-based algorithm. We want to emphasize that the scope of this work in mostly on the theoretical contributions, rather than experimental results.}
 
 \end{enumerate}
 
@@ -251,7 +272,40 @@ in the leaves” should be just “leaves.” \response{Fixed.}
 \subsection{Reviewer \#3}
 
 \subsubsection{Main Comments}
+\begin{itemize}
+\item
+Is your definition of integrality gap used elsewhere? If not, try to use a different word - maybe something like “objective-oblivious integrality gap”? The point is to make it clear that yes, this is something like integrality gap, but it does NOT match anything the reader has seen before.
+\response{We agree that using a different term will provide much better clarity for future readers.  We now call our version the ``integrality gap of a polyhedron'' (IGP)} \cindy{TODO: update this if we change it.}
 
+\arash{I actually don't agree with the reviewer here. They are saying that in their opinion for integrality gap you keep $c$ constant and take $\max$ over instances. This does not make sense to me. Because $c$ itself is dependent on the instance. }
+
+\arash{Let's look at Definition 5.13 in SW book: The integrality gap of an integer program is the worst-case ratio over all instances of the problem of value of an optimal solution to the integer programming formulation to value of an optimal solution to its linear programming relaxation. So this is $\max_c \frac{cx:Ax\leq b, x\in \mathbb{Z}^n}{cx:Ax\leq b, x\in \mathbb{R}^n}$, which is inline with Definition 1.}
+\cindy{Does the SW book actually give that math-based definition, where the max is only over c?  I don't have a copy and I don't see a SW book in our reference list right now. Or is that math your interpretation? As I said to Bob in a phone call, for a given combinatorial optimization problem, A,b, and c can change from instance to instance. For some problems, c is fixed (e.g. all 1).  But any problem that allows weighting of the combinatorial objects could have changes anywhere (perhaps we could add examples of that, because this reviewer is really concerned about this). If the SW book has this definition, then we should include a citation to that book when we define what we mean by integrality gap. We should probably also include the papers that this reviewer gave us. We (and SW if the math is as above) are still considering the integrality gap when the polyhedron is fixed, which is not over all instances of a problem in general. If the papers this reviewer cited consider everything fixed but b, that is also a restriction. That is ours and theirs are still a subset of the ``normal'' definition. I still think it will help reduce confusion if we call ours something more restrictive.  Is that OK?}
+\arash{The definition in SW is just in words. There are two ways to read SW: 1. the instances of an IP over $A,b,c$, 2. the instances of an IP over all $c$.}
+\arash{To me the second one makes so much more sense: since integrality gap can only be defined with respect to a formulation - so if you change the formulation you expect the integraltiy gap to change. Reviewer \#3's definition is not like that: consider matching: the formulation with only degree constraints has gap infinity, but formulation with degree constraints and odd set constraints has gap $1$. While in definition of integrality gap of reviewer \#3 you can say that the gap is changing.}
+\arash{I do agree we should cite what the reviewer suggested, but not sure where it fits.}
+\cindy{I agree that the integrality gap depends on the formulation. I think of a formulation the way they appear in technical papers. There are parameters and variables, an objective function and then families of constraints. The form of the objective and constraints is the formulation. But the values of a particular set of parameters, which includes things like graph topology for graph-based problems, identifies a specific instance. This supports what you call definition 1 from WS. This is why I suggested we spend a little time somewhere in the paper discussing problem formulations that fix c or fix A or fix b, or fix none of them, etc. Given the (definition 1) form, which comes from a mathematical formulation, researchers can prove an upper bound (for min problems) of $alpha$ (a constant or a function of the input size) by finding an algorithm that ``rounds'' an optimal LP solution to a feasible integer solution and proves the objective of that solution is no more than $\alpha$ times the optimal LP value. One can prove a lower bound of $\beta$ on the integrality gap for that formulation by finding an instance, or a family of instances, where the integrality gap is at least $\beta$. It's useful to prove large lower bounds, because it shows one has to add more constraints to get a good LP-based approximation algorithm for that problem. This paper gives a computational/experimental way to prove a lower bound on the integrality gap for a problem. It's reasonable to fix some parts of the formulation for experiments. For this paper, the polyhedron is fixed for a given test. It's convenient that WS include the same restriction. I pulled a copy of the book.  I will try to look at the context of that definition and see why they give it that way.  Wherever we have this discussion is where we should include the references that Reviewer 3 gave to us.  I thought we had included a lot of the logic I just added, but perhaps not, or not clearly.}
+
+\response{
+We added this explanation after Definition 1:
+
+Consider an instance of a combinatorial optimization problem $\mathcal{P}$. We can characterize $\mathcal{P}$ by a set of feasible solutions in $S\in \mathbb{Z}_{\geq 0}^n$ and a cost function $c\in \mathbb{R}_{\geq 0}^n$. In many cases (see [VZ,SW]) the set $S$ can described as a set of integer points within a polyhedron $P$ (in fact the choice of $P$ need not be unique.) In this case, the integrality gap of $\mathcal{P}$ with respect to $P$ is $\min\{cx:x\in S\}/{\min\{cx:x\in P\}}$. Hence $g(I)$ in Definition 1 is equivalent to the worst-case integrality gap of all instances of a problem with respect to $P(I)$. 
+
+
+The reason that we define integrality gap for a polyhedron as opposed to an instance of a problem is that our algorithms are independent of the cost function $c$. 
+ 
+}
+Relatedly, Eisenbrand and Shmonin \cite{eisenbrand} introduced an algorithm that finds the maximum gap between the optimal values of an IP and its LP relaxation over all realizations of vector $b$ (for which the IP is feasible). Their algorithm runs in polynomial-time given $n$ is fixed. In contrast, FDT always runs in time polynomial in $n$, but obtains an upper bound on the integrality gap as opposed to an exact value.
+\item
+Mention the existing work on integrality gaps and compare your results to it.
+\response{Added a pointer to Carr Vemapala Meta-rounding and  Eisenbrand and Shmonin Fixed Dimension work right before section 1.1. and motioned how it isn related to our work. Thank you for this pointer.}
+\item
+Mention known work on obtaining integer feasible solutions. Is FDT the first algorithm which constructs a feasible solution if the instance has finite integrality gap? For which definitions of integrality gap can this be done in polynomial time, and with what quality of the resulting solution (wrt the integrality gap)? \response{See above.}
+\item
+Explain why FDT cannot be used to obtain a feasible solution attaining g(I, c) – is it because despite g(I, c) being finite, g(I) is infinite? or would FDT find some solution, but of worse value because g(I) is much larger than g(I,c), or can both scenarios happen?
+
+\response{Thank you for pointing this out. We added a short discussion right after Theorem 5 to discuss the issue in a (slightly) different way:  A keen reader might ask why Theorem 5 does not imply that P = NP, as one iteratively find a feasible solution $x^*\in S(I)$, and add the constraint $x\leq cx^*-\epsilon$ for some small enough $\epsilon>0$ to $I$ until DomToIP fails to find a feasible solution. However, note that adding constraints to $I$ might result in $g(I)$ becoming infinite, in which case DomToIP would fail to find a feasible solution to the IP. }
+\end{itemize}
 
 
 \subsubsection{Detailed Comments}
@@ -262,9 +316,10 @@ pairs (page number, line number) below.
 \response{Thank you for the recommendation. We added line numbers to the document.}
 \item (2,10) “we have formulated” – better to say “instances … are known” and give a reference, e.g. to MIPLIB; or if you have some particularly hard instances in mind that YOU have formulated, you can refer to them, but this should be a fairly widely known
 fact. 
-\response{MIPLIB citation added and the wording is changed as suggested.}
+\response{MIPLIB citation added and the wording is changed as suggested.}\cindy{I actually did mean that we, researchers at Sandia National Laboratories, have formulated problems that these solvers cannot solve. This is because our problems are from national security, and don't always look like the kinds of problem that industry or academia solve. These problems are not published. One doesn't generally publish MIP formulations that don't solve (negative results are not interesting unless accompanied by positive results, or for famous open problems). We can add that to the response, but stick to MIPLIB in the paper if you like. However, {\bf Question}: Did you check the status of MIPLIB?  How many moderate-size problems are not solvable by commercial solvers? Do you have to go to more recent updates of MIPLIB, like MIPLIB 2010 and probably even more recent to find unsolved problems and are they still moderate-sized?}
 
-\item (2,14) “the” -> “these”?
+\item (2,14) “the” $\rightarrow$ “these”?
+\response{Fixed.}
 \item (2,26) “from the problem” – what problem? Maybe “using special problem structure together with the result of an LP relaxation to obtain an integer feasible solution
 whose value is at most C times the value of the LP optimum” or something like that.
 \response{Paragraph reworded as follows: Many combinatorial optimization problems can be formulated as IPs. An {\em LP-based approximation algorithm} uses the LP relaxations to the IP formulation to find provably good approximate feasible integer solutions in polynomial time. At the highest level, this involves solving the LP relaxation, using special  problem structure to find a feasible integer solution, and proving that the objective value of the solution is no more than $C$ times worse than the bound from the LP relaxation. The approximation factor $C$ can be a constant or depend on the input parameters of the IP, e.g. $O(\log(n))$ where $n$ is the number of variables in the formulation of the IP (the dimension of the problem).}
@@ -322,7 +377,7 @@ pay attention to all the “easy to check”, “obvious”, “clearly” etc. 
 \response{Fixed.}
 \item (16,11-17) You should discuss why the intuitive approach of binarizing an LP (just split each variable into two binary variables and copy the respective column of the
 constraint matrix) does not lead to the same or better result. Or maybe it does?
-\response{We added this paragraph in the discussion of why $\{0,1,2\}$ problems are different from binary problems: Another approach to a $\{0,1,2\}$ problem could be to ``binarize'' the variables, but splitting each variable into two binary copies and solving the binary problem via FDT for binary IPs (Theorem \ref{FDTFull}). One potential issue that can arise by doing this is that the binary version of a problem might have a larger integrality gap compared to the one that allows larger multiplicity. One example of this is the 2EC problem considered in this section. As mentioned above, we have $g(\mbox{2EC})\leq \frac{3}{2}$, while $g(\mbox{2ECSS})\geq \frac{3}{2}$, where 2ECSS is a problem equivalent to 2EC but without any doubled edges allowed {CKKK08}.}
+\response{We added this paragraph in the discussion of why $\{0,1,2\}$ problems are different from binary problems: Another approach to a $\{0,1,2\}$ problem could be to ``binarize'' the variables, but splitting each variable into two binary copies and solving the binary problem via FDT for binary IPs (Theorem 4). One potential issue that can arise by doing this is that the binary version of a problem might have a larger integrality gap compared to the one that allows larger multiplicity. One example of this is the 2EC problem considered in this section. As mentioned above, we have $g(\mbox{2EC})\leq \frac{3}{2}$, while $g(\mbox{2ECSS})\geq \frac{3}{2}$, where 2ECSS is a problem equivalent to 2EC but without any doubled edges allowed {CKKK08}.}
 
 \item (19,14) “1Mb cache” – I looked up this CPU and it has 1MB of L2 cache. Note that
 1Mb $\neq$ 1MB, and “cache” is quite an ambiguous term (there are several types of CPU
@@ -331,11 +386,14 @@ stated, so I would just not comment on it. If you must, give a correct capacity 
 indicate the level of the cache. \response{We removed the cache amount. Thanks.}
 \item (19,22-26) Is there no good benchmark set for TAP? If not, please mention that as
 the reason why you study random instances. (It is not good practise in experimental
-algorithmics to study random instances unless necessary.)
+algorithmics to study random instances unless necessary.) \response{Unfortunately we couldn't find any benchmark database of instances for TAP. We can remove this experiment for the paper (or move it to an appendix).} 
 \item (20,22) One idea to consider and comment on: did you warm-start each computation of FDT? It seems to me that you could reuse the model that FDT solves in each
 iteration – basically, you only change the objective and fix the variables which corresponds to changing lower/upper bounds, so you should be able to save time on
 building / destroying the model. I’m not sure how much the pruning model can be reused. Either way, please comment on this idea. The idea was successful elsewhere,
 e.g. https://arxiv.org/abs/1911.08636 
+
+\response{Thank you for the great suggestion. We added a comment related to this in the conclusion. Even-though this seems like a great suggestion we think trying this in our experiments would fall beyond the mostly theoretical scope of this work.}
+
 \item (21,10) Christofides’ algorithm is no longer the fastest https://arxiv.org/abs/2007.01409
 
 \response{We added a reference to the KKO paper in the footnote.}
