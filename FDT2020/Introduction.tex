@@ -118,7 +118,7 @@ where $z_{IP}(I,c)$ is the optimal solution to the integer program and $z_{LP}(I
 
 Consider an instance of a combinatorial optimization problem $\mathcal{P}$ given by a set of feasible solutions in $S\in \mathbb{Z}_{\geq 0}^n$ and a cost function $c\in \mathbb{R}_{\geq 0}^n$. In many cases (see \cite{vazirani,shmoyswilliamson}), $S$ is a set of integer points within a polyhedron $P$, where the choice of $P$ need not be unique. In this case, the integrality gap of problem $\mathcal{P}$ with respect to polyhedron $P$ is $\min\{cx:x\in S\}/{\min\{cx:x\in P\}}$. Hence $g(I)$ in Definition \ref{IGofPoly} is equivalent to the worst-case integrality gap of all instances of a problem with respect to $P(I)$. 
 
-The reason that we define integrality gap for a polyhedron as opposed to an instance of a problem is that our algorithms are independent of the cost function $c$. 
+The reason that we define integrality gap for a polyhedron as opposed to an instance of a problem is that our algorithms are independent of the cost function $c$. We do, however, require the cost function $c$ to be non-negative since that is required to use the Carr-Vempala theorem, as described below.
  
 A combinatorial optimization problem consists of a family of instances that potentially have different sets of feasible solutions (e.g. due to different sizes). In this case, the integraltiy gap of combinatorial optimization problem with respect to a IP formulation, is the worst case integrality gap of over all instances of the combinatorial optmization problem with the linear relaxation of the respective instance of the IP formulation, or the worst case integrality gap of $I$ for all instances $\mathcal{I}$ in the IP formulation. Therefore, we define,
  
@@ -158,9 +158,9 @@ Formally, for some positive integer $k$, given a set of points $S\subseteq \math
 For the case when $g(I)>1$ a similar statement is as follows. The {\em dominant} of $P(I)$, which we denote by $\dom(P(I))$, is the set of points $x'$ such that there exists a point $x\in P$ with $x'\geq x$ in every component. A polyhedron is of \textit{a blocking type} if it is equal to its dominant.
 
 \begin{thm}[Carr, Vempala \cite{Carr2004}] \label{CV2}
-	We have $g(I) \leq C$ if and only if for $x\in P(I)$ the vector $Cx$ can be is as a convex combination of points in $\dom(S(I))$. 
+	We have $g(I) \leq C$ if and only if for $x\in P(I)$ the vector $Cx$ can be expressed as a convex combination of points in $\dom(S(I))$. 
 \end{thm}
-Goemans \cite{goemansblocking} first introduced Theorem \ref{CV2} for blocking-type polyhedra. While there is an exact algorithm for problems with gap $1$, as stated in Proposition \ref{cara}, Theorem~\ref{CV2} is existential, with no construction. We remark that Proposition \label{CV2} would not work if we drop the non-negatvitiy constraints on the cost function $c$ in the definition of integrality gap (Defitinon \ref{IGofPoly}).
+Goemans \cite{goemansblocking} first introduced Theorem \ref{CV2} for blocking-type polyhedra. While there is an exact algorithm for problems with gap $1$, as stated in Proposition~\ref{cara}, Theorem~\ref{CV2} is existential, with no construction. Proposition~\label{cara} would not work if we drop the non-negativity constraints on the cost function $c$ in the definition of integrality gap (Definition~\ref{IGofPoly}).
 %In contrast to Proposition \ref{cara} which implies exact algorithms for problems with a gap of 1, Theorem \ref{CV} does not imply an approximation algorithm, since it does not suggest how to find such a convex combination in polynomial time.
 %This points to an interesting open question. 
 % We show later, for $I$ with $g(I)<\infty$, the notation of dominant is in fact useful.
@@ -182,7 +182,7 @@ If we relax Question \ref{question1} (resp. Question \ref{question2}), but multi
 
 To study integrality gaps, we wish to decompose a suitably scaled linear-programming solution into a convex combination of feasible integer solutions {\bf constructively}. That is, we ask: under reasonable complexity assumptions, given a specific problem $\mathcal{I}$ with  $1<g(\mathcal{I})<\infty$, and $x\in P(I)$ for some $I\in \mathcal{I}$, \textbf{can we write} $Cx$ as a convex combination of points in $\dom(S(I))$? We wish to find the smallest factor $C$ possible.
 
-Carr and Vempala \cite{metarounding} showed if there an algorithm $\mathcal{A}$ that for $I\in \mathcal{I}$ and $c\geq 0$ finds $z\in S(I)$ with $cz\leq g'cx$ for any $x\in P(I)$, then $g'x$ can be \textbf{write} as a convex combination of points in $S(I)$. However, for many known problems there is a gap between the best known $g'$ and $g(\mathcal{I})$. 
+Carr and Vempala \cite{metarounding} showed if there an algorithm $\mathcal{A}$ that for $I\in \mathcal{I}$ and $c\geq 0$ finds $z\in S(I)$ with $cz\leq g'cx$ for any $x\in P(I)$, then $g'x$ can be written as a convex combination of points in $S(I)$. However, for many known problems there is a gap between the best known $g'$ and $g(\mathcal{I})$. 
 
 Relatedly, Eisenbrand and Shmonin \cite{eisenbrand} introduced an algorithm that finds the maximum gap between the optimal values of an IP and its LP relaxation over all realizations of vector $b$ (for which the IP is feasible). Their algorithm runs in polynomial-time given $n$ is fixed. In contrast, FDT always runs in time polynomial in $n$, but obtains an upper bound on the integrality gap as opposed to an exact value.
 
