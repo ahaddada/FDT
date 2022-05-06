@@ -338,7 +338,9 @@ as a convex combination of feasible solutions, provided the IP integrality gap i
 \item We experimentally show that FDT can give good approximate solutions to small instances of vertex-cover (VC) and tree augmentation problems.
 \item We show that the integrality gap for 2EC (minimum 2-edge-connected sub-multigraph) is at most $\frac{6}{5}$ for Carr-Vempala points with at most $12$ vertices on the cycle formed by the fractional edges, matching the lower bound for the integrality gap for 2EC for these challenging instances.
 \item We demonstrate (with 2EC) how FDT experiments can support theoretical work on integrality gaps for specific problems. In particular, we computationally prove an upper bound on small instances of 2EC with a specific structure.
-\item We demonstrate (with VC) how FDT can be used to find feasible solutions of improved quality compared to those from the feasiblity pump \cite{fp1}.
+\item We give proof-of-concept experimental results that demonstrate that FDT might be a reasonable heuristic in practice for some problems. For VC, FDT gives better solutions than the original feasibility pump \cite{fp1}, though requiring more time.  Similarly, for TAP, FDT usually gives much better solutions than the known 2-approximation \cite{FJ81}, but runs more slowly.
+
+
 \end{itemize}
 
 

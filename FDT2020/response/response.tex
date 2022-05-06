@@ -114,29 +114,28 @@ lor=black,pdfstartview=FitH]{hyperref}
 \def\eps{\epsilon}
 \newcommand{\arash}[1]{\noindent{\bf {\color{blue!60!black}{\sc Arash:}  #1}}}
 \newcommand{\cindy}[1]{\noindent{\bf {\color{magenta!80!black}{\sc Cindy:}  #1}}}
+
+
 \newcommand{\response}[1]{\noindent{{\color{blue!80!black}  #1}}}
-\iffalse
 \renewcommand{\arash}[1]{}
 \renewcommand{\cindy}[1]{}
-\fi
 \title{Responses to reviewers comments}
 \maketitle
 
 
 \section{General Response}
-\response{We thank the editor and reviewers for their insightful and constructive comments. }
-
-
-\arash{TODO: Thank the reviewers at length. Apologies for the delay in submission for the revisions, thanks the editor for the extensions.}
+\response{We thank the reviewers for their insightful and constructive comments. We sincerely apologize for the long delay in submitting our revision.  We thank our editor very much for the extension. Our junior author finished his training and took a job in industry. The more senior co-author at a national lab accepts her considerable share of responsibility for the delay as well.
+}
+%\arash{TODO: Thank the reviewers at length. Apologies for the delay in submission for the revisions, thanks the editor for the extensions.}
 \section{Detailed Responses}
 
 
 \subsection{Reviewer 1}
 \subsubsection{Major Comments}
-\response{We have addressed the issue in the proof of Theorem 3 as detailed below. We also made several major revision in our presentation specially with regards to the more technical parts of the paper.}
+\response{We have addressed the issue in the proof of Theorem 3 as detailed below. We also made several major revision in our presentation especially with regards to the more technical parts of the paper.}
 \subsubsection{Minor Comments}
 \begin{itemize}
-\item Introduction: Introduction jumps between describing methods and problems the methods are applied to. The there is a subsection 1.2 Experiments with more problem descriptions. Please restructure the introduction so
+\item Introduction: Introduction jumps between describing methods and problems the methods are applied to. There is a subsection 1.2 Experiments with more problem descriptions. Please restructure the introduction so
 that the flow is more logical.
 \response{We agree that the introduction is a little bit lengthy and not direct. However, we wanted to make sure that the reader is familiar with our terminology before diving into the results presentation.
 
@@ -144,7 +143,7 @@ That being said, we have made some changes in the introduction. We hope the new 
 
 
 \item p. 2, last paragraph: “Integrality gap” is defined with respect to an IP instance, instead of a family of IP instances (IP formulation) for a problem. This makes the paragraph rather awkward to read, because the statements are not correct as stated.
-\response{We made various changes starting from the paragraph before Definition 1 and the discussion that follows, drawing the comparison between different objects that a gap can be defined on and where Definition 1 stands. Our definition is integrality gap of a polyhedron.}
+\response{We made various changes starting with the paragraph before Definition 1 through the discussion that follows. We compare our Definition 1 to other definitions of the integrality gap. Our definition is the integrality gap of a polyhedron. We explain why we use this definition. We also added more context about our definition of integrality gap to the abstract, so the reader is aware immediately that we are using a polyhedron-based definition.}
 
 \item p. 3, below equation (1): Why is $A$ defined as a matrix of rational numbers but $b$ a vector or real numbers?
 
@@ -156,11 +155,11 @@ That being said, we have made some changes in the introduction. We hope the new 
 with the previous statement, and also nonstandard as far as I know. Please add some remarks for the reader about this choice. Also, the importance of considering $c \geq 0$ only should be emphasized more in the text (it is of
 vital importance when using Carr-Vempala).
 
-\response{As stated above, the discussion following Definition 1. We added a remark that $c$ need to be non-negative for Carr-Vempala to works.} 
+\response{As stated above, the discussion following Definition 1. We added a remark that $c$ must be non-negative for Carr-Vempala to work.} 
 
 \item p. 4, equation (4): supremum instead of maximum
 \response{Fixed.}
-\item p. 5, Proposition 2: Please specify where this is stated in [GLS93].
+
 \item p. 5, below Proposition 2: I don’t see that Proposition 2 and Theorem 3 are equivalent as stated. (Also in light of the remark about one result having an algorithm, and the other not.)
 \response{Fixed. Now we say they are similar statement. We also tried to word the statements in a way to draw the similarity between the two.}
 
@@ -208,9 +207,9 @@ $IP^{(\ell)}\neq \emptyset$?
 \subsubsection{Major Comments}
 The computational results seem quite weak to me. The classic Feasibility Pump heuristic is known to produce solutions of fairly poor quality; it is designed primarily to produce feasible solutions to potentially difficult MIPs
 quickly. On TAP and 2EC, the authors compare to problem-specific approximation algorithms that are not particularly designed to produce high quality solutions either.
-\response{Our comparison of FDT to feasibility pump is to main showcase a use case of the algorithm and a direction that could be possibly explored. We are not offering FDT as a replacement for FP. We will add remarks that make this clear to the reader.
+\response{We respect and understand this reviewer's point of view. We have added some caveats to the start of the experimental section. Our experiments are intended to demonstrate using FDT for experimentally studying integrality gaps. We have explicitly stated the we are not recommending FDT as a replacement heuristic. We hope it will complement other general heuristics. %Our comparison of FDT to feasibility pump is mainly to showcase a use case of the algorithm and a direction that could be possibly explored. We are not suggesting FDT as a replacement for FP. We will add remarks that make this clear to the reader.
 
-With respect to Christofides, we mistakenly mentioned comparing FDT with Christofides but we in fact compare FDT with BOMC (Best of Many Christofides) - this has been fixed in the abstract and the paper. As presented in Figure 3, we don't settle for the worst-case upper bound of 3/2. Similarly, for TAP, FJ81 is the only rounding algorithm known for the solution of the CUT-LP. Again, we don't use the worst-case upper bound of 2 and use the instance specific gap provided by the algorithm. Also we remark that FDT is a generic algorithm that applies to any type of IP formulation, while BOMC and FJ81 only work for a certain type of formulation.}
+With respect to Christofides, we mistakenly wrote that we compared FDT to Christofides.  In fact, we compare FDT with BOMC (Best of Many Christofides) - this has been fixed in the abstract and the paper. As presented in Figure 3, we don't settle for the worst-case upper bound of 3/2. Similarly, for TAP, FJ81 is the only rounding algorithm known for the solution of the CUT-LP. Again, we don't use the worst-case upper bound of 2. Instead we use the instance-specific gap provided by the algorithm. Also, FDT is a generic algorithm that applies to any formulation with a suitablly bounded integrality gap, while BOMC and FJ81 problem-specific.}
 
 \begin{enumerate}
 
@@ -220,10 +219,10 @@ to certify this. Lastly, it is claimed that Christofides’ algorithm is the “
 which is what is compared in the paper. 
 
 
-\response{We made several fixed in the abstract that addressed all the points mentioned above.}
+\response{We made several edits to the abstract. We believe they address all the points mentioned above.}
 \item The paper should mention the randomized metarounding algorithm by Carr and Vempala and compare it to the FDT algorithm. 
-\response{Added this paragraph right before section 1.1: 
-Carr and Vempala [CV00] showed if there an algorithm $\mathcal{A}$ that for $I\in \mathcal{I}$ and $c\geq 0$ finds $z\in S(I)$ with $cz\leq g'cx$ for any $x\in P(I)$, then $g'x$ can be \textbf{write} as a convex combination of points in $S(I)$. However, for many known problems there is a gap between the best known $g'$ and $g(\mathcal{I})$. }
+\response{We added this paragraph right before section 1.1: 
+Carr and Vempala [CV00] showed if there is an algorithm $\mathcal{A}$ that for $I\in \mathcal{I}$ and $c\geq 0$ finds $z\in S(I)$ with $cz\leq g'cx$ for any $x\in P(I)$, then $g'x$ can be written as a convex combination of points in $S(I)$. However, for many known problems there is a gap between the best known $g'$ and $g(\mathcal{I})$. }
 \item In the proofs of Lemma 8 and Lemma 11, I do not see why it can be assumed that $\lambda_0,\lambda_1,\lambda_2>0$. I think one has to allow the case in which
 the branching step returns just 1 or (in the case of 2EC) just 2 vectors.
 \response{Yes. We corrected this in the statement of Lemma 9, 10, 12. Also in the description of the Algorithm 2.}
@@ -232,7 +231,8 @@ and the 2-approximation for TAP rather dubious. To show that the FDT
 algorithm performs much better than the theoretical $g^{|supp(x)|}$ bound, just comparing to the initial fractional solution is all that is needed. On the other hand, if the goal is to show that the FDT algorithm works well as a
 general purpose feasibility heuristic, then comparing to a FDT to a more modern variant of FP (e.g. as in the Feasibility Pump 2.0 paper) would be more reasonable.
 
-\response{The comparisons with FP are not presented to claim that FDT to provide direct comparisons between the two algorithms, but to provide a baseline on the IG upper bounds provided by another LP-based algorithm. We want to emphasize that the scope of this work in mostly on the theoretical contributions, rather than experimental results.}
+\response{We felt that readers might be curious about how FDT compares to another general incumbent heuristic. We were not able to find any code for feasibility pump 2.0. In the FP 2.0 paper, the authors wrote that the “overhead of constraint propagation can be quite large … Hence we need a very efficient implementation of the whole constraint propagation system, including both the single propagators and the overall propagation engine.”  FP 2.0 is much more complex than simple FP. To be fair to FP 2.0 in a comparison, we would need to program the authors’ optimizations to achieve their performance.  Since our goal was to show that the performance can be reasonable, we felt that implementing the full, optimized FP 2.0 was out of scope.}
+%The comparisons with FP are not presented to claim that FDT to provide direct comparisons between the two algorithms, but to provide a baseline on the IG upper bounds provided by another LP-based algorithm. We want to emphasize that the scope of this work in mostly on the theoretical contributions, rather than experimental results.
 
 \end{enumerate}
 
@@ -242,7 +242,7 @@ general purpose feasibility heuristic, then comparing to a FDT to a more modern 
 \item  The abstract says “Dom2IP” but the paper mostly uses “DomToIP”. 
 \response{Fixed.}
 \item In Theorem 3, I think $\mathcal{D}(S(I))$ should just be $S(I)$.
-\response{NOT FINAL: The proof of this theorem only shows it for the dominant of $S(I)$ and not $S(I)$ itself, although for many problems of interest we have $S(I)=\mathcal{D}(S(I))$. }
+\response{The proof of this theorem only holds for the dominant of $S(I)$ and not $S(I)$ itself, although for many problems of interest we have $S(I)=\mathcal{D}(S(I))$. }
 
 \item On page 6, “which runs in polynomial time algorithm” should be “which runs in polynomial time”. 
 \response{Fixed.}
@@ -257,7 +257,10 @@ defined in Lemma 8.
 \item On page 8, you refer to Figure 2 but this figure only shows up on page 23.
 
 \response{The figure is moved to page 3.}
-\item You mention that the Dom2IP algorithm can be used to prove that an IPs integrality gap is unbounded. How effective is this? \arash{need to think about this.}
+\item You mention that the Dom2IP algorithm can be used to prove that an IPs integrality gap is unbounded. How effective is this? 
+
+\response{
+DomToIP starts from a feasible solution to the LP relaxation and tries to find an integer feasible solution in the support of the fractional solution. If Dom2IP fails to do this for any instance, we can conclude the integrality gap is infinite. We could perform a broad search over possible (useful/interesting) feasible points to the LP relaxation to find such a certificate for the unboundedness of the integrality gap.}
 \item Lemma 9 requires $\gamma_0 + \gamma_1 \leq 1$. Perhaps this should already be included
 in Lemma 8.
 \response{Fixed. Also added a constraint into the formulation of LPC that ensures $\lambda_0 + \lambda_1\leq 1$ and corresponding changes in the proof of the Claim.}
@@ -295,7 +298,7 @@ Consider an instance of a combinatorial optimization problem $\mathcal{P}$. We c
 The reason that we define integrality gap for a polyhedron as opposed to an instance of a problem is that our algorithms are independent of the cost function $c$. 
  
 }
-Relatedly, Eisenbrand and Shmonin \cite{eisenbrand} introduced an algorithm that finds the maximum gap between the optimal values of an IP and its LP relaxation over all realizations of vector $b$ (for which the IP is feasible). Their algorithm runs in polynomial-time given $n$ is fixed. In contrast, FDT always runs in time polynomial in $n$, but obtains an upper bound on the integrality gap as opposed to an exact value.
+
 \item
 Mention the existing work on integrality gaps and compare your results to it.
 \response{Added a pointer to Carr Vemapala Meta-rounding and  Eisenbrand and Shmonin Fixed Dimension work right before section 1.1. and motioned how it isn related to our work. Thank you for this pointer.}
@@ -377,7 +380,7 @@ pay attention to all the “easy to check”, “obvious”, “clearly” etc. 
 \response{Fixed.}
 \item (16,11-17) You should discuss why the intuitive approach of binarizing an LP (just split each variable into two binary variables and copy the respective column of the
 constraint matrix) does not lead to the same or better result. Or maybe it does?
-\response{We added this paragraph in the discussion of why $\{0,1,2\}$ problems are different from binary problems: Another approach to a $\{0,1,2\}$ problem could be to ``binarize'' the variables, but splitting each variable into two binary copies and solving the binary problem via FDT for binary IPs (Theorem 4). One potential issue that can arise by doing this is that the binary version of a problem might have a larger integrality gap compared to the one that allows larger multiplicity. One example of this is the 2EC problem considered in this section. As mentioned above, we have $g(\mbox{2EC})\leq \frac{3}{2}$, while $g(\mbox{2ECSS})\geq \frac{3}{2}$, where 2ECSS is a problem equivalent to 2EC but without any doubled edges allowed {CKKK08}.}
+\response{We added this paragraph in the discussion of why $\{0,1,2\}$ problems are different from binary problems: Another approach to a $\{0,1,2\}$ problem could be to ``binarize'' the variables, but splitting each variable into two binary copies and solving the binary problem via FDT for binary IPs (Theorem \ref{FDTFull}). One potential issue that can arise by doing this is that the binary version of a problem might have a larger integrality gap compared to the one that allows larger multiplicity. One example of this is the 2EC problem considered in this section. As mentioned above, we have $g(\mbox{2EC})\leq \frac{3}{2}$, while $g(\mbox{2ECSS})\geq \frac{3}{2}$, where 2ECSS is a problem equivalent to 2EC but without any doubled edges allowed {CKKK08}.}
 
 \item (19,14) “1Mb cache” – I looked up this CPU and it has 1MB of L2 cache. Note that
 1Mb $\neq$ 1MB, and “cache” is quite an ambiguous term (there are several types of CPU
